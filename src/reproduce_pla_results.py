@@ -649,7 +649,13 @@ def figure_cp_geometry(output_root: Path) -> None:
     fig, ax = plt.subplots(figsize=(5.0, 3.8))
     ax.fill_between(a_values, 0, a_values, alpha=0.18, label="CPTP region")
     ax.plot(a_values, a_values, linewidth=2.0, label=r"Amplitude damping: $|c|^2=a$")
-    ax.plot(a_values, a_values**2, linewidth=2.0, linestyle="--", label=r"Added dephasing: $|c|^2=a^2$")
+    ax.plot(
+        a_values,
+        a_values**2,
+        linewidth=2.0,
+        linestyle="--",
+        label="Added-dephasing example ($u=x/2$):\n$|c|^2=a^2$",
+    )
     ax.plot([1, 1], [0, 1], linewidth=1.1, linestyle=":")
     ax.annotate(
         "population ceiling",
