@@ -1,0 +1,9 @@
+Method,Order,m,eta_m,Leading margin coefficient,Local direction,Admissible set
+Forward Euler,1,2,-1/2,-1/4,outward,{0}
+Heun RK2,2,3,-1/6,1/8,inward,"[0, 2]"
+"SSPRK(3,3)",3,4,-1/24,-7/192,outward,{0}
+Classical RK4,4,5,-1/120,1/128,inward,"[0, alpha_4]"
+Dormand-Prince 5 principal,5,6,1/3600,31/115200,inward,"[0, alpha_5]"
+Dormand-Prince embedded 4,4,5,97/120000,-97/128000,outward,"{0} union [beta_-, beta_+]"
+Backward Euler,1,2,1/2,1/4,inward,"[0, infinity)"
+Implicit midpoint,2,3,1/12,-1/16,outward,{0}

@@ -1,0 +1,34 @@
+{
+  "title": "rk-choi-complete-positivity: exact Runge-Kutta/Choi admissibility calculations",
+  "description": "Exact symbolic calculations, certified root brackets, sign charts, and figure-generation code for generator-conditioned complete-positivity regions of Runge-Kutta methods for qubit damping.",
+  "upload_type": "software",
+  "access_right": "open",
+  "license": "mit",
+  "version": "1.0.0",
+  "language": "eng",
+  "creators": [
+    {
+      "name": "Pierpoint, G. Blake",
+      "orcid": "0000-0001-8288-8549",
+      "affiliation": "Department of Physics, University of Maryland, College Park; Weyl Center for Mathematical Physics"
+    },
+    {
+      "name": "Bernard, Olivier",
+      "orcid": "0009-0007-0177-1607",
+      "affiliation": "Department of Physics, Engineering, Earth and Environmental Sciences, Mechanics, Université Grenoble Alpes; Weyl Center for Mathematical Physics"
+    },
+    {
+      "name": "Liu, Yichen",
+      "orcid": "0009-0005-2367-1493",
+      "affiliation": "Department of Computer Science and Engineering, Shanghai Jiao Tong University; Weyl Center for Mathematical Physics"
+    }
+  ],
+  "keywords": [
+    "Lindblad equation",
+    "complete positivity",
+    "Runge-Kutta methods",
+    "Choi matrix",
+    "quantum channels",
+    "numerical stability"
+  ]
+}

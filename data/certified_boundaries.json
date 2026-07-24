@@ -1,0 +1,1196 @@
+{
+  "schema_version": "1.0",
+  "description": "Exact tableau-derived stability functions, boundary polynomials, Sturm-certified positive-root brackets, rational interval sign samples, and CPTP-admissible components for eight Runge-Kutta formulas.",
+  "arithmetic": {
+    "symbolic": "exact rational SymPy arithmetic",
+    "root_certification": "Sturm counts via sympy.Poly.count_roots",
+    "fixed_horizon_decimal_precision": 80
+  },
+  "software": {
+    "python": "3.13.5",
+    "sympy": "1.14.0",
+    "numpy": "2.3.5",
+    "mpmath": "1.3.0",
+    "matplotlib": "3.10.8",
+    "pillow": "12.3.0"
+  },
+  "named_endpoints": {
+    "alpha_4": "2.78529356340528162",
+    "alpha_5": "3.30656789263494650",
+    "beta_+": "4.38498632080194436",
+    "beta_-": "3.06885654805038075",
+    "delta_0": "24.7278950301296972",
+    "delta_1": "24.7277543187603100",
+    "delta_M": "15.2987678075854269",
+    "mu_4": "10.9824254662932734",
+    "mu_5": "13.1740934628009334"
+  },
+  "methods": [
+    {
+      "key": "FE",
+      "name": "Forward Euler",
+      "order": 1,
+      "butcher_tableau": {
+        "A": [
+          [
+            "0"
+          ]
+        ],
+        "b": [
+          "1"
+        ]
+      },
+      "stability_function": "s + 1",
+      "stage_resolvent_determinants": {
+        "full_step": "1",
+        "half_step": "1"
+      },
+      "first_exponential_defect": {
+        "m": 2,
+        "eta_m": "-1/2"
+      },
+      "leading_margin_coefficient": "-1/4",
+      "margin": "-x**2/4",
+      "boundary_polynomials": {
+        "a=0": {
+          "expression": "1 - x",
+          "numerator_scalar": "-1",
+          "primitive_numerator": "x - 1",
+          "square_free_part": "x - 1",
+          "denominator": "1"
+        },
+        "a=1": {
+          "expression": "-x",
+          "numerator_scalar": "-1",
+          "primitive_numerator": "x",
+          "square_free_part": "x",
+          "denominator": "1"
+        },
+        "M=0": {
+          "expression": "-x**2/4",
+          "numerator_scalar": "-1",
+          "primitive_numerator": "x**2",
+          "square_free_part": "x",
+          "denominator": "4"
+        }
+      },
+      "positive_root_certificates": [
+        {
+          "equation": "a=0",
+          "label": "",
+          "bracket": {
+            "type": "point",
+            "value": "1"
+          },
+          "approximation": "1",
+          "multiplicity": 1,
+          "sturm_count": 1
+        }
+      ],
+      "interval_sign_chart": [
+        {
+          "left": "0",
+          "right": "1",
+          "sample": "1/2",
+          "signs": {
+            "a": 1,
+            "a_minus_1": -1,
+            "M": -1,
+            "det_full": 1,
+            "det_half": 1
+          },
+          "rk_domain": true,
+          "cptp": false
+        },
+        {
+          "left": "1",
+          "right": "infinity",
+          "sample": "2",
+          "signs": {
+            "a": -1,
+            "a_minus_1": -1,
+            "M": -1,
+            "det_full": 1,
+            "det_half": 1
+          },
+          "rk_domain": true,
+          "cptp": false
+        }
+      ],
+      "admissible_components": [
+        {
+          "type": "point",
+          "value": "0"
+        }
+      ],
+      "certified_admissible_set": "{0}"
+    },
+    {
+      "key": "RK2",
+      "name": "Heun RK2",
+      "order": 2,
+      "butcher_tableau": {
+        "A": [
+          [
+            "0",
+            "0"
+          ],
+          [
+            "1",
+            "0"
+          ]
+        ],
+        "b": [
+          "1/2",
+          "1/2"
+        ]
+      },
+      "stability_function": "(s**2 + 2*s + 2)/2",
+      "stage_resolvent_determinants": {
+        "full_step": "1",
+        "half_step": "1"
+      },
+      "first_exponential_defect": {
+        "m": 3,
+        "eta_m": "-1/6"
+      },
+      "leading_margin_coefficient": "1/8",
+      "margin": "-x**3*(x - 8)/64",
+      "boundary_polynomials": {
+        "a=0": {
+          "expression": "(x**2 - 2*x + 2)/2",
+          "numerator_scalar": "1/2",
+          "primitive_numerator": "x**2 - 2*x + 2",
+          "square_free_part": "x**2 - 2*x + 2",
+          "denominator": "1"
+        },
+        "a=1": {
+          "expression": "x*(x - 2)/2",
+          "numerator_scalar": "1",
+          "primitive_numerator": "x*(x - 2)",
+          "square_free_part": "x*(x - 2)",
+          "denominator": "2"
+        },
+        "M=0": {
+          "expression": "-x**3*(x - 8)/64",
+          "numerator_scalar": "-1",
+          "primitive_numerator": "x**3*(x - 8)",
+          "square_free_part": "x*(x - 8)",
+          "denominator": "64"
+        }
+      },
+      "positive_root_certificates": [
+        {
+          "equation": "a=1",
+          "label": "",
+          "bracket": {
+            "type": "point",
+            "value": "2"
+          },
+          "approximation": "2",
+          "multiplicity": 1,
+          "sturm_count": 1
+        },
+        {
+          "equation": "M=0",
+          "label": "",
+          "bracket": {
+            "type": "point",
+            "value": "8"
+          },
+          "approximation": "8",
+          "multiplicity": 1,
+          "sturm_count": 1
+        }
+      ],
+      "interval_sign_chart": [
+        {
+          "left": "0",
+          "right": "2",
+          "sample": "1",
+          "signs": {
+            "a": 1,
+            "a_minus_1": -1,
+            "M": 1,
+            "det_full": 1,
+            "det_half": 1
+          },
+          "rk_domain": true,
+          "cptp": true
+        },
+        {
+          "left": "2",
+          "right": "8",
+          "sample": "5",
+          "signs": {
+            "a": 1,
+            "a_minus_1": 1,
+            "M": 1,
+            "det_full": 1,
+            "det_half": 1
+          },
+          "rk_domain": true,
+          "cptp": false
+        },
+        {
+          "left": "8",
+          "right": "infinity",
+          "sample": "9",
+          "signs": {
+            "a": 1,
+            "a_minus_1": 1,
+            "M": -1,
+            "det_full": 1,
+            "det_half": 1
+          },
+          "rk_domain": true,
+          "cptp": false
+        }
+      ],
+      "admissible_components": [
+        {
+          "type": "interval",
+          "left": "0",
+          "right": "2",
+          "left_closed": true,
+          "right_closed": true
+        }
+      ],
+      "certified_admissible_set": "[0, 2]"
+    },
+    {
+      "key": "SSP3",
+      "name": "SSPRK(3,3)",
+      "order": 3,
+      "butcher_tableau": {
+        "A": [
+          [
+            "0",
+            "0",
+            "0"
+          ],
+          [
+            "1",
+            "0",
+            "0"
+          ],
+          [
+            "1/4",
+            "1/4",
+            "0"
+          ]
+        ],
+        "b": [
+          "1/6",
+          "1/6",
+          "2/3"
+        ]
+      },
+      "stability_function": "(s**3 + 3*s**2 + 6*s + 6)/6",
+      "stage_resolvent_determinants": {
+        "full_step": "1",
+        "half_step": "1"
+      },
+      "first_exponential_defect": {
+        "m": 4,
+        "eta_m": "-1/24"
+      },
+      "leading_margin_coefficient": "-7/192",
+      "margin": "-x**4*(x**2 - 12*x + 84)/2304",
+      "boundary_polynomials": {
+        "a=0": {
+          "expression": "-(x**3 - 3*x**2 + 6*x - 6)/6",
+          "numerator_scalar": "-1/6",
+          "primitive_numerator": "x**3 - 3*x**2 + 6*x - 6",
+          "square_free_part": "x**3 - 3*x**2 + 6*x - 6",
+          "denominator": "1"
+        },
+        "a=1": {
+          "expression": "-x*(x**2 - 3*x + 6)/6",
+          "numerator_scalar": "-1",
+          "primitive_numerator": "x*(x**2 - 3*x + 6)",
+          "square_free_part": "x*(x**2 - 3*x + 6)",
+          "denominator": "6"
+        },
+        "M=0": {
+          "expression": "-x**4*(x**2 - 12*x + 84)/2304",
+          "numerator_scalar": "-1",
+          "primitive_numerator": "x**4*(x**2 - 12*x + 84)",
+          "square_free_part": "x*(x**2 - 12*x + 84)",
+          "denominator": "2304"
+        }
+      },
+      "positive_root_certificates": [
+        {
+          "equation": "a=0",
+          "label": "",
+          "bracket": {
+            "type": "open_interval",
+            "lower_decimal": "1.596071637983",
+            "upper_decimal": "1.596071637984",
+            "lower_rational": "1596071637983/1000000000000",
+            "upper_rational": "49877238687/31250000000"
+          },
+          "approximation": "1.59607163798332152",
+          "multiplicity": 1,
+          "sturm_count": 1
+        }
+      ],
+      "interval_sign_chart": [
+        {
+          "left": "0",
+          "right": "1.59607163798332152",
+          "sample": "1596071637983/2000000000000",
+          "signs": {
+            "a": 1,
+            "a_minus_1": -1,
+            "M": -1,
+            "det_full": 1,
+            "det_half": 1
+          },
+          "rk_domain": true,
+          "cptp": false
+        },
+        {
+          "left": "1.59607163798332152",
+          "right": "infinity",
+          "sample": "81127238687/31250000000",
+          "signs": {
+            "a": -1,
+            "a_minus_1": -1,
+            "M": -1,
+            "det_full": 1,
+            "det_half": 1
+          },
+          "rk_domain": true,
+          "cptp": false
+        }
+      ],
+      "admissible_components": [
+        {
+          "type": "point",
+          "value": "0"
+        }
+      ],
+      "certified_admissible_set": "{0}"
+    },
+    {
+      "key": "RK4",
+      "name": "Classical RK4",
+      "order": 4,
+      "butcher_tableau": {
+        "A": [
+          [
+            "0",
+            "0",
+            "0",
+            "0"
+          ],
+          [
+            "1/2",
+            "0",
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "1/2",
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "0",
+            "1",
+            "0"
+          ]
+        ],
+        "b": [
+          "1/6",
+          "1/3",
+          "1/3",
+          "1/6"
+        ]
+      },
+      "stability_function": "(s**4 + 4*s**3 + 12*s**2 + 24*s + 24)/24",
+      "stage_resolvent_determinants": {
+        "full_step": "1",
+        "half_step": "1"
+      },
+      "first_exponential_defect": {
+        "m": 5,
+        "eta_m": "-1/120"
+      },
+      "leading_margin_coefficient": "1/128",
+      "margin": "-x**5*(x**3 - 16*x**2 + 160*x - 1152)/147456",
+      "boundary_polynomials": {
+        "a=0": {
+          "expression": "(x**4 - 4*x**3 + 12*x**2 - 24*x + 24)/24",
+          "numerator_scalar": "1/24",
+          "primitive_numerator": "x**4 - 4*x**3 + 12*x**2 - 24*x + 24",
+          "square_free_part": "x**4 - 4*x**3 + 12*x**2 - 24*x + 24",
+          "denominator": "1"
+        },
+        "a=1": {
+          "expression": "x*(x**3 - 4*x**2 + 12*x - 24)/24",
+          "numerator_scalar": "1",
+          "primitive_numerator": "x*(x**3 - 4*x**2 + 12*x - 24)",
+          "square_free_part": "x*(x**3 - 4*x**2 + 12*x - 24)",
+          "denominator": "24"
+        },
+        "M=0": {
+          "expression": "-x**5*(x**3 - 16*x**2 + 160*x - 1152)/147456",
+          "numerator_scalar": "-1",
+          "primitive_numerator": "x**5*(x**3 - 16*x**2 + 160*x - 1152)",
+          "square_free_part": "x*(x**3 - 16*x**2 + 160*x - 1152)",
+          "denominator": "147456"
+        }
+      },
+      "positive_root_certificates": [
+        {
+          "equation": "a=1",
+          "label": "alpha_4",
+          "bracket": {
+            "type": "open_interval",
+            "lower_decimal": "2.785293563405",
+            "upper_decimal": "2.785293563406",
+            "lower_rational": "557058712681/200000000000",
+            "upper_rational": "1392646781703/500000000000"
+          },
+          "approximation": "2.78529356340528162",
+          "multiplicity": 1,
+          "sturm_count": 1
+        },
+        {
+          "equation": "M=0",
+          "label": "mu_4",
+          "bracket": {
+            "type": "open_interval",
+            "lower_decimal": "10.982425466293",
+            "upper_decimal": "10.982425466294",
+            "lower_rational": "10982425466293/1000000000000",
+            "upper_rational": "5491212733147/500000000000"
+          },
+          "approximation": "10.9824254662932734",
+          "multiplicity": 1,
+          "sturm_count": 1
+        }
+      ],
+      "interval_sign_chart": [
+        {
+          "left": "0",
+          "right": "alpha_4",
+          "sample": "557058712681/400000000000",
+          "signs": {
+            "a": 1,
+            "a_minus_1": -1,
+            "M": 1,
+            "det_full": 1,
+            "det_half": 1
+          },
+          "rk_domain": true,
+          "cptp": true
+        },
+        {
+          "left": "alpha_4",
+          "right": "mu_4",
+          "sample": "13767719029699/2000000000000",
+          "signs": {
+            "a": 1,
+            "a_minus_1": 1,
+            "M": 1,
+            "det_full": 1,
+            "det_half": 1
+          },
+          "rk_domain": true,
+          "cptp": false
+        },
+        {
+          "left": "mu_4",
+          "right": "infinity",
+          "sample": "5991212733147/500000000000",
+          "signs": {
+            "a": 1,
+            "a_minus_1": 1,
+            "M": -1,
+            "det_full": 1,
+            "det_half": 1
+          },
+          "rk_domain": true,
+          "cptp": false
+        }
+      ],
+      "admissible_components": [
+        {
+          "type": "interval",
+          "left": "0",
+          "right": "alpha_4",
+          "left_closed": true,
+          "right_closed": true
+        }
+      ],
+      "certified_admissible_set": "[0, alpha_4]"
+    },
+    {
+      "key": "DP5",
+      "name": "Dormand-Prince 5 principal",
+      "order": 5,
+      "butcher_tableau": {
+        "A": [
+          [
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0"
+          ],
+          [
+            "1/5",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0"
+          ],
+          [
+            "3/40",
+            "9/40",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0"
+          ],
+          [
+            "44/45",
+            "-56/15",
+            "32/9",
+            "0",
+            "0",
+            "0",
+            "0"
+          ],
+          [
+            "19372/6561",
+            "-25360/2187",
+            "64448/6561",
+            "-212/729",
+            "0",
+            "0",
+            "0"
+          ],
+          [
+            "9017/3168",
+            "-355/33",
+            "46732/5247",
+            "49/176",
+            "-5103/18656",
+            "0",
+            "0"
+          ],
+          [
+            "35/384",
+            "0",
+            "500/1113",
+            "125/192",
+            "-2187/6784",
+            "11/84",
+            "0"
+          ]
+        ],
+        "b": [
+          "35/384",
+          "0",
+          "500/1113",
+          "125/192",
+          "-2187/6784",
+          "11/84",
+          "0"
+        ]
+      },
+      "stability_function": "(s**6 + 5*s**5 + 25*s**4 + 100*s**3 + 300*s**2 + 600*s + 600)/600",
+      "stage_resolvent_determinants": {
+        "full_step": "1",
+        "half_step": "1"
+      },
+      "first_exponential_defect": {
+        "m": 6,
+        "eta_m": "1/3600"
+      },
+      "leading_margin_coefficient": "31/115200",
+      "margin": "-x**6*(x**6 - 20*x**5 + 300*x**4 - 3600*x**3 + 35600*x**2 - 294400*x - 396800)/1474560000",
+      "boundary_polynomials": {
+        "a=0": {
+          "expression": "(x**6 - 5*x**5 + 25*x**4 - 100*x**3 + 300*x**2 - 600*x + 600)/600",
+          "numerator_scalar": "1/600",
+          "primitive_numerator": "x**6 - 5*x**5 + 25*x**4 - 100*x**3 + 300*x**2 - 600*x + 600",
+          "square_free_part": "x**6 - 5*x**5 + 25*x**4 - 100*x**3 + 300*x**2 - 600*x + 600",
+          "denominator": "1"
+        },
+        "a=1": {
+          "expression": "x*(x**5 - 5*x**4 + 25*x**3 - 100*x**2 + 300*x - 600)/600",
+          "numerator_scalar": "1",
+          "primitive_numerator": "x*(x**5 - 5*x**4 + 25*x**3 - 100*x**2 + 300*x - 600)",
+          "square_free_part": "x*(x**5 - 5*x**4 + 25*x**3 - 100*x**2 + 300*x - 600)",
+          "denominator": "600"
+        },
+        "M=0": {
+          "expression": "-x**6*(x**6 - 20*x**5 + 300*x**4 - 3600*x**3 + 35600*x**2 - 294400*x - 396800)/1474560000",
+          "numerator_scalar": "-1",
+          "primitive_numerator": "x**6*(x**6 - 20*x**5 + 300*x**4 - 3600*x**3 + 35600*x**2 - 294400*x - 396800)",
+          "square_free_part": "x*(x**6 - 20*x**5 + 300*x**4 - 3600*x**3 + 35600*x**2 - 294400*x - 396800)",
+          "denominator": "1474560000"
+        }
+      },
+      "positive_root_certificates": [
+        {
+          "equation": "a=1",
+          "label": "alpha_5",
+          "bracket": {
+            "type": "open_interval",
+            "lower_decimal": "3.306567892634",
+            "upper_decimal": "3.306567892635",
+            "lower_rational": "1653283946317/500000000000",
+            "upper_rational": "661313578527/200000000000"
+          },
+          "approximation": "3.30656789263494650",
+          "multiplicity": 1,
+          "sturm_count": 1
+        },
+        {
+          "equation": "M=0",
+          "label": "mu_5",
+          "bracket": {
+            "type": "open_interval",
+            "lower_decimal": "13.174093462800",
+            "upper_decimal": "13.174093462801",
+            "lower_rational": "32935233657/2500000000",
+            "upper_rational": "13174093462801/1000000000000"
+          },
+          "approximation": "13.1740934628009334",
+          "multiplicity": 1,
+          "sturm_count": 1
+        }
+      ],
+      "interval_sign_chart": [
+        {
+          "left": "0",
+          "right": "alpha_5",
+          "sample": "1653283946317/1000000000000",
+          "signs": {
+            "a": 1,
+            "a_minus_1": -1,
+            "M": 1,
+            "det_full": 1,
+            "det_half": 1
+          },
+          "rk_domain": true,
+          "cptp": true
+        },
+        {
+          "left": "alpha_5",
+          "right": "mu_5",
+          "sample": "3296132271087/400000000000",
+          "signs": {
+            "a": 1,
+            "a_minus_1": 1,
+            "M": 1,
+            "det_full": 1,
+            "det_half": 1
+          },
+          "rk_domain": true,
+          "cptp": false
+        },
+        {
+          "left": "mu_5",
+          "right": "infinity",
+          "sample": "14174093462801/1000000000000",
+          "signs": {
+            "a": 1,
+            "a_minus_1": 1,
+            "M": -1,
+            "det_full": 1,
+            "det_half": 1
+          },
+          "rk_domain": true,
+          "cptp": false
+        }
+      ],
+      "admissible_components": [
+        {
+          "type": "interval",
+          "left": "0",
+          "right": "alpha_5",
+          "left_closed": true,
+          "right_closed": true
+        }
+      ],
+      "certified_admissible_set": "[0, alpha_5]"
+    },
+    {
+      "key": "DP4",
+      "name": "Dormand-Prince embedded 4",
+      "order": 4,
+      "butcher_tableau": {
+        "A": [
+          [
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0"
+          ],
+          [
+            "1/5",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0"
+          ],
+          [
+            "3/40",
+            "9/40",
+            "0",
+            "0",
+            "0",
+            "0",
+            "0"
+          ],
+          [
+            "44/45",
+            "-56/15",
+            "32/9",
+            "0",
+            "0",
+            "0",
+            "0"
+          ],
+          [
+            "19372/6561",
+            "-25360/2187",
+            "64448/6561",
+            "-212/729",
+            "0",
+            "0",
+            "0"
+          ],
+          [
+            "9017/3168",
+            "-355/33",
+            "46732/5247",
+            "49/176",
+            "-5103/18656",
+            "0",
+            "0"
+          ],
+          [
+            "35/384",
+            "0",
+            "500/1113",
+            "125/192",
+            "-2187/6784",
+            "11/84",
+            "0"
+          ]
+        ],
+        "b": [
+          "5179/57600",
+          "0",
+          "7571/16695",
+          "393/640",
+          "-92097/339200",
+          "187/2100",
+          "1/40"
+        ]
+      },
+      "stability_function": "(5*s**7 + 161*s**6 + 1097*s**5 + 5000*s**4 + 20000*s**3 + 60000*s**2 + 120000*s + 120000)/120000",
+      "stage_resolvent_determinants": {
+        "full_step": "1",
+        "half_step": "1"
+      },
+      "first_exponential_defect": {
+        "m": 5,
+        "eta_m": "97/120000"
+      },
+      "leading_margin_coefficient": "-97/128000",
+      "margin": "-x**5*(25*x**9 - 3220*x**8 + 147564*x**7 - 3225872*x**6 + 48214544*x**5 - 576320000*x**4 + 5721600000*x**3 - 37719040000*x**2 + 16752640000*x + 178790400000)/235929600000000",
+      "boundary_polynomials": {
+        "a=0": {
+          "expression": "-(5*x**7 - 161*x**6 + 1097*x**5 - 5000*x**4 + 20000*x**3 - 60000*x**2 + 120000*x - 120000)/120000",
+          "numerator_scalar": "-1/120000",
+          "primitive_numerator": "5*x**7 - 161*x**6 + 1097*x**5 - 5000*x**4 + 20000*x**3 - 60000*x**2 + 120000*x - 120000",
+          "square_free_part": "5*x**7 - 161*x**6 + 1097*x**5 - 5000*x**4 + 20000*x**3 - 60000*x**2 + 120000*x - 120000",
+          "denominator": "1"
+        },
+        "a=1": {
+          "expression": "-x*(5*x**6 - 161*x**5 + 1097*x**4 - 5000*x**3 + 20000*x**2 - 60000*x + 120000)/120000",
+          "numerator_scalar": "-1",
+          "primitive_numerator": "x*(5*x**6 - 161*x**5 + 1097*x**4 - 5000*x**3 + 20000*x**2 - 60000*x + 120000)",
+          "square_free_part": "x*(5*x**6 - 161*x**5 + 1097*x**4 - 5000*x**3 + 20000*x**2 - 60000*x + 120000)",
+          "denominator": "120000"
+        },
+        "M=0": {
+          "expression": "-x**5*(25*x**9 - 3220*x**8 + 147564*x**7 - 3225872*x**6 + 48214544*x**5 - 576320000*x**4 + 5721600000*x**3 - 37719040000*x**2 + 16752640000*x + 178790400000)/235929600000000",
+          "numerator_scalar": "-1",
+          "primitive_numerator": "x**5*(25*x**9 - 3220*x**8 + 147564*x**7 - 3225872*x**6 + 48214544*x**5 - 576320000*x**4 + 5721600000*x**3 - 37719040000*x**2 + 16752640000*x + 178790400000)",
+          "square_free_part": "x*(25*x**9 - 3220*x**8 + 147564*x**7 - 3225872*x**6 + 48214544*x**5 - 576320000*x**4 + 5721600000*x**3 - 37719040000*x**2 + 16752640000*x + 178790400000)",
+          "denominator": "235929600000000"
+        }
+      },
+      "positive_root_certificates": [
+        {
+          "equation": "M=0",
+          "label": "beta_-",
+          "bracket": {
+            "type": "open_interval",
+            "lower_decimal": "3.068856548050",
+            "upper_decimal": "3.068856548051",
+            "lower_rational": "61377130961/20000000000",
+            "upper_rational": "3068856548051/1000000000000"
+          },
+          "approximation": "3.06885654805038075",
+          "multiplicity": 1,
+          "sturm_count": 1
+        },
+        {
+          "equation": "a=1",
+          "label": "beta_+",
+          "bracket": {
+            "type": "open_interval",
+            "lower_decimal": "4.384986320801",
+            "upper_decimal": "4.384986320802",
+            "lower_rational": "4384986320801/1000000000000",
+            "upper_rational": "2192493160401/500000000000"
+          },
+          "approximation": "4.38498632080194436",
+          "multiplicity": 1,
+          "sturm_count": 1
+        },
+        {
+          "equation": "M=0",
+          "label": "delta_M",
+          "bracket": {
+            "type": "open_interval",
+            "lower_decimal": "15.298767807585",
+            "upper_decimal": "15.298767807586",
+            "lower_rational": "3059753561517/200000000000",
+            "upper_rational": "7649383903793/500000000000"
+          },
+          "approximation": "15.2987678075854269",
+          "multiplicity": 1,
+          "sturm_count": 1
+        },
+        {
+          "equation": "a=1",
+          "label": "delta_1",
+          "bracket": {
+            "type": "open_interval",
+            "lower_decimal": "24.727754318760",
+            "upper_decimal": "24.727754318761",
+            "lower_rational": "618193857969/25000000000",
+            "upper_rational": "24727754318761/1000000000000"
+          },
+          "approximation": "24.7277543187603100",
+          "multiplicity": 1,
+          "sturm_count": 1
+        },
+        {
+          "equation": "a=0",
+          "label": "delta_0",
+          "bracket": {
+            "type": "open_interval",
+            "lower_decimal": "24.727895030129",
+            "upper_decimal": "24.727895030130",
+            "lower_rational": "24727895030129/1000000000000",
+            "upper_rational": "2472789503013/100000000000"
+          },
+          "approximation": "24.7278950301296972",
+          "multiplicity": 1,
+          "sturm_count": 1
+        }
+      ],
+      "interval_sign_chart": [
+        {
+          "left": "0",
+          "right": "beta_-",
+          "sample": "61377130961/40000000000",
+          "signs": {
+            "a": 1,
+            "a_minus_1": -1,
+            "M": -1,
+            "det_full": 1,
+            "det_half": 1
+          },
+          "rk_domain": true,
+          "cptp": false
+        },
+        {
+          "left": "beta_-",
+          "right": "beta_+",
+          "sample": "1863460717213/500000000000",
+          "signs": {
+            "a": 1,
+            "a_minus_1": -1,
+            "M": 1,
+            "det_full": 1,
+            "det_half": 1
+          },
+          "rk_domain": true,
+          "cptp": true
+        },
+        {
+          "left": "beta_+",
+          "right": "delta_M",
+          "sample": "19683754128387/2000000000000",
+          "signs": {
+            "a": 1,
+            "a_minus_1": 1,
+            "M": 1,
+            "det_full": 1,
+            "det_half": 1
+          },
+          "rk_domain": true,
+          "cptp": false
+        },
+        {
+          "left": "delta_M",
+          "right": "delta_1",
+          "sample": "20013261063173/1000000000000",
+          "signs": {
+            "a": 1,
+            "a_minus_1": 1,
+            "M": -1,
+            "det_full": 1,
+            "det_half": 1
+          },
+          "rk_domain": true,
+          "cptp": false
+        },
+        {
+          "left": "delta_1",
+          "right": "delta_0",
+          "sample": "4945564934889/200000000000",
+          "signs": {
+            "a": 1,
+            "a_minus_1": -1,
+            "M": -1,
+            "det_full": 1,
+            "det_half": 1
+          },
+          "rk_domain": true,
+          "cptp": false
+        },
+        {
+          "left": "delta_0",
+          "right": "infinity",
+          "sample": "2572789503013/100000000000",
+          "signs": {
+            "a": -1,
+            "a_minus_1": -1,
+            "M": -1,
+            "det_full": 1,
+            "det_half": 1
+          },
+          "rk_domain": true,
+          "cptp": false
+        }
+      ],
+      "admissible_components": [
+        {
+          "type": "point",
+          "value": "0"
+        },
+        {
+          "type": "interval",
+          "left": "beta_-",
+          "right": "beta_+",
+          "left_closed": true,
+          "right_closed": true
+        }
+      ],
+      "certified_admissible_set": "{0} union [beta_-, beta_+]"
+    },
+    {
+      "key": "BE",
+      "name": "Backward Euler",
+      "order": 1,
+      "butcher_tableau": {
+        "A": [
+          [
+            "1"
+          ]
+        ],
+        "b": [
+          "1"
+        ]
+      },
+      "stability_function": "-1/(s - 1)",
+      "stage_resolvent_determinants": {
+        "full_step": "x + 1",
+        "half_step": "(x + 2)/2"
+      },
+      "first_exponential_defect": {
+        "m": 2,
+        "eta_m": "1/2"
+      },
+      "leading_margin_coefficient": "1/4",
+      "margin": "x**2/((x + 1)*(x + 2)**2)",
+      "boundary_polynomials": {
+        "a=0": {
+          "expression": "1/(x + 1)",
+          "numerator_scalar": "1",
+          "primitive_numerator": "1",
+          "square_free_part": "1",
+          "denominator": "x + 1"
+        },
+        "a=1": {
+          "expression": "-x/(x + 1)",
+          "numerator_scalar": "-1",
+          "primitive_numerator": "x",
+          "square_free_part": "x",
+          "denominator": "x + 1"
+        },
+        "M=0": {
+          "expression": "x**2/((x + 1)*(x + 2)**2)",
+          "numerator_scalar": "1",
+          "primitive_numerator": "x**2",
+          "square_free_part": "x",
+          "denominator": "(x + 1)*(x + 2)**2"
+        }
+      },
+      "positive_root_certificates": [],
+      "interval_sign_chart": [
+        {
+          "left": "0",
+          "right": "infinity",
+          "sample": "1",
+          "signs": {
+            "a": 1,
+            "a_minus_1": -1,
+            "M": 1,
+            "det_full": 1,
+            "det_half": 1
+          },
+          "rk_domain": true,
+          "cptp": true
+        }
+      ],
+      "admissible_components": [
+        {
+          "type": "interval",
+          "left": "0",
+          "right": "infinity",
+          "left_closed": true,
+          "right_closed": false
+        }
+      ],
+      "certified_admissible_set": "[0, infinity)"
+    },
+    {
+      "key": "IM",
+      "name": "Implicit midpoint",
+      "order": 2,
+      "butcher_tableau": {
+        "A": [
+          [
+            "1/2"
+          ]
+        ],
+        "b": [
+          "1"
+        ]
+      },
+      "stability_function": "-(s + 2)/(s - 2)",
+      "stage_resolvent_determinants": {
+        "full_step": "(x + 2)/2",
+        "half_step": "(x + 4)/4"
+      },
+      "first_exponential_defect": {
+        "m": 3,
+        "eta_m": "1/12"
+      },
+      "leading_margin_coefficient": "-1/16",
+      "margin": "-2*x**3/((x + 2)*(x + 4)**2)",
+      "boundary_polynomials": {
+        "a=0": {
+          "expression": "-(x - 2)/(x + 2)",
+          "numerator_scalar": "-1",
+          "primitive_numerator": "x - 2",
+          "square_free_part": "x - 2",
+          "denominator": "x + 2"
+        },
+        "a=1": {
+          "expression": "-2*x/(x + 2)",
+          "numerator_scalar": "-2",
+          "primitive_numerator": "x",
+          "square_free_part": "x",
+          "denominator": "x + 2"
+        },
+        "M=0": {
+          "expression": "-2*x**3/((x + 2)*(x + 4)**2)",
+          "numerator_scalar": "-2",
+          "primitive_numerator": "x**3",
+          "square_free_part": "x",
+          "denominator": "(x + 2)*(x + 4)**2"
+        }
+      },
+      "positive_root_certificates": [
+        {
+          "equation": "a=0",
+          "label": "",
+          "bracket": {
+            "type": "point",
+            "value": "2"
+          },
+          "approximation": "2",
+          "multiplicity": 1,
+          "sturm_count": 1
+        }
+      ],
+      "interval_sign_chart": [
+        {
+          "left": "0",
+          "right": "2",
+          "sample": "1",
+          "signs": {
+            "a": 1,
+            "a_minus_1": -1,
+            "M": -1,
+            "det_full": 1,
+            "det_half": 1
+          },
+          "rk_domain": true,
+          "cptp": false
+        },
+        {
+          "left": "2",
+          "right": "infinity",
+          "sample": "3",
+          "signs": {
+            "a": -1,
+            "a_minus_1": -1,
+            "M": -1,
+            "det_full": 1,
+            "det_half": 1
+          },
+          "rk_domain": true,
+          "cptp": false
+        }
+      ],
+      "admissible_components": [
+        {
+          "type": "point",
+          "value": "0"
+        }
+      ],
+      "certified_admissible_set": "{0}"
+    }
+  ]
+}
