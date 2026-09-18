@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "rk-choi-margin"
-version = "4.0.0"
+version = "4.0.1"
 description = "Exact symbolic and certified numerical checks for complete-positivity regions of Runge-Kutta discretizations of phase-covariant qubit Lindblad dynamics, with a candidate-aware certified guard for adaptive stepping."
 requires-python = ">=3.11"
 dependencies = [

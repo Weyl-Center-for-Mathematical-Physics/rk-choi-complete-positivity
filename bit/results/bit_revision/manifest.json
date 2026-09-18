@@ -1,6 +1,6 @@
 {
  "generator": "reproduce_bit.py",
- "generated_utc": "2026-09-18T21:08:01+00:00",
+ "generated_utc": "2026-09-18T22:06:40+00:00",
  "python": "3.13.5",
  "stage_counts": {
   "PASS": 5,
@@ -10,7 +10,7 @@
  "stages": [
   {
    "stage": "certificates",
-   "log": "results\\bit_revision\\logs\\20260918T210444Z_certificates.log",
+   "log": "results\\bit_revision\\logs\\20260918T220316Z_certificates.log",
    "commands": [
     {
      "title": "Independent first-principles verification of the article's claims",
@@ -20,7 +20,7 @@
       "scripts/verify_bit_claims.py"
      ],
      "exit": 0,
-     "seconds": 16.2
+     "seconds": 18.2
     },
     {
      "title": "Verification of the extrapolation corollary for the archived methods",
@@ -30,14 +30,14 @@
       "scripts/verify_bit_extension.py"
      ],
      "exit": 0,
-     "seconds": 10.8
+     "seconds": 13.6
     }
    ],
    "status": "PASS"
   },
   {
    "stage": "tests",
-   "log": "results\\bit_revision\\logs\\20260918T210511Z_tests.log",
+   "log": "results\\bit_revision\\logs\\20260918T220347Z_tests.log",
    "commands": [
     {
      "title": "Collect the complete pytest suite",
@@ -52,7 +52,7 @@
       "tests"
      ],
      "exit": 0,
-     "seconds": 1.6,
+     "seconds": 1.8,
      "tests_collected": 387
     },
     {
@@ -68,7 +68,7 @@
       "tests/test_closeout.py"
      ],
      "exit": 0,
-     "seconds": 11.3,
+     "seconds": 12.5,
      "tests_passed": 14
     },
     {
@@ -84,7 +84,7 @@
       "tests/test_core.py"
      ],
      "exit": 0,
-     "seconds": 15.5,
+     "seconds": 12.8,
      "tests_passed": 41
     },
     {
@@ -100,7 +100,7 @@
       "tests/test_topology_operational.py"
      ],
      "exit": 0,
-     "seconds": 3.4,
+     "seconds": 2.2,
      "tests_passed": 9
     },
     {
@@ -116,7 +116,7 @@
       "tests/test_v26.py"
      ],
      "exit": 0,
-     "seconds": 1.8,
+     "seconds": 1.6,
      "tests_passed": 6
     },
     {
@@ -132,7 +132,7 @@
       "tests/test_v27_certification.py"
      ],
      "exit": 0,
-     "seconds": 4.2,
+     "seconds": 4.4,
      "tests_passed": 14
     },
     {
@@ -148,7 +148,7 @@
       "tests/test_v27_noncommuting_adaptive.py"
      ],
      "exit": 0,
-     "seconds": 41.6,
+     "seconds": 43.4,
      "tests_passed": 8
     },
     {
@@ -164,7 +164,7 @@
       "tests/test_v28_candidates.py"
      ],
      "exit": 0,
-     "seconds": 3.1,
+     "seconds": 3.2,
      "tests_passed": 9
     },
     {
@@ -180,7 +180,7 @@
       "tests/test_v29_executed_candidate.py"
      ],
      "exit": 0,
-     "seconds": 7.0,
+     "seconds": 5.6,
      "tests_passed": 12
     },
     {
@@ -196,7 +196,7 @@
       "tests/test_v29_theory.py"
      ],
      "exit": 0,
-     "seconds": 3.3,
+     "seconds": 3.6,
      "tests_passed": 8
     },
     {
@@ -212,7 +212,7 @@
       "tests/test_v30_execution_contract.py"
      ],
      "exit": 0,
-     "seconds": 3.4,
+     "seconds": 3.6,
      "tests_passed": 12
     },
     {
@@ -228,7 +228,7 @@
       "tests/test_v31_closeout.py"
      ],
      "exit": 0,
-     "seconds": 3.1,
+     "seconds": 3.5,
      "tests_passed": 61
     },
     {
@@ -244,7 +244,7 @@
       "tests/test_v32_external_review.py"
      ],
      "exit": 0,
-     "seconds": 2.7,
+     "seconds": 2.4,
      "tests_passed": 9
     },
     {
@@ -260,7 +260,7 @@
       "tests/test_v33_endpoint_membership.py"
      ],
      "exit": 0,
-     "seconds": 6.5,
+     "seconds": 7.4,
      "tests_passed": 16
     },
     {
@@ -276,7 +276,7 @@
       "tests/test_v34_remediation.py"
      ],
      "exit": 0,
-     "seconds": 1.3,
+     "seconds": 1.6,
      "tests_passed": 4
     },
     {
@@ -292,7 +292,7 @@
       "tests/test_v35_editorial_layout.py"
      ],
      "exit": 0,
-     "seconds": 6.4,
+     "seconds": 6.6,
      "tests_passed": 11
     },
     {
@@ -324,7 +324,7 @@
       "tests/test_bit_scientific_contract.py"
      ],
      "exit": 0,
-     "seconds": 7.9,
+     "seconds": 9.5,
      "tests_passed": 36
     },
     {
@@ -340,7 +340,7 @@
       "tests/test_bit_figure_contract.py"
      ],
      "exit": 0,
-     "seconds": 4.4,
+     "seconds": 4.7,
      "tests_passed": 31
     },
     {
@@ -356,7 +356,7 @@
       "tests/test_bit_table_contract.py"
      ],
      "exit": 0,
-     "seconds": 0.4,
+     "seconds": 0.5,
      "tests_passed": 13
     },
     {
@@ -372,7 +372,7 @@
       "tests/test_bit_reproduce_contract.py"
      ],
      "exit": 0,
-     "seconds": 1.1,
+     "seconds": 1.2,
      "tests_passed": 13
     },
     {
@@ -388,7 +388,7 @@
       "tests/test_bit_submission_contract.py"
      ],
      "exit": 0,
-     "seconds": 4.4,
+     "seconds": 4.5,
      "tests_passed": 54
     }
    ],
@@ -396,7 +396,7 @@
   },
   {
    "stage": "audits",
-   "log": "results\\bit_revision\\logs\\20260918T210725Z_audits.log",
+   "log": "results\\bit_revision\\logs\\20260918T220604Z_audits.log",
    "commands": [
     {
      "title": "Verify theorem identities (v2.x archive audit)",
@@ -406,7 +406,7 @@
       "scripts/verify_theorems.py"
      ],
      "exit": 0,
-     "seconds": 5.3
+     "seconds": 5.1
     },
     {
      "title": "Verify phase-covariant identities",
@@ -416,7 +416,7 @@
       "scripts/verify_phase_covariant.py"
      ],
      "exit": 0,
-     "seconds": 3.7
+     "seconds": 3.3
     },
     {
      "title": "Verify method and candidate audit",
@@ -426,7 +426,7 @@
       "scripts/verify_section4.py"
      ],
      "exit": 0,
-     "seconds": 2.2
+     "seconds": 2.4
     },
     {
      "title": "Independent 15,000-sample Choi audit",
@@ -436,7 +436,7 @@
       "independent_validation/independent_audit_v31.py"
      ],
      "exit": 0,
-     "seconds": 4.9
+     "seconds": 4.2
     },
     {
      "title": "Executed-candidate contract audit",
@@ -446,7 +446,7 @@
       "independent_validation/executed_candidate_contract_v31.py"
      ],
      "exit": 0,
-     "seconds": 6.9
+     "seconds": 7.2
     },
     {
      "title": "Endpoint-domain adversarial audit",
@@ -456,14 +456,14 @@
       "independent_validation/endpoint_membership_v33.py"
      ],
      "exit": 0,
-     "seconds": 2.8
+     "seconds": 3.0
     }
    ],
    "status": "PASS"
   },
   {
    "stage": "figures",
-   "log": "results\\bit_revision\\logs\\20260918T210751Z_figures.log",
+   "log": "results\\bit_revision\\logs\\20260918T220629Z_figures.log",
    "commands": [
     {
      "title": "Generate the BIT figure set with overlap and colour audits",
@@ -473,7 +473,7 @@
       "scripts/generate_bit_figures.py"
      ],
      "exit": 0,
-     "seconds": 9.8
+     "seconds": 10.6
     },
     {
      "title": "Generate the Online Resource tables from frozen records",
@@ -490,7 +490,7 @@
   },
   {
    "stage": "manuscript-contract",
-   "log": "results\\bit_revision\\logs\\20260918T210801Z_manuscript-contract.log",
+   "log": "results\\bit_revision\\logs\\20260918T220640Z_manuscript-contract.log",
    "commands": [
     {
      "title": "Audit the manuscript source against the archive contract",
@@ -506,7 +506,7 @@
       "<revision-root>\\code_and_data\\results\\bit_revision\\bit_audit.json"
      ],
      "exit": 0,
-     "seconds": 0.1
+     "seconds": 0.2
     }
    ],
    "status": "PASS"
@@ -552,7 +552,7 @@
   "independent_validation/third_order_adversarial_v32.py": "fa9ceeb5e6f821d565173ef0890b989ee4e4d991ff9e7844f4082b8ff45094f6",
   "independent_validation/third_order_adversarial_v33.py": "af5fa62a4f06aa31a930488bc8214b807537927cf0df869872dcc56b6563e498",
   "manuscript_contract/scripts_source_audit_v35.py": "871d8c953b0fdad3c11fa22010e5f1038e47050a6d908438dbcf03a3deff61cc",
-  "pyproject.toml": "fc05cea1c307afa238cfee12af315141581d68e29cbc78d42668c5c4b7daad0d",
+  "pyproject.toml": "a4fda17d49b5c2703ede6706909d37fd5e82aefd0ff531768017e08e4fa12111",
   "reproduce.sh": "fdfb18ab20648ff03673382a2cff793de9a4e2b4e9fed3e26e7bff675f7fae76",
   "reproduce_bit.py": "49a32e66d501c82c7b913a3985205c55fb79670773870576204c72b4572ea4eb",
   "scripts/audit_bit_source.py": "425836c70d647b083a9913db01f0ed72ae2bc61eb821d94539d17bbca7b32611",
@@ -623,7 +623,7 @@
  },
  "manuscript_inputs_sha256": {
   "cover_letter.tex": "489b7f6ae159c14bd1ad3f0dac2e676ddf87377e025627150848d3f1b7d8918c",
-  "declarations.tex": "54914718cd4d9eb4dd4963db8d52a4384c88543a729232d99432f33eb1624954",
+  "declarations.tex": "8b35f66c6a9447e1193dad514ecb617498f90e46a69a57a1f6948a57d049fa66",
   "ESM_1.tex": "500ffd4124b58835b01375df9253f716283d26595d7afb32e36da34a81ce9617",
   "extrapolation_table.tex": "914b35a0ea58270f7848cc08bddd1fca1b9efe8b741d762986eb68abf4db64c3",
   "Fig1.eps": "fc2727e63754e74959e2b8193f1057930b7825db4ab49b64b773fd1b71fc77c6",

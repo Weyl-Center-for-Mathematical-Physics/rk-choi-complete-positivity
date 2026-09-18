@@ -8,6 +8,15 @@ a minor version adds results without changing existing ones; a patch version cha
 or tests only. Historical version directories (`results/v26` … `results/v34`, `results/jcp_figures_v34`,
 `figures_jcp`) and the historical entry point `reproduce.sh` are preserved unchanged across versions.
 
+## 4.0.1 — documentation patch (2026-09-18)
+
+No change to code, tests, certified data, figures or tables. The article's Code availability statement,
+this archive's citation metadata and documentation now cite the versioned release
+https://github.com/Weyl-Center-for-Mathematical-Physics/rk-choi-complete-positivity/releases/tag/v4.0.1
+and the Zenodo concept DOI 10.5281/zenodo.21522057, which resolves to the latest archived version
+(version 4.0.0 is archived as 10.5281/zenodo.22837831). The flattened article source shipped in
+`manuscript_source/` was regenerated from the updated article.
+
 ## 4.0.0 — BIT Numerical Mathematics revision (2026-09-18)
 
 Supports the article *Complete-positivity regions of Runge–Kutta discretizations of phase-covariant qubit
