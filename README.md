@@ -25,7 +25,8 @@ See [`bit/README.md`](bit/README.md), [`bit/VERSION.md`](bit/VERSION.md), and th
 the separate manuscript workspace. This is a public reproducibility release, not a journal submission.
 
 The code, data and documentation are MIT-licensed. The root `CITATION.cff` describes the current release.
-Use the versioned GitHub release URL as the persistent reference for this release.
+The v4.0.0 release is archived at [DOI 10.5281/zenodo.22837831](https://doi.org/10.5281/zenodo.22837831);
+cite the versioned GitHub release URL or that DOI.
 
 ## Preserved historical zero-precession archive
 

@@ -5,6 +5,7 @@ type: software
 version: 4.0.0
 date-released: 2026-09-18
 license: MIT
+doi: 10.5281/zenodo.22837831
 url: "https://github.com/Weyl-Center-for-Mathematical-Physics/rk-choi-complete-positivity/releases/tag/v4.0.0"
 repository-code: "https://github.com/Weyl-Center-for-Mathematical-Physics/rk-choi-complete-positivity"
 abstract: >-
