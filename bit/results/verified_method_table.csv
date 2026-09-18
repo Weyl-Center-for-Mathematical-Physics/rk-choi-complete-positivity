@@ -1,0 +1,9 @@
+key,method,family,order,stages,stability_function,first_defect_index_m,eta_m,local_margin_coefficient,local_orientation,cp_admissible_set
+euler,Forward Euler,explicit,1,1,x + 1,2,-1/2,-1/4,outward/non-CP,{0}
+rk2,Heun RK2,explicit,2,2,(x**2 + 2*x + 2)/2,3,-1/6,1/8,inward/CP,"[0, 2]"
+rk3,"SSPRK(3,3)",explicit,3,3,(x**3 + 3*x**2 + 6*x + 6)/6,4,-1/24,-7/192,outward/non-CP,{0}
+rk4,Classical RK4,explicit,4,4,(x**4 + 4*x**3 + 12*x**2 + 24*x + 24)/24,5,-1/120,1/128,inward/CP,"[0, 2.785293563]"
+dp5,Dormand-Prince 5 principal formula,explicit embedded,5,7,(x**6 + 5*x**5 + 25*x**4 + 100*x**3 + 300*x**2 + 600*x + 600)/600,6,1/3600,31/115200,inward/CP,"[0, 3.306567893]"
+dp4,Dormand-Prince embedded 4 formula,explicit embedded,4,7,(5*x**7 + 161*x**6 + 1097*x**5 + 5000*x**4 + 20000*x**3 + 60000*x**2 + 120000*x + 120000)/120000,5,97/120000,-97/128000,outward/non-CP,"{0} union [3.068856548, 4.384986321]"
+be,Backward Euler,implicit,1,1,-1/(x - 1),2,1/2,1/4,inward/CP,"[0, infinity)"
+im,Implicit midpoint,implicit,2,1,-(x + 2)/(x - 2),3,1/12,-1/16,outward/non-CP,{0}

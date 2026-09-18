@@ -1,0 +1,86 @@
+\section{Executed-candidate certification and adaptive control}
+\label{sec:stepcontrol}
+
+Embedded RK and step-doubling methods use local error estimates to propose new steps \cite{DormandPrince1980,HairerNorsettWanner1993,Shampine1985Doubling}. PI and digital-filter controllers refine those proposals using recent error history \cite{Gustafsson1991,Soderlind2002,Soderlind2003}. A complete-positivity failure is not an error measurement. It is a structural rejection of a particular candidate map and should not be inserted into the error history as an artificial error ratio.
+
+\subsection{Executed-input and executed-map semantics}
+
+For a known phase-covariant generator, membership is decided by the four inequalities of Theorem~\ref{thm:criterion} together with the stage-evaluation domain. Reliable implementation is not equivalent to subtracting two nearly equal binary numbers. On the one-way RK4 boundary,
+\begin{equation}
+ M_4(x;\varpi)=-\frac{x^5q}{147456}\,\mathcal C_q(qx),
+\end{equation}
+so direct evaluation of $R_4(-x)-|R_4[-x(1/2-\ii\varpi)]|^2$ loses the sign as $x\to0$.
+
+The interface is tri-state:
+\begin{equation}
+ \textsc{CPTP\_PASS},\qquad \textsc{CPTP\_FAIL},\qquad \textsc{CPTP\_UNCERTAIN}.
+ \label{eq:tri_state}
+\end{equation}
+A Python floating-point input is interpreted as its exact IEEE-754 binary rational, so the certificate concerns the number used by the workflow rather than a nearby printed decimal. Polynomial decisions use exact rational arithmetic and Sturm isolation in the supported cases. An unresolved sign returns \textsc{uncertain}; it is never accepted automatically.
+
+The distinction is observable at the upper RK4 boundary for $\varpi=2$. The printed decimal $x=1.270334626973889$ has margin $+1.43\times10^{-16}$, whereas the exact binary64 value represented by the same display has margin $-9.45\times10^{-17}$. A certifier that rationalizes the printed decimal certifies a different map from the one executed.
+
+Certification is attached to an immutable candidate record, defined here as the binary64 step, construction rule, numerical map, and certificate for the map actually advanced. The estimator, guard, and accumulator pass this record unchanged; local-error estimates remain separate because they compare candidates rather than certify one. After projection, the selected rational step is converted to binary64 and the candidate is recertified at that executed value. Exact-exponential and Strang maps receive a by-construction CPTP certificate only when created internally from a recognized construction rule; direct RK maps are certified algebraically. A caller-supplied label cannot certify an arbitrary matrix.
+The certificate applies to the exact mathematical candidate induced by the exact binary input. Its stored complex128 superoperator is generated from the same candidate specification and checked against that specification, but the implementation does not claim a formal enclosure of every downstream BLAS operation. Accordingly, machine-scale negative eigenvalues of the stored matrix near an equality face are monitored realization errors, not substitutes for the exact sign certificate.
+
+\begin{figure*}[t]
+ \centering
+ \makebox[\textwidth][c]{\includegraphics[width=\JCPFigureWidth]{Fig4_certified_guard.pdf}}
+ \caption{Why certification must bind the executed input and candidate. (a) The scaled exact sign polynomial identifies the detached component and the steps skipped by repeated halving. (b) The physical margin scales as $x^5$ and is eventually dominated by fixed absolute tolerances and cancellation in direct binary64 subtraction. Scientific decisions use the exact sign structure or exact candidate constraints, not the displayed floating subtraction.}
+ \label{fig:certified_guard}
+\end{figure*}
+
+\subsection{One-shot CP projection and error-control separation}
+
+Let $\mathcal H_{\rm CP}^{\rm cand}(h_{\rm prop})$ be the CPTP set of the candidate construction actually proposed over $0<h\le h_{\rm prop}$. For supported phase-covariant polynomial candidates, the certified component locator uses exact root isolation to return the components within this domain. Each root is compared algebraically with both endpoints before its bracket is restricted: exterior roots are discarded, endpoint roots are retained, and interior roots are re-isolated within the domain. An isolated equality point is accepted only if every active inequality and stage-domain condition holds. Any unresolved membership, identity, ordering, bracket overlap, or sign yields \textsc{uncertain}.
+
+\begin{proposition}[Exact feasibility and executed projection]
+\label{prop:one_shot_projection}
+Assume the component decomposition of $\mathcal H_{\rm CP}^{\rm cand}(h_{\rm prop})$ is certified. Every positive-width component contains an interior rational step specification. The implementation accepts a projection only if it also discovers an IEEE-754 value whose exact binary rational lies in that component and recertifies the corresponding candidate specification. If the finite representable search or binary recertification fails, the status is \textnormal{\textsc{uncertain}} with diagnostic \texttt{EXECUTED\_BINARY\_RECERTIFICATION\_FAILED}. If no positive-width component exists, the routine returns \textnormal{\textsc{no component}}; unresolved root, ordering, membership, or sign information also returns \textnormal{\textsc{uncertain}}. CP feasibility does not determine local accuracy, which must be recomputed for the executed candidate.
+\end{proposition}
+
+\begin{proof}
+A positive-width component contains a nonempty open interval, hence an interior rational by density of $\mathbb Q$ in $\mathbb R$. This establishes an exact candidate specification but not the success of a finite binary64 search: a narrow component need not contain a value reached by the implementation's representable search stencil. Each proposed binary64 value is therefore interpreted as its exact rational and recertified against every active predicate. Successful recertification proves executed projection; exhaustion or failure leaves the decision unresolved and triggers the stated fail-closed status.
+\end{proof}
+
+The controller maintains separate error and CP state. A CP-only rejection leaves the PI error history unchanged while component selection constructs a new candidate. The error estimate is recomputed at that candidate before acceptance. A change of representation or propagator resets the PI memory by policy, because the preceding error ratio no longer belongs to the same candidate family.
+
+\begin{algorithm}[Candidate-aware step]
+\label{alg:candidate_controller}
+Given a generator, RK method, error-controller proposal $h_{\rm prop}$, candidate-construction rule, tolerances, certification options, and a physical fallback:
+\begin{enumerate}
+ \item Construct the candidate map intended for advancement and its local-error estimate.
+ \item If the error estimate fails, update the ordinary PI/PID proposal and repeat.
+ \item Certify that execution record at the same executed numerical input; retain the local-error observation separately.
+ \item If the status is \textsc{pass}, accept and update PI memory using that candidate's error.
+ \item If the status is \textsc{fail}, isolate the candidate-map CPTP components below the error proposal, choose a certified interior point, reconstruct and recertify the executed candidate there, recompute its error, and return to step 2. If no positive-width component is available, transform or switch propagator, construct the replacement candidate, and return to step 2.
+ \item If the status is \textsc{uncertain}, increase precision or construct the physical fallback and return to step 2; never convert uncertainty to acceptance.
+\end{enumerate}
+\end{algorithm}
+
+At the exact one-way boundary with a detached component, a proposal below the component has no smaller positive direct-RK recovery. With dephasing or bidirectional relaxation, the attached component of Sec.~\ref{sec:robustness} returns, so sufficiently small steps eventually recover; projection versus further reduction is then a cost decision rather than a logical necessity.
+
+\subsection{Adaptive and comparative benchmarks}
+
+The first experiment uses the exact-boundary case $\theta=\kappa=0$, $\varpi=2$, and final dimensionless time $X=2$. Step doubling compares a coarse RK4 map with two half steps and advances the fine map. Four policies are reported over a tolerance sweep: error-only laboratory-frame RK4, a CP guard with rotating-frame fallback, rotating-frame RK4, and Strang composition of exact Hamiltonian and dissipative subflows \cite{Strang1968}. Strang is exact in this commuting benchmark and is included as a structural reference, not as a general timing claim.
+
+Figure~\ref{fig:tolerance_sweep}(a) plots normalized-Choi trace error against a reporting proxy that assigns one unit per RK stage and three per exponential action. This work proxy excludes algebraic certification costs, which are reported separately in Table~\ref{tab:guard_telemetry}. Repeated abscissae indicate equal proxy counts rather than duplicate records: the two error-only observations at work 60 correspond to requested tolerances $10^{-2}$ and $3\times10^{-3}$. At requested tolerance $3\times10^{-4}$, rotating-frame RK4 reaches \BenchmarkRotatingError{} in \BenchmarkRotatingStages{} RK stages; the nearest guard-plus-fallback result reaches \BenchmarkNearestGuardError{} in \BenchmarkNearestGuardStages{} stages.
+
+Across the four boundary rows, every accepted guarded candidate uses rotating-frame fallback. The guard makes \BenchmarkGuardLocatorCalls{} locator calls: \BenchmarkGuardSuccessfulProjections{} projections, \BenchmarkGuardEmptyComponents{} empty component sets, and \BenchmarkGuardUncertainOutcomes{} uncertain results. These runs test fail-closed fallback, not runtime efficiency.
+
+Buffered and near-saddle cases exercise projection at global normalized-Choi errors below $10^{-3}$. At $\theta=0$, $\kappa=10^{-3}$, $\varpi=2$, tolerance $10^{-3}$, and $X=2$, the controller accepts \BenchmarkBufferedDirect{} direct and \BenchmarkBufferedProjected{} projected candidates after \BenchmarkBufferedLocatorCalls{} locator calls, with error \BenchmarkBufferedError{} from \BenchmarkBufferedStages{} RK stages. At $\varpi=1.65$ with the same buffer and tolerance, it makes \BenchmarkNearSaddleProjected{} projection after \BenchmarkNearSaddleLocatorCalls{} locator call, with error \BenchmarkNearSaddleError{}. Figure~\ref{fig:tolerance_sweep}(b) identifies the accepted candidate types; Table~\ref{tab:guard_telemetry} gives the operation counts. A separate large-tolerance path remains in the archive only as an adversarial projection test.
+
+A common dense-qubit noncommuting comparison is also supplied in the archive for the transverse-field generator of Sec.~\ref{sec:robustness}. Direct fixed-step RK4 and exact-subflow Strang are compared against the exact exponential over several subdivisions. This modest baseline illustrates the expected order/structure tradeoff in the same representation; it does not establish a universal ranking against modern low-rank, Kraus, nested-Picard, sparse, or tensor-network implementations.
+
+\input{generated/adaptive_benchmark_table_v34}
+
+\begin{figure*}[t]
+ \centering
+ \makebox[\textwidth][c]{\includegraphics[width=\JCPFigureWidth]{Fig5_tolerance_sweep.pdf}}
+ \caption{Adaptive safety tests. (a) At $\theta=\kappa=0$, $\varpi=2$, and $X=2$, normalized-Choi trace error is plotted against propagator work. Repeated abscissae are equal-work observations, not duplicate points; the two labeled error-only observations at work 60 use tolerances $10^{-2}$ and $3\times10^{-3}$. The guard curve consists entirely of rotating-frame fallback; Strang is exact for this commuting split and lies at the numerical roundoff floor, so it is omitted from the logarithmic panel. Certification costs are reported separately in Table~\ref{tab:guard_telemetry}. (b) Accepted candidate types in the buffered, near-saddle, and boundary cases. No exact-fallback acceptances occur in these four cases. The boundary guard switches representation because its proposal contains no smaller positive fine-map component.}
+ \label{fig:tolerance_sweep}
+\end{figure*}
+
+\begin{remark}[Adaptive channel scope]
+For each accepted fixed step, the certified candidate is a linear trace-preserving map. If a step sequence is chosen from one particular input state, however, the overall adaptive input--output procedure is generally nonlinear in the initial state and is not itself one reusable quantum channel. Reusable channel construction requires a common generator-, superoperator-, Choi-, or fixed-basis error criterion independent of the state subsequently propagated.
+\end{remark}

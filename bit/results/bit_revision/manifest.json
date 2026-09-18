@@ -1,0 +1,774 @@
+{
+ "generator": "reproduce_bit.py",
+ "generated_utc": "2026-09-18T21:08:01+00:00",
+ "python": "3.13.5",
+ "stage_counts": {
+  "PASS": 5,
+  "FAIL": 0,
+  "SKIPPED": 0
+ },
+ "stages": [
+  {
+   "stage": "certificates",
+   "log": "results\\bit_revision\\logs\\20260918T210444Z_certificates.log",
+   "commands": [
+    {
+     "title": "Independent first-principles verification of the article's claims",
+     "argv": [
+      "python",
+      "-u",
+      "scripts/verify_bit_claims.py"
+     ],
+     "exit": 0,
+     "seconds": 16.2
+    },
+    {
+     "title": "Verification of the extrapolation corollary for the archived methods",
+     "argv": [
+      "python",
+      "-u",
+      "scripts/verify_bit_extension.py"
+     ],
+     "exit": 0,
+     "seconds": 10.8
+    }
+   ],
+   "status": "PASS"
+  },
+  {
+   "stage": "tests",
+   "log": "results\\bit_revision\\logs\\20260918T210511Z_tests.log",
+   "commands": [
+    {
+     "title": "Collect the complete pytest suite",
+     "argv": [
+      "python",
+      "-m",
+      "pytest",
+      "--collect-only",
+      "-q",
+      "-p",
+      "no:cacheprovider",
+      "tests"
+     ],
+     "exit": 0,
+     "seconds": 1.6,
+     "tests_collected": 387
+    },
+    {
+     "title": "Test tests/test_closeout.py",
+     "argv": [
+      "python",
+      "-m",
+      "pytest",
+      "-q",
+      "-rs",
+      "-p",
+      "no:cacheprovider",
+      "tests/test_closeout.py"
+     ],
+     "exit": 0,
+     "seconds": 11.3,
+     "tests_passed": 14
+    },
+    {
+     "title": "Test tests/test_core.py",
+     "argv": [
+      "python",
+      "-m",
+      "pytest",
+      "-q",
+      "-rs",
+      "-p",
+      "no:cacheprovider",
+      "tests/test_core.py"
+     ],
+     "exit": 0,
+     "seconds": 15.5,
+     "tests_passed": 41
+    },
+    {
+     "title": "Test tests/test_topology_operational.py",
+     "argv": [
+      "python",
+      "-m",
+      "pytest",
+      "-q",
+      "-rs",
+      "-p",
+      "no:cacheprovider",
+      "tests/test_topology_operational.py"
+     ],
+     "exit": 0,
+     "seconds": 3.4,
+     "tests_passed": 9
+    },
+    {
+     "title": "Test tests/test_v26.py",
+     "argv": [
+      "python",
+      "-m",
+      "pytest",
+      "-q",
+      "-rs",
+      "-p",
+      "no:cacheprovider",
+      "tests/test_v26.py"
+     ],
+     "exit": 0,
+     "seconds": 1.8,
+     "tests_passed": 6
+    },
+    {
+     "title": "Test tests/test_v27_certification.py",
+     "argv": [
+      "python",
+      "-m",
+      "pytest",
+      "-q",
+      "-rs",
+      "-p",
+      "no:cacheprovider",
+      "tests/test_v27_certification.py"
+     ],
+     "exit": 0,
+     "seconds": 4.2,
+     "tests_passed": 14
+    },
+    {
+     "title": "Test tests/test_v27_noncommuting_adaptive.py",
+     "argv": [
+      "python",
+      "-m",
+      "pytest",
+      "-q",
+      "-rs",
+      "-p",
+      "no:cacheprovider",
+      "tests/test_v27_noncommuting_adaptive.py"
+     ],
+     "exit": 0,
+     "seconds": 41.6,
+     "tests_passed": 8
+    },
+    {
+     "title": "Test tests/test_v28_candidates.py",
+     "argv": [
+      "python",
+      "-m",
+      "pytest",
+      "-q",
+      "-rs",
+      "-p",
+      "no:cacheprovider",
+      "tests/test_v28_candidates.py"
+     ],
+     "exit": 0,
+     "seconds": 3.1,
+     "tests_passed": 9
+    },
+    {
+     "title": "Test tests/test_v29_executed_candidate.py",
+     "argv": [
+      "python",
+      "-m",
+      "pytest",
+      "-q",
+      "-rs",
+      "-p",
+      "no:cacheprovider",
+      "tests/test_v29_executed_candidate.py"
+     ],
+     "exit": 0,
+     "seconds": 7.0,
+     "tests_passed": 12
+    },
+    {
+     "title": "Test tests/test_v29_theory.py",
+     "argv": [
+      "python",
+      "-m",
+      "pytest",
+      "-q",
+      "-rs",
+      "-p",
+      "no:cacheprovider",
+      "tests/test_v29_theory.py"
+     ],
+     "exit": 0,
+     "seconds": 3.3,
+     "tests_passed": 8
+    },
+    {
+     "title": "Test tests/test_v30_execution_contract.py",
+     "argv": [
+      "python",
+      "-m",
+      "pytest",
+      "-q",
+      "-rs",
+      "-p",
+      "no:cacheprovider",
+      "tests/test_v30_execution_contract.py"
+     ],
+     "exit": 0,
+     "seconds": 3.4,
+     "tests_passed": 12
+    },
+    {
+     "title": "Test tests/test_v31_closeout.py",
+     "argv": [
+      "python",
+      "-m",
+      "pytest",
+      "-q",
+      "-rs",
+      "-p",
+      "no:cacheprovider",
+      "tests/test_v31_closeout.py"
+     ],
+     "exit": 0,
+     "seconds": 3.1,
+     "tests_passed": 61
+    },
+    {
+     "title": "Test tests/test_v32_external_review.py",
+     "argv": [
+      "python",
+      "-m",
+      "pytest",
+      "-q",
+      "-rs",
+      "-p",
+      "no:cacheprovider",
+      "tests/test_v32_external_review.py"
+     ],
+     "exit": 0,
+     "seconds": 2.7,
+     "tests_passed": 9
+    },
+    {
+     "title": "Test tests/test_v33_endpoint_membership.py",
+     "argv": [
+      "python",
+      "-m",
+      "pytest",
+      "-q",
+      "-rs",
+      "-p",
+      "no:cacheprovider",
+      "tests/test_v33_endpoint_membership.py"
+     ],
+     "exit": 0,
+     "seconds": 6.5,
+     "tests_passed": 16
+    },
+    {
+     "title": "Test tests/test_v34_remediation.py",
+     "argv": [
+      "python",
+      "-m",
+      "pytest",
+      "-q",
+      "-rs",
+      "-p",
+      "no:cacheprovider",
+      "tests/test_v34_remediation.py"
+     ],
+     "exit": 0,
+     "seconds": 1.3,
+     "tests_passed": 4
+    },
+    {
+     "title": "Test tests/test_v35_editorial_layout.py",
+     "argv": [
+      "python",
+      "-m",
+      "pytest",
+      "-q",
+      "-rs",
+      "-p",
+      "no:cacheprovider",
+      "tests/test_v35_editorial_layout.py"
+     ],
+     "exit": 0,
+     "seconds": 6.4,
+     "tests_passed": 11
+    },
+    {
+     "title": "Test tests/test_v35_submission_revision.py",
+     "argv": [
+      "python",
+      "-m",
+      "pytest",
+      "-q",
+      "-rs",
+      "-p",
+      "no:cacheprovider",
+      "tests/test_v35_submission_revision.py"
+     ],
+     "exit": 0,
+     "seconds": 0.4,
+     "tests_passed": 6
+    },
+    {
+     "title": "Test tests/test_bit_scientific_contract.py",
+     "argv": [
+      "python",
+      "-m",
+      "pytest",
+      "-q",
+      "-rs",
+      "-p",
+      "no:cacheprovider",
+      "tests/test_bit_scientific_contract.py"
+     ],
+     "exit": 0,
+     "seconds": 7.9,
+     "tests_passed": 36
+    },
+    {
+     "title": "Test tests/test_bit_figure_contract.py",
+     "argv": [
+      "python",
+      "-m",
+      "pytest",
+      "-q",
+      "-rs",
+      "-p",
+      "no:cacheprovider",
+      "tests/test_bit_figure_contract.py"
+     ],
+     "exit": 0,
+     "seconds": 4.4,
+     "tests_passed": 31
+    },
+    {
+     "title": "Test tests/test_bit_table_contract.py",
+     "argv": [
+      "python",
+      "-m",
+      "pytest",
+      "-q",
+      "-rs",
+      "-p",
+      "no:cacheprovider",
+      "tests/test_bit_table_contract.py"
+     ],
+     "exit": 0,
+     "seconds": 0.4,
+     "tests_passed": 13
+    },
+    {
+     "title": "Test tests/test_bit_reproduce_contract.py",
+     "argv": [
+      "python",
+      "-m",
+      "pytest",
+      "-q",
+      "-rs",
+      "-p",
+      "no:cacheprovider",
+      "tests/test_bit_reproduce_contract.py"
+     ],
+     "exit": 0,
+     "seconds": 1.1,
+     "tests_passed": 13
+    },
+    {
+     "title": "Test tests/test_bit_submission_contract.py",
+     "argv": [
+      "python",
+      "-m",
+      "pytest",
+      "-q",
+      "-rs",
+      "-p",
+      "no:cacheprovider",
+      "tests/test_bit_submission_contract.py"
+     ],
+     "exit": 0,
+     "seconds": 4.4,
+     "tests_passed": 54
+    }
+   ],
+   "status": "PASS"
+  },
+  {
+   "stage": "audits",
+   "log": "results\\bit_revision\\logs\\20260918T210725Z_audits.log",
+   "commands": [
+    {
+     "title": "Verify theorem identities (v2.x archive audit)",
+     "argv": [
+      "python",
+      "-u",
+      "scripts/verify_theorems.py"
+     ],
+     "exit": 0,
+     "seconds": 5.3
+    },
+    {
+     "title": "Verify phase-covariant identities",
+     "argv": [
+      "python",
+      "-u",
+      "scripts/verify_phase_covariant.py"
+     ],
+     "exit": 0,
+     "seconds": 3.7
+    },
+    {
+     "title": "Verify method and candidate audit",
+     "argv": [
+      "python",
+      "-u",
+      "scripts/verify_section4.py"
+     ],
+     "exit": 0,
+     "seconds": 2.2
+    },
+    {
+     "title": "Independent 15,000-sample Choi audit",
+     "argv": [
+      "python",
+      "-u",
+      "independent_validation/independent_audit_v31.py"
+     ],
+     "exit": 0,
+     "seconds": 4.9
+    },
+    {
+     "title": "Executed-candidate contract audit",
+     "argv": [
+      "python",
+      "-u",
+      "independent_validation/executed_candidate_contract_v31.py"
+     ],
+     "exit": 0,
+     "seconds": 6.9
+    },
+    {
+     "title": "Endpoint-domain adversarial audit",
+     "argv": [
+      "python",
+      "-u",
+      "independent_validation/endpoint_membership_v33.py"
+     ],
+     "exit": 0,
+     "seconds": 2.8
+    }
+   ],
+   "status": "PASS"
+  },
+  {
+   "stage": "figures",
+   "log": "results\\bit_revision\\logs\\20260918T210751Z_figures.log",
+   "commands": [
+    {
+     "title": "Generate the BIT figure set with overlap and colour audits",
+     "argv": [
+      "python",
+      "-u",
+      "scripts/generate_bit_figures.py"
+     ],
+     "exit": 0,
+     "seconds": 9.8
+    },
+    {
+     "title": "Generate the Online Resource tables from frozen records",
+     "argv": [
+      "python",
+      "-u",
+      "scripts/generate_bit_tables.py"
+     ],
+     "exit": 0,
+     "seconds": 0.1
+    }
+   ],
+   "status": "PASS"
+  },
+  {
+   "stage": "manuscript-contract",
+   "log": "results\\bit_revision\\logs\\20260918T210801Z_manuscript-contract.log",
+   "commands": [
+    {
+     "title": "Audit the manuscript source against the archive contract",
+     "argv": [
+      "python",
+      "-u",
+      "scripts/audit_bit_source.py",
+      "--manuscript",
+      "<revision-root>\\manuscript",
+      "--status",
+      "PRE_SUBMISSION",
+      "--json",
+      "<revision-root>\\code_and_data\\results\\bit_revision\\bit_audit.json"
+     ],
+     "exit": 0,
+     "seconds": 0.1
+    }
+   ],
+   "status": "PASS"
+  }
+ ],
+ "tests_collected": 387,
+ "tests_passed": 387,
+ "tests_skipped": 0,
+ "frozen_inputs_sha256": {
+  "results/jcp_figures_v34/figure1_exact_branches.csv": "2f81dd15a03ac5e05f5fff5908386448eb995584f6b8133cd3649af8bcf50be4",
+  "results/jcp_figures_v34/figure1_conditioning.csv": "8c6673442bbefa5abcd00c6012f5bcaf56111fa4f74cbf0da01564f6d8e02c62",
+  "results/jcp_figures_v34/figure2_candidate_regions.csv": "00e0c7bb28e3429513513a91a97ea71f606e0888868b4d5e49cd3aac7f27a292",
+  "results/jcp_figures_v34/figure2_richardson_margin.csv": "1e21c8612fd7246935ffaeefa8a8af0ebe7ccf388c4b815effea35490a44702b",
+  "results/jcp_figures_v34/figure3_noncommuting_endpoints.csv": "9e7d52aec53f681ee56bec687642f9e1c821761eb118670f91babcfe84050623",
+  "results/jcp_figures_v34/figure4_conditioning.csv": "895c2e3af0e0536858b8b137ea781cfbbb6c1e55edefddcb21a4db2af0fd96d9",
+  "results/jcp_figures_v34/figure5_tolerance_sweep.csv": "aa7ccd3a71de7f0acdd270680573c5f7baa0a0f91e4e7c1780054ff81f840738",
+  "results/jcp_figures_v34/figure5_action_composition.csv": "bb40d3337fd37354032c16620d74069e9df9e84aaaae7059c6b72798235cc52e",
+  "results/jcp_figures_v34/figureS2_operational.csv": "b2874b7e48a845ffe03dfe6f5d441bc37302c71929507284071bd107cb34705f",
+  "results/v27/v27_verification.json": "ce81fa596dc3f6d0b6fd5089c13b7c406e92585ffa32d32cc08f34c2e9418030",
+  "results/v34/v34_verification.json": "2a908280917f9cf1ff607fce19364cfcfb2691eb137a08fb530120a8dc7a14eb",
+  "results/closeout/root_sign_certificate_v2_7.json": "ea2c39f1c57e415ed846925ffadc3c1f3ab8bc27374112da32c8b2b259210203"
+ },
+ "source_inputs_sha256": {
+  "CODE_ARCHIVE_ALLOWLIST.txt": "265eb39daf3b842cbc6dd1815afdf42fe40a0c5e709cdb3636dbaedfcf4df251",
+  "independent_validation/adversarial_regressions_v29.py": "c4d34735aaa0e5de18849d0c36f134b511475e8196b34268b1a6794c69d38731",
+  "independent_validation/adversarial_regressions_v30.py": "9bac27891de4b39588e2055cf62f02dcde68954ef32882d85ba0950bc56090f6",
+  "independent_validation/adversarial_regressions_v31.py": "d3c7381b90c9b1e3a54ddd6d95229b1669594dd4551bf0fbd35b0519aeb25783",
+  "independent_validation/endpoint_membership_v33.py": "3928313b91653ec7af38b040ca96623f523c76b55c2fa4f8b339c696ce047869",
+  "independent_validation/executed_candidate_contract_v29.py": "18eca3955a2ba24623f24efd2635601a6723048ec31ec8a1f756f71a5b53a1d8",
+  "independent_validation/executed_candidate_contract_v30.py": "2bbad89436d4260b86ccf92bc3b1a6b6df5ec2d209700d3a0b1cf89b01484fe7",
+  "independent_validation/executed_candidate_contract_v31.py": "3c52bbddbbc306d623d34dcdd33a81ba93c76330d465f90022135f1ef6b15899",
+  "independent_validation/external_review_regressions_v32.py": "404dabfe3c3b7fb738751ea2b97ecc6dc8080a63b385a6de004cd49ff75767e1",
+  "independent_validation/external_review_regressions_v33.py": "bc015aa0a3813d9e77399d86c19559a99acb2974ed07c9b069eb2cfe6335feff",
+  "independent_validation/independent_audit_v27.py": "c59f2fd03a21af6ceb9f7230e298ee448ee92b61810a4ec178ed5f0c51b5beaf",
+  "independent_validation/independent_audit_v28.py": "527855b4f8d3eedf3ea731f10c806af82a0dc382d42c94a517fada71a361c4a4",
+  "independent_validation/independent_audit_v29.py": "58e6be305eae0d68e8fd0bd112821acd953790fffc7172c662167aae70cd6681",
+  "independent_validation/independent_audit_v30.py": "a007ccdd4837690183c5e954645f68682589b9684caba4d1dd784bf7d77a33d5",
+  "independent_validation/independent_audit_v31.py": "2f515f8c8dd6c5d4cf9faab9f84e965eafcf258cb1f50dfa7da0986d8cbd36e9",
+  "independent_validation/remediation_v34.py": "dcf44afdcdfbe5356bcec729772db9083a7106f1a29bec39924a42339e93f9a3",
+  "independent_validation/second_order_adversarial_v30.py": "a574936da86f1c6b548c6873d4d2f5bf210a275603856e18e419285b86dbff52",
+  "independent_validation/second_order_adversarial_v31.py": "e1aada6d841f8857c684915351ff8453c5d2f3aa94334212cb06295174df54e8",
+  "independent_validation/third_order_adversarial_v31.py": "45583b52680c7418def43997d982315cd6e4e89aadbc5e26a078dfe11917dede",
+  "independent_validation/third_order_adversarial_v32.py": "fa9ceeb5e6f821d565173ef0890b989ee4e4d991ff9e7844f4082b8ff45094f6",
+  "independent_validation/third_order_adversarial_v33.py": "af5fa62a4f06aa31a930488bc8214b807537927cf0df869872dcc56b6563e498",
+  "manuscript_contract/scripts_source_audit_v35.py": "871d8c953b0fdad3c11fa22010e5f1038e47050a6d908438dbcf03a3deff61cc",
+  "pyproject.toml": "fc05cea1c307afa238cfee12af315141581d68e29cbc78d42668c5c4b7daad0d",
+  "reproduce.sh": "fdfb18ab20648ff03673382a2cff793de9a4e2b4e9fed3e26e7bff675f7fae76",
+  "reproduce_bit.py": "49a32e66d501c82c7b913a3985205c55fb79670773870576204c72b4572ea4eb",
+  "scripts/audit_bit_source.py": "425836c70d647b083a9913db01f0ed72ae2bc61eb821d94539d17bbca7b32611",
+  "scripts/build_bit_package.py": "f4c8395842b5f74c84b66e410db17c8c7b5e9d3103726ec92d4fb3148876d49c",
+  "scripts/generate_benchmark_figures.py": "468cee55772078e5bff38da2c52837b354d3cb462a2f05f07a262487abe4aca9",
+  "scripts/generate_bit_figures.py": "bf15765240f50e33a21bda727d988fe75677629871df2b4f3ed493148786506b",
+  "scripts/generate_bit_tables.py": "429228a26c83ea44924952921a1452aace2a4cdf6c1651a61f6217b5ffb6ba7f",
+  "scripts/generate_jcp_figures.py": "74420117c10c9ead36bbf8a438199d1bd8343cb1da5da6149999d136e8acdd1f",
+  "scripts/generate_jcp_figures_v27.py": "a4dd95cc1d567a2d1cdb4c3ef6fab0391668f9f4a0cdb2ace72bea7d2302b028",
+  "scripts/generate_jcp_figures_v28.py": "1c9ce927a22ef0b7b7899afd5ba22417a39e5c037355dc60e911380748555fe1",
+  "scripts/generate_jcp_figures_v29.py": "0e3149c83d22671d6c3420d3cf1ef88afa44ec1d5c342d4ce813dbeaf7417827",
+  "scripts/generate_jcp_figures_v30.py": "e21efc279687aac72ffcffd9dc1b18542642ae1f14d1ac4709ba8b000fae9ec6",
+  "scripts/generate_jcp_figures_v31.py": "c086ee9d0cd700b06d947344131ee4c7c0c7f153d7e765a612a642d64259bd9c",
+  "scripts/generate_jcp_figures_v32.py": "9a0a33b08709c256e01685b317b04385e5b72db7aa60b324eb46a5187464a762",
+  "scripts/generate_jcp_figures_v33.py": "4c9a094d02bc5c722b37c89050237890a3314daf53eb3603a2f7b82a96bbbe6f",
+  "scripts/generate_jcp_figures_v34.py": "5d87f56de064803a3e50d19b02615e41653121e292f61543f192fa1d120bae2a",
+  "scripts/generate_root_certificate.py": "14f915e8c07bda3914a5f877c59b8558d6eb1243895ddc73cd8adb114b498189",
+  "scripts/sync_article_numbers.py": "de2db273b47327c6a77436ccf2225626ebb57ed7f63c116abbd1528ce85f03a1",
+  "scripts/verify_bit_claims.py": "314955add1acbc488a419094d3646275f57afdea5d1122329ac282a8f4c13a3f",
+  "scripts/verify_bit_extension.py": "1e798d10eee38a8655c2068d76529c994ae4251668cf718a4cc18c9f136555e0",
+  "scripts/verify_phase_covariant.py": "b6b7de2c5f2172f15fb52dda6577dec29cab3f299ba619e958d6afeb058aca1b",
+  "scripts/verify_section2.py": "21f760dc550f1202d1cdbdef84a3b549d6cadb891fbd5f1be20ceb9a716cdf73",
+  "scripts/verify_section3.py": "b4916225dc1a1edc5534275fd30a5e12fed521cf27c02c237bb60466b965f77b",
+  "scripts/verify_section4.py": "46b983feea7d1de2b8beb13d82f4631e1c67be6e09651cf831d70f28eab1d576",
+  "scripts/verify_section5.py": "6e3a4ae28a0a13c23240197e79b2d186b11c259097544247eb64ea6b7703279d",
+  "scripts/verify_theorems.py": "97d908d71d57381d5f142c58462dcb0ea57acc18dbeb3604bebe2ee33c7f37db",
+  "scripts/verify_v26_extensions.py": "586df582816580f32c115768073ed822d74ad430b34259655710b3212a1620a2",
+  "scripts/verify_v27_extensions.py": "460b95a926ffbcfcbb444f9ea002b34ccddca6e0839d6b5c2c8bb42bfb28acdc",
+  "scripts/verify_v28_extensions.py": "da099fd6b6be995b70872b31c71aa83bc16f8fbd60e600dd86c0c6de174bc612",
+  "scripts/verify_v29_extensions.py": "bc3d78e2a055e13fd7e960403a6383e819c3f70b75833338789f8d7cdcb007c2",
+  "scripts/verify_v30_extensions.py": "b3e7d8671225da92ff5bfdaef108b1a7a8084ad7c00d0b4b9a63520c4ce589ec",
+  "scripts/verify_v31_extensions.py": "38efd6e4a32627f4c35759a58be3975ab40d5c670189086a8665e8311356140d",
+  "scripts/verify_v32_extensions.py": "90be6fd717c1f44d1946cf378764fcc5c18a893cf625733a8309090a29f676ba",
+  "scripts/verify_v33_extensions.py": "75b09a58b8a56e08dad4cbb761664d012af922ba143297568525d627f71e0966",
+  "scripts/verify_v34_extensions.py": "c0d4e66d8b54f12f248fd2e3183a37ed64058a9defe847222398ac369be2281e",
+  "src/rk_choi_margin/__init__.py": "70ae38dd1956481fe39ccd8f4b008b3914edf053e041b0c133d3344f860681c7",
+  "src/rk_choi_margin/candidates.py": "10af91f7c5303648337ba8e9b6b6dbe6cf9a3268d3e8213d7e446e961701749d",
+  "src/rk_choi_margin/certification.py": "f59cb592679e9241b64d2cbb48fbe8b961d5699e3e27c5bc93949e66d0ce56ec",
+  "src/rk_choi_margin/channels.py": "8f3d940bbc1cbb0b179fa159c230450af90d058d86e86a839c1e54ea730d3e9a",
+  "src/rk_choi_margin/controllers.py": "690da0741308c9ec710312d98d58559bb1cc1f6f104435c163ed0621ab9230cf",
+  "src/rk_choi_margin/extrapolation.py": "bbca2ba0536b89ebaa61eb9a6ebf3b729042d120432edc01f5732c1860d83a5f",
+  "src/rk_choi_margin/liouvillian.py": "f850983c6874ffc82176b03039f224a682f2860f0dca2ea587660b97fd290f86",
+  "src/rk_choi_margin/methods.py": "ef2abe6fa8d3dc934e8a53d0dd465149d7749a7cecb90a204c2d1300c11a6147",
+  "src/rk_choi_margin/symbolic.py": "10efa900c43c8ed33249c080c29d0d31ece46ec29a9ff110c5f7cb5ef619452c",
+  "src/rk_choi_margin/topology.py": "9ee9e982db6f7452569c180ceb0c20ae86486ab9d3cc1afff4cb8efc7866ce8e",
+  "src/rk_choi_margin/v26.py": "2b49b99ccd92219927800c9232d10df89b23bc97c0ab589d027fb02511377081",
+  "tests/test_bit_figure_contract.py": "e62d9842372c08f6de1428d99f8ab57f6097322e9cea0e7dd30e036174667655",
+  "tests/test_bit_reproduce_contract.py": "b30f0284dbeb6baf18685678420c0f851221d3b8b4baaafbb7d06452f82c94bf",
+  "tests/test_bit_scientific_contract.py": "a884ec7cf111f3d344f31543550202566f60d18b894c1c25c978c2b9ca780249",
+  "tests/test_bit_submission_contract.py": "aa2528631d6cfd729595ddeb752f605217c281000bfe5eab7fe7075e8e3900f2",
+  "tests/test_bit_table_contract.py": "d7a8146e3d7831e18051ef26ab3b4802e092772f1e047896141f86b341ee6db9",
+  "tests/test_closeout.py": "4a10b287e4ed8a0edb1a6366ce359724ff00913813ac582e33004789337c8f6f",
+  "tests/test_core.py": "6ba0f1799f210934bb0f6b25079e206797cd286e8b21b4475c16b6c76dc8fc62",
+  "tests/test_topology_operational.py": "2f1e0391e0697465e329788897ab26749752058d4e038d82ef25df4f1a9fe2c2",
+  "tests/test_v26.py": "ac511b62f1fccd8d0f54ca8b3a8f50856969c61c1c8ee6fa35542225823d294e",
+  "tests/test_v27_certification.py": "9e8ea6e725e409654c45542052fe6b9b2108548d2ac503ada5d906d548cb9c24",
+  "tests/test_v27_noncommuting_adaptive.py": "dba81ad69679410121a902990abad24a01fb281121dbe17d9539a31ef3c6ea57",
+  "tests/test_v28_candidates.py": "37b44a67c80c0809fe638a463dab85c0f1863994d2690e852523242ccd169d48",
+  "tests/test_v29_executed_candidate.py": "342be27dbaf8cc2d093255cef9980c55f92cf684034c6154a4f0280f025b7c6e",
+  "tests/test_v29_theory.py": "871e06a84e69c6f2072a490a27b4ff0d73ecfd8c2d42fe3290d95e56e62d7307",
+  "tests/test_v30_execution_contract.py": "5add5aec1547ea0d766317ca0e0c96db89d615617122fd7b8e9de7ded5eadbdf",
+  "tests/test_v31_closeout.py": "daaa21fc8b2bad142f792182e57be57d8ea9f5aa71ecde732236387590de7a4c",
+  "tests/test_v32_external_review.py": "e0695ac272b058a43a871082a88a05fa19207ae413a1b442476796ba48d04e2f",
+  "tests/test_v33_endpoint_membership.py": "34506532cffb4ed941fb941bb50b530aa97481ebe82891c16c5fcd6d76f60124",
+  "tests/test_v34_remediation.py": "7cfc27d65310cd5f7872e21028da9171c5395d2e8a31066b13e07b7a3f9894d3",
+  "tests/test_v35_editorial_layout.py": "6c7f20fbfcbf34e8eb41ec6835da126d51a9595779683ed04c9f7f9a1920c400",
+  "tests/test_v35_submission_revision.py": "ad7dfef9e0993104b75197450694eefef855dc720d08e024cbd1bed3567f0b80"
+ },
+ "manuscript_inputs_sha256": {
+  "cover_letter.tex": "489b7f6ae159c14bd1ad3f0dac2e676ddf87377e025627150848d3f1b7d8918c",
+  "declarations.tex": "54914718cd4d9eb4dd4963db8d52a4384c88543a729232d99432f33eb1624954",
+  "ESM_1.tex": "500ffd4124b58835b01375df9253f716283d26595d7afb32e36da34a81ce9617",
+  "extrapolation_table.tex": "914b35a0ea58270f7848cc08bddd1fca1b9efe8b741d762986eb68abf4db64c3",
+  "Fig1.eps": "fc2727e63754e74959e2b8193f1057930b7825db4ab49b64b773fd1b71fc77c6",
+  "Fig2.eps": "d6d6128f5005f78077d4abb6e9409bda07fa6c6504d36c711ac549ba9cb88204",
+  "Fig3.eps": "047df8dd74ebf1e7a9a730d887cc7493fc6e9442a2db361a5ff9f5750c6ac585",
+  "FigS1.eps": "e4a60bf8dd1f363ea43824e0522b7d8fe6556388611141bff814d7f7b2004eb1",
+  "FigS2.eps": "02ca2cb213edbbe4d298d3f82a37cf2dfa8aad554bee841e792b318555d80092",
+  "FigS3.eps": "712381261c30051934656f86da2a267332bf18567baa93a94678ca5cdb2ace37",
+  "FigS4.eps": "83b8222b192ac2af6340aca471e9e1b8cbf7d605318221c0d1a09e44367f39e2",
+  "guard_telemetry_table.tex": "5f1f1af2981df30c962fdb9a6cd8478cdf0b99ba30e71d3963537cc1285c1da4",
+  "main.tex": "4fd30465ce1c5ab9f4f67c362024e106c8ebe51fca5245db5a6a09027dcaf9a6",
+  "nine_candidate_certificate.tex": "2dfa6707ec7cf91a786564fa2460d69b8cdaf714d832aa2756622920c9e30798",
+  "references.bib": "f1f1f4d1d99bb0749d1be2ab8eac4c8ac3af9ce60f478e1ea962ef032999987d",
+  "sec01_introduction.tex": "e8bbb9bdd583654e4f07bb15bb65575325aae5a4c0e4a1a9ee4a546af623d770",
+  "sec02_problem_and_candidates.tex": "19c394abfb4ca6f9735a8981f0cda094bc20021ac1b79b89ee102b5407f97d21",
+  "sec03_cp_criterion.tex": "cd69e53955526180b6bc23b1d7442465adbcfa65e597d39acfbff4d97594ee33",
+  "sec04_rk4_classification.tex": "2433fa7af90b03279a6bde903cc0faf11525d8e5c9e90878561682bd14adb673",
+  "sec05_representation_and_candidates.tex": "1f637845b585b39cb924db7e2d6fc22d6724fb46214f974a0ab0bf9a2e927551",
+  "sec06_certification_and_examples.tex": "eb130f968aa09f58f173f54487e37d616512dfe1abfa3a78f9ab7015a368a7fb",
+  "sec07_discussion.tex": "ebe822c8cd7a4680bb50ad3622dd97b2a1932308fdfdae5fd505aabefc6a59b8",
+  "sec08_conclusion.tex": "4e5e55a07ab119047950eca9d57629a04b33a7359b679bf0583c567aa2fe6960",
+  "sn-jnl.cls": "36d0c3273a59d48dc6a9c7b080dfa1ec50dc10229d8751568d1f2e490ffa5ecc",
+  "sn-mathphys-num.bst": "b3a7c7fbcc1e7f9619de634fcea2f5bb7a245818a5942bc576e40ea001633332",
+  "tolerance_sweep_table.tex": "b88cea8b24aebff78d50324c1c3b016deb3968663c8af639b49c632878a40993"
+ },
+ "artifacts": {
+  "results/bit_revision/claim_verification.json": {
+   "bytes": 19842,
+   "sha256": "a70bbeee5de3300c478e86384fe64664df5f172476017b8540d28a727cadcc3c"
+  },
+  "results/bit_revision/claim_verification.md": {
+   "bytes": 5214,
+   "sha256": "8f35406edadeda27d86aeb8b23262297258c417baef2d9efc57b203f1a0ee24c"
+  },
+  "results/bit_revision/extrapolation_corollary.json": {
+   "bytes": 11344,
+   "sha256": "77be392dc07b21198fd37dc50172818a4d8139ef8d00731086be69d8364855ea"
+  },
+  "results/bit_revision/extrapolation_corollary.md": {
+   "bytes": 2096,
+   "sha256": "910210ee7ef8ff6a86a8239ebedc0bc51edfb710f45110bb8ff0626d28dbce74"
+  },
+  "results/bit_revision/figures/manifest.json": {
+   "bytes": 6014,
+   "sha256": "cec2a122a701554c5e4da3fd41a4b101cb4132520d0d9399d075b7d10685a7db"
+  },
+  "results/bit_revision/tables/manifest.json": {
+   "bytes": 596,
+   "sha256": "180cfa8ba73605d559ce1e9a6865c6f89adf2af69a85be5a20edb6286d569b7f"
+  },
+  "results/bit_revision/tables/extrapolation_table.tex": {
+   "bytes": 1360,
+   "sha256": "914b35a0ea58270f7848cc08bddd1fca1b9efe8b741d762986eb68abf4db64c3"
+  },
+  "results/bit_revision/tables/guard_telemetry_table.tex": {
+   "bytes": 699,
+   "sha256": "5f1f1af2981df30c962fdb9a6cd8478cdf0b99ba30e71d3963537cc1285c1da4"
+  },
+  "results/bit_revision/tables/tolerance_sweep_table.tex": {
+   "bytes": 1861,
+   "sha256": "b88cea8b24aebff78d50324c1c3b016deb3968663c8af639b49c632878a40993"
+  },
+  "figures_bit/Fig1.eps": {
+   "bytes": 190428,
+   "sha256": "fc2727e63754e74959e2b8193f1057930b7825db4ab49b64b773fd1b71fc77c6"
+  },
+  "figures_bit/Fig2.eps": {
+   "bytes": 84842,
+   "sha256": "d6d6128f5005f78077d4abb6e9409bda07fa6c6504d36c711ac549ba9cb88204"
+  },
+  "figures_bit/Fig3.eps": {
+   "bytes": 48760,
+   "sha256": "047df8dd74ebf1e7a9a730d887cc7493fc6e9442a2db361a5ff9f5750c6ac585"
+  },
+  "figures_bit/FigS1.eps": {
+   "bytes": 32922,
+   "sha256": "e4a60bf8dd1f363ea43824e0522b7d8fe6556388611141bff814d7f7b2004eb1"
+  },
+  "figures_bit/FigS2.eps": {
+   "bytes": 69632,
+   "sha256": "02ca2cb213edbbe4d298d3f82a37cf2dfa8aad554bee841e792b318555d80092"
+  },
+  "figures_bit/FigS3.eps": {
+   "bytes": 67030,
+   "sha256": "712381261c30051934656f86da2a267332bf18567baa93a94678ca5cdb2ace37"
+  },
+  "figures_bit/FigS4.eps": {
+   "bytes": 54926,
+   "sha256": "83b8222b192ac2af6340aca471e9e1b8cbf7d605318221c0d1a09e44367f39e2"
+  },
+  "figures_bit/Fig1.pdf": {
+   "bytes": 74716,
+   "sha256": "b0bc15e848207d205fc79c1572c35f5336eca117c95f60762e0de9b5a8f38201"
+  },
+  "figures_bit/Fig2.pdf": {
+   "bytes": 43761,
+   "sha256": "b0e0fe5986c519d9b7ca1cd3bb1a0f48d9354703d543bfed2df0afd899312818"
+  },
+  "figures_bit/Fig3.pdf": {
+   "bytes": 29632,
+   "sha256": "6a45c77bd607a343c5e22dd1999b333c3bec0de13131134b9f765f6d29d14bad"
+  },
+  "figures_bit/FigS1.pdf": {
+   "bytes": 22621,
+   "sha256": "54330516de5efc3b4e9b1200ebbe6baa074933fdb224f07190fb22eaef24a26e"
+  },
+  "figures_bit/FigS2.pdf": {
+   "bytes": 38801,
+   "sha256": "8228ff4d27d606ae5d674a3efe33af6b29b54b517744af96ed9b31861fca7e8e"
+  },
+  "figures_bit/FigS3.pdf": {
+   "bytes": 35732,
+   "sha256": "1370c22bb82b1f84e03637aab198188121552291f1bd72b086e43da6dd4cb059"
+  },
+  "figures_bit/FigS4.pdf": {
+   "bytes": 22308,
+   "sha256": "d82db0c1a0ef3c49dfb156644f1d2344a5a459a4ce56a39f7faf8ef3518b2fd3"
+  },
+  "figures_bit/Fig1.png": {
+   "bytes": 136474,
+   "sha256": "837a9e5e2d9f42971f7f6eee513d8758fe8d55857828e0dc4810e60e2099f85f"
+  },
+  "figures_bit/Fig2.png": {
+   "bytes": 72652,
+   "sha256": "8242ea77b3f3ce63dc1863a294e3dd40ce28bcce9a042caa4ad3e4c6eee3a2b2"
+  },
+  "figures_bit/Fig3.png": {
+   "bytes": 75921,
+   "sha256": "aa0bb54274b18ca4dfd6b70257a7da9303990ecb62e36bcbea8205c2de7fa212"
+  },
+  "figures_bit/FigS1.png": {
+   "bytes": 67469,
+   "sha256": "7451b4dd48b13527e8ece6321ac0addd8c48e01c977bdcb82078840ea4001717"
+  },
+  "figures_bit/FigS2.png": {
+   "bytes": 163860,
+   "sha256": "de6a99c287ea75ce34bbbb0095b3a828cc5bbf976e173ebdd357fb344a997032"
+  },
+  "figures_bit/FigS3.png": {
+   "bytes": 120098,
+   "sha256": "ff8180974e64375a06c4baf04f49ee9b75f9d7090175a5d6a1e2dcac0a5d7cc0"
+  },
+  "figures_bit/FigS4.png": {
+   "bytes": 107266,
+   "sha256": "8cfa071c8483874ea53043943f7e6b6c5f5b7d6164816d6a3284b09d59913de6"
+  }
+ }
+}

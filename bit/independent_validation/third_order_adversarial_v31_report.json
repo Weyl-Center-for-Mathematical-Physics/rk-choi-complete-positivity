@@ -1,0 +1,272 @@
+{
+  "blockers_detected": true,
+  "code_root": "/mnt/data/v32work/code/JCP_Code_and_Data_v3_2",
+  "finding_count": 1,
+  "findings": [
+    {
+      "current_v31_values": {
+        "first_guarded_below_error": 1.9018391371184816e-05,
+        "first_guarded_below_stage_units": 84,
+        "first_guarded_below_tolerance": 0.003,
+        "generated_macro_present": false,
+        "nearest_guarded_error": 6.091722947231542e-05,
+        "nearest_guarded_stage_units": 84,
+        "nearest_guarded_tolerance": 0.01,
+        "rotating_error": 6.019302489924499e-05,
+        "rotating_stage_units": 60,
+        "stale_phrase_present": false
+      },
+      "id": "P0-MANUSCRIPT-BENCHMARK-NUMBERS-STALE",
+      "probable_historical_origin": {
+        "accepted_steps": "3",
+        "candidate_certifications": "3",
+        "component_searches": "0",
+        "exponential_actions": "0",
+        "fallback_steps": "3",
+        "global_normalized_choi_error": "3.65834504790477e-05",
+        "guard_evaluations": "3",
+        "minimum_step_choi_eigenvalue": "-3.3824213650283346e-28",
+        "pi_memory_resets": "3",
+        "policy": "candidate_guard",
+        "precision_escalations": "0",
+        "rejected_cp": "3",
+        "rejected_error": "2",
+        "rhs_stage_evaluations": "96",
+        "scenario": "tolerance_sweep",
+        "tolerance": "0.01"
+      },
+      "required_fix": "Replace prose from current v3.1 results, preferably via generated TeX macros, and add a source-to-CSV consistency test.",
+      "severity": "P0",
+      "status": "CONFIRMED",
+      "summary": "Section 6 reports a guarded point at 3.7e-5 in 96 stage units or lacks generated v3.1 benchmark macros tied to adaptive_benchmark_v31.csv."
+    }
+  ],
+  "raw_evidence": {
+    "candidate_guard_main_sweep_action_composition": {
+      "accepted_steps": 15,
+      "component_searches": 0,
+      "direct_accepts": 0,
+      "exact_fallback_accepts": 0,
+      "fallback_steps": 15,
+      "projected_accepts": 0,
+      "rotating_accepts": 15,
+      "strang_accepts": 0
+    },
+    "current_v31_benchmark_comparison": {
+      "first_guarded_below_error": 1.9018391371184816e-05,
+      "first_guarded_below_stage_units": 84,
+      "first_guarded_below_tolerance": 0.003,
+      "generated_macro_present": false,
+      "nearest_guarded_error": 6.091722947231542e-05,
+      "nearest_guarded_stage_units": 84,
+      "nearest_guarded_tolerance": 0.01,
+      "rotating_error": 6.019302489924499e-05,
+      "rotating_stage_units": 60,
+      "stale_phrase_present": false
+    },
+    "negative_structural_time_cases": [
+      {
+        "analytic_population_term_1_minus_exp_minus_h": -1.0000000000005e-12,
+        "builder": "exact-gksl",
+        "exception": "ValueError",
+        "h": -1e-12,
+        "message": "total_x must be >= 0",
+        "outcome": "rejected"
+      },
+      {
+        "analytic_population_term_1_minus_exp_minus_h": -1.0000000000005e-12,
+        "builder": "strang",
+        "exception": "ValueError",
+        "h": -1e-12,
+        "message": "total_x must be >= 0",
+        "outcome": "rejected"
+      },
+      {
+        "analytic_population_term_1_minus_exp_minus_h": -1.00000000000005e-13,
+        "builder": "exact-gksl",
+        "exception": "ValueError",
+        "h": -1e-13,
+        "message": "total_x must be >= 0",
+        "outcome": "rejected"
+      },
+      {
+        "analytic_population_term_1_minus_exp_minus_h": -1.00000000000005e-13,
+        "builder": "strang",
+        "exception": "ValueError",
+        "h": -1e-13,
+        "message": "total_x must be >= 0",
+        "outcome": "rejected"
+      },
+      {
+        "analytic_population_term_1_minus_exp_minus_h": -1.000000000000005e-14,
+        "builder": "exact-gksl",
+        "exception": "ValueError",
+        "h": -1e-14,
+        "message": "total_x must be >= 0",
+        "outcome": "rejected"
+      },
+      {
+        "analytic_population_term_1_minus_exp_minus_h": -1.000000000000005e-14,
+        "builder": "strang",
+        "exception": "ValueError",
+        "h": -1e-14,
+        "message": "total_x must be >= 0",
+        "outcome": "rejected"
+      },
+      {
+        "analytic_population_term_1_minus_exp_minus_h": -1.0000000000000007e-15,
+        "builder": "exact-gksl",
+        "exception": "ValueError",
+        "h": -1e-15,
+        "message": "total_x must be >= 0",
+        "outcome": "rejected"
+      },
+      {
+        "analytic_population_term_1_minus_exp_minus_h": -1.0000000000000007e-15,
+        "builder": "strang",
+        "exception": "ValueError",
+        "h": -1e-15,
+        "message": "total_x must be >= 0",
+        "outcome": "rejected"
+      },
+      {
+        "analytic_population_term_1_minus_exp_minus_h": -1e-16,
+        "builder": "exact-gksl",
+        "exception": "ValueError",
+        "h": -1e-16,
+        "message": "total_x must be >= 0",
+        "outcome": "rejected"
+      },
+      {
+        "analytic_population_term_1_minus_exp_minus_h": -1e-16,
+        "builder": "strang",
+        "exception": "ValueError",
+        "h": -1e-16,
+        "message": "total_x must be >= 0",
+        "outcome": "rejected"
+      }
+    ],
+    "positive_structural_controls": [
+      {
+        "h": 0.0,
+        "provenance_valid": true,
+        "status": "PASS"
+      },
+      {
+        "h": 1e-16,
+        "provenance_valid": true,
+        "status": "PASS"
+      },
+      {
+        "h": 0.1,
+        "provenance_valid": true,
+        "status": "PASS"
+      },
+      {
+        "h": 1.0,
+        "provenance_valid": true,
+        "status": "PASS"
+      }
+    ],
+    "probable_v28_origin_of_stale_sentence": {
+      "accepted_steps": "3",
+      "candidate_certifications": "3",
+      "component_searches": "0",
+      "exponential_actions": "0",
+      "fallback_steps": "3",
+      "global_normalized_choi_error": "3.65834504790477e-05",
+      "guard_evaluations": "3",
+      "minimum_step_choi_eigenvalue": "-3.3824213650283346e-28",
+      "pi_memory_resets": "3",
+      "policy": "candidate_guard",
+      "precision_escalations": "0",
+      "rejected_cp": "3",
+      "rejected_error": "2",
+      "rhs_stage_evaluations": "96",
+      "scenario": "tolerance_sweep",
+      "tolerance": "0.01"
+    },
+    "public_api_validation_cases": [
+      {
+        "case": "noninteger_substeps",
+        "exception": "TypeError",
+        "input": 1.5,
+        "outcome": "rejected"
+      },
+      {
+        "case": "noninteger_substeps",
+        "exception": "TypeError",
+        "input": 2.9,
+        "outcome": "rejected"
+      },
+      {
+        "case": "invalid_precision",
+        "exception": "TypeError",
+        "input": 1.5,
+        "outcome": "rejected"
+      },
+      {
+        "case": "invalid_precision",
+        "exception": "ValueError",
+        "input": 0,
+        "outcome": "rejected"
+      },
+      {
+        "case": "invalid_precision",
+        "exception": "ValueError",
+        "input": -5,
+        "outcome": "rejected"
+      },
+      {
+        "case": "invalid_controller_input",
+        "exception": "ValueError",
+        "input": {
+          "final_time": -1.0,
+          "initial_h": 0.1,
+          "min_h": 1e-12,
+          "tolerance": 0.01
+        },
+        "message": "final_time must be > 0",
+        "outcome": "exception"
+      },
+      {
+        "case": "invalid_controller_input",
+        "exception": "ValueError",
+        "input": {
+          "final_time": 1.0,
+          "initial_h": -0.1,
+          "min_h": 1e-12,
+          "tolerance": 0.01
+        },
+        "message": "initial_h must be > 0",
+        "outcome": "exception"
+      },
+      {
+        "case": "invalid_controller_input",
+        "exception": "ValueError",
+        "input": {
+          "final_time": 1.0,
+          "initial_h": 0.1,
+          "min_h": 1e-12,
+          "tolerance": -0.01
+        },
+        "message": "tolerance must be > 0",
+        "outcome": "exception"
+      },
+      {
+        "case": "invalid_controller_input",
+        "exception": "ValueError",
+        "input": {
+          "final_time": 1.0,
+          "initial_h": 0.1,
+          "min_h": -1e-12,
+          "tolerance": 0.01
+        },
+        "message": "min_h must be > 0",
+        "outcome": "exception"
+      }
+    ]
+  },
+  "script": "third_order_adversarial_v31.py",
+  "source_root": "/mnt/data/v32work/source/JCP_LaTeX_Source_v3_2"
+}

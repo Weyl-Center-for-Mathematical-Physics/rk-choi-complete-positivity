@@ -1,0 +1,33 @@
+\section{Relation to classical diagnostics and structure-preserving alternatives}
+\label{sec:comparison}
+
+Complete-positivity stability answers a different question from scalar stability, strong-stability preservation, state-level positivity, or local error control. On one-way damping, the scalar multipliers can both contract while the coupled inequality $|c|^2\le a$ fails. SSP coefficients and absolute-monotonicity radii concern preservation of convex functionals or the positive orthant over classes of ODEs \cite{Kraaijevanger1986Absolute,Kraaijevanger1991Contractivity,GottliebShuTadmor2001,FerracinaSpijker2004,Higueras2005}; positivity-preserving adaptive RK procedures likewise target state or invariant-domain constraints \cite{NussleinRanochaKetcheson2021}. None of these notions is interchangeable with complete positivity of a fixed linear candidate under tensor extension.
+
+The constructive Lindblad literature solves a complementary problem. Kraus and low-rank methods enforce CPTP structure \cite{CaoLu2025,AppeloCheng2025}; nested-Picard schemes address arbitrary order and time-dependent Hamiltonians \cite{HuAppeloCheng2025NPI}; tensor-train and Gregory constructions target compressed or reduced-cost high-order propagation \cite{DelMastroAppeloCheng2026TT,HuAppeloCheng2026Gregory}. The Gregory nested-Picard analysis uses a physics-based test equation to study stability, whereas the finite-step CPTP question here asks whether the particular map executed by an unchanged RK or derived candidate is completely positive. These questions are complementary: test-equation stability does not by itself certify map-level complete positivity. Our contribution is not another universally physical propagator. It describes the exact physicality topology of unchanged RK candidates, including candidates created by composition or extrapolation, and uses that topology to decide whether to accept, transform, project, or switch. Classical extrapolation studies already show that Richardson combinations can change absolute stability, dissipation, and dispersion \cite{Szyszkowicz1985Richardson,ZlatevEtAl2017Richardson,HavasiKazemi2018Richardson}; the result here is the corresponding map-level complete-positivity failure even when both constituent quantum-channel candidates are CPTP.
+
+For a known autonomous phase-covariant qubit generator, one membership test uses two scalar stability-function evaluations and four inequalities, with stage-domain checks when needed. Locating every component or proving emptiness is a separate root-isolation task. The scalar reduction does not extend at the same cost to an arbitrary black-box or higher-dimensional Liouvillian, where a map-level Choi test is substantially larger.
+
+\begin{table*}[t]
+\centering
+\caption{Roles of the numerical policies used in this paper. The work descriptions are structural and do not assert universal wall-clock rankings across dense, sparse, low-rank, or tensor-compressed representations.}
+\label{tab:method_comparison}
+\small
+\begin{tabularx}{\textwidth}{@{}p{0.15\textwidth}p{0.19\textwidth}p{0.23\textwidth}X@{}}
+\toprule
+Policy & Candidate advanced & Physicality status & Purpose in this study \\
+\midrule
+Direct RK4 & unchanged full or fine RK candidate & conditional & baseline with exact generator-conditioned CPTP topology \\
+Candidate-aware RK4 & fine RK candidate, projected candidate, or certified fallback & certified conditional & can retain direct RK, select a certified component, or switch; action counts are recorded \\
+Rotating-frame RK4 & de-rotated RK candidate followed by exact back-rotation & conditional & representation preconditioning for commuting coherent motion \\
+Exact-subflow Strang & symmetric composition of exact CPTP subflows & CPTP by construction & transparent splitting reference; second order when the subflows do not commute \\
+Modern Kraus/low-rank/NPI schemes & method-specific structured candidates & enforced in their stated classes & scalable constructive alternatives \cite{CaoLu2025,AppeloCheng2025,HuAppeloCheng2025NPI} \\
+\bottomrule
+\end{tabularx}
+\end{table*}
+
+\subsection{Verification and reproducibility}
+\label{subsec:verification}
+
+All analytic identities are regenerated from rational Butcher data. Integer polynomials, Sturm isolation, rational brackets, and joint tests at algebraic roots support the topology and Richardson results; the algebraic procedures follow standard algorithms \cite{BasuPollackRoy2006}. Endpoint membership is decided before bracket restriction, and unresolved domain membership, root identity, ordering, or sign returns \textsc{uncertain}. Direct Choi calculations independently test the scalar criterion on randomized and adversarial candidate families. The companion archive pins the SymPy, NumPy, mpmath, Matplotlib, and pytest environment \cite{MeurerEtAl2017,HarrisEtAl2020,JohanssonMpmath,Hunter2007,Pytest2025}.
+
+All reported values and figures, including the graphical abstract, were regenerated deterministically with the versioned scripts and checked by the procedures described above.

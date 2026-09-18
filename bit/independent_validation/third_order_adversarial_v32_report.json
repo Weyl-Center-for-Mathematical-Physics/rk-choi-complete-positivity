@@ -1,0 +1,185 @@
+{
+  "code_root": "/mnt/data/v32work/clean_code_run/JCP_Code_and_Data_v3_2",
+  "finding_count": 0,
+  "findings": [],
+  "overall": "PASS",
+  "raw_evidence": {
+    "api_validation": [
+      {
+        "api": "equal_substep_candidate",
+        "exception": "TypeError",
+        "input": "True",
+        "rejected": true
+      },
+      {
+        "api": "equal_substep_candidate",
+        "exception": "TypeError",
+        "input": "2.0",
+        "rejected": true
+      },
+      {
+        "api": "equal_substep_candidate",
+        "exception": "TypeError",
+        "input": "2.9",
+        "rejected": true
+      },
+      {
+        "api": "equal_substep_candidate",
+        "exception": "ValueError",
+        "input": "0",
+        "rejected": true
+      },
+      {
+        "api": "equal_substep_candidate",
+        "exception": "ValueError",
+        "input": "-1",
+        "rejected": true
+      },
+      {
+        "api": "ExactGKSLExponentialRecipe",
+        "dps": "True",
+        "exception": "TypeError",
+        "rejected": true
+      },
+      {
+        "api": "ExactSubflowStrangRecipe",
+        "dps": "True",
+        "exception": "TypeError",
+        "rejected": true
+      },
+      {
+        "api": "ExactGKSLExponentialRecipe",
+        "dps": "1.5",
+        "exception": "TypeError",
+        "rejected": true
+      },
+      {
+        "api": "ExactSubflowStrangRecipe",
+        "dps": "1.5",
+        "exception": "TypeError",
+        "rejected": true
+      },
+      {
+        "api": "ExactGKSLExponentialRecipe",
+        "dps": "0",
+        "exception": "ValueError",
+        "rejected": true
+      },
+      {
+        "api": "ExactSubflowStrangRecipe",
+        "dps": "0",
+        "exception": "ValueError",
+        "rejected": true
+      },
+      {
+        "api": "ExactGKSLExponentialRecipe",
+        "dps": "-5",
+        "exception": "ValueError",
+        "rejected": true
+      },
+      {
+        "api": "ExactSubflowStrangRecipe",
+        "dps": "-5",
+        "exception": "ValueError",
+        "rejected": true
+      },
+      {
+        "api": "controller",
+        "exception": "ValueError",
+        "input": {
+          "final_time": -1.0,
+          "initial_h": 0.1,
+          "min_h": 1e-12,
+          "tolerance": 0.01
+        },
+        "rejected": true
+      },
+      {
+        "api": "controller",
+        "exception": "ValueError",
+        "input": {
+          "final_time": 1.0,
+          "initial_h": -0.1,
+          "min_h": 1e-12,
+          "tolerance": 0.01
+        },
+        "rejected": true
+      },
+      {
+        "api": "controller",
+        "exception": "ValueError",
+        "input": {
+          "final_time": 1.0,
+          "initial_h": 0.1,
+          "min_h": 1e-12,
+          "tolerance": -0.01
+        },
+        "rejected": true
+      },
+      {
+        "api": "controller",
+        "exception": "ValueError",
+        "input": {
+          "final_time": 1.0,
+          "initial_h": 0.1,
+          "min_h": -1e-12,
+          "tolerance": 0.01
+        },
+        "rejected": true
+      }
+    ],
+    "benchmark_rows": 20,
+    "negative_time": [
+      {
+        "builder": "exact-gksl",
+        "exception": "ValueError",
+        "h": -1e-12,
+        "rejected": true
+      },
+      {
+        "builder": "strang",
+        "exception": "ValueError",
+        "h": -1e-12,
+        "rejected": true
+      },
+      {
+        "builder": "exact-gksl",
+        "exception": "ValueError",
+        "h": -1e-13,
+        "rejected": true
+      },
+      {
+        "builder": "strang",
+        "exception": "ValueError",
+        "h": -1e-13,
+        "rejected": true
+      },
+      {
+        "builder": "exact-gksl",
+        "exception": "ValueError",
+        "h": -1e-16,
+        "rejected": true
+      },
+      {
+        "builder": "strang",
+        "exception": "ValueError",
+        "h": -1e-16,
+        "rejected": true
+      },
+      {
+        "builder": "exact-gksl",
+        "exception": "ValueError",
+        "h": -5e-324,
+        "rejected": true
+      },
+      {
+        "builder": "strang",
+        "exception": "ValueError",
+        "h": -5e-324,
+        "rejected": true
+      }
+    ]
+  },
+  "script": "third_order_adversarial_v32.py",
+  "source_root": "/mnt/data/v32work/clean_code_run/JCP_Code_and_Data_v3_2/manuscript_contract"
+}

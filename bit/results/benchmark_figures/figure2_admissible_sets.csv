@@ -1,0 +1,10 @@
+method,component_type,left,right
+Forward Euler,point,0.0,0.0
+Heun RK2,interval,0.0,2.0
+"SSPRK(3,3)",point,0.0,0.0
+Classical RK4,interval,0.0,2.785293563405282
+Dormand--Prince 5 (principal),interval,0.0,3.306567892634947
+Dormand--Prince 4 (embedded),point,0.0,0.0
+Dormand--Prince 4 (embedded),isolated_interval,3.068856548050381,4.384986320801944
+Backward Euler,unbounded,0.0,infinity
+Implicit midpoint,point,0.0,0.0

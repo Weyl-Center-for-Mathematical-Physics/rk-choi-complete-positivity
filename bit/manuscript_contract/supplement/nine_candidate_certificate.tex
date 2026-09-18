@@ -1,0 +1,435 @@
+\section{Summary}
+\begin{center}
+\begin{tabularx}{\textwidth}{@{}X l l@{}}
+\toprule
+Method & Stage domain on $x\geq0$ & Certified admissible set \\
+\midrule
+Forward Euler & all $x\geq0$ & $\{0\}$ \\
+Heun RK2 & all $x\geq0$ & $[0,2]$ \\
+SSPRK(3,3) & all $x\geq0$ & $\{0\}$ \\
+Classical RK4 & all $x\geq0$ & $[0,\alpha_4]$ \\
+RK4 Richardson extrapolate & all $x\geq0$ & $\{0\}\cup[\rho_-,\rho_+]$ \\
+Dormand-Prince 5 principal formula & all $x\geq0$ & $[0,\alpha_5]$ \\
+Dormand-Prince embedded 4 formula & all $x\geq0$ & $\{0\}\cup[\beta_-,\beta_+]$ \\
+Backward Euler & all $x\geq0$ & $[0,\infty)$ \\
+Implicit midpoint & all $x\geq0$ & $\{0\}$ \\
+\bottomrule
+\end{tabularx}
+\end{center}
+\section{Forward Euler}
+The exact stability function is
+\[\begin{adjustbox}{max width=0.98\textwidth}$\displaystyle R(s)=s + 1$\end{adjustbox}\]
+The full- and half-step stage-resolvent factors are $1$ and $1$, respectively.
+The exact scalar functions are
+\[\begin{adjustbox}{max width=0.98\textwidth}$\displaystyle a(x)=1 - x$\end{adjustbox}\]
+\[\begin{adjustbox}{max width=0.98\textwidth}$\displaystyle M_R(x,0,0)=- \frac{x^{2}}{4}$\end{adjustbox}\]
+The primitive boundary numerators below isolate the zeros of $a$, $a-1$, and $M_R$; their signs are retained in the exact expressions above and in every interval row.
+\[\begin{aligned}
+P_0(x)={}&x-1
+\end{aligned}\]
+\[\begin{aligned}
+P_1(x)={}&x
+\end{aligned}\]
+\[\begin{aligned}
+P_M(x)={}&x^{2}
+\end{aligned}\]
+These equations correspond respectively to $a(x)=0$, $a(x)=1$, and $M_R(x,0,0)=0$. Their square-free parts are
+\[\begin{aligned}
+\operatorname{sqf}P_0={}&x-1
+\end{aligned}\]
+\[\begin{aligned}
+\operatorname{sqf}P_1={}&x
+\end{aligned}\]
+\[\begin{aligned}
+\operatorname{sqf}P_M={}&x
+\end{aligned}\]
+\begin{center}
+\begin{tabularx}{\textwidth}{@{}l l l X@{}}
+\toprule
+Label & Certified rational bracket & Approx. & Source / active mechanism \\
+\midrule
+$--$ & $1$ & $1$ & population floor (a=0) \\
+\bottomrule
+\end{tabularx}
+\end{center}
+\begin{center}
+\begin{tabular}{@{}l c c c c c@{}}
+\toprule
+Open interval & $\operatorname{sgn}a$ & $\operatorname{sgn}(a-1)$ & $\operatorname{sgn}M$ & domain & CPTP \\
+\midrule
+$(0,1)$ & + & - & - & yes & no \\
+$(1,\infty)$ & - & - & - & yes & no \\
+\bottomrule
+\end{tabular}
+\end{center}
+The certified admissible set is $\mathcal A_R=\{0\}$. The first exponential defect is $(m,\eta_m)=(2,- \frac{1}{2})$, and the signed boundary-law coefficient is $- \frac{1}{4}$.
+\section{Heun RK2}
+The exact stability function is
+\[\begin{adjustbox}{max width=0.98\textwidth}$\displaystyle R(s)=\frac{s^{2}}{2} + s + 1$\end{adjustbox}\]
+The full- and half-step stage-resolvent factors are $1$ and $1$, respectively.
+The exact scalar functions are
+\[\begin{adjustbox}{max width=0.98\textwidth}$\displaystyle a(x)=\frac{x^{2} - 2 x + 2}{2}$\end{adjustbox}\]
+\[\begin{adjustbox}{max width=0.98\textwidth}$\displaystyle M_R(x,0,0)=- \frac{x^{3} \left(x - 8\right)}{64}$\end{adjustbox}\]
+The primitive boundary numerators below isolate the zeros of $a$, $a-1$, and $M_R$; their signs are retained in the exact expressions above and in every interval row.
+\[\begin{aligned}
+P_0(x)={}&x^{2}-2 x+2
+\end{aligned}\]
+\[\begin{aligned}
+P_1(x)={}&x^{2}-2 x
+\end{aligned}\]
+\[\begin{aligned}
+P_M(x)={}&x^{4}-8 x^{3}
+\end{aligned}\]
+These equations correspond respectively to $a(x)=0$, $a(x)=1$, and $M_R(x,0,0)=0$. Their square-free parts are
+\[\begin{aligned}
+\operatorname{sqf}P_0={}&x^{2}-2 x+2
+\end{aligned}\]
+\[\begin{aligned}
+\operatorname{sqf}P_1={}&x^{2}-2 x
+\end{aligned}\]
+\[\begin{aligned}
+\operatorname{sqf}P_M={}&x^{2}-8 x
+\end{aligned}\]
+\begin{center}
+\begin{tabularx}{\textwidth}{@{}l l l X@{}}
+\toprule
+Label & Certified rational bracket & Approx. & Source / active mechanism \\
+\midrule
+$--$ & $2$ & $2$ & population ceiling (a=1) \\
+$--$ & $8$ & $8$ & coherence-population block (M=0) \\
+\bottomrule
+\end{tabularx}
+\end{center}
+\begin{center}
+\begin{tabular}{@{}l c c c c c@{}}
+\toprule
+Open interval & $\operatorname{sgn}a$ & $\operatorname{sgn}(a-1)$ & $\operatorname{sgn}M$ & domain & CPTP \\
+\midrule
+$(0,2)$ & + & - & + & yes & yes \\
+$(2,8)$ & + & + & + & yes & no \\
+$(8,\infty)$ & + & + & - & yes & no \\
+\bottomrule
+\end{tabular}
+\end{center}
+The certified admissible set is $\mathcal A_R=[0,2]$. The first exponential defect is $(m,\eta_m)=(3,- \frac{1}{6})$, and the signed boundary-law coefficient is $\frac{1}{8}$.
+\section{SSPRK(3,3)}
+The exact stability function is
+\[\begin{adjustbox}{max width=0.98\textwidth}$\displaystyle R(s)=\frac{s^{3}}{6} + \frac{s^{2}}{2} + s + 1$\end{adjustbox}\]
+The full- and half-step stage-resolvent factors are $1$ and $1$, respectively.
+The exact scalar functions are
+\[\begin{adjustbox}{max width=0.98\textwidth}$\displaystyle a(x)=- \frac{x^{3} - 3 x^{2} + 6 x - 6}{6}$\end{adjustbox}\]
+\[\begin{adjustbox}{max width=0.98\textwidth}$\displaystyle M_R(x,0,0)=- \frac{x^{4} \left(x^{2} - 12 x + 84\right)}{2304}$\end{adjustbox}\]
+The primitive boundary numerators below isolate the zeros of $a$, $a-1$, and $M_R$; their signs are retained in the exact expressions above and in every interval row.
+\[\begin{aligned}
+P_0(x)={}&x^{3}-3 x^{2}+6 x\\
+&-6
+\end{aligned}\]
+\[\begin{aligned}
+P_1(x)={}&x^{3}-3 x^{2}+6 x
+\end{aligned}\]
+\[\begin{aligned}
+P_M(x)={}&x^{6}-12 x^{5}+84 x^{4}
+\end{aligned}\]
+These equations correspond respectively to $a(x)=0$, $a(x)=1$, and $M_R(x,0,0)=0$. Their square-free parts are
+\[\begin{aligned}
+\operatorname{sqf}P_0={}&x^{3}-3 x^{2}+6 x\\
+&-6
+\end{aligned}\]
+\[\begin{aligned}
+\operatorname{sqf}P_1={}&x^{3}-3 x^{2}+6 x
+\end{aligned}\]
+\[\begin{aligned}
+\operatorname{sqf}P_M={}&x^{3}-12 x^{2}+84 x
+\end{aligned}\]
+\begin{center}
+\begin{tabularx}{\textwidth}{@{}l l l X@{}}
+\toprule
+Label & Certified rational bracket & Approx. & Source / active mechanism \\
+\midrule
+$--$ & $(1.596071637983321,1.596071637983322)$ & $1.596071637983322$ & population floor (a=0) \\
+\bottomrule
+\end{tabularx}
+\end{center}
+\begin{center}
+\begin{tabular}{@{}l c c c c c@{}}
+\toprule
+Open interval & $\operatorname{sgn}a$ & $\operatorname{sgn}(a-1)$ & $\operatorname{sgn}M$ & domain & CPTP \\
+\midrule
+$(0,1.596071637983322)$ & + & - & - & yes & no \\
+$(1.596071637983322,\infty)$ & - & - & - & yes & no \\
+\bottomrule
+\end{tabular}
+\end{center}
+The certified admissible set is $\mathcal A_R=\{0\}$. The first exponential defect is $(m,\eta_m)=(4,- \frac{1}{24})$, and the signed boundary-law coefficient is $- \frac{7}{192}$.
+\section{Classical RK4}
+The exact stability function is
+\[\begin{adjustbox}{max width=0.98\textwidth}$\displaystyle R(s)=\frac{s^{4}}{24} + \frac{s^{3}}{6} + \frac{s^{2}}{2} + s + 1$\end{adjustbox}\]
+The full- and half-step stage-resolvent factors are $1$ and $1$, respectively.
+The exact scalar functions are
+\[\begin{adjustbox}{max width=0.98\textwidth}$\displaystyle a(x)=\frac{x^{4} - 4 x^{3} + 12 x^{2} - 24 x + 24}{24}$\end{adjustbox}\]
+\[\begin{adjustbox}{max width=0.98\textwidth}$\displaystyle M_R(x,0,0)=- \frac{x^{5} \left(x^{3} - 16 x^{2} + 160 x - 1152\right)}{147456}$\end{adjustbox}\]
+The primitive boundary numerators below isolate the zeros of $a$, $a-1$, and $M_R$; their signs are retained in the exact expressions above and in every interval row.
+\[\begin{aligned}
+P_0(x)={}&x^{4}-4 x^{3}+12 x^{2}\\
+&-24 x+24
+\end{aligned}\]
+\[\begin{aligned}
+P_1(x)={}&x^{4}-4 x^{3}+12 x^{2}\\
+&-24 x
+\end{aligned}\]
+\[\begin{aligned}
+P_M(x)={}&x^{8}-16 x^{7}+160 x^{6}\\
+&-1152 x^{5}
+\end{aligned}\]
+These equations correspond respectively to $a(x)=0$, $a(x)=1$, and $M_R(x,0,0)=0$. Their square-free parts are
+\[\begin{aligned}
+\operatorname{sqf}P_0={}&x^{4}-4 x^{3}+12 x^{2}\\
+&-24 x+24
+\end{aligned}\]
+\[\begin{aligned}
+\operatorname{sqf}P_1={}&x^{4}-4 x^{3}+12 x^{2}\\
+&-24 x
+\end{aligned}\]
+\[\begin{aligned}
+\operatorname{sqf}P_M={}&x^{4}-16 x^{3}+160 x^{2}\\
+&-1152 x
+\end{aligned}\]
+\begin{center}
+\begin{tabularx}{\textwidth}{@{}l l l X@{}}
+\toprule
+Label & Certified rational bracket & Approx. & Source / active mechanism \\
+\midrule
+$\alpha_4$ & $(2.785293563405281,2.785293563405282)$ & $2.785293563405282$ & population ceiling (a=1) \\
+$\mu_4$ & $(10.982425466293273,10.982425466293274)$ & $10.982425466293273$ & coherence-population block (M=0) \\
+\bottomrule
+\end{tabularx}
+\end{center}
+\begin{center}
+\begin{tabular}{@{}l c c c c c@{}}
+\toprule
+Open interval & $\operatorname{sgn}a$ & $\operatorname{sgn}(a-1)$ & $\operatorname{sgn}M$ & domain & CPTP \\
+\midrule
+$(0,2.785293563405282)$ & + & - & + & yes & yes \\
+$(2.785293563405282,10.982425466293273)$ & + & + & + & yes & no \\
+$(10.982425466293273,\infty)$ & + & + & - & yes & no \\
+\bottomrule
+\end{tabular}
+\end{center}
+The certified admissible set is $\mathcal A_R=[0,\alpha_4]$. The first exponential defect is $(m,\eta_m)=(5,- \frac{1}{120})$, and the signed boundary-law coefficient is $\frac{1}{128}$.
+\section{Dormand-Prince 5 principal formula}
+The exact stability function is
+\[\begin{adjustbox}{max width=0.98\textwidth}$\displaystyle R(s)=\frac{s^{6}}{600} + \frac{s^{5}}{120} + \frac{s^{4}}{24} + \frac{s^{3}}{6} + \frac{s^{2}}{2} + s + 1$\end{adjustbox}\]
+The full- and half-step stage-resolvent factors are $1$ and $1$, respectively.
+The exact scalar functions are
+\[\begin{adjustbox}{max width=0.98\textwidth}$\displaystyle a(x)=\frac{x^{6} - 5 x^{5} + 25 x^{4} - 100 x^{3} + 300 x^{2} - 600 x + 600}{600}$\end{adjustbox}\]
+\[\begin{adjustbox}{max width=0.98\textwidth}$\displaystyle M_R(x,0,0)=- \frac{x^{6} \left(x^{6} - 20 x^{5} + 300 x^{4} - 3600 x^{3} + 35600 x^{2} - 294400 x - 396800\right)}{1474560000}$\end{adjustbox}\]
+The primitive boundary numerators below isolate the zeros of $a$, $a-1$, and $M_R$; their signs are retained in the exact expressions above and in every interval row.
+\[\begin{aligned}
+P_0(x)={}&x^{6}-5 x^{5}+25 x^{4}\\
+&-100 x^{3}+300 x^{2}-600 x\\
+&+600
+\end{aligned}\]
+\[\begin{aligned}
+P_1(x)={}&x^{6}-5 x^{5}+25 x^{4}\\
+&-100 x^{3}+300 x^{2}-600 x
+\end{aligned}\]
+\[\begin{aligned}
+P_M(x)={}&x^{12}-20 x^{11}+300 x^{10}\\
+&-3600 x^{9}+35600 x^{8}-294400 x^{7}\\
+&-396800 x^{6}
+\end{aligned}\]
+These equations correspond respectively to $a(x)=0$, $a(x)=1$, and $M_R(x,0,0)=0$. Their square-free parts are
+\[\begin{aligned}
+\operatorname{sqf}P_0={}&x^{6}-5 x^{5}+25 x^{4}\\
+&-100 x^{3}+300 x^{2}-600 x\\
+&+600
+\end{aligned}\]
+\[\begin{aligned}
+\operatorname{sqf}P_1={}&x^{6}-5 x^{5}+25 x^{4}\\
+&-100 x^{3}+300 x^{2}-600 x
+\end{aligned}\]
+\[\begin{aligned}
+\operatorname{sqf}P_M={}&x^{7}-20 x^{6}+300 x^{5}\\
+&-3600 x^{4}+35600 x^{3}-294400 x^{2}\\
+&-396800 x
+\end{aligned}\]
+\begin{center}
+\begin{tabularx}{\textwidth}{@{}l l l X@{}}
+\toprule
+Label & Certified rational bracket & Approx. & Source / active mechanism \\
+\midrule
+$\alpha_5$ & $(3.306567892634946,3.306567892634947)$ & $3.306567892634947$ & population ceiling (a=1) \\
+$\mu_5$ & $(13.174093462800933,13.174093462800934)$ & $13.174093462800933$ & coherence-population block (M=0) \\
+\bottomrule
+\end{tabularx}
+\end{center}
+\begin{center}
+\begin{tabular}{@{}l c c c c c@{}}
+\toprule
+Open interval & $\operatorname{sgn}a$ & $\operatorname{sgn}(a-1)$ & $\operatorname{sgn}M$ & domain & CPTP \\
+\midrule
+$(0,3.306567892634947)$ & + & - & + & yes & yes \\
+$(3.306567892634947,13.174093462800933)$ & + & + & + & yes & no \\
+$(13.174093462800933,\infty)$ & + & + & - & yes & no \\
+\bottomrule
+\end{tabular}
+\end{center}
+The certified admissible set is $\mathcal A_R=[0,\alpha_5]$. The first exponential defect is $(m,\eta_m)=(6,\frac{1}{3600})$, and the signed boundary-law coefficient is $\frac{31}{115200}$.
+\section{Dormand-Prince embedded 4 formula}
+The exact stability function is
+\[\begin{adjustbox}{max width=0.98\textwidth}$\displaystyle R(s)=\frac{s^{7}}{24000} + \frac{161 s^{6}}{120000} + \frac{1097 s^{5}}{120000} + \frac{s^{4}}{24} + \frac{s^{3}}{6} + \frac{s^{2}}{2} + s + 1$\end{adjustbox}\]
+The full- and half-step stage-resolvent factors are $1$ and $1$, respectively.
+The exact scalar functions are
+\[\begin{adjustbox}{max width=0.98\textwidth}$\displaystyle a(x)=- \frac{5 x^{7} - 161 x^{6} + 1097 x^{5} - 5000 x^{4} + 20000 x^{3} - 60000 x^{2} + 120000 x - 120000}{120000}$\end{adjustbox}\]
+\[\begin{adjustbox}{max width=0.98\textwidth}$\displaystyle M_R(x,0,0)=- \frac{x^{5} \left(25 x^{9} - 3220 x^{8} + 147564 x^{7} - 3225872 x^{6} + 48214544 x^{5} - 576320000 x^{4} + 5721600000 x^{3} - 37719040000 x^{2} + 16752640000 x + 178790400000\right)}{235929600000000}$\end{adjustbox}\]
+The primitive boundary numerators below isolate the zeros of $a$, $a-1$, and $M_R$; their signs are retained in the exact expressions above and in every interval row.
+\[\begin{aligned}
+P_0(x)={}&5 x^{7}-161 x^{6}+1097 x^{5}\\
+&-5000 x^{4}+20000 x^{3}-60000 x^{2}\\
+&+120000 x-120000
+\end{aligned}\]
+\[\begin{aligned}
+P_1(x)={}&5 x^{7}-161 x^{6}+1097 x^{5}\\
+&-5000 x^{4}+20000 x^{3}-60000 x^{2}\\
+&+120000 x
+\end{aligned}\]
+\[\begin{aligned}
+P_M(x)={}&25 x^{14}-3220 x^{13}+147564 x^{12}\\
+&-3225872 x^{11}+48214544 x^{10}-576320000 x^{9}\\
+&+5721600000 x^{8}-37719040000 x^{7}+16752640000 x^{6}\\
+&+178790400000 x^{5}
+\end{aligned}\]
+These equations correspond respectively to $a(x)=0$, $a(x)=1$, and $M_R(x,0,0)=0$. Their square-free parts are
+\[\begin{aligned}
+\operatorname{sqf}P_0={}&5 x^{7}-161 x^{6}+1097 x^{5}\\
+&-5000 x^{4}+20000 x^{3}-60000 x^{2}\\
+&+120000 x-120000
+\end{aligned}\]
+\[\begin{aligned}
+\operatorname{sqf}P_1={}&5 x^{7}-161 x^{6}+1097 x^{5}\\
+&-5000 x^{4}+20000 x^{3}-60000 x^{2}\\
+&+120000 x
+\end{aligned}\]
+\[\begin{aligned}
+\operatorname{sqf}P_M={}&25 x^{10}-3220 x^{9}+147564 x^{8}\\
+&-3225872 x^{7}+48214544 x^{6}-576320000 x^{5}\\
+&+5721600000 x^{4}-37719040000 x^{3}+16752640000 x^{2}\\
+&+178790400000 x
+\end{aligned}\]
+\begin{center}
+\begin{tabularx}{\textwidth}{@{}l l l X@{}}
+\toprule
+Label & Certified rational bracket & Approx. & Source / active mechanism \\
+\midrule
+$\beta_-$ & $(3.06885654805038,3.068856548050381)$ & $3.068856548050381$ & coherence-population block (M=0) \\
+$\beta_+$ & $(4.384986320801944,4.384986320801945)$ & $4.384986320801944$ & population ceiling (a=1) \\
+$\delta_M$ & $(15.298767807585426,15.298767807585427)$ & $15.298767807585427$ & coherence-population block (M=0) \\
+$\delta_1$ & $(24.72775431876031,24.727754318760311)$ & $24.72775431876031$ & population ceiling (a=1) \\
+$\delta_0$ & $(24.727895030129697,24.727895030129698)$ & $24.727895030129697$ & population floor (a=0) \\
+\bottomrule
+\end{tabularx}
+\end{center}
+\begin{center}
+\begin{tabular}{@{}l c c c c c@{}}
+\toprule
+Open interval & $\operatorname{sgn}a$ & $\operatorname{sgn}(a-1)$ & $\operatorname{sgn}M$ & domain & CPTP \\
+\midrule
+$(0,3.068856548050381)$ & + & - & - & yes & no \\
+$(3.068856548050381,4.384986320801944)$ & + & - & + & yes & yes \\
+$(4.384986320801944,15.298767807585427)$ & + & + & + & yes & no \\
+$(15.298767807585427,24.72775431876031)$ & + & + & - & yes & no \\
+$(24.72775431876031,24.727895030129697)$ & + & - & - & yes & no \\
+$(24.727895030129697,\infty)$ & - & - & - & yes & no \\
+\bottomrule
+\end{tabular}
+\end{center}
+The certified admissible set is $\mathcal A_R=\{0\}\cup[\beta_-,\beta_+]$. The first exponential defect is $(m,\eta_m)=(5,\frac{97}{120000})$, and the signed boundary-law coefficient is $- \frac{97}{128000}$.
+\section{Backward Euler}
+The exact stability function is
+\[\begin{adjustbox}{max width=0.98\textwidth}$\displaystyle R(s)=- \frac{1}{s - 1}$\end{adjustbox}\]
+The full- and half-step stage-resolvent factors are $x + 1$ and $\frac{x}{2} + 1$, respectively.
+The exact scalar functions are
+\[\begin{adjustbox}{max width=0.98\textwidth}$\displaystyle a(x)=\frac{1}{x + 1}$\end{adjustbox}\]
+\[\begin{adjustbox}{max width=0.98\textwidth}$\displaystyle M_R(x,0,0)=\frac{x^{2}}{\left(x + 1\right) \left(x + 2\right)^{2}}$\end{adjustbox}\]
+The primitive boundary numerators below isolate the zeros of $a$, $a-1$, and $M_R$; their signs are retained in the exact expressions above and in every interval row.
+\[\begin{aligned}
+P_0(x)={}&1
+\end{aligned}\]
+\[\begin{aligned}
+P_1(x)={}&x
+\end{aligned}\]
+\[\begin{aligned}
+P_M(x)={}&x^{2}
+\end{aligned}\]
+These equations correspond respectively to $a(x)=0$, $a(x)=1$, and $M_R(x,0,0)=0$. Their square-free parts are
+\[\begin{aligned}
+\operatorname{sqf}P_0={}&1
+\end{aligned}\]
+\[\begin{aligned}
+\operatorname{sqf}P_1={}&x
+\end{aligned}\]
+\[\begin{aligned}
+\operatorname{sqf}P_M={}&x
+\end{aligned}\]
+No positive real boundary roots or stage-resolvent singularities occur.
+\begin{center}
+\begin{tabular}{@{}l c c c c c@{}}
+\toprule
+Open interval & $\operatorname{sgn}a$ & $\operatorname{sgn}(a-1)$ & $\operatorname{sgn}M$ & domain & CPTP \\
+\midrule
+$(0,\infty)$ & + & - & + & yes & yes \\
+\bottomrule
+\end{tabular}
+\end{center}
+The certified admissible set is $\mathcal A_R=[0,\infty)$. The first exponential defect is $(m,\eta_m)=(2,\frac{1}{2})$, and the signed boundary-law coefficient is $\frac{1}{4}$.
+\section{Implicit midpoint}
+The exact stability function is
+\[\begin{adjustbox}{max width=0.98\textwidth}$\displaystyle R(s)=- \frac{s + 2}{s - 2}$\end{adjustbox}\]
+The full- and half-step stage-resolvent factors are $\frac{x}{2} + 1$ and $\frac{x}{4} + 1$, respectively.
+The exact scalar functions are
+\[\begin{adjustbox}{max width=0.98\textwidth}$\displaystyle a(x)=- \frac{x - 2}{x + 2}$\end{adjustbox}\]
+\[\begin{adjustbox}{max width=0.98\textwidth}$\displaystyle M_R(x,0,0)=- \frac{2 x^{3}}{\left(x + 2\right) \left(x + 4\right)^{2}}$\end{adjustbox}\]
+The primitive boundary numerators below isolate the zeros of $a$, $a-1$, and $M_R$; their signs are retained in the exact expressions above and in every interval row.
+\[\begin{aligned}
+P_0(x)={}&x-2
+\end{aligned}\]
+\[\begin{aligned}
+P_1(x)={}&x
+\end{aligned}\]
+\[\begin{aligned}
+P_M(x)={}&x^{3}
+\end{aligned}\]
+These equations correspond respectively to $a(x)=0$, $a(x)=1$, and $M_R(x,0,0)=0$. Their square-free parts are
+\[\begin{aligned}
+\operatorname{sqf}P_0={}&x-2
+\end{aligned}\]
+\[\begin{aligned}
+\operatorname{sqf}P_1={}&x
+\end{aligned}\]
+\[\begin{aligned}
+\operatorname{sqf}P_M={}&x
+\end{aligned}\]
+\begin{center}
+\begin{tabularx}{\textwidth}{@{}l l l X@{}}
+\toprule
+Label & Certified rational bracket & Approx. & Source / active mechanism \\
+\midrule
+$--$ & $2$ & $2$ & population floor (a=0) \\
+\bottomrule
+\end{tabularx}
+\end{center}
+\begin{center}
+\begin{tabular}{@{}l c c c c c@{}}
+\toprule
+Open interval & $\operatorname{sgn}a$ & $\operatorname{sgn}(a-1)$ & $\operatorname{sgn}M$ & domain & CPTP \\
+\midrule
+$(0,2)$ & + & - & - & yes & no \\
+$(2,\infty)$ & - & - & - & yes & no \\
+\bottomrule
+\end{tabular}
+\end{center}
+The certified admissible set is $\mathcal A_R=\{0\}$. The first exponential defect is $(m,\eta_m)=(3,\frac{1}{12})$, and the signed boundary-law coefficient is $- \frac{1}{16}$.
+\section{Embedded Dormand--Prince no-omission check}
+For the embedded fourth-order formula, the ordered positive events are the first margin zero $\beta_-$, the first population-ceiling zero $\beta_+$, the second margin zero $\delta_M$, the second population-ceiling zero $\delta_1$, and the population-floor zero $\delta_0$. The complete sign chart shows that both CPTP inequalities hold only between $\beta_-$ and $\beta_+$. Population overflow excludes the region after $\beta_+$, the margin is again negative after $\delta_M$, and the population multiplier becomes negative after $\delta_0$. Consequently no later root generates an omitted admissible component.
+\section{Reproducibility}
+The companion machine-readable records contain exact expressions, rational brackets, root multiplicities, exact rational sample points, and interval truth values. The eight named RK formulas are generated directly from the exact tableaux in \texttt{src/rk\_choi\_margin/methods.py}; the Richardson stability polynomial and its global certificate are regenerated independently by \texttt{scripts/verify\_v33\_extensions.py}. Every displayed endpoint is produced by or checked against exact real-root isolation rather than visual sampling.

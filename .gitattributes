@@ -1,1 +1,3 @@
 * text=auto eol=lf
+# Preserve the exact approved BIT archive member bytes, including generated text line endings.
+bit/** -text

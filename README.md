@@ -1,4 +1,41 @@
-# Data and code for *Runge-Kutta stability defects at the complete-positivity boundary of qubit damping*
+# Runge-Kutta complete-positivity reproducibility releases
+
+## Current BIT code and data: v4.0.0
+
+The versioned [v4.0.0 release](https://github.com/Weyl-Center-for-Mathematical-Physics/rk-choi-complete-positivity/releases/tag/v4.0.0)
+provides the code and data supporting *Complete-positivity regions of Runge-Kutta discretizations of
+phase-covariant qubit dynamics*, by G. Blake Pierpoint, Olivier Bernard, and Yichen Liu.
+
+The current reproducibility tree is in [`bit/`](bit/), with its own pinned environment, documentation,
+69-check exact claim verifier, tests, scientific records, and deterministic figure/table generators.
+The release asset `BIT_Code_and_Data.zip` preserves the exact reviewed 408-file archive. Its historical
+manuscript-contract and flattened article-source fixtures are included deliberately because tests use
+them; they are not journal submission files.
+
+```bash
+cd bit
+python -m venv .venv
+# POSIX; on Windows use .venv\Scripts\python.exe in place of .venv/bin/python
+.venv/bin/python -m pip install -e ".[test]"
+.venv/bin/python reproduce_bit.py all
+```
+
+See [`bit/README.md`](bit/README.md), [`bit/VERSION.md`](bit/VERSION.md), and the
+[release notes](RELEASE_NOTES_v4.0.0.md). Standalone reproduction explicitly skips checks that require
+the separate manuscript workspace. This is a public reproducibility release, not a journal submission.
+
+The code, data and documentation are MIT-licensed. The root `CITATION.cff` describes the current release.
+Use the versioned GitHub release URL as the persistent reference for this release.
+
+## Preserved historical zero-precession archive
+
+The [v1.0.0 tag and release](https://github.com/Weyl-Center-for-Mathematical-Physics/rk-choi-complete-positivity/releases/tag/v1.0.0)
+and its [archived DOI](https://doi.org/10.5281/zenodo.21522058) remain unchanged. The root `src/`, `data/`,
+`figures/`, `supplement/`, and historical reproduction workflow remain available unchanged. The root
+`AUTHORS.md` and the documentation below describe that historical release, not current affiliation or
+journal-consideration status. The BIT extension in `bit/` should be reproduced separately.
+
+### Original documentation: *Runge-Kutta stability defects at the complete-positivity boundary of qubit damping*
 
 This repository contains the exact symbolic calculations, certified boundary data, plotting data, and figures accompanying the manuscript submitted to *Physics Letters A*.
 

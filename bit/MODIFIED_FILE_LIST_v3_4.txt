@@ -1,0 +1,261 @@
+# Modified and added files for v3.4
+
+Tracked changes relative to the imported v3.3 repository:
+M	code_unpacked/JCP_Code_and_Data_v3_3/CITATION.cff
+M	code_unpacked/JCP_Code_and_Data_v3_3/EXECUTED_CANDIDATE_CONTRACT.log
+M	code_unpacked/JCP_Code_and_Data_v3_3/GENERATE_ROOT_CERTIFICATE.log
+M	code_unpacked/JCP_Code_and_Data_v3_3/INDEPENDENT_AUDIT.log
+M	code_unpacked/JCP_Code_and_Data_v3_3/README.md
+M	code_unpacked/JCP_Code_and_Data_v3_3/README.txt
+M	code_unpacked/JCP_Code_and_Data_v3_3/TEST_CLOSEOUT.log
+M	code_unpacked/JCP_Code_and_Data_v3_3/TEST_CORE.log
+M	code_unpacked/JCP_Code_and_Data_v3_3/TEST_TOPOLOGY_OPERATIONAL.log
+M	code_unpacked/JCP_Code_and_Data_v3_3/TEST_V26.log
+M	code_unpacked/JCP_Code_and_Data_v3_3/TEST_V27_CERTIFICATION.log
+M	code_unpacked/JCP_Code_and_Data_v3_3/TEST_V27_NONCOMMUTING_ADAPTIVE.log
+M	code_unpacked/JCP_Code_and_Data_v3_3/TEST_V28_CANDIDATES.log
+M	code_unpacked/JCP_Code_and_Data_v3_3/TEST_V29_EXECUTED.log
+M	code_unpacked/JCP_Code_and_Data_v3_3/TEST_V29_THEORY.log
+M	code_unpacked/JCP_Code_and_Data_v3_3/TEST_V30_EXECUTION.log
+M	code_unpacked/JCP_Code_and_Data_v3_3/TEST_V31_CLOSEOUT.log
+M	code_unpacked/JCP_Code_and_Data_v3_3/TEST_V32_EXTERNAL_REVIEW.log
+M	code_unpacked/JCP_Code_and_Data_v3_3/TEST_V33_ENDPOINT_MEMBERSHIP.log
+M	code_unpacked/JCP_Code_and_Data_v3_3/VERIFY_METHOD_AUDIT.log
+M	code_unpacked/JCP_Code_and_Data_v3_3/VERIFY_PHASE_COVARIANT.log
+M	code_unpacked/JCP_Code_and_Data_v3_3/VERIFY_THEOREMS.log
+M	code_unpacked/JCP_Code_and_Data_v3_3/VERIFY_V27_EXTENSIONS.log
+M	code_unpacked/JCP_Code_and_Data_v3_3/VERSION.md
+M	code_unpacked/JCP_Code_and_Data_v3_3/figures_jcp/Fig1_RK4_phase_diagram.pdf
+M	code_unpacked/JCP_Code_and_Data_v3_3/figures_jcp/Fig1_RK4_phase_diagram.png
+M	code_unpacked/JCP_Code_and_Data_v3_3/figures_jcp/Fig2_candidate_maps.pdf
+M	code_unpacked/JCP_Code_and_Data_v3_3/figures_jcp/Fig2_candidate_maps.png
+D	code_unpacked/JCP_Code_and_Data_v3_3/figures_jcp/Fig3_certified_guard.eps
+D	code_unpacked/JCP_Code_and_Data_v3_3/figures_jcp/Fig3_certified_guard.pdf
+D	code_unpacked/JCP_Code_and_Data_v3_3/figures_jcp/Fig3_certified_guard.png
+D	code_unpacked/JCP_Code_and_Data_v3_3/figures_jcp/Fig4_tolerance_sweep.eps
+D	code_unpacked/JCP_Code_and_Data_v3_3/figures_jcp/Fig4_tolerance_sweep.pdf
+D	code_unpacked/JCP_Code_and_Data_v3_3/figures_jcp/Fig4_tolerance_sweep.png
+D	code_unpacked/JCP_Code_and_Data_v3_3/figures_jcp/Fig5_operational_refinement.eps
+D	code_unpacked/JCP_Code_and_Data_v3_3/figures_jcp/Fig5_operational_refinement.pdf
+D	code_unpacked/JCP_Code_and_Data_v3_3/figures_jcp/Fig5_operational_refinement.png
+D	code_unpacked/JCP_Code_and_Data_v3_3/figures_jcp/Fig5_robustness.eps
+D	code_unpacked/JCP_Code_and_Data_v3_3/figures_jcp/Fig5_robustness.pdf
+D	code_unpacked/JCP_Code_and_Data_v3_3/figures_jcp/Fig5_robustness.png
+M	code_unpacked/JCP_Code_and_Data_v3_3/figures_jcp/Fig6_frequency_bands.pdf
+M	code_unpacked/JCP_Code_and_Data_v3_3/figures_jcp/Fig6_frequency_bands.png
+M	code_unpacked/JCP_Code_and_Data_v3_3/figures_jcp/Graphical_Abstract.eps
+M	code_unpacked/JCP_Code_and_Data_v3_3/figures_jcp/Graphical_Abstract.pdf
+M	code_unpacked/JCP_Code_and_Data_v3_3/figures_jcp/Graphical_Abstract.png
+M	code_unpacked/JCP_Code_and_Data_v3_3/manuscript_contract/BUILD_INSTRUCTIONS.txt
+M	code_unpacked/JCP_Code_and_Data_v3_3/manuscript_contract/Cover_Letter_JCP.tex
+M	code_unpacked/JCP_Code_and_Data_v3_3/manuscript_contract/Figure_Captions.txt
+M	code_unpacked/JCP_Code_and_Data_v3_3/manuscript_contract/Highlights.txt
+M	code_unpacked/JCP_Code_and_Data_v3_3/manuscript_contract/README.txt
+D	code_unpacked/JCP_Code_and_Data_v3_3/manuscript_contract/SOURCE_AUDIT_v3_3.json
+M	code_unpacked/JCP_Code_and_Data_v3_3/manuscript_contract/SOURCE_MANIFEST.txt
+M	code_unpacked/JCP_Code_and_Data_v3_3/manuscript_contract/SOURCE_SHA256SUMS.txt
+M	code_unpacked/JCP_Code_and_Data_v3_3/manuscript_contract/Supplemental_Material_JCP.tex
+M	code_unpacked/JCP_Code_and_Data_v3_3/manuscript_contract/Title_Page.txt
+M	code_unpacked/JCP_Code_and_Data_v3_3/manuscript_contract/figures/Fig1_RK4_phase_diagram.pdf
+M	code_unpacked/JCP_Code_and_Data_v3_3/manuscript_contract/figures/Fig1_RK4_phase_diagram.png
+M	code_unpacked/JCP_Code_and_Data_v3_3/manuscript_contract/figures/Fig2_candidate_maps.pdf
+M	code_unpacked/JCP_Code_and_Data_v3_3/manuscript_contract/figures/Fig2_candidate_maps.png
+D	code_unpacked/JCP_Code_and_Data_v3_3/manuscript_contract/figures/Fig3_certified_guard.eps
+D	code_unpacked/JCP_Code_and_Data_v3_3/manuscript_contract/figures/Fig3_certified_guard.pdf
+D	code_unpacked/JCP_Code_and_Data_v3_3/manuscript_contract/figures/Fig3_certified_guard.png
+D	code_unpacked/JCP_Code_and_Data_v3_3/manuscript_contract/figures/Fig4_tolerance_sweep.eps
+D	code_unpacked/JCP_Code_and_Data_v3_3/manuscript_contract/figures/Fig4_tolerance_sweep.pdf
+D	code_unpacked/JCP_Code_and_Data_v3_3/manuscript_contract/figures/Fig4_tolerance_sweep.png
+D	code_unpacked/JCP_Code_and_Data_v3_3/manuscript_contract/figures/Fig5_operational_refinement.eps
+D	code_unpacked/JCP_Code_and_Data_v3_3/manuscript_contract/figures/Fig5_operational_refinement.pdf
+D	code_unpacked/JCP_Code_and_Data_v3_3/manuscript_contract/figures/Fig5_operational_refinement.png
+D	code_unpacked/JCP_Code_and_Data_v3_3/manuscript_contract/figures/Fig5_robustness.eps
+D	code_unpacked/JCP_Code_and_Data_v3_3/manuscript_contract/figures/Fig5_robustness.pdf
+D	code_unpacked/JCP_Code_and_Data_v3_3/manuscript_contract/figures/Fig5_robustness.png
+M	code_unpacked/JCP_Code_and_Data_v3_3/manuscript_contract/figures/Fig6_frequency_bands.pdf
+M	code_unpacked/JCP_Code_and_Data_v3_3/manuscript_contract/figures/Fig6_frequency_bands.png
+M	code_unpacked/JCP_Code_and_Data_v3_3/manuscript_contract/figures/Graphical_Abstract.eps
+M	code_unpacked/JCP_Code_and_Data_v3_3/manuscript_contract/figures/Graphical_Abstract.pdf
+M	code_unpacked/JCP_Code_and_Data_v3_3/manuscript_contract/figures/Graphical_Abstract.png
+D	code_unpacked/JCP_Code_and_Data_v3_3/manuscript_contract/generated/adaptive_benchmark_table_v33.tex
+D	code_unpacked/JCP_Code_and_Data_v3_3/manuscript_contract/generated/benchmark_macros_v33.tex
+M	code_unpacked/JCP_Code_and_Data_v3_3/manuscript_contract/jcp_article.tex
+M	code_unpacked/JCP_Code_and_Data_v3_3/manuscript_contract/jcp_preamble.tex
+M	code_unpacked/JCP_Code_and_Data_v3_3/manuscript_contract/references_jcp.tex
+D	code_unpacked/JCP_Code_and_Data_v3_3/manuscript_contract/scripts_source_audit_v33.py
+M	code_unpacked/JCP_Code_and_Data_v3_3/manuscript_contract/sections/01_introduction.tex
+M	code_unpacked/JCP_Code_and_Data_v3_3/manuscript_contract/sections/04_rk4_topology.tex
+M	code_unpacked/JCP_Code_and_Data_v3_3/manuscript_contract/sections/05_robustness.tex
+M	code_unpacked/JCP_Code_and_Data_v3_3/manuscript_contract/sections/06_candidate_maps.tex
+M	code_unpacked/JCP_Code_and_Data_v3_3/manuscript_contract/sections/06_step_control.tex
+M	code_unpacked/JCP_Code_and_Data_v3_3/manuscript_contract/sections/07_comparison.tex
+M	code_unpacked/JCP_Code_and_Data_v3_3/manuscript_contract/sections/08_conclusion.tex
+M	code_unpacked/JCP_Code_and_Data_v3_3/pyproject.toml
+M	code_unpacked/JCP_Code_and_Data_v3_3/reproduce.sh
+M	code_unpacked/JCP_Code_and_Data_v3_3/results/v27/v27_verification.json
+M	code_unpacked/JCP_Code_and_Data_v3_3/src/rk_choi_margin/candidates.py
+M	code_unpacked/JCP_Code_and_Data_v3_3/src/rk_choi_margin/certification.py
+M	code_unpacked/JCP_Code_and_Data_v3_3/src/rk_choi_margin/controllers.py
+M	code_unpacked/JCP_Code_and_Data_v3_3/src/rk_choi_margin/liouvillian.py
+
+Untracked v3.4 additions:
+.matplotlib-cache/fontlist-v390.json
+GENERATE_JCP_FIGURES_V34.log
+REMEDIATION_AUDIT_V34.log
+REPRODUCE_V34_AUDITS_BG.exit
+REPRODUCE_V34_AUDITS_BG.log
+REPRODUCE_V34_AUDITS_BG.pid
+REPRODUCE_V34_CERTIFICATES_BG.exit
+REPRODUCE_V34_CERTIFICATES_BG.log
+REPRODUCE_V34_CERTIFICATES_BG.pid
+REPRODUCE_V34_FIGURES_BG.exit
+REPRODUCE_V34_FIGURES_BG.log
+REPRODUCE_V34_FIGURES_BG.pid
+REPRODUCE_V34_LEGACY_HEAVY_BG.exit
+REPRODUCE_V34_LEGACY_HEAVY_BG.log
+REPRODUCE_V34_LEGACY_HEAVY_BG.pid
+REPRODUCE_V34_SOURCE_AUDIT_STAGE.log
+REPRODUCE_V34_TESTS_BG.exit
+REPRODUCE_V34_TESTS_BG.log
+REPRODUCE_V34_TESTS_BG.pid
+REPRODUCE_V34_TESTS_STAGE.console
+SOURCE_AUDIT_V34.log
+TEST_COLLECT_V34.log
+TEST_FULL_V34.time
+TEST_RESULTS_V34.log
+TEST_STAGE_V34.time
+TEST_V34_REMEDIATION.log
+VERIFY_V34_EXTENSIONS.log
+figures_jcp/Fig3_robustness.eps
+figures_jcp/Fig3_robustness.pdf
+figures_jcp/Fig3_robustness.png
+figures_jcp/Fig4_certified_guard.eps
+figures_jcp/Fig4_certified_guard.pdf
+figures_jcp/Fig4_certified_guard.png
+figures_jcp/Fig5_tolerance_sweep.eps
+figures_jcp/Fig5_tolerance_sweep.pdf
+figures_jcp/Fig5_tolerance_sweep.png
+figures_jcp/FigS2_operational_refinement.eps
+figures_jcp/FigS2_operational_refinement.pdf
+figures_jcp/FigS2_operational_refinement.png
+independent_validation/__pycache__/adversarial_regressions_v29.cpython-313.pyc
+independent_validation/__pycache__/adversarial_regressions_v30.cpython-313.pyc
+independent_validation/__pycache__/adversarial_regressions_v31.cpython-313.pyc
+independent_validation/__pycache__/endpoint_membership_v33.cpython-313.pyc
+independent_validation/__pycache__/executed_candidate_contract_v29.cpython-313.pyc
+independent_validation/__pycache__/executed_candidate_contract_v30.cpython-313.pyc
+independent_validation/__pycache__/executed_candidate_contract_v31.cpython-313.pyc
+independent_validation/__pycache__/external_review_regressions_v32.cpython-313.pyc
+independent_validation/__pycache__/external_review_regressions_v33.cpython-313.pyc
+independent_validation/__pycache__/independent_audit_v27.cpython-313.pyc
+independent_validation/__pycache__/independent_audit_v28.cpython-313.pyc
+independent_validation/__pycache__/independent_audit_v29.cpython-313.pyc
+independent_validation/__pycache__/independent_audit_v30.cpython-313.pyc
+independent_validation/__pycache__/independent_audit_v31.cpython-313.pyc
+independent_validation/__pycache__/remediation_v34.cpython-313.pyc
+independent_validation/__pycache__/second_order_adversarial_v30.cpython-313.pyc
+independent_validation/__pycache__/second_order_adversarial_v31.cpython-313.pyc
+independent_validation/__pycache__/third_order_adversarial_v31.cpython-313.pyc
+independent_validation/__pycache__/third_order_adversarial_v32.cpython-313.pyc
+independent_validation/__pycache__/third_order_adversarial_v33.cpython-313.pyc
+independent_validation/remediation_v34.py
+independent_validation/remediation_v34_report.json
+manuscript_contract/SOURCE_AUDIT_v3_4.json
+manuscript_contract/figures/Fig3_robustness.eps
+manuscript_contract/figures/Fig3_robustness.pdf
+manuscript_contract/figures/Fig3_robustness.png
+manuscript_contract/figures/Fig4_certified_guard.eps
+manuscript_contract/figures/Fig4_certified_guard.pdf
+manuscript_contract/figures/Fig4_certified_guard.png
+manuscript_contract/figures/Fig5_tolerance_sweep.eps
+manuscript_contract/figures/Fig5_tolerance_sweep.pdf
+manuscript_contract/figures/Fig5_tolerance_sweep.png
+manuscript_contract/figures/FigS2_operational_refinement.eps
+manuscript_contract/figures/FigS2_operational_refinement.pdf
+manuscript_contract/figures/FigS2_operational_refinement.png
+manuscript_contract/generated/adaptive_benchmark_table_v34.tex
+manuscript_contract/generated/benchmark_macros_v34.tex
+manuscript_contract/references.bib
+manuscript_contract/scripts_source_audit_v34.py
+results/jcp_figures_v34/figure1_conditioning.csv
+results/jcp_figures_v34/figure1_exact_branches.csv
+results/jcp_figures_v34/figure2_candidate_regions.csv
+results/jcp_figures_v34/figure2_richardson_margin.csv
+results/jcp_figures_v34/figure3_noncommuting_endpoints.csv
+results/jcp_figures_v34/figure4_conditioning.csv
+results/jcp_figures_v34/figure5_action_composition.csv
+results/jcp_figures_v34/figure5_tolerance_sweep.csv
+results/jcp_figures_v34/figureS2_operational.csv
+results/v34/adaptive_benchmark_table_v34.tex
+results/v34/adaptive_benchmark_v34.csv
+results/v34/benchmark_macros_v34.tex
+results/v34/noncommuting_method_comparison_v34.csv
+results/v34/v34_verification.json
+results/v34/v34_verification.md
+scripts/__pycache__/generate_benchmark_figures.cpython-313.pyc
+scripts/__pycache__/generate_jcp_figures.cpython-313.pyc
+scripts/__pycache__/generate_jcp_figures_v27.cpython-313.pyc
+scripts/__pycache__/generate_jcp_figures_v28.cpython-313.pyc
+scripts/__pycache__/generate_jcp_figures_v29.cpython-313.pyc
+scripts/__pycache__/generate_jcp_figures_v30.cpython-313.pyc
+scripts/__pycache__/generate_jcp_figures_v31.cpython-313.pyc
+scripts/__pycache__/generate_jcp_figures_v32.cpython-313.pyc
+scripts/__pycache__/generate_jcp_figures_v33.cpython-313.pyc
+scripts/__pycache__/generate_jcp_figures_v34.cpython-313.pyc
+scripts/__pycache__/generate_root_certificate.cpython-313.pyc
+scripts/__pycache__/verify_phase_covariant.cpython-313.pyc
+scripts/__pycache__/verify_section2.cpython-313.pyc
+scripts/__pycache__/verify_section3.cpython-313.pyc
+scripts/__pycache__/verify_section4.cpython-313.pyc
+scripts/__pycache__/verify_section5.cpython-313.pyc
+scripts/__pycache__/verify_theorems.cpython-313.pyc
+scripts/__pycache__/verify_v26_extensions.cpython-313.pyc
+scripts/__pycache__/verify_v27_extensions.cpython-313.pyc
+scripts/__pycache__/verify_v28_extensions.cpython-313.pyc
+scripts/__pycache__/verify_v29_extensions.cpython-313.pyc
+scripts/__pycache__/verify_v30_extensions.cpython-313.pyc
+scripts/__pycache__/verify_v31_extensions.cpython-313.pyc
+scripts/__pycache__/verify_v32_extensions.cpython-313.pyc
+scripts/__pycache__/verify_v33_extensions.cpython-313.pyc
+scripts/__pycache__/verify_v34_extensions.cpython-313.pyc
+scripts/generate_jcp_figures_v34.py
+scripts/verify_v34_extensions.py
+src/rk_choi_margin/__pycache__/__init__.cpython-313.pyc
+src/rk_choi_margin/__pycache__/candidates.cpython-313.pyc
+src/rk_choi_margin/__pycache__/certification.cpython-313.pyc
+src/rk_choi_margin/__pycache__/channels.cpython-313.pyc
+src/rk_choi_margin/__pycache__/controllers.cpython-313.pyc
+src/rk_choi_margin/__pycache__/liouvillian.cpython-313.pyc
+src/rk_choi_margin/__pycache__/methods.cpython-313.pyc
+src/rk_choi_margin/__pycache__/symbolic.cpython-313.pyc
+src/rk_choi_margin/__pycache__/topology.cpython-313.pyc
+src/rk_choi_margin/__pycache__/v26.cpython-313.pyc
+tests/__pycache__/test_closeout.cpython-313-pytest-9.0.2.pyc
+tests/__pycache__/test_closeout.cpython-313.pyc
+tests/__pycache__/test_core.cpython-313-pytest-9.0.2.pyc
+tests/__pycache__/test_core.cpython-313.pyc
+tests/__pycache__/test_topology_operational.cpython-313-pytest-9.0.2.pyc
+tests/__pycache__/test_topology_operational.cpython-313.pyc
+tests/__pycache__/test_v26.cpython-313-pytest-9.0.2.pyc
+tests/__pycache__/test_v26.cpython-313.pyc
+tests/__pycache__/test_v27_certification.cpython-313-pytest-9.0.2.pyc
+tests/__pycache__/test_v27_certification.cpython-313.pyc
+tests/__pycache__/test_v27_noncommuting_adaptive.cpython-313-pytest-9.0.2.pyc
+tests/__pycache__/test_v27_noncommuting_adaptive.cpython-313.pyc
+tests/__pycache__/test_v28_candidates.cpython-313-pytest-9.0.2.pyc
+tests/__pycache__/test_v28_candidates.cpython-313.pyc
+tests/__pycache__/test_v29_executed_candidate.cpython-313-pytest-9.0.2.pyc
+tests/__pycache__/test_v29_executed_candidate.cpython-313.pyc
+tests/__pycache__/test_v29_theory.cpython-313-pytest-9.0.2.pyc
+tests/__pycache__/test_v29_theory.cpython-313.pyc
+tests/__pycache__/test_v30_execution_contract.cpython-313-pytest-9.0.2.pyc
+tests/__pycache__/test_v30_execution_contract.cpython-313.pyc
+tests/__pycache__/test_v31_closeout.cpython-313-pytest-9.0.2.pyc
+tests/__pycache__/test_v31_closeout.cpython-313.pyc
+tests/__pycache__/test_v32_external_review.cpython-313-pytest-9.0.2.pyc
+tests/__pycache__/test_v32_external_review.cpython-313.pyc
+tests/__pycache__/test_v33_endpoint_membership.cpython-313-pytest-9.0.2.pyc
+tests/__pycache__/test_v33_endpoint_membership.cpython-313.pyc
+tests/__pycache__/test_v34_remediation.cpython-313-pytest-9.0.2.pyc
+tests/__pycache__/test_v34_remediation.cpython-313.pyc
+tests/test_v34_remediation.py

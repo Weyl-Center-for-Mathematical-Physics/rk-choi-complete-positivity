@@ -1,0 +1,36 @@
+\usepackage[T1]{fontenc}
+\usepackage{amsmath,amssymb,mathtools,amsthm}
+\usepackage{bm}
+\usepackage{graphicx}
+\usepackage{booktabs,tabularx,array}
+\usepackage{microtype}
+% Keep the Elsevier Times body while avoiding bitmap EC fallbacks for e-mail
+% addresses and monospaced execution diagnostics.
+\renewcommand{\ttdefault}{lmtt}
+\usepackage{siunitx}
+\usepackage{xcolor}
+\usepackage{flushend}
+\usepackage[hidelinks]{hyperref}
+\graphicspath{{figures/}}
+\newcommand{\JCPFigureWidth}{0.96\textwidth}
+\setlength{\emergencystretch}{3em}
+\newcommand{\CPTP}{\mathrm{CPTP}}
+\newcommand{\CP}{\mathrm{CP}}
+\newcommand{\id}{\operatorname{id}}
+\newcommand{\sgn}{\operatorname{sgn}}
+\newcommand{\Tr}{\operatorname{Tr}}
+\newcommand{\spec}{\operatorname{spec}}
+\newcommand{\dd}{\mathrm{d}}
+\newcommand{\e}{\mathrm{e}}
+\newcommand{\ii}{\mathrm{i}}
+\newcommand{\Fmargin}{F_{R,\theta}}
+\newcommand{\Mmargin}{M_{R,\varpi}}
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{lemma}[theorem]{Lemma}
+\theoremstyle{definition}
+\newtheorem{algorithm}{Algorithm}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+\hypersetup{pdftitle={Complete-positivity topology of Runge--Kutta maps for qubit Lindblad equations},pdfauthor={G. Blake Pierpoint; Olivier Bernard; Yichen Liu},pdfkeywords={Lindblad equation, complete positivity, Runge--Kutta methods, quantum channels, candidate maps, adaptive time stepping, certified numerics}}

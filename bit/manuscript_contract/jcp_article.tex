@@ -1,0 +1,57 @@
+\input{generated/benchmark_macros_v34}
+\begin{frontmatter}
+
+\title{Complete-positivity topology of Runge--Kutta maps for qubit Lindblad equations}
+
+\author[odu]{G. Blake Pierpoint\corref{cor1}}
+\ead{pierpogb@odu.edu}
+\author[uga,weyl]{Olivier Bernard}
+\ead{oli.bernard@weylcenter.org}
+\author[sjtu,weyl]{Yichen Liu}
+\ead{Yichen.Liu@weylcenter.org}
+\cortext[cor1]{Corresponding author.}
+
+\affiliation[odu]{organization={Old Dominion University},addressline={5115 Hampton Boulevard},city={Norfolk},state={Virginia},postcode={23529},country={USA}}
+\affiliation[uga]{organization={UFR PhITEM (Physics, Engineering, Earth, Environment, Mechanics), Universit\'e Grenoble Alpes},addressline={230 rue de la Physique},city={Saint-Martin-d'H\`eres},postcode={38400},country={France}}
+\affiliation[sjtu]{organization={Department of Computer Science and Engineering, Shanghai Jiao Tong University},addressline={800 Dongchuan Road, Minhang District},city={Shanghai},postcode={200240},country={China}}
+\affiliation[weyl]{organization={Weyl Center for Mathematical Physics},addressline={1235 Pennsylvania Avenue SE, Unit 1294},city={Washington},state={DC},postcode={20003},country={USA}}
+
+\begin{abstract}
+An exact Lindblad propagator is completely positive and trace preserving (CPTP); a direct Runge--Kutta (RK) step applied to the same generator need not be. For the autonomous phase-covariant qubit generator (coherent precession, bidirectional relaxation, pure dephasing) we derive necessary and sufficient conditions for a direct RK step to be CPTP, expressed through the stability function evaluated at the generator's eigenvalues. For one-way relaxation without dephasing these conditions classify classical RK4 into six admissibility regimes as the precession-to-relaxation ratio varies, including regimes where the admissible step set is disconnected or reduces to isolated points. Exactly removing the commuting precession in a rotating frame eliminates the high-frequency disconnected component, so finite-step physicality depends on the numerical representation, not only on the method. Pointwise certificates at four transverse-field strengths show the disconnected structure persists under a noncommuting perturbation. Candidate construction matters independently: at precession ratio 2 the positive-step CPTP sets of one full RK4 step and of two half steps are disjoint, and the fifth-order Richardson extrapolate of RK4 is non-CPTP on the entire step range where both constituents are CPTP. We implement a tri-state guard that certifies the executed binary64 step and candidate before acceptance and fails closed on unresolved decisions. In adaptive tests, error-only step doubling accepts non-CPTP candidates; the guarded workflows project to a certified step or fall back to an exact subflow. The executed candidate, not the method label or the error estimate, determines finite-step physicality.
+\end{abstract}
+
+\begin{keyword}
+Lindblad equation \sep complete positivity \sep Runge--Kutta methods \sep candidate maps \sep adaptive time stepping \sep certified numerics
+\end{keyword}
+
+\end{frontmatter}
+
+\ifdefined\ReviewMode\linenumbers\fi
+
+\input{sections/01_introduction}
+\input{sections/02_exact_criterion}
+\input{sections/03_local_geometry}
+\input{sections/04_rk4_topology}
+\input{sections/05_robustness}
+\input{sections/06_candidate_maps}
+\input{sections/07_step_control}
+\input{sections/08_operational_composition}
+\input{sections/09_comparison}
+\input{sections/10_conclusion}
+
+\section*{CRediT authorship contribution statement}
+G. Blake Pierpoint: Conceptualization, Methodology, Formal analysis, Investigation, Data curation, Visualization, Project administration, Software, Supervision, Writing -- original draft, Writing -- review and editing. Olivier Bernard: Conceptualization, Methodology, Formal analysis, Investigation, Software, Validation, Writing -- review and editing. Yichen Liu: Software, Methodology, Formal analysis, Investigation, Validation, Writing -- review and editing.
+
+\section*{Acknowledgments}
+This research was supported by the Research Computing clusters at Old Dominion University. The Wahab cluster is supported in part by National Science Foundation's grant CNS-1828593, ``MRI Acquisition: A Reconfigurable Computing Infrastructure Enabling Interdisciplinary and Collaborative Research in Hampton Roads.''
+
+\section*{Funding}
+This research received no specific grant from funding agencies in the public, commercial, or not-for-profit sectors.
+
+\section*{Declaration of competing interest}
+The authors declare that they have no known competing financial interests or personal relationships that could have appeared to influence the work reported in this paper.
+
+\section*{Data availability}
+No external data were used. The versioned code-and-data archive contains exact tableaux, symbolic certificates, rational root brackets, interval sign charts, adaptive-benchmark records, plotting data, source code, and regression tests. It will be available from Zenodo at \texttt{[ZENODO DOI TO BE INSERTED BEFORE SUBMISSION]} under the MIT License.
+
+\input{references_jcp}

@@ -1,0 +1,47 @@
+cff-version: 1.2.0
+message: "If you use this software and data package, please cite this versioned release and the associated article."
+title: "rk-choi-margin: complete-positivity regions of Runge-Kutta discretizations of phase-covariant qubit dynamics (code and data)"
+type: software
+version: 4.0.0
+date-released: 2026-09-18
+url: "https://github.com/Weyl-Center-for-Mathematical-Physics/rk-choi-complete-positivity/releases/tag/v4.0.0"
+repository-code: "https://github.com/Weyl-Center-for-Mathematical-Physics/rk-choi-complete-positivity"
+license: MIT
+abstract: >-
+  Exact symbolic calculations, certified root brackets, an independent
+  first-principles verifier of the article's claims, the Richardson-extrapolation
+  corollary of the signed first-defect law, candidate-map tests, pointwise
+  transverse-field certificates, certified adaptive-guard telemetry, deterministic
+  figures and tables with accessibility audits, and regression tests supporting
+  finite-step complete-positivity classifications of Runge-Kutta discretizations
+  of phase-covariant qubit Lindblad dynamics.
+authors:
+  - family-names: Pierpoint
+    given-names: G. Blake
+    orcid: "https://orcid.org/0000-0001-8288-8549"
+  - family-names: Bernard
+    given-names: Olivier
+    orcid: "https://orcid.org/0009-0007-0177-1607"
+  - family-names: Liu
+    given-names: Yichen
+    orcid: "https://orcid.org/0009-0005-2367-1493"
+keywords:
+  - Lindblad equation
+  - complete positivity
+  - Runge-Kutta methods
+  - stability regions
+  - Richardson extrapolation
+  - certified numerics
+references:
+  - type: software
+    title: "rk-choi-complete-positivity: Runge-Kutta complete-positivity certificates for amplitude damping (v1.0.0)"
+    authors:
+      - family-names: Pierpoint
+        given-names: G. Blake
+      - family-names: Bernard
+        given-names: Olivier
+      - family-names: Liu
+        given-names: Yichen
+    year: 2026
+    doi: 10.5281/zenodo.21522058
+    notes: "Earlier public release covering the zero-precession amplitude-damping certificates."

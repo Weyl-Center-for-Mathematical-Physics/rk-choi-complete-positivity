@@ -1,0 +1,100 @@
+\section{Complete RK4 topology on the laboratory-frame one-way ray}
+\label{sec:rk4topology}
+
+Set $\theta=u=0$ and $\nu=\varpi x$. For classical RK4,
+\begin{equation}
+ R_4(z)=1+z+\frac{z^2}{2}+\frac{z^3}{6}+\frac{z^4}{24}.
+\end{equation}
+The population ceiling $R_4(-x)\le1$ first becomes active at
+\begin{equation}
+ \alpha_4=2.785293563405\ldots,
+ \qquad
+ \alpha_4^3-4\alpha_4^2+12\alpha_4-24=0.
+ \label{eq:alpha4}
+\end{equation}
+The Choi margin admits a closed factorization for every $\varpi$.
+
+\begin{proposition}[Laboratory-frame RK4 margin]
+\label{prop:rk4factor}
+Let $q=1+4\varpi^2$ and $y=qx$. Then
+\begin{equation}
+ M_4(x;\varpi)=-\frac{x^5q}{147456}\,\mathcal C_q(qx),
+ \label{eq:rk4_factor}
+\end{equation}
+where
+\begin{equation}
+ \mathcal C_q(y)=y^3-16y^2-32(q-6)y+384(q-4).
+ \label{eq:rk4_cubic}
+\end{equation}
+Its discriminant is
+\begin{equation}
+ \operatorname{disc}_y\mathcal C_q
+ =16384(q-4)(8q^2-123q+348).
+ \label{eq:cubic_discriminant}
+\end{equation}
+\end{proposition}
+
+Define
+\begin{equation}
+ q_\pm=\frac{123\pm11\sqrt{33}}{16},
+ \qquad
+ \varpi_\pm=\frac{\sqrt{107\pm11\sqrt{33}}}{8}.
+ \label{eq:qcrit}
+\end{equation}
+Numerically, $\varpi_-=0.82736225145\ldots$ and $\varpi_+=1.63071202389\ldots$. The critical cubics factor as
+\begin{align}
+ \mathcal C_{q_-}(y)&=(y-9+\sqrt{33})^2(y-2\sqrt{33}+2),\nonumber\\
+ \mathcal C_{4}(y)&=y(y-8)^2,\nonumber\\
+ \mathcal C_{q_+}(y)&=(y-9-\sqrt{33})^2(y+2+2\sqrt{33}).
+ \label{eq:critical_cubics}
+\end{align}
+
+\begin{theorem}[Complete laboratory-frame RK4 classification]
+\label{thm:rk4topology}
+Let $\mathcal A_4(\varpi)$ be the set of $x\ge0$ for which direct laboratory-frame RK4 is CPTP on the one-way, zero-dephasing ray. Then:
+\begin{enumerate}
+ \item For $1\le q<q_-$, $\mathcal C_q$ has one positive root $y_3$ and
+ \[
+  \mathcal A_4=[0,\min\{\alpha_4,y_3/q\}].
+ \]
+ At $q=q_-$ the same formula holds; the additional double root is an internal tangency.
+ \item For $q_-<q<4$, $\mathcal C_q$ has three positive roots $y_1<y_2<y_3$ and
+ \[
+  \mathcal A_4=[0,y_1/q]\cup[y_2/q,y_3/q].
+ \]
+ \item At $q=4$, $\mathcal A_4=\{0,2\}$.
+ \item For $4<q<q_+$, $\mathcal A_4=\{0\}$.
+ \item At $q=q_+$,
+ \[
+  \mathcal A_4=\left\{0,\frac{9+\sqrt{33}}{q_+}\right\}.
+ \]
+ \item For $q>q_+$, $\mathcal C_q$ has one negative and two positive roots $y_2<y_3$, and
+ \[
+  \mathcal A_4=\{0\}\cup[y_2/q,y_3/q].
+ \]
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+For $x>0$, Eq.~\eqref{eq:rk4_factor} makes the block condition equivalent to $\mathcal C_q(qx)\le0$. The sign at the origin is set by $384(q-4)$, and the number and multiplicity of real roots follow from Eq.~\eqref{eq:cubic_discriminant}. Root sums and products determine their signs. Equation~\eqref{eq:critical_cubics} resolves the equality cases. Exact isolation verifies the population ceiling on the attached low-frequency branch and confirms that all detached endpoints lie below $\alpha_4$. Complete sign charts are supplied in the Supplementary Material.
+\end{proof}
+
+Figure~\ref{fig:rk4_phase} shows two forms of reentrance. Just below $\sqrt3/2$, a detached interval coexists with the attached small-step interval. The band is only $0.03866\ldots$ wide in $\varpi$, so a coarse frequency grid can miss it. At $\sqrt3/2$ both components collapse to points. Positive-step CPTP then disappears before a remote interval is born at $\varpi_+$.
+
+The equality cases are exact mathematical members of the CPTP set, but isolated zero-margin points are not robust controller targets. The birth at $\varpi_+$ is a saddle node: the two positive roots separate as $O((\varpi-\varpi_+)^{1/2})$. Companion-matrix roots are consequently ill-conditioned there. All classifications use exact Sturm isolation or certified sign continuation; floating companion roots seed plots only.
+
+\begin{figure*}[t]
+ \centering
+ \makebox[\textwidth][c]{\includegraphics[width=\JCPFigureWidth]{Fig1_RK4_phase_diagram.pdf}}
+ \caption{Exact RK4 topology and conditioning on the laboratory-frame one-way, zero-dephasing ray, with $x=\Gamma h$ and $\varpi=|\omega|/\Gamma$. (a) Attached and detached CPTP components constructed from the cubic branches and population ceiling. The inset resolves the narrow reentrant band; isolated equality points are retained. (b) The detached-window width has the square-root scaling expected at the double-root birth, making uncertified floating root decisions unreliable close to $\varpi_+$.}
+ \label{fig:rk4_phase}
+\end{figure*}
+
+For $q\to\infty$, the lower positive root balances the $q$-dependent constant and linear terms in Eq.~\eqref{eq:rk4_cubic}, while the upper root scales as $\sqrt q$. Hence
+\begin{equation}
+ x_-(\varpi)=\frac{3}{\varpi^2}+O(\varpi^{-4}),
+ \qquad
+ x_+(\varpi)=\frac{2\sqrt2}{|\varpi|}+O(\varpi^{-2}).
+ \label{eq:window_asymptotics}
+\end{equation}
+The upper limit is the classical RK4 imaginary-axis boundary because $|R_4(\ii\nu)|^2-1=\nu^6(\nu^2-8)/576$. The lower edge has no scalar analogue; it is produced by the coupled population--coherence Choi condition.

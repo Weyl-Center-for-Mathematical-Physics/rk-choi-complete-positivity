@@ -1,0 +1,52 @@
+\documentclass[10pt]{article}
+\usepackage[letterpaper,top=0.48in,bottom=0.48in,left=0.70in,right=0.70in]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage[hidelinks]{hyperref}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.22em}
+\pagestyle{empty}
+
+\begin{document}
+
+{\large\bfseries G. Blake Pierpoint}\\[-0.05em]
+Old Dominion University\\
+5115 Hampton Boulevard, Norfolk, Virginia 23529, USA\\
+\href{mailto:pierpogb@odu.edu}{pierpogb@odu.edu}
+
+\vspace{0.25em}
+\hrule
+\vspace{0.34em}
+
+August 20, 2026
+
+Editors, \textit{Journal of Computational Physics}
+
+\textbf{Re: Full-Length Article submission}
+
+Dear Editors,
+
+Please consider our manuscript, ``Complete-positivity topology of Runge--Kutta maps for qubit Lindblad equations,'' by G. Blake Pierpoint, Olivier Bernard, and Yichen Liu. The work is original, has not been published, is not under consideration by any other journal, and is approved by all authors for submission.
+
+We derive necessary and sufficient finite-step complete-positivity conditions for direct Runge--Kutta steps on an autonomous phase-covariant qubit generator. For classical RK4, the analysis identifies six admissibility regimes, including disconnected step sets and isolated points, and shows that removing commuting precession changes the finite-step topology. Pointwise noncommuting certificates demonstrate persistence under transverse-field perturbations. Candidate construction supplies a distinct obstruction: one full step and two half steps can have disjoint positive-step CPTP sets, while their fifth-order Richardson extrapolate can be non-CPTP throughout the range where both inputs are channels. A tri-state binary64 guard then prevents adaptive acceptance of unresolved or non-CPTP candidates.
+
+The paper extends the positivity question of Riesch and Jirauschek to generator-conditioned complete positivity and adaptive candidate control. Its extrapolation analysis connects with Havasi and Kazemi, and its diagnostic perspective complements the CPTP-by-construction methods of Appel\"o and Cheng and of Cao and Lu. It addresses efficacy through guarded acceptance tests, robustness through buffered and noncommuting cases, computational complexity through explicit operation and certification costs, and reproducibility through a versioned archive. The manuscript also compares direct RK, rotating-frame RK, exact-subflow splitting, and modern structure-preserving approaches.
+
+The companion archive contains the exact certificates, plotting data, source code, and regression tests needed to reproduce the results.
+
+\textbf{Suggested reviewers}
+
+Christian Jirauschek, Technical University of Munich --- \href{mailto:jirauschek@tum.de}{jirauschek@tum.de}\\
+Yingda Cheng, Virginia Tech --- \href{mailto:yingda@vt.edu}{yingda@vt.edu}\\
+David I. Ketcheson, KAUST --- \href{mailto:david.ketcheson@kaust.edu.sa}{david.ketcheson@kaust.edu.sa}
+
+\textbf{Reviewer exclusions: none.}
+
+Thank you for your consideration.
+
+Sincerely,\\[1.20em]
+{\bfseries G. Blake Pierpoint}\\
+Corresponding author
+
+\end{document}

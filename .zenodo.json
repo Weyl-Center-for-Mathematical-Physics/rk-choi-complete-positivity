@@ -1,21 +1,22 @@
 {
-  "title": "rk-choi-complete-positivity: exact Runge-Kutta/Choi admissibility calculations",
-  "description": "Exact symbolic calculations, certified root brackets, sign charts, and figure-generation code for generator-conditioned complete-positivity regions of Runge-Kutta methods for qubit damping.",
+  "title": "rk-choi-complete-positivity: complete-positivity regions of Runge-Kutta discretizations of phase-covariant qubit dynamics (code and data)",
+  "description": "Exact symbolic calculations, certified root brackets, an independent first-principles verifier of the article's claims, the Richardson-extrapolation corollary of the signed first-defect law, candidate-map tests, pointwise transverse-field certificates, certified adaptive-guard telemetry, deterministic figures and tables with accessibility audits, and regression tests supporting finite-step complete-positivity classifications of Runge-Kutta discretizations of phase-covariant qubit Lindblad dynamics. The current tree is in bit/; the root src/, data/, figures/ and supplement/ directories preserve the earlier zero-precession release v1.0.0 unchanged.",
   "upload_type": "software",
   "access_right": "open",
   "license": "mit",
-  "version": "1.0.0",
+  "version": "4.0.0",
+  "publication_date": "2026-09-18",
   "language": "eng",
   "creators": [
     {
       "name": "Pierpoint, G. Blake",
       "orcid": "0000-0001-8288-8549",
-      "affiliation": "Department of Physics, University of Maryland, College Park; Weyl Center for Mathematical Physics"
+      "affiliation": "Old Dominion University"
     },
     {
       "name": "Bernard, Olivier",
       "orcid": "0009-0007-0177-1607",
-      "affiliation": "Department of Physics, Engineering, Earth and Environmental Sciences, Mechanics, Université Grenoble Alpes; Weyl Center for Mathematical Physics"
+      "affiliation": "UFR PhITEM, Université Grenoble Alpes; Weyl Center for Mathematical Physics"
     },
     {
       "name": "Liu, Yichen",
@@ -27,8 +28,8 @@
     "Lindblad equation",
     "complete positivity",
     "Runge-Kutta methods",
-    "Choi matrix",
-    "quantum channels",
-    "numerical stability"
+    "stability regions",
+    "Richardson extrapolation",
+    "certified numerics"
   ]
 }

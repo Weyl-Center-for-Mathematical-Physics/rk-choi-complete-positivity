@@ -1,0 +1,151 @@
+{
+  "version": "3.3.0",
+  "passed": 13,
+  "failed": 0,
+  "checks": [
+    {
+      "name": "upper inside: fixed certificate",
+      "passed": true,
+      "detail": "PASS"
+    },
+    {
+      "name": "upper inside: generic locator",
+      "passed": true,
+      "detail": {
+        "status": "PASS",
+        "components": [
+          [
+            "0",
+            "10932606268253299984007980/32135153242574363440770023"
+          ],
+          [
+            "99999999999999999999999999999999999/100000000000000000000000000000000000",
+            "1"
+          ]
+        ],
+        "isolated": []
+      }
+    },
+    {
+      "name": "upper inside: candidate locator",
+      "passed": true,
+      "detail": {
+        "status": "PASS",
+        "components": [
+          [
+            "0",
+            "10932606268253299984007980/32135153242574363440770023"
+          ],
+          [
+            "99999999999999999999999999999999999/100000000000000000000000000000000000",
+            "1"
+          ]
+        ],
+        "isolated": []
+      }
+    },
+    {
+      "name": "upper equal: fixed certificate",
+      "passed": true,
+      "detail": "PASS"
+    },
+    {
+      "name": "upper equal: generic locator",
+      "passed": true,
+      "detail": {
+        "status": "PASS",
+        "components": [
+          [
+            "0",
+            "429884087069645/1263595402190803"
+          ]
+        ],
+        "isolated": [
+          "1"
+        ]
+      }
+    },
+    {
+      "name": "upper equal: candidate locator",
+      "passed": true,
+      "detail": {
+        "status": "PASS",
+        "components": [
+          [
+            "0",
+            "429884087069645/1263595402190803"
+          ]
+        ],
+        "isolated": [
+          "1"
+        ]
+      }
+    },
+    {
+      "name": "upper outside: fixed certificate",
+      "passed": true,
+      "detail": "FAIL"
+    },
+    {
+      "name": "upper outside: generic locator",
+      "passed": true,
+      "detail": {
+        "status": "PASS",
+        "components": [
+          [
+            "0",
+            "429884087069645/1263595402190803"
+          ]
+        ],
+        "isolated": []
+      }
+    },
+    {
+      "name": "upper outside: candidate locator",
+      "passed": true,
+      "detail": {
+        "status": "PASS",
+        "components": [
+          [
+            "0",
+            "429884087069645/1263595402190803"
+          ]
+        ],
+        "isolated": []
+      }
+    },
+    {
+      "name": "lower below: exact domain membership",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "lower equal: exact domain membership",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "lower inside: exact domain membership",
+      "passed": true,
+      "detail": [
+        "1/100000000000000000000000000000000000"
+      ]
+    },
+    {
+      "name": "near-coincident roots separated and ordered",
+      "passed": true,
+      "detail": [
+        [
+          "99999999999999999999999999999999999/100000000000000000000000000000000000",
+          "99999999999999999999999999999999999/100000000000000000000000000000000000",
+          "99999999999999999999999999999999999/100000000000000000000000000000000000"
+        ],
+        [
+          "100000000000000000000000000000000001/100000000000000000000000000000000000",
+          "100000000000000000000000000000000001/100000000000000000000000000000000000",
+          "100000000000000000000000000000000001/100000000000000000000000000000000000"
+        ]
+      ]
+    }
+  ]
+}

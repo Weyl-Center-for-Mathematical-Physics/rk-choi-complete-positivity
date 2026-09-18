@@ -1,0 +1,127 @@
+\section{Direct RK propagation and the exact channel criterion}
+\label{sec:criterion}
+
+We use units with $\hbar=1$. Let $|0\rangle$ and $|1\rangle$ denote the lower- and upper-energy states, $\sigma_-=|0\rangle\langle1|$, $\sigma_+=|1\rangle\langle0|$, and $\sigma_z=|0\rangle\langle0|-|1\rangle\langle1|$. The autonomous phase-covariant generator is
+\begin{equation}
+ \mathcal L(\rho)=-\ii[H,\rho]+\gamma_\downarrow\mathcal D[\sigma_-](\rho)
+ +\gamma_\uparrow\mathcal D[\sigma_+](\rho)
+ +\frac{\gamma_\phi}{2}(\sigma_z\rho\sigma_z-\rho),
+ \label{eq:gksl}
+\end{equation}
+where $H=-\omega\sigma_z/2$, $\mathcal D[L](\rho)=L\rho L^\dagger-\{L^\dagger L,\rho\}/2$, and all rates are nonnegative \cite{Hall2008Complete,Lankinen2016Complete,Filippov2020Phase,Siudzinska2023Geometry}. Define
+\begin{equation}
+ \Gamma=\gamma_\downarrow+\gamma_\uparrow,
+ \quad \theta=\gamma_\uparrow/\Gamma,
+ \quad x=\Gamma h,
+ \quad u=\gamma_\phi h,
+ \quad \nu=\omega h.
+ \label{eq:coordinates}
+\end{equation}
+For $\Gamma>0$, $\theta\in[0,1]$ is the stationary excitation fraction. It represents a thermal stationary population only when the rates satisfy an additional detailed-balance relation. The population and coherence modes obey
+\begin{equation}
+ \dot q=-\Gamma(q-\theta),
+ \qquad
+ \dot\rho_{01}=-\left(\frac{\Gamma}{2}+\gamma_\phi-\ii\omega\right)\rho_{01}.
+ \label{eq:modes}
+\end{equation}
+The boundary $\Gamma=0$ is recovered continuously and does not require $\theta$.
+
+For an $s$-stage RK method with real Butcher coefficients $(A,b)$, let
+\begin{equation}
+ R(z)=1+z b^T(I-zA)^{-1}{\bf 1}
+ \label{eq:stability_function}
+\end{equation}
+be its stability function \cite{HairerNorsettWanner1993}. We retain the true stage-evaluation domain: a removable cancellation in a reduced rational expression does not validate a singular stage system. Direct application to Eq.~\eqref{eq:modes} gives
+\begin{equation}
+ a=R(-x),
+ \qquad
+ c=R(-x/2-u+\ii\nu).
+ \label{eq:multipliers}
+\end{equation}
+The resulting complex-linear map on $X=(X_{jk})\in M_2(\mathbb C)$ is
+\begin{equation}
+ \Phi_{R}^{(\theta)}(X)=
+ \begin{pmatrix}
+ A_\theta X_{00}+C_\theta X_{11} & cX_{01}\\
+ c^*X_{10} & B_\theta X_{00}+D_\theta X_{11}
+ \end{pmatrix},
+ \label{eq:direct_map}
+\end{equation}
+where
+\begin{align}
+ A_\theta&=1-\theta(1-a), & B_\theta&=\theta(1-a),\nonumber\\
+ C_\theta&=(1-\theta)(1-a), & D_\theta&=\theta+(1-\theta)a.
+ \label{eq:ABCD}
+\end{align}
+The map preserves trace and Hermiticity exactly. No integrating factor, projection, Kraus reconstruction, or post-step renormalization has been introduced.
+
+Using the convention $J(\Phi)=\sum_{jk}|j\rangle\langle k|\otimes\Phi(|j\rangle\langle k|)$, the unnormalized Choi matrix is
+\begin{equation}
+ J_\theta=
+ \begin{pmatrix}
+ A_\theta&0&0&c\\
+ 0&B_\theta&0&0\\
+ 0&0&C_\theta&0\\
+ c^*&0&0&D_\theta
+ \end{pmatrix}.
+ \label{eq:thermal_choi}
+\end{equation}
+This is the established non-unital phase-covariant Choi form \cite{Choi1975CP,RuskaiSzarekWerner2002,BraunEtAl2014,Siudzinska2023Geometry}. Its pullback through Eq.~\eqref{eq:multipliers} yields the exact numerical criterion.
+
+\begin{theorem}[Finite-step CPTP criterion]
+\label{thm:criterion}
+On the RK stage-evaluation domain, the direct step \eqref{eq:direct_map} is CPTP if and only if
+\begin{equation}
+ a\le1,
+ \qquad A_\theta\ge0,
+ \qquad D_\theta\ge0,
+ \qquad \Fmargin(x,u,\nu)\ge0,
+ \label{eq:full_criterion}
+\end{equation}
+where
+\begin{equation}
+ \Fmargin(x,u,\nu)=a+\theta(1-\theta)(1-a)^2-|c|^2.
+ \label{eq:full_margin}
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+The scalar Choi entries $B_\theta$ and $C_\theta$ are nonnegative exactly when $a\le1$. The remaining Hermitian $2\times2$ block is positive semidefinite exactly when its diagonal entries and determinant are nonnegative. Direct multiplication gives $A_\theta D_\theta=a+\theta(1-\theta)(1-a)^2$.
+\end{proof}
+
+At the one-way endpoint $\theta=0$, Eq.~\eqref{eq:full_criterion} reduces to
+\begin{equation}
+ 0\le a\le1,
+ \qquad
+ M_R(x,u,\nu):=a-|c|^2\ge0.
+ \label{eq:one_way_criterion}
+\end{equation}
+The margin already implies $a\ge0$. The lower eigenvalue of the active Choi block is
+\begin{equation}
+ \lambda_-=
+ \frac{1+a-\sqrt{(1-a)^2+4|c|^2}}{2}
+ =\frac{2M_R}{1+a+\sqrt{(1-a)^2+4|c|^2}},
+ \label{eq:lambda_margin}
+\end{equation}
+so its sign is the sign of $M_R$. The population ceiling and block margin are independent exit mechanisms.
+
+\subsection{Representation dependence under a rotating frame}
+\label{subsec:rotating_frame}
+
+The exact physical evolution is invariant under a change of frame, but a specified direct-RK discretization need not be. Let
+\begin{equation}
+ \widetilde\rho(t)=\e^{\ii Ht}\rho(t)\e^{-\ii Ht}.
+\end{equation}
+Because $\e^{\ii Ht}\sigma_\pm\e^{-\ii Ht}=\e^{\mp\ii\omega t}\sigma_\pm$ and $\mathcal D[\e^{\ii\phi}L]=\mathcal D[L]$, the transformed generator contains the same dissipators and no coherent $z$-precession. Denote that dissipative generator by $\mathcal L_{\rm dis}$ and the exact back-rotation by the unitary channel $\mathcal U_h$.
+
+\begin{proposition}[Frame-transformed RK step]
+\label{prop:rotating_frame}
+The numerical procedure
+\begin{equation}
+ \Phi_h^{\rm RF}=\mathcal U_h\circ R(h\mathcal L_{\rm dis})
+ \label{eq:rotating_frame_step}
+\end{equation}
+is CPTP if and only if $R(h\mathcal L_{\rm dis})$ is CPTP. Its admissibility set is therefore independent of $\omega$. For one-way damping without dephasing, classical RK4 has the attached interval $0\le x\le\alpha_4$ in this frame, rather than the high-frequency detached regions found for direct laboratory-frame RK4.
+\end{proposition}
+
+Thus the regions below characterize direct RK applied in the stated representation. This is analogous to the familiar representation dependence of stiffness and phase error: a rotating frame can remove the high-frequency pathology in this benchmark, whereas the noncommuting perturbation studied in Sec.~\ref{sec:robustness} cannot be removed by the same transformation.

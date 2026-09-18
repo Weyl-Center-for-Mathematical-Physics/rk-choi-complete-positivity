@@ -1,0 +1,91 @@
+\section{Persistence beyond the critical phase-covariant boundary}
+\label{sec:robustness}
+
+The detached intervals of Theorem~\ref{thm:rk4topology} were derived at $\theta=\kappa=0$, where the exact semigroup rides the Choi determinant boundary. Positive dephasing or bidirectional relaxation restores a small-step buffer. The remote component and the intervening nonphysical gap can nevertheless persist.
+
+\begin{theorem}[Relative-open persistence of disconnectedness]
+\label{thm:persistence}
+Fix an RK method of order at least two, a frequency ratio $\varpi$, and a compact step interval $K$ contained in the RK stage-evaluation domain. Suppose that at $(\theta,\kappa)=(0,0)$:
+\begin{enumerate}
+ \item the Choi margin has a detached positive component $(r_2,r_3)\subset K$ bounded by simple roots;
+ \item there are points $s_-\in(0,r_2)$, $s_+\in(r_2,r_3)$, and $s_{\rm out}>r_3$ in $K$ with margin signs $-$, $+$, and $-$;
+ \item every inactive population and Choi-diagonal constraint has uniform strict slack on closed neighborhoods of these points and roots.
+\end{enumerate}
+Then a relative-open neighborhood of $(0,0)$ in the physical quadrant $\theta,\kappa\ge0$ has at least two positive-step CPTP components whenever $\theta+\kappa>0$.
+\end{theorem}
+
+\begin{proof}
+Choose disjoint compact neighborhoods of the three sign samples and of the two simple roots, all lying inside $K$. Compactness and the strict-slack hypothesis give one positive lower bound for every inactive constraint on their union. Continuity of the RK map, Choi entries, and active margin in $(x,\theta,\kappa)$ preserves these inequalities and the three strict margin signs in one common relative-open parameter neighborhood. The implicit-function theorem continues the simple roots near $r_2$ and $r_3$. Equations~\eqref{eq:dephasing_buffer} and \eqref{eq:excitation_buffer} supply an attached positive interval near $x=0$ for every nonzero buffer. The preserved $-,+,-$ samples then force a gap and a remote positive component. The theorem establishes persistence of disconnectedness, not persistence of the boundary absorbing interval below $r_2$.
+\end{proof}
+
+For RK4 at $\varpi=2$, exact rational data give the representative classifications in Table~\ref{tab:robust_cases}. Every displayed endpoint is isolated by a Sturm count and every intervening sign is evaluated at an exact rational sample.
+
+\begin{table*}[t]
+\centering
+\caption{Certified RK4 regions at $\varpi=2$ with positive dephasing and/or excitation fraction. Here $\kappa=\gamma_\phi/\Gamma$. All listed roots are simple.}
+\label{tab:robust_cases}
+\small
+\begingroup
+\setlength{\tabcolsep}{9pt}
+\renewcommand{\arraystretch}{1.10}
+\begin{tabular}{@{}ccccc l@{}}
+\toprule
+$\theta$ & $\kappa$ & $r_1$ & $r_2$ & $r_3$ & Complete CPTP set \\
+\midrule
+$0$ & $10^{-3}$ & $0.25334887$ & $0.74069600$ & $1.26954271$ & $[0,r_1]\cup[r_2,r_3]$ \\
+$10^{-3}$ & $0$ & $0.12226890$ & $0.74255831$ & $1.27054437$ & $[0,r_1]\cup[r_2,r_3]$ \\
+$10^{-3}$ & $10^{-3}$ & $0.26203333$ & $0.73836463$ & $1.26975357$ & $[0,r_1]\cup[r_2,r_3]$ \\
+$0$ & $10^{-2}$ & $0.51930822$ & $0.68162161$ & $1.26228015$ & $[0,r_1]\cup[r_2,r_3]$ \\
+$10^{-2}$ & $0$ & $0.27693028$ & $0.72089681$ & $1.27239139$ & $[0,r_1]\cup[r_2,r_3]$ \\
+\bottomrule
+\end{tabular}
+\endgroup
+\end{table*}
+
+The local estimates \eqref{eq:attached_scaling} predict the order of the first attached endpoint. A multiplicative reducer with factor $\rho\in(0,1)$ starting from $x_0>x_{\rm att}$ reaches that component after approximately
+\begin{equation}
+ j_{\rm att}=\left\lceil\frac{\log(x_{\rm att}/x_0)}{\log\rho}\right\rceil
+ \label{eq:attached_reductions}
+\end{equation}
+reductions. Thus an off-boundary controller may eventually recover under refinement, but the cost can be large when the buffer is weak.
+
+\subsection{Noncommuting Hamiltonian perturbation}
+
+The two-scalar reduction is special to commuting phase-covariant modes, but disconnectedness is not confined to that subfamily. Consider
+\begin{equation}
+ \mathcal L_{\epsilon}(\rho)=\mathcal L(\rho)-\ii[\Omega_x\sigma_x/2,\rho],
+ \label{eq:transverse_generator}
+\end{equation}
+with the same dissipators as Eq.~\eqref{eq:gksl}. For $\Omega_x\ne0$, phase covariance is broken and the one-step Choi matrix must be formed from the full $4\times4$ RK superoperator.
+
+\begin{proposition}[Persistence in a non-phase-covariant GKSL family]
+\label{prop:noncommuting_persistence}
+Let $\mathcal L_\eta$ be a continuous finite-dimensional parameterized GKSL family. If four steps $0<h_a<h_g<h_d<h_o$ satisfy strict Choi-eigenvalue signs $+,-,+,-$ for $R_4(h\mathcal L_{\eta_0})$, then the sign pattern, and hence at least two positive-step CP components, persists for all $\eta$ in a sufficiently small neighborhood of $\eta_0$ within that GKSL family.
+\end{proposition}
+
+\begin{proof}
+The polynomial $R_4(h\mathcal L_\eta)$ and its Choi matrix depend continuously on $(h,\eta)$. The smallest Choi eigenvalue is continuous for Hermitian matrices. Four strict signs therefore remain unchanged in one common neighborhood. The two positive samples are separated by a negative sample, so they cannot belong to one connected CP component.
+\end{proof}
+
+At $\Gamma=1$, $\theta=\kappa=10^{-3}$, $\omega/\Gamma=2$, and $\Omega_x/\Gamma=0.1$, exact characteristic-polynomial brackets give the approximate midpoint values
+\begin{equation}
+ \lambda_{\min}(0.1)\approx9.5156\times10^{-5},\quad
+ \lambda_{\min}(0.5)\approx-2.7778\times10^{-3},
+\end{equation}
+\begin{equation}
+ \lambda_{\min}(0.9)\approx5.8959\times10^{-4},\quad
+ \lambda_{\min}(1.4)\approx-3.9227\times10^{-1}.
+ \label{eq:noncommuting_samples}
+\end{equation}
+Exact isolation of every principal-minor root yields
+\begin{equation}
+ \mathcal A_4=[0,0.26357691\ldots]\cup[0.73588381\ldots,1.26847248\ldots].
+\end{equation}
+We repeat the exact component calculation at $\Omega_x/\Gamma\in\{0,0.05,0.10,0.20\}$. Each of these four parameter values has an attached and a detached CP component. Figure~\ref{fig:robustness} displays only those certified points; no interpolation or uniform interval certificate is asserted. Proposition~\ref{prop:noncommuting_persistence} supplies local persistence around each strict-sign base point, not a generic theorem for arbitrary noncommuting Lindbladians.
+
+\begin{figure*}[t]
+ \centering
+ \makebox[\textwidth][c]{\includegraphics[width=\JCPFigureWidth]{Fig2_robustness.pdf}}
+ \caption{Disconnected RK4 regions at $\varpi=|\omega|/\Gamma=2$, with $x=\Gamma h$. (a) Exact phase-covariant cases with positive dephasing and/or excitation fraction. (b) Discrete component boundaries certified independently at $\Omega_x/\Gamma\in\{0,0.05,0.10,0.20\}$. Markers are not connected or interpolated; the panel does not certify every coupling between the displayed values.}
+ \label{fig:robustness}
+\end{figure*}

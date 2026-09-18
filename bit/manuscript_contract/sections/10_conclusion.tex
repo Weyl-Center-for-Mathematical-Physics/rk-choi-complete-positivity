@@ -1,0 +1,12 @@
+\section{Conclusions}
+\label{sec:conclusion}
+
+For the autonomous phase-covariant qubit family, direct RK admits an exact necessary-and-sufficient CPTP criterion. On the laboratory-frame one-way, zero-dephasing ray, classical RK4 exhibits connected, reentrant, isolated, empty-positive-step, and detached regimes that are invisible to scalar stability and ordinary error control.
+
+The principal numerical consequence is candidate dependence. A full RK step, the composition of equal substeps, and a negative-weight extrapolate are different maps over the same total interval. At $|\omega|/\Gamma=2$, the nontrivial positive-step CPTP components of the full-step and two-half-step candidates are disjoint, and the general substep-ladder criterion identifies exactly when consecutive candidate families overlap. Richardson extrapolation raises the linear order of RK4 yet reverses the leading complete-positivity orientation on nonrotating damping; a global certificate shows that the extrapolate remains non-CPTP throughout an interval on which both constituent maps are physical. Adaptive software must therefore certify the map it actually advances.
+
+The guard accepts only a candidate certified at its executed binary64 step. A CP-only rejection leaves the PI error memory unchanged; failed projection, an empty component set, or unresolved certification invokes the physical fallback. Error-only step doubling accepts non-CPTP fine candidates in the boundary test, whereas the guarded workflows do not. Table~\ref{tab:guard_telemetry} reports the component-location and certification workload.
+
+The high-frequency detached topology is representation dependent: an exact rotating frame removes the commuting precession in the central benchmark. In the displayed non-phase-covariant transverse-field family, independent certificates at $\Omega_x/\Gamma\in\{0,0.05,0.10,0.20\}$ each retain two finite-step CP components. These pointwise results do not certify the full interval or arbitrary noncommuting Lindbladians. The one-qubit scalar criterion remains special; time-dependent, higher-dimensional, and interacting generators require map-level certification or structure-preserving propagation.
+
+Complete positivity therefore belongs to the candidate map in its chosen representation, not to the RK method, nominal step, or error estimate. An adaptive code must certify that map or switch to a CPTP construction.

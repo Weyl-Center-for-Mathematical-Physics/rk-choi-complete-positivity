@@ -1,0 +1,23 @@
+Build requirements:
+- A current TeX distribution containing elsarticle, amsmath, amsthm,
+  mathtools, graphicx, booktabs, tabularx, microtype, siunitx, xcolor,
+  hyperref, lineno, lmodern, and flushend.
+
+From the source-directory root:
+
+  latexmk -pdf -interaction=nonstopmode -halt-on-error Manuscript_JCP.tex
+  latexmk -pdf -interaction=nonstopmode -halt-on-error Manuscript_JCP_clean.tex
+  latexmk -pdf -interaction=nonstopmode -halt-on-error Supplementary_Material_JCP.tex
+  latexmk -pdf -interaction=nonstopmode -halt-on-error Cover_Letter_JCP.tex
+
+Expected outputs:
+- Manuscript_JCP.pdf
+- Manuscript_JCP_clean.pdf
+- Supplementary_Material_JCP.pdf
+- Cover_Letter_JCP.pdf
+
+The authoritative bibliography is the numbered thebibliography environment in
+references_jcp.tex, so no BibTeX pass is required. references.bib is supplied as
+a machine-readable companion for the added root-isolation and software records.
+Before journal upload, replace the Zenodo DOI placeholder and confirm the final
+rendered manuscript, Supplementary Material, figures, and upload metadata.

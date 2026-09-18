@@ -1,0 +1,291 @@
+{
+  "checks": [
+    {
+      "name": "direct projection pass 1e-2",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "direct provenance 1e-2",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "direct executed recertificate 1e-2",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "direct projection pass 1e-10",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "direct provenance 1e-10",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "direct executed recertificate 1e-10",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "direct projection pass 1e-20",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "direct provenance 1e-20",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "direct executed recertificate 1e-20",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "direct projection pass 1e-30",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "direct provenance 1e-30",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "direct executed recertificate 1e-30",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "equal-substeps projection pass 1e-2",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "equal-substeps provenance 1e-2",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "equal-substeps executed recertificate 1e-2",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "equal-substeps projection pass 1e-10",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "equal-substeps provenance 1e-10",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "equal-substeps executed recertificate 1e-10",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "equal-substeps projection pass 1e-20",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "equal-substeps provenance 1e-20",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "equal-substeps executed recertificate 1e-20",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "equal-substeps projection pass 1e-30",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "equal-substeps provenance 1e-30",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "equal-substeps executed recertificate 1e-30",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "lab coarse provenance h=0.5",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "lab fine provenance h=0.5",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "lab fine matrix identity h=0.5",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "lab extrapolated provenance h=0.5",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "lab distinct hashes h=0.5",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "lab coarse provenance h=1.0",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "lab fine provenance h=1.0",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "lab fine matrix identity h=1.0",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "lab extrapolated provenance h=1.0",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "lab distinct hashes h=1.0",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "lab coarse provenance h=2.0",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "lab fine provenance h=2.0",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "lab fine matrix identity h=2.0",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "lab extrapolated provenance h=2.0",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "lab distinct hashes h=2.0",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "rotating coarse provenance h=0.5",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "rotating fine provenance h=0.5",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "rotating fine matrix identity h=0.5",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "rotating coarse provenance h=1.0",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "rotating fine provenance h=1.0",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "rotating fine matrix identity h=1.0",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "rotating coarse provenance h=2.0",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "rotating fine provenance h=2.0",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "rotating fine matrix identity h=2.0",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "benchmark provenance 2.0",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "benchmark physicality 2.0",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "benchmark identity 2.0",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "benchmark provenance 2.8",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "benchmark physicality 2.8",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "benchmark identity 2.8",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "benchmark provenance 5.6",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "benchmark physicality 5.6",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "benchmark identity 5.6",
+      "pass": true,
+      "detail": ""
+    }
+  ],
+  "passed": 57,
+  "total": 57
+}

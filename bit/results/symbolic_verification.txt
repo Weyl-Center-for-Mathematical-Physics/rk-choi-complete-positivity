@@ -1,0 +1,90 @@
+RK-CHOI COMPLETE-POSITIVITY - EXACT SYMBOLIC VERIFICATION
+====================================================
+
+Forward Euler
+-------------
+family: explicit; order: 1; stages: 1
+R(x) = x + 1
+first defect: m=2, eta_m=-1/2
+predicted local CP coefficient: -1/4
+M_R(x,0) = -z**2/4
+CP-admissible set on x>=0 at u=0: {0}
+
+Heun RK2
+--------
+family: explicit; order: 2; stages: 2
+R(x) = (x**2 + 2*x + 2)/2
+first defect: m=3, eta_m=-1/6
+predicted local CP coefficient: 1/8
+M_R(x,0) = -z**3*(z - 8)/64
+CP-admissible set on x>=0 at u=0: [0, 2]
+
+SSPRK(3,3)
+----------
+family: explicit; order: 3; stages: 3
+R(x) = (x**3 + 3*x**2 + 6*x + 6)/6
+first defect: m=4, eta_m=-1/24
+predicted local CP coefficient: -7/192
+M_R(x,0) = -z**4*(z**2 - 12*z + 84)/2304
+CP-admissible set on x>=0 at u=0: {0}
+
+Classical RK4
+-------------
+family: explicit; order: 4; stages: 4
+R(x) = (x**4 + 4*x**3 + 12*x**2 + 24*x + 24)/24
+first defect: m=5, eta_m=-1/120
+predicted local CP coefficient: 1/128
+M_R(x,0) = -z**5*(z**3 - 16*z**2 + 160*z - 1152)/147456
+CP-admissible set on x>=0 at u=0: [0, 2.785293563]
+
+Dormand-Prince 5 principal formula
+----------------------------------
+family: explicit embedded; order: 5; stages: 7
+R(x) = (x**6 + 5*x**5 + 25*x**4 + 100*x**3 + 300*x**2 + 600*x + 600)/600
+first defect: m=6, eta_m=1/3600
+predicted local CP coefficient: 31/115200
+M_R(x,0) = -z**6*(z**6 - 20*z**5 + 300*z**4 - 3600*z**3 + 35600*z**2 - 294400*z - 396800)/1474560000
+CP-admissible set on x>=0 at u=0: [0, 3.306567893]
+
+Dormand-Prince embedded 4 formula
+---------------------------------
+family: explicit embedded; order: 4; stages: 7
+R(x) = (5*x**7 + 161*x**6 + 1097*x**5 + 5000*x**4 + 20000*x**3 + 60000*x**2 + 120000*x + 120000)/120000
+first defect: m=5, eta_m=97/120000
+predicted local CP coefficient: -97/128000
+M_R(x,0) = -z**5*(25*z**9 - 3220*z**8 + 147564*z**7 - 3225872*z**6 + 48214544*z**5 - 576320000*z**4 + 5721600000*z**3 - 37719040000*z**2 + 16752640000*z + 178790400000)/235929600000000
+CP-admissible set on x>=0 at u=0: {0} union [3.068856548, 4.384986321]
+
+Backward Euler
+--------------
+family: implicit; order: 1; stages: 1
+R(x) = -1/(x - 1)
+first defect: m=2, eta_m=1/2
+predicted local CP coefficient: 1/4
+M_R(x,0) = z**2/((z + 1)*(z + 2)**2)
+CP-admissible set on x>=0 at u=0: [0, infinity)
+
+Implicit midpoint
+-----------------
+family: implicit; order: 2; stages: 1
+R(x) = -(x + 2)/(x - 2)
+first defect: m=3, eta_m=1/12
+predicted local CP coefficient: -1/16
+M_R(x,0) = -2*z**3/((z + 2)*(z + 4)**2)
+CP-admissible set on x>=0 at u=0: {0}
+
+ZERO-TEMPERATURE TWO-RATE CHECKS
+------------------------
+RK2 at x=4: a=5, c=1, M=4, 1-a=-4 (independent population exit verified).
+Two-rate margin: M_R(x,u)=R(-x)-R(-x/2-u)^2.
+Joint first derivatives at (0,0): dM/dx=0 and dM/du=2.
+Pure dephasing: M_R(0,u)=1-R(-u)^2.
+Rationalized Choi denominator obeys D >= 2 for all real finite (a,c).
+Every audited nonconstant explicit RK polynomial has M_R(x,u)->-infinity as u->infinity for fixed x>0.
+Backward Euler full-quadrant margin: (4*u_nonnegative**2 + 4*u_nonnegative*x_nonnegative + 8*u_nonnegative + x_nonnegative**2)/((x_nonnegative + 1)*(2*u_nonnegative + x_nonnegative + 2)**2)
+Backward Euler is the scope counterexample to any unrestricted stiffness-nonuniformity claim.
+
+ROTATING ONE-WAY BOUNDARY CHECK
+------------------------
+RK4 coefficient of x^5 at u=0 on a fixed nu ray: -(4*nu**2 - 3)*(4*nu**2 + 1)/384
+Local sign changes at |nu|=sqrt(3)/2.

@@ -1,0 +1,43 @@
+SECTION 4 EXACT METHOD AUDIT
+====================================
+
+Certified decimal root isolations (exact Sturm counts):
+- RK4 population endpoint: (2.785293563400000, 2.785293563500000)
+- RK4 first margin zero: (10.98242546620000, 10.98242546640000)
+- DP5 population endpoint: (3.306567892600000, 3.306567892700000)
+- DP5 first margin zero: (13.17409346280000, 13.17409346290000)
+- DP4 margin re-entry: (3.068856548000000, 3.068856548100000)
+- DP4 population exit: (4.384986320800000, 4.384986320900000)
+- DP4 second margin zero: (15.29876780750000, 15.29876780770000)
+- DP4 second population crossing: (24.72775431870000, 24.72775431890000)
+- DP4 population-multiplier zero: (24.72789503010000, 24.72789503020000)
+
+Exact low-order margins:
+- Forward Euler: -z**2/4
+- Heun RK2: -z**3*(z - 8)/64
+- SSPRK(3,3): -z**4*(z**2 - 12*z + 84)/2304
+- Classical RK4: -z**5*(z**3 - 16*z**2 + 160*z - 1152)/147456
+
+Pure-amplitude-damping admissible sets:
+- Forward Euler: {0}
+- Heun RK2: [0, 2]
+- SSPRK(3,3): {0}
+- Classical RK4: [0, 2.78529356341]
+- Dormand-Prince 5 principal formula: [0, 3.30656789263]
+- Dormand-Prince embedded 4 formula: {0} union [3.06885654805, 4.38498632080]
+- Backward Euler: [0, infinity)
+- Implicit midpoint: {0}
+
+Dormand-Prince embedded fourth-order sign chart:
+- x=1: a=0.3671583333333333, M=-0.0006909451507610745 (outward neighborhood)
+- x=4: a=0.4517333333333333, M=0.4370115555555556 (isolated CPTP component)
+- x=5: a=2.848958333333333, M=2.845615107152197 (population overflow)
+- x=20: a=8794.333333333333, M=-82309.02777777778 (negative block margin)
+- x=25: a=-2071.526041666667, M=-1211570.365380289 (negative population multiplier)
+
+Backward Euler margin: z**2/((z + 1)*(z + 2)**2)
+Implicit midpoint margin: -2*z**3/((z + 2)*(z + 4)**2)
+
+The DP4 finite interval is a structural CPTP component, not an accuracy recommendation.
+
+Wrote <archive>\results\section4\method_audit_table.csv

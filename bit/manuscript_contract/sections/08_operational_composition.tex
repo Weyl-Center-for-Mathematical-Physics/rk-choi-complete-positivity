@@ -1,0 +1,46 @@
+\section{Operational witness and refinement}
+\label{sec:operational}
+
+The Choi test is already a system--ancilla experiment \cite{Choi1975CP,Stinespring1955}. Let $\rho_\Omega=|\Omega\rangle\langle\Omega|/2$ be a maximally entangled two-qubit state. Then
+\begin{equation}
+ (\id\otimes\Phi)(\rho_\Omega)=\frac{J(\Phi)}{2}.
+ \label{eq:bell_choi}
+\end{equation}
+If $J(\Phi_R)$ has a normalized eigenvector $|v_-\rangle$ with eigenvalue $\lambda_-<0$, the legitimate positive effect $E_-=|v_-\rangle\langle v_-|$ is assigned the numerical Born-rule value
+\begin{equation}
+ p_-^{\rm RK}=\Tr\!\left[E_-(\id\otimes\Phi_R)(\rho_\Omega)\right]=\frac{\lambda_-}{2}<0.
+ \label{eq:negative_born}
+\end{equation}
+No physical quantum instrument or trajectory ensemble can have such a non-CP map as its unconditional average \cite{DaviesLewis1970,SteinbachGarrawayKnight1995,WonglakhonWisemanChantasri2024}.
+
+For a qubit map, a qubit ancilla already witnesses non-CP. The same witness embeds in every larger ancilla, so the one-qubit admissibility condition is exactly the local safety condition for applying the fixed map as $\Phi_R\otimes\id_d$. This does not claim that direct RK applied to an interacting many-body Liouvillian factorizes into local maps.
+
+Define the normalized-Choi negative mass and Bell-input output trace error by
+\begin{equation}
+ \delta_{\rm CP}=\frac{\|J_R/2\|_1-1}{2},
+ \qquad
+ E_J=\frac12\left\|\frac{J_R-J_{\rm ex}}{2}\right\|_1.
+ \label{eq:choi_error_definitions}
+\end{equation}
+Because both normalized Choi operators have trace one, their difference is traceless. The variational characterization of trace distance therefore gives $\delta_{\rm CP}\le E_J$. The ratio can be order one while both quantities are small; it is neither a diamond norm nor a worst-case channel distance.
+
+\subsection{Fixed-horizon convergence from outside the channel set}
+
+Return to nonrotating one-way damping. Fix final dimensionless time $X$ and take $N$ equal direct steps $x_N=X/N$. If
+\begin{equation}
+ R(z)-\e^z=\eta_mz^m+O(z^{m+1}),
+ \qquad
+ K=(-1)^m(1-2^{1-m})\eta_m,
+\end{equation}
+then logarithmic expansion gives
+\begin{equation}
+ M_N(X)=KXe^{-X}\left(\frac{X}{N}\right)^{m-1}+O(N^{-m}),
+ \label{eq:fixed_horizon_margin}
+\end{equation}
+with the corresponding active Choi eigenvalue
+\begin{equation}
+ \lambda_{-,N}(X)=\frac{KXe^{-X}}{1+e^{-X}}
+ \left(\frac{X}{N}\right)^{m-1}+O(N^{-m}).
+ \label{eq:fixed_horizon_eig}
+\end{equation}
+When $K<0$, the candidate is asymptotically outside the channel set; when $m=p+1$, the negative defect decays at the ordinary global order $p$. A claim of negativity at every finite refinement requires a method-specific sign result, supplied for the displayed Forward Euler and SSPRK(3,3) examples in the Supplementary Material. Thus convergence of maps does not imply physicality of every finite candidate.

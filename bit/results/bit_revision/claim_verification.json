@@ -1,0 +1,758 @@
+{
+  "script": "scripts/verify_bit_claims.py",
+  "independent_of_rk_choi_margin": true,
+  "sympy": "1.14.0",
+  "mpmath": "1.3.0",
+  "checks_passed": 69,
+  "checks_total": 69,
+  "checks": {
+    "rk4_stability_function_from_tableau": {
+      "pass": true,
+      "R4": "z**4/24 + z**3/6 + z**2/2 + z + 1"
+    },
+    "mode_equation_population": {
+      "pass": true
+    },
+    "mode_equation_coherence": {
+      "pass": true
+    },
+    "generator_spectrum": {
+      "pass": true,
+      "spectrum": [
+        "0",
+        "-gamma_down - gamma_up",
+        "-gamma_down/2 - gamma_phi - gamma_up/2 + I*omega",
+        "-gamma_down/2 - gamma_phi - gamma_up/2 - I*omega"
+      ]
+    },
+    "rk4_direct_map_equals_claimed_block_form": {
+      "pass": true
+    },
+    "rk4_choi_matrix_equals_claimed_form": {
+      "pass": true
+    },
+    "trace_preservation_identities": {
+      "pass": true
+    },
+    "choi_block_determinant_identity": {
+      "pass": true
+    },
+    "stage_domain_is_spectral_condition": {
+      "pass": true,
+      "note": "explicit tableau: det(I - lambda A) = 1 for every lambda, so the stage domain is all steps; implicit tableaux give det(I-lambda A) with lambda in spec(hL)"
+    },
+    "exact_semigroup_margin": {
+      "pass": true
+    },
+    "criterion_reduction_structure": {
+      "pass": true,
+      "note": "characteristic polynomial of the claimed Choi matrix factors as (lambda-B)(lambda-C)(lambda^2-(A+D)lambda+(AD-|c|^2)); a Hermitian matrix is PSD iff all eigenvalues are nonnegative, so J>=0 iff B,C>=0 and the 2x2 block has nonnegative trace and determinant, i.e. A,D>=0 and AD-|c|^2>=0; B,C>=0 iff a<=1 for theta in (0,1) (at theta=0 only C=1-a>=0 is active, at theta=1 only B=1-a>=0)"
+    },
+    "signed_first_defect_law_generic_m2_to_m8": {
+      "pass": true,
+      "G_m_in_q": {
+        "2": "q/2",
+        "3": "3*q/4",
+        "4": "-q*(q - 8)/8",
+        "5": "-5*q*(q - 4)/16",
+        "6": "q*(q**2 - 18*q + 48)/32",
+        "7": "7*q*(q - 4)**2/64",
+        "8": "-q*(q**3 - 32*q**2 + 160*q - 256)/128"
+      }
+    },
+    "G4_G5_G6_G7_closed_forms": {
+      "pass": true
+    },
+    "unit_circle_rule_q4": {
+      "pass": true
+    },
+    "rk4_threshold_factorization": {
+      "pass": true,
+      "M": "-x**6*(x - 2)**2/576"
+    },
+    "ssp3_threshold_factorization": {
+      "pass": true
+    },
+    "dp5_first_defect": {
+      "pass": true,
+      "m": 6,
+      "eta": "1/3600"
+    },
+    "richardson_first_defect": {
+      "pass": true,
+      "m": 6,
+      "eta": "-1/4320"
+    },
+    "G6_thresholds": {
+      "pass": true,
+      "roots_q": [
+        "9 - sqrt(33)",
+        "sqrt(33) + 9"
+      ],
+      "varpi_thresholds": [
+        "0.750905678741007",
+        "1.85368299923005"
+      ]
+    },
+    "dephasing_buffer_first_order": {
+      "pass": true
+    },
+    "excitation_buffer_coefficient": {
+      "pass": true,
+      "coefficient": "2*r2*varpi**2 + r2/2 - theta**2 + theta - varpi**2 - 1/4"
+    },
+    "rk4_x5_coefficient": {
+      "pass": true,
+      "coefficient": "-(4*varpi**2 - 3)*(4*varpi**2 + 1)/384"
+    },
+    "rk4_large_frequency_defect": {
+      "pass": true
+    },
+    "attached_scaling_laws": {
+      "pass": true
+    },
+    "rk4_margin_cubic_factorization": {
+      "pass": true
+    },
+    "cubic_discriminant": {
+      "pass": true,
+      "disc": "16384*(q - 4)*(8*q**2 - 123*q + 348)"
+    },
+    "q_pm_roots": {
+      "pass": true
+    },
+    "varpi_pm_closed_forms": {
+      "pass": true,
+      "varpi_minus": "0.82736225145112604665",
+      "varpi_plus": "1.6307120238943857361",
+      "band_width": "0.0386631523333"
+    },
+    "critical_cubic_factorizations": {
+      "pass": true
+    },
+    "alpha4_population_ceiling": {
+      "pass": true,
+      "alpha4": "2.78529356340528162352975918977"
+    },
+    "cubic_root_counts_by_regime": {
+      "pass": true,
+      "positive_roots_over_q": {
+        "1": [
+          [
+            "10.9824254663",
+            "10.9824254663",
+            1
+          ]
+        ],
+        "2": [
+          [
+            "5.37003212547",
+            "5.37003212547",
+            1
+          ]
+        ],
+        "18/5": [
+          [
+            "2.70241305295",
+            "2.70241305295",
+            1
+          ]
+        ],
+        "39/10": [
+          [
+            "0.173199520774",
+            "0.173199520774",
+            1
+          ],
+          [
+            "1.61483288035",
+            "1.61483288035",
+            1
+          ],
+          [
+            "2.31453170144",
+            "2.31453170144",
+            1
+          ]
+        ],
+        "4": [
+          [
+            "2.00000000000",
+            "2.00000000000",
+            2
+          ]
+        ],
+        "6": [],
+        "17": [
+          [
+            "0.744782427896",
+            "0.744782427896",
+            1
+          ],
+          [
+            "1.27033462697",
+            "1.27033462697",
+            1
+          ]
+        ]
+      },
+      "q_minus": "3.73811318051",
+      "q_plus": "11.6368868195"
+    },
+    "empty_positive_step_regime_4_to_qplus": {
+      "pass": true
+    },
+    "attached_branch_ceiling_crossover": {
+      "pass": true,
+      "q_c": "3.5282058982943983771",
+      "varpi_c": "0.79501665050085560725",
+      "reduced_discriminant": "-1774190592*t_alpha**2 + 3472883712*t_alpha + 3170893824",
+      "reduced_discriminant_bracket_values": [
+        "-920028168.341",
+        "-920028168.341"
+      ],
+      "resultant_degree": 9,
+      "resultant_real_root_brackets": [
+        [
+          "3",
+          "4"
+        ]
+      ],
+      "note": "exactly one real root of q -> C_q(q alpha4) (negative reduced discriminant), Sturm-isolated in (1, q_-) through the resultant; for 1<=q<q_c the attached set is [0, alpha4] (population ceiling active), for q_c<q<q_- it is [0, y3/q]"
+    },
+    "printed_crossover_brackets": {
+      "pass": true,
+      "alpha_bracket": [
+        "27/10",
+        "14/5"
+      ],
+      "q_c_bracket": [
+        "7/2",
+        "18/5"
+      ],
+      "note": "the printed rational brackets certify the discriminant sign and crossover location, not merely decimal approximations"
+    },
+    "detached_endpoints_below_alpha4": {
+      "pass": true,
+      "quadratic_discriminant": "-2304*(t_alpha - 2)*(5*t_alpha + 2)",
+      "sign_of_C_q_at_q_alpha4": {
+        "2": -1,
+        "37/10": 1,
+        "39/10": 1,
+        "17": 1,
+        "100": 1,
+        "1000000": 1
+      },
+      "max_endpoint_over_q_sampled": 2.314531701443197,
+      "note": "y3/q > alpha4 on [1, q_c), = alpha4 at q_c, < alpha4 on (q_c, oo) which contains [q_-, 4] and [q_+, oo); sampled y3/q < alpha4 at q = 3.9, 17, 100"
+    },
+    "isolated_points_q4_and_qplus": {
+      "pass": true,
+      "point_q4": 2,
+      "point_qplus": "1.26705388436338"
+    },
+    "window_edge_asymptotics": {
+      "pass": true,
+      "samples": {
+        "10000": {
+          "y2": 12.000600450360304,
+          "y3_over_sqrt32q": 1.0033162198622518
+        },
+        "1000000": {
+          "y2": 12.000006000045,
+          "y3_over_sqrt32q": 1.0003513653569291
+        },
+        "100000000": {
+          "y2": 12.000000060000005,
+          "y3_over_sqrt32q": 1.0000353334635286
+        }
+      }
+    },
+    "rk4_imaginary_axis_boundary": {
+      "pass": true
+    },
+    "hamiltonian_and_dissipative_parts_commute": {
+      "pass": true
+    },
+    "generator_splits": {
+      "pass": true
+    },
+    "unitary_channel_equals_exp_hamiltonian_part": {
+      "pass": true
+    },
+    "lab_and_rotating_rk4_maps_differ": {
+      "pass": true
+    },
+    "rotating_candidate_admissibility_is_omega_free": {
+      "pass": true
+    },
+    "frame_candidates_differ_prop6ii": {
+      "pass": true,
+      "note": "x^8 coefficients of |R4(-(1/2+kappa)x+i varpi x)|^2 and R4(-(1/2+kappa)x)^2 differ by (((1/2+kappa)^2+varpi^2)^4-(1/2+kappa)^8)/576, nonzero for varpi != 0; backward Euler and implicit midpoint: |R(-s+i nu)|^2 - R(-s)^2 = -nu^2/((1+s)^2((1+s)^2+nu^2)) and 8 nu^2 s/((2+s)^2((2+s)^2+nu^2)), zero for nu != 0 only at s = 0"
+    },
+    "composition_calculus": {
+      "pass": true
+    },
+    "rk4_population_multiplier_positive": {
+      "pass": true
+    },
+    "varpi2_direct_interval": {
+      "pass": true,
+      "lower": "0.7447824278959195",
+      "upper": "1.270334626973889"
+    },
+    "varpi2_two_half_step_disjoint": {
+      "pass": true,
+      "ratio": "1.70564527222"
+    },
+    "substep_ladder_overlap_for_n_ge_2": {
+      "pass": true
+    },
+    "halving_threshold_resultant": {
+      "pass": true,
+      "resultant": "6291456*(q - 4)*(72*q**3 - 2071*q**2 + 12552*q - 21744)"
+    },
+    "halving_threshold_value": {
+      "pass": true,
+      "varpi_half": "2.24825460451498048"
+    },
+    "richardson_stability_polynomial": {
+      "pass": true
+    },
+    "richardson_margin_factorization": {
+      "pass": true
+    },
+    "richardson_first_positive_root_above_alpha4": {
+      "pass": true,
+      "first_root": "6.034523958649170",
+      "all_positive_P10_roots": [
+        "6.03452395865",
+        "22.1024370829"
+      ]
+    },
+    "richardson_remote_interval": {
+      "pass": true,
+      "population_ceiling_root": "6.459127767825721",
+      "note": "margin positive and 0<=a<=1 at x=6.2 (inside), a>1 at x=6.5 (ceiling exit), margin negative at x=0.5 and 3 (outside)"
+    },
+    "richardson_global_sign_chart": {
+      "pass": true,
+      "events": [
+        {
+          "source": "a",
+          "bracket": [
+            "2.919911381617275",
+            "2.919911381617276"
+          ]
+        },
+        {
+          "source": "a",
+          "bracket": [
+            "6.034383873449079",
+            "6.034383873449080"
+          ]
+        },
+        {
+          "source": "M",
+          "bracket": [
+            "6.034523958649170",
+            "6.034523958649171"
+          ]
+        },
+        {
+          "source": "a-1",
+          "bracket": [
+            "6.459127767825720",
+            "6.459127767825721"
+          ]
+        },
+        {
+          "source": "M",
+          "bracket": [
+            "22.102437082855815",
+            "22.102437082855816"
+          ]
+        }
+      ],
+      "intervals": [
+        {
+          "sample": "1",
+          "signs": [
+            1,
+            -1,
+            -1
+          ]
+        },
+        {
+          "sample": "4",
+          "signs": [
+            -1,
+            -1,
+            -1
+          ]
+        },
+        {
+          "sample": "120689/20000",
+          "signs": [
+            1,
+            -1,
+            -1
+          ]
+        },
+        {
+          "sample": "31/5",
+          "signs": [
+            1,
+            -1,
+            1
+          ]
+        },
+        {
+          "sample": "10",
+          "signs": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "sample": "23",
+          "signs": [
+            1,
+            1,
+            -1
+          ]
+        }
+      ],
+      "note": "all positive boundary roots isolated and simple; exact signs on every interval including the tail leave only the closed remote component plus zero"
+    },
+    "persistence_inactive_slack_interval": {
+      "pass": true,
+      "interval": [
+        "7/10",
+        "13/10"
+      ],
+      "note": "at varpi=2 both detached roots lie in (0.7,1.3), where a and 1-a have no zeros and are strictly positive; A_0=1 supplies the remaining inactive constraint"
+    },
+    "constituents_cptp_on_common_interval": {
+      "pass": true,
+      "note": "coarse RK4 at varpi=0: M4(x;0) = x^5(1152-160x+16x^2-x^3)/147456, the cubic has no root in (0, alpha4] (Sturm count) and is positive at both ends, so M4>0 on (0, alpha4]; 0<=a<=1 there by the population identity and the ceiling root alpha4; the fine map is CPTP on [0, 2 alpha4] by dilation (Proposition 7)"
+    },
+    "rk4_nonrotating_margin_root": {
+      "pass": true,
+      "root": "10.9824254662933"
+    },
+    "richardson_orientation_bands": {
+      "pass": true
+    },
+    "dp5_orientation_bands_reversed": {
+      "pass": true
+    },
+    "table1_buffered_roots_varpi2": {
+      "pass": true,
+      "rows": {
+        "theta=0,kappa=1e-3": {
+          "roots": [
+            0.25334886911583565,
+            0.7406959996518822,
+            1.2695427111395663
+          ],
+          "expected": [
+            0.253348869116,
+            0.740695999652,
+            1.26954271114
+          ],
+          "ok": true
+        },
+        "theta=1e-3,kappa=0": {
+          "roots": [
+            0.12226890347002936,
+            0.7425583125540361,
+            1.2705443701359842
+          ],
+          "expected": [
+            0.12226890347,
+            0.742558312554,
+            1.270544370136
+          ],
+          "ok": true
+        },
+        "theta=1e-3,kappa=1e-3": {
+          "roots": [
+            0.2620333331608279,
+            0.7383646272134431,
+            1.2697535708263887
+          ],
+          "expected": [
+            0.262033333161,
+            0.738364627213,
+            1.269753570826
+          ],
+          "ok": true
+        },
+        "theta=0,kappa=1e-2": {
+          "roots": [
+            0.519308218819772,
+            0.6816216100681476,
+            1.2622801549800335
+          ],
+          "expected": [
+            0.51930821882,
+            0.681621610068,
+            1.26228015498
+          ],
+          "ok": true
+        },
+        "theta=1e-2,kappa=0": {
+          "roots": [
+            0.27693027581060614,
+            0.7208968050589576,
+            1.2723913949352523
+          ],
+          "expected": [
+            0.276930275811,
+            0.720896805059,
+            1.272391394935
+          ],
+          "ok": true
+        }
+      }
+    },
+    "persistence_sign_samples": {
+      "pass": true
+    },
+    "noncommuting_eigenvalue_signs_omega_x_0p1": {
+      "pass": true,
+      "samples": {
+        "1/10": {
+          "bracket": [
+            "361/3793779",
+            "349/3667670"
+          ],
+          "midpoint": 9.515578006423842e-05,
+          "expected": 9.5156e-05,
+          "sign_ok": "True"
+        },
+        "1/2": {
+          "bracket": [
+            "-6492/2337121",
+            "-6491/2336761"
+          ],
+          "midpoint": -0.002777776589139385,
+          "expected": -0.0027778,
+          "sign_ok": "True"
+        },
+        "9/10": {
+          "bracket": [
+            "891/1511210",
+            "590/1000689"
+          ],
+          "midpoint": 0.0005895937695619112,
+          "expected": 0.00058959,
+          "sign_ok": "True"
+        },
+        "7/5": {
+          "bracket": [
+            "-676733/1725174",
+            "-322205/821387"
+          ],
+          "midpoint": -0.3922694174613061,
+          "expected": -0.39227,
+          "sign_ok": "True"
+        }
+      }
+    },
+    "noncommuting_components_omega_x_0p1": {
+      "pass": true,
+      "endpoints": [
+        0.263576909874516,
+        0.7358838130069857,
+        1.2684724787166293
+      ],
+      "sign_pattern": [
+        "+",
+        "-",
+        "+",
+        "-"
+      ]
+    },
+    "transverse_table_endpoints": {
+      "pass": true,
+      "rows": {
+        "0": {
+          "roots": [
+            0.2620333331608324,
+            0.7383646272134424,
+            1.2697535708263874
+          ],
+          "expected": [
+            0.262033333161,
+            0.738364627213,
+            1.269753570826
+          ],
+          "ok": true
+        },
+        "1/20": {
+          "roots": [
+            0.26241893640075603,
+            0.7377443064252766,
+            1.2694327140054824
+          ],
+          "expected": [
+            0.262418936401,
+            0.737744306425,
+            1.269432714005
+          ],
+          "ok": true
+        },
+        "1/5": {
+          "roots": [
+            0.2682224579252435,
+            0.7284582232649756,
+            1.2646656146994912
+          ],
+          "expected": [
+            0.268222457925,
+            0.728458223265,
+            1.264665614699
+          ],
+          "ok": true
+        }
+      },
+      "note": "endpoints are roots of det J(h); the sign pattern between them was certified for Omega_x=0.1 above and is +,-,+,- by continuity of the certified structure only at the listed values"
+    },
+    "printed_decimal_vs_binary64_margin": {
+      "pass": true,
+      "decimal_margin": 1.4282094153936922e-16,
+      "binary64_margin": -9.446976546312677e-17
+    },
+    "nine_candidate_admissible_sets": {
+      "pass": true,
+      "methods": {
+        "Forward Euler": {
+          "positive_width_components": [],
+          "expected": [],
+          "ok": true
+        },
+        "Heun RK2": {
+          "positive_width_components": [
+            [
+              0.0,
+              2.0
+            ]
+          ],
+          "expected": [
+            [
+              0,
+              2
+            ]
+          ],
+          "ok": true
+        },
+        "SSPRK(3,3)": {
+          "positive_width_components": [],
+          "expected": [],
+          "ok": true
+        },
+        "Classical RK4": {
+          "positive_width_components": [
+            [
+              0.0,
+              2.785293563405
+            ]
+          ],
+          "expected": [
+            [
+              0,
+              2.785293563405282
+            ]
+          ],
+          "ok": true
+        },
+        "Richardson RK4": {
+          "positive_width_components": [
+            [
+              6.034523958649,
+              6.459127767826
+            ]
+          ],
+          "expected": [
+            [
+              6.034523958649,
+              6.459127767826
+            ]
+          ],
+          "ok": true
+        },
+        "Dormand-Prince 5": {
+          "positive_width_components": [
+            [
+              0.0,
+              3.306567892635
+            ]
+          ],
+          "expected": [
+            [
+              0,
+              3.306567892634947
+            ]
+          ],
+          "ok": true
+        },
+        "Dormand-Prince embedded 4": {
+          "positive_width_components": [
+            [
+              3.06885654805,
+              4.384986320802
+            ]
+          ],
+          "expected": [
+            [
+              3.068856548050381,
+              4.384986320801944
+            ]
+          ],
+          "ok": true
+        },
+        "Backward Euler": {
+          "positive_width_components": [
+            [
+              0.0,
+              1.0
+            ]
+          ],
+          "expected": [
+            [
+              0,
+              Infinity
+            ]
+          ],
+          "ok": true
+        },
+        "Implicit midpoint": {
+          "positive_width_components": [],
+          "expected": [],
+          "ok": true
+        }
+      },
+      "note": "Backward Euler's last sampled segment is unbounded; the archive states [0, infinity)"
+    },
+    "fixed_horizon_margin_asymptotics": {
+      "pass": true,
+      "methods": {
+        "Euler": {
+          "m": 2,
+          "eta": "-1/2",
+          "K": "-0.250000000000000",
+          "ok": true
+        },
+        "RK4": {
+          "m": 5,
+          "eta": "-1/120",
+          "K": "0.00781250000000000",
+          "ok": true
+        }
+      }
+    }
+  }
+}

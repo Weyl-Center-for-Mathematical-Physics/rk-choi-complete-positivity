@@ -1,0 +1,5 @@
+- Exact CPTP conditions are derived for Runge--Kutta steps on a qubit generator.
+- RK4 admissible step sets can be disconnected or reduce to isolated points.
+- Full-step and two-half-step RK4 maps can have disjoint CPTP sets.
+- RK4 Richardson extrapolation can fail although both inputs are channels.
+- A tri-state binary64 guard certifies the executed candidate before acceptance.

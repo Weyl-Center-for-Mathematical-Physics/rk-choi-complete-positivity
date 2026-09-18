@@ -1,0 +1,27 @@
+{
+  "outside_root_discarded_before_restriction": true,
+  "exact_upper_boundary_retained": true,
+  "locator_outcome_partition": true,
+  "granular_telemetry_keys": true,
+  "boundary_telemetry_totals": {
+    "locator_calls": 15,
+    "successful_projections": 0,
+    "empty_component_outcomes": 15,
+    "uncertain_outcomes": 0,
+    "root_isolation_ops": 45,
+    "certification_ops": 117,
+    "binary_recertifications": 0,
+    "precision_escalations": 0,
+    "fallback_events": 15
+  },
+  "boundary_expected_counts": true,
+  "transverse_pointwise_values": [
+    0.0,
+    0.05,
+    0.1,
+    0.2
+  ],
+  "exactly_four_transverse_certificates": true,
+  "marker_only_transverse_plot": true,
+  "pass": true
+}

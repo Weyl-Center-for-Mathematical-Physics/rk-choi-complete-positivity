@@ -1,0 +1,25 @@
+Wrote <archive>\results\closeout\root_sign_certificate_v2_7.json
+Wrote <archive>\supplement\root_sign_certificate_v2_7.md
+Wrote <archive>\supplement\root_sign_certificate_v2_7.tex
+euler \{0\}
+  [] 1 ['a']
+rk2 [0,2]
+  [] 2 ['a-1']
+  [] 8 ['M']
+rk3 \{0\}
+  [] 1.596071637983322 ['a']
+rk4 [0,\alpha_4]
+  ['\\alpha_4'] 2.785293563405282 ['a-1']
+  ['\\mu_4'] 10.982425466293273 ['M']
+dp5 [0,\alpha_5]
+  ['\\alpha_5'] 3.306567892634947 ['a-1']
+  ['\\mu_5'] 13.174093462800933 ['M']
+dp4 \{0\}\cup[\beta_-,\beta_+]
+  ['\\beta_-'] 3.068856548050381 ['M']
+  ['\\beta_+'] 4.384986320801944 ['a-1']
+  ['\\delta_M'] 15.298767807585427 ['M']
+  ['\\delta_1'] 24.72775431876031 ['a-1']
+  ['\\delta_0'] 24.727895030129697 ['a']
+be [0,\infty)
+im \{0\}
+  [] 2 ['a']

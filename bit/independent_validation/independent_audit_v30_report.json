@@ -1,0 +1,132 @@
+{
+  "implementation": "standalone: no rk_choi_margin imports",
+  "checks": [
+    {
+      "name": "exact RK4 rotating factorization",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "cubic discriminant",
+      "pass": true,
+      "detail": "16384*(q - 4)*(8*q**2 - 123*q + 348)"
+    },
+    {
+      "name": "halving resultant",
+      "pass": true,
+      "detail": "6291456*(q - 4)*(72*q**3 - 2071*q**2 + 12552*q - 21744)"
+    },
+    {
+      "name": "unique detached halving threshold root",
+      "pass": true,
+      "detail": "[21.21859506689124515461302428273282294951484477195863466890719070713922]"
+    },
+    {
+      "name": "halving threshold value",
+      "pass": true,
+      "detail": "2.248254604514980480473209602602194408889423364772157470276133257820225"
+    },
+    {
+      "name": "15000 scalar-vs-Choi comparisons",
+      "pass": true,
+      "detail": "mismatches=0"
+    },
+    {
+      "name": "H=1 full pass fine fail",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "H=2 full fail fine pass",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "Richardson stability function",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "Richardson first defect",
+      "pass": true,
+      "detail": "-1/4320"
+    },
+    {
+      "name": "Richardson nonrotating boundary coefficient",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "Richardson margin factorization",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "Richardson leading coefficient",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "Richardson first positive margin root",
+      "pass": true,
+      "detail": "[6.03452395864917, 22.102437082855815]"
+    },
+    {
+      "name": "binary-vs-decimal certification reversal",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "noncommuting sign h=0.1",
+      "pass": true,
+      "detail": "9.515578006908222e-05"
+    },
+    {
+      "name": "noncommuting sign h=0.5",
+      "pass": true,
+      "detail": "-0.002777776589095122"
+    },
+    {
+      "name": "noncommuting sign h=0.9",
+      "pass": true,
+      "detail": "0.0005895937694814833"
+    },
+    {
+      "name": "noncommuting sign h=1.4",
+      "pass": true,
+      "detail": "-0.39226941746150223"
+    },
+    {
+      "name": "frame dependence at h=.7",
+      "pass": true,
+      "detail": "lab=-0.004313202832099066840277777777777777777777777777777777777777777777777777777777777777777777777777777784, rotating=0.001193934602796766493055555555555555555555555555555555555555555555555555555555555555555555555555555562"
+    }
+  ],
+  "passed": 20,
+  "total": 20,
+  "randomized_samples": 15000,
+  "randomized_mismatches": 0,
+  "noncommuting_samples": [
+    {
+      "h": 0.1,
+      "lambda_min": 9.515578006908222e-05,
+      "sign": 1
+    },
+    {
+      "h": 0.5,
+      "lambda_min": -0.002777776589095122,
+      "sign": -1
+    },
+    {
+      "h": 0.9,
+      "lambda_min": 0.0005895937694814833,
+      "sign": 1
+    },
+    {
+      "h": 1.4,
+      "lambda_min": -0.39226941746150223,
+      "sign": -1
+    }
+  ],
+  "varpi_half": "2.24825460451498048047320960260"
+}

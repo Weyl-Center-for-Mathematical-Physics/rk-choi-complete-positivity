@@ -1,0 +1,8 @@
+Validated environment
+Python 3.13.5
+SymPy 1.14.0
+NumPy 2.3.5
+SciPy 1.16.1
+mpmath 1.3.0
+Matplotlib 3.10.8
+pytest 9.0.2

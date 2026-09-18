@@ -1,0 +1,4 @@
+policy,global_normalized_choi_error,max_cp_defect,accepted_steps,rhs_stage_evaluations,fallback_steps
+error_only,0.001552566932411435,0.001583937234177768,4,72,0
+certified_guard,7.584761428376905e-06,1.1102230246271538e-16,4,132,4
+rotating_frame,0.00034661010309696815,1.110223024625442e-16,2,24,0

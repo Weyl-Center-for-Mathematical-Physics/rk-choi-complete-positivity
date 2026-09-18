@@ -1,0 +1,64 @@
+{
+  "version": "3.5.0",
+  "tex_files": 20,
+  "labels": 99,
+  "unique_labels": 99,
+  "duplicate_labels": [],
+  "reference_occurrences": 42,
+  "undefined_references": [],
+  "citation_occurrences": 100,
+  "unique_citations": 64,
+  "bibliography_entries": 64,
+  "undefined_citations": [],
+  "uncited_bibliography_entries": [],
+  "duplicate_bibliography_keys": [],
+  "abstract_word_count": 238,
+  "abstract_counter": "texcount",
+  "abstract_word_limit": 250,
+  "highlights": [
+    {
+      "text": "Exact CPTP conditions are derived for Runge--Kutta steps on a qubit generator.",
+      "characters_including_spaces": 78,
+      "within_85": true
+    },
+    {
+      "text": "RK4 admissible step sets can be disconnected or reduce to isolated points.",
+      "characters_including_spaces": 74,
+      "within_85": true
+    },
+    {
+      "text": "Full-step and two-half-step RK4 maps can have disjoint CPTP sets.",
+      "characters_including_spaces": 65,
+      "within_85": true
+    },
+    {
+      "text": "RK4 Richardson extrapolation can fail although both inputs are channels.",
+      "characters_including_spaces": 72,
+      "within_85": true
+    },
+    {
+      "text": "A tri-state binary64 guard certifies the executed candidate before acceptance.",
+      "characters_including_spaces": 78,
+      "within_85": true
+    }
+  ],
+  "missing_graphics": [],
+  "missing_inputs": [],
+  "ambiguous_rotating_terminology": [],
+  "legacy_active_asset_names": [],
+  "scope_contract": {
+    "pointwise_transverse_values_present": true,
+    "no_uniform_transverse_claim_present": true,
+    "controller_safety_scope_present": true,
+    "binary_recertification_failure_present": true,
+    "work_proxy_exclusion_present": true
+  },
+  "disclosures": {
+    "no_ai_declaration_in_manuscript": true,
+    "no_duplicate_ai_note_in_verification": true,
+    "graphical_abstract_reproducible_provenance": true
+  },
+  "final_latex_log_failures": {},
+  "critical_failures": {},
+  "pass": true
+}

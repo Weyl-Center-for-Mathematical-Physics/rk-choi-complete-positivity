@@ -1,0 +1,129 @@
+{
+  "version": "3.0",
+  "checks": [
+    {
+      "name": "no arbitrary matrix theorem builder",
+      "pass": true,
+      "evidence": null
+    },
+    {
+      "name": "forged structural provenance fails",
+      "pass": true,
+      "evidence": null
+    },
+    {
+      "name": "forged structural common gate fails",
+      "pass": true,
+      "evidence": -2.0
+    },
+    {
+      "name": "direct estimator guard object identity",
+      "pass": true,
+      "evidence": null
+    },
+    {
+      "name": "projection guard estimator object identity",
+      "pass": true,
+      "evidence": null
+    },
+    {
+      "name": "fallback exact input h=0.1",
+      "pass": true,
+      "evidence": null
+    },
+    {
+      "name": "fallback exact map h=0.1",
+      "pass": true,
+      "evidence": null
+    },
+    {
+      "name": "fallback exact input h=1.1",
+      "pass": true,
+      "evidence": null
+    },
+    {
+      "name": "fallback exact map h=1.1",
+      "pass": true,
+      "evidence": null
+    },
+    {
+      "name": "fallback exact input h=2.8",
+      "pass": true,
+      "evidence": null
+    },
+    {
+      "name": "fallback exact map h=2.8",
+      "pass": true,
+      "evidence": null
+    },
+    {
+      "name": "PI family transition recorded",
+      "pass": true,
+      "evidence": {
+        "accepted_steps": 3,
+        "direct_accepts": 2,
+        "projected_accepts": 0,
+        "rotating_accepts": 0,
+        "strang_accepts": 0,
+        "exact_fallback_accepts": 1,
+        "rejected_error": 0,
+        "rejected_cp": 1,
+        "guard_evaluations": 3,
+        "candidate_certifications": 3,
+        "component_searches": 0,
+        "fallback_steps": 1,
+        "precision_escalations": 0,
+        "pi_memory_resets": 1,
+        "rhs_stage_evaluations": 36,
+        "exponential_actions": 1
+      }
+    },
+    {
+      "name": "PI post-transition proposal not minimum shrink",
+      "pass": true,
+      "evidence": [
+        1.0,
+        2.0,
+        2.0
+      ]
+    },
+    {
+      "name": "current verifier writes v31",
+      "pass": true,
+      "evidence": null
+    },
+    {
+      "name": "current verifier does not write historical v29",
+      "pass": true,
+      "evidence": null
+    },
+    {
+      "name": "nested diagnostics immutable",
+      "pass": true,
+      "evidence": null
+    },
+    {
+      "name": "diagnostics mutation blocked",
+      "pass": true,
+      "evidence": null
+    },
+    {
+      "name": "matrix mutation blocked",
+      "pass": true,
+      "evidence": null
+    },
+    {
+      "name": "adaptive execution identity",
+      "pass": true,
+      "evidence": null
+    },
+    {
+      "name": "adaptive provenance",
+      "pass": true,
+      "evidence": null
+    }
+  ],
+  "passed": 20,
+  "total": 20,
+  "technical_decision": "GO"
+}

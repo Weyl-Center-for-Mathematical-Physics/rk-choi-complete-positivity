@@ -1,0 +1,1518 @@
+{
+  "version": "2.3",
+  "certification": "exact rational arithmetic with Sturm root counts and exact sign samples",
+  "methods": [
+    {
+      "key": "euler",
+      "name": "Forward Euler",
+      "family": "explicit",
+      "order": 1,
+      "stages": 1,
+      "R": "x + 1",
+      "R_display": "s + 1",
+      "R_latex": "s + 1",
+      "a": "1 - x",
+      "c": "-(x - 2)/2",
+      "M": "-x**2/4",
+      "stage_determinant": "1",
+      "stage_full": "1",
+      "stage_half": "1",
+      "polynomials": {
+        "a": {
+          "expr": "1 - x",
+          "numerator_scalar": "-1",
+          "primitive_numerator": "x - 1",
+          "factorization": "x - 1",
+          "square_free": "x - 1",
+          "roots": [
+            {
+              "lo": "1",
+              "hi": "1",
+              "lo_decimal": "1",
+              "hi_decimal": "1",
+              "approx": "1",
+              "multiplicity": 1,
+              "exact": "1"
+            }
+          ]
+        },
+        "a-1": {
+          "expr": "-x",
+          "numerator_scalar": "-1",
+          "primitive_numerator": "x",
+          "factorization": "x",
+          "square_free": "x",
+          "roots": [
+            {
+              "lo": "0",
+              "hi": "0",
+              "lo_decimal": "0",
+              "hi_decimal": "0",
+              "approx": "0",
+              "multiplicity": 1,
+              "exact": "0"
+            }
+          ]
+        },
+        "M": {
+          "expr": "-x**2/4",
+          "numerator_scalar": "-1",
+          "primitive_numerator": "x**2",
+          "factorization": "x**2",
+          "square_free": "x",
+          "roots": [
+            {
+              "lo": "0",
+              "hi": "0",
+              "lo_decimal": "0",
+              "hi_decimal": "0",
+              "approx": "0",
+              "multiplicity": 2,
+              "exact": "0"
+            }
+          ]
+        }
+      },
+      "positive_events": [
+        {
+          "root": {
+            "lo": "1",
+            "hi": "1",
+            "lo_decimal": "1",
+            "hi_decimal": "1",
+            "approx": "1",
+            "multiplicity": 1,
+            "exact": "1"
+          },
+          "sources": [
+            "a"
+          ],
+          "multiplicities": {
+            "a": 1
+          },
+          "labels": [],
+          "mechanism": "population floor (a=0)"
+        }
+      ],
+      "sign_rows": [
+        {
+          "interval": "(0, 1)",
+          "left": null,
+          "right": {
+            "lo": "1",
+            "hi": "1",
+            "lo_decimal": "1",
+            "hi_decimal": "1",
+            "approx": "1",
+            "multiplicity": 1,
+            "exact": "1"
+          },
+          "sample": "1/2",
+          "sign_a": 1,
+          "sign_a_minus_1": -1,
+          "sign_M": -1,
+          "domain": true,
+          "cptp": false
+        },
+        {
+          "interval": "(1, infinity)",
+          "left": {
+            "lo": "1",
+            "hi": "1",
+            "lo_decimal": "1",
+            "hi_decimal": "1",
+            "approx": "1",
+            "multiplicity": 1,
+            "exact": "1"
+          },
+          "right": null,
+          "sample": "2",
+          "sign_a": -1,
+          "sign_a_minus_1": -1,
+          "sign_M": -1,
+          "domain": true,
+          "cptp": false
+        }
+      ],
+      "admissible_components": [
+        {
+          "type": "point",
+          "value": "0"
+        }
+      ],
+      "admissible_set_latex": "\\{0\\}",
+      "defect": {
+        "m": 2,
+        "eta": "-1/2",
+        "boundary_coefficient": "-1/4"
+      }
+    },
+    {
+      "key": "rk2",
+      "name": "Heun RK2",
+      "family": "explicit",
+      "order": 2,
+      "stages": 2,
+      "R": "(x**2 + 2*x + 2)/2",
+      "R_display": "s**2/2 + s + 1",
+      "R_latex": "\\frac{s^{2}}{2} + s + 1",
+      "a": "(x**2 - 2*x + 2)/2",
+      "c": "(x**2 - 4*x + 8)/8",
+      "M": "-x**3*(x - 8)/64",
+      "stage_determinant": "1",
+      "stage_full": "1",
+      "stage_half": "1",
+      "polynomials": {
+        "a": {
+          "expr": "(x**2 - 2*x + 2)/2",
+          "numerator_scalar": "1",
+          "primitive_numerator": "x**2 - 2*x + 2",
+          "factorization": "x**2 - 2*x + 2",
+          "square_free": "x**2 - 2*x + 2",
+          "roots": []
+        },
+        "a-1": {
+          "expr": "x*(x - 2)/2",
+          "numerator_scalar": "1",
+          "primitive_numerator": "x**2 - 2*x",
+          "factorization": "x*(x - 2)",
+          "square_free": "x**2 - 2*x",
+          "roots": [
+            {
+              "lo": "0",
+              "hi": "0",
+              "lo_decimal": "0",
+              "hi_decimal": "0",
+              "approx": "0",
+              "multiplicity": 1,
+              "exact": "0"
+            },
+            {
+              "lo": "2",
+              "hi": "2",
+              "lo_decimal": "2",
+              "hi_decimal": "2",
+              "approx": "2",
+              "multiplicity": 1,
+              "exact": "2"
+            }
+          ]
+        },
+        "M": {
+          "expr": "-x**3*(x - 8)/64",
+          "numerator_scalar": "-1",
+          "primitive_numerator": "x**4 - 8*x**3",
+          "factorization": "x**3*(x - 8)",
+          "square_free": "x**2 - 8*x",
+          "roots": [
+            {
+              "lo": "0",
+              "hi": "0",
+              "lo_decimal": "0",
+              "hi_decimal": "0",
+              "approx": "0",
+              "multiplicity": 3,
+              "exact": "0"
+            },
+            {
+              "lo": "8",
+              "hi": "8",
+              "lo_decimal": "8",
+              "hi_decimal": "8",
+              "approx": "8",
+              "multiplicity": 1,
+              "exact": "8"
+            }
+          ]
+        }
+      },
+      "positive_events": [
+        {
+          "root": {
+            "lo": "2",
+            "hi": "2",
+            "lo_decimal": "2",
+            "hi_decimal": "2",
+            "approx": "2",
+            "multiplicity": 1,
+            "exact": "2"
+          },
+          "sources": [
+            "a-1"
+          ],
+          "multiplicities": {
+            "a-1": 1
+          },
+          "labels": [],
+          "mechanism": "population ceiling (a=1)"
+        },
+        {
+          "root": {
+            "lo": "8",
+            "hi": "8",
+            "lo_decimal": "8",
+            "hi_decimal": "8",
+            "approx": "8",
+            "multiplicity": 1,
+            "exact": "8"
+          },
+          "sources": [
+            "M"
+          ],
+          "multiplicities": {
+            "M": 1
+          },
+          "labels": [],
+          "mechanism": "coherence-population block (M=0)"
+        }
+      ],
+      "sign_rows": [
+        {
+          "interval": "(0, 2)",
+          "left": null,
+          "right": {
+            "lo": "2",
+            "hi": "2",
+            "lo_decimal": "2",
+            "hi_decimal": "2",
+            "approx": "2",
+            "multiplicity": 1,
+            "exact": "2"
+          },
+          "sample": "1",
+          "sign_a": 1,
+          "sign_a_minus_1": -1,
+          "sign_M": 1,
+          "domain": true,
+          "cptp": true
+        },
+        {
+          "interval": "(2, 8)",
+          "left": {
+            "lo": "2",
+            "hi": "2",
+            "lo_decimal": "2",
+            "hi_decimal": "2",
+            "approx": "2",
+            "multiplicity": 1,
+            "exact": "2"
+          },
+          "right": {
+            "lo": "8",
+            "hi": "8",
+            "lo_decimal": "8",
+            "hi_decimal": "8",
+            "approx": "8",
+            "multiplicity": 1,
+            "exact": "8"
+          },
+          "sample": "5",
+          "sign_a": 1,
+          "sign_a_minus_1": 1,
+          "sign_M": 1,
+          "domain": true,
+          "cptp": false
+        },
+        {
+          "interval": "(8, infinity)",
+          "left": {
+            "lo": "8",
+            "hi": "8",
+            "lo_decimal": "8",
+            "hi_decimal": "8",
+            "approx": "8",
+            "multiplicity": 1,
+            "exact": "8"
+          },
+          "right": null,
+          "sample": "9",
+          "sign_a": 1,
+          "sign_a_minus_1": 1,
+          "sign_M": -1,
+          "domain": true,
+          "cptp": false
+        }
+      ],
+      "admissible_components": [
+        {
+          "type": "interval",
+          "left": "0",
+          "right": "2"
+        }
+      ],
+      "admissible_set_latex": "[0,2]",
+      "defect": {
+        "m": 3,
+        "eta": "-1/6",
+        "boundary_coefficient": "1/8"
+      }
+    },
+    {
+      "key": "rk3",
+      "name": "SSPRK(3,3)",
+      "family": "explicit",
+      "order": 3,
+      "stages": 3,
+      "R": "(x**3 + 3*x**2 + 6*x + 6)/6",
+      "R_display": "s**3/6 + s**2/2 + s + 1",
+      "R_latex": "\\frac{s^{3}}{6} + \\frac{s^{2}}{2} + s + 1",
+      "a": "-(x**3 - 3*x**2 + 6*x - 6)/6",
+      "c": "-(x**3 - 6*x**2 + 24*x - 48)/48",
+      "M": "-x**4*(x**2 - 12*x + 84)/2304",
+      "stage_determinant": "1",
+      "stage_full": "1",
+      "stage_half": "1",
+      "polynomials": {
+        "a": {
+          "expr": "-(x**3 - 3*x**2 + 6*x - 6)/6",
+          "numerator_scalar": "-1",
+          "primitive_numerator": "x**3 - 3*x**2 + 6*x - 6",
+          "factorization": "x**3 - 3*x**2 + 6*x - 6",
+          "square_free": "x**3 - 3*x**2 + 6*x - 6",
+          "roots": [
+            {
+              "lo": "4196889418/2629511933",
+              "hi": "549025976325/343985798168",
+              "lo_decimal": "1.596071637983321",
+              "hi_decimal": "1.596071637983322",
+              "approx": "1.596071637983322",
+              "multiplicity": 1,
+              "exact": null
+            }
+          ]
+        },
+        "a-1": {
+          "expr": "-x*(x**2 - 3*x + 6)/6",
+          "numerator_scalar": "-1",
+          "primitive_numerator": "x**3 - 3*x**2 + 6*x",
+          "factorization": "x*(x**2 - 3*x + 6)",
+          "square_free": "x**3 - 3*x**2 + 6*x",
+          "roots": [
+            {
+              "lo": "0",
+              "hi": "0",
+              "lo_decimal": "0",
+              "hi_decimal": "0",
+              "approx": "0",
+              "multiplicity": 1,
+              "exact": "0"
+            }
+          ]
+        },
+        "M": {
+          "expr": "-x**4*(x**2 - 12*x + 84)/2304",
+          "numerator_scalar": "-1",
+          "primitive_numerator": "x**6 - 12*x**5 + 84*x**4",
+          "factorization": "x**4*(x**2 - 12*x + 84)",
+          "square_free": "x**3 - 12*x**2 + 84*x",
+          "roots": [
+            {
+              "lo": "0",
+              "hi": "0",
+              "lo_decimal": "0",
+              "hi_decimal": "0",
+              "approx": "0",
+              "multiplicity": 4,
+              "exact": "0"
+            }
+          ]
+        }
+      },
+      "positive_events": [
+        {
+          "root": {
+            "lo": "4196889418/2629511933",
+            "hi": "549025976325/343985798168",
+            "lo_decimal": "1.596071637983321",
+            "hi_decimal": "1.596071637983322",
+            "approx": "1.596071637983322",
+            "multiplicity": 1,
+            "exact": null
+          },
+          "sources": [
+            "a"
+          ],
+          "multiplicities": {
+            "a": 1
+          },
+          "labels": [],
+          "mechanism": "population floor (a=0)"
+        }
+      ],
+      "sign_rows": [
+        {
+          "interval": "(0, 1.596071637983322)",
+          "left": null,
+          "right": {
+            "lo": "4196889418/2629511933",
+            "hi": "549025976325/343985798168",
+            "lo_decimal": "1.596071637983321",
+            "hi_decimal": "1.596071637983322",
+            "approx": "1.596071637983322",
+            "multiplicity": 1,
+            "exact": null
+          },
+          "sample": "2098444709/2629511933",
+          "sign_a": 1,
+          "sign_a_minus_1": -1,
+          "sign_M": -1,
+          "domain": true,
+          "cptp": false
+        },
+        {
+          "interval": "(1.596071637983322, infinity)",
+          "left": {
+            "lo": "4196889418/2629511933",
+            "hi": "549025976325/343985798168",
+            "lo_decimal": "1.596071637983321",
+            "hi_decimal": "1.596071637983322",
+            "approx": "1.596071637983322",
+            "multiplicity": 1,
+            "exact": null
+          },
+          "right": null,
+          "sample": "893011774493/343985798168",
+          "sign_a": -1,
+          "sign_a_minus_1": -1,
+          "sign_M": -1,
+          "domain": true,
+          "cptp": false
+        }
+      ],
+      "admissible_components": [
+        {
+          "type": "point",
+          "value": "0"
+        }
+      ],
+      "admissible_set_latex": "\\{0\\}",
+      "defect": {
+        "m": 4,
+        "eta": "-1/24",
+        "boundary_coefficient": "-7/192"
+      }
+    },
+    {
+      "key": "rk4",
+      "name": "Classical RK4",
+      "family": "explicit",
+      "order": 4,
+      "stages": 4,
+      "R": "(x**4 + 4*x**3 + 12*x**2 + 24*x + 24)/24",
+      "R_display": "s**4/24 + s**3/6 + s**2/2 + s + 1",
+      "R_latex": "\\frac{s^{4}}{24} + \\frac{s^{3}}{6} + \\frac{s^{2}}{2} + s + 1",
+      "a": "(x**4 - 4*x**3 + 12*x**2 - 24*x + 24)/24",
+      "c": "(x**4 - 8*x**3 + 48*x**2 - 192*x + 384)/384",
+      "M": "-x**5*(x**3 - 16*x**2 + 160*x - 1152)/147456",
+      "stage_determinant": "1",
+      "stage_full": "1",
+      "stage_half": "1",
+      "polynomials": {
+        "a": {
+          "expr": "(x**4 - 4*x**3 + 12*x**2 - 24*x + 24)/24",
+          "numerator_scalar": "1",
+          "primitive_numerator": "x**4 - 4*x**3 + 12*x**2 - 24*x + 24",
+          "factorization": "x**4 - 4*x**3 + 12*x**2 - 24*x + 24",
+          "square_free": "x**4 - 4*x**3 + 12*x**2 - 24*x + 24",
+          "roots": []
+        },
+        "a-1": {
+          "expr": "x*(x**3 - 4*x**2 + 12*x - 24)/24",
+          "numerator_scalar": "1",
+          "primitive_numerator": "x**4 - 4*x**3 + 12*x**2 - 24*x",
+          "factorization": "x*(x**3 - 4*x**2 + 12*x - 24)",
+          "square_free": "x**4 - 4*x**3 + 12*x**2 - 24*x",
+          "roots": [
+            {
+              "lo": "0",
+              "hi": "0",
+              "lo_decimal": "0",
+              "hi_decimal": "0",
+              "approx": "0",
+              "multiplicity": 1,
+              "exact": "0"
+            },
+            {
+              "lo": "56054471054/20125157287",
+              "hi": "38988820501/13998100959",
+              "lo_decimal": "2.785293563405281",
+              "hi_decimal": "2.785293563405282",
+              "approx": "2.785293563405282",
+              "multiplicity": 1,
+              "exact": null
+            }
+          ]
+        },
+        "M": {
+          "expr": "-x**5*(x**3 - 16*x**2 + 160*x - 1152)/147456",
+          "numerator_scalar": "-1",
+          "primitive_numerator": "x**8 - 16*x**7 + 160*x**6 - 1152*x**5",
+          "factorization": "x**5*(x**3 - 16*x**2 + 160*x - 1152)",
+          "square_free": "x**4 - 16*x**3 + 160*x**2 - 1152*x",
+          "roots": [
+            {
+              "lo": "0",
+              "hi": "0",
+              "lo_decimal": "0",
+              "hi_decimal": "0",
+              "approx": "0",
+              "multiplicity": 5,
+              "exact": "0"
+            },
+            {
+              "lo": "261596123591/23819521871",
+              "hi": "261771096549/23835453958",
+              "lo_decimal": "10.982425466293273",
+              "hi_decimal": "10.982425466293274",
+              "approx": "10.982425466293273",
+              "multiplicity": 1,
+              "exact": null
+            }
+          ]
+        }
+      },
+      "positive_events": [
+        {
+          "root": {
+            "lo": "56054471054/20125157287",
+            "hi": "38988820501/13998100959",
+            "lo_decimal": "2.785293563405281",
+            "hi_decimal": "2.785293563405282",
+            "approx": "2.785293563405282",
+            "multiplicity": 1,
+            "exact": null
+          },
+          "sources": [
+            "a-1"
+          ],
+          "multiplicities": {
+            "a-1": 1
+          },
+          "labels": [
+            "\\alpha_4"
+          ],
+          "mechanism": "population ceiling (a=1)"
+        },
+        {
+          "root": {
+            "lo": "261596123591/23819521871",
+            "hi": "261771096549/23835453958",
+            "lo_decimal": "10.982425466293273",
+            "hi_decimal": "10.982425466293274",
+            "approx": "10.982425466293273",
+            "multiplicity": 1,
+            "exact": null
+          },
+          "sources": [
+            "M"
+          ],
+          "multiplicities": {
+            "M": 1
+          },
+          "labels": [
+            "\\mu_4"
+          ],
+          "mechanism": "coherence-population block (M=0)"
+        }
+      ],
+      "sign_rows": [
+        {
+          "interval": "(0, 2.785293563405282)",
+          "left": null,
+          "right": {
+            "lo": "56054471054/20125157287",
+            "hi": "38988820501/13998100959",
+            "lo_decimal": "2.785293563405281",
+            "hi_decimal": "2.785293563405282",
+            "approx": "2.785293563405282",
+            "multiplicity": 1,
+            "exact": null
+          },
+          "sample": "28027235527/20125157287",
+          "sign_a": 1,
+          "sign_a_minus_1": -1,
+          "sign_M": 1,
+          "domain": true,
+          "cptp": true
+        },
+        {
+          "interval": "(2.785293563405282, 10.982425466293273)",
+          "left": {
+            "lo": "56054471054/20125157287",
+            "hi": "38988820501/13998100959",
+            "lo_decimal": "2.785293563405281",
+            "hi_decimal": "2.785293563405282",
+            "approx": "2.785293563405282",
+            "multiplicity": 1,
+            "exact": null
+          },
+          "right": {
+            "lo": "261596123591/23819521871",
+            "hi": "261771096549/23835453958",
+            "lo_decimal": "10.982425466293273",
+            "hi_decimal": "10.982425466293274",
+            "approx": "10.982425466293273",
+            "multiplicity": 1,
+            "exact": null
+          },
+          "sample": "2295272005578961150570/333428071945366574289",
+          "sign_a": 1,
+          "sign_a_minus_1": 1,
+          "sign_M": 1,
+          "domain": true,
+          "cptp": false
+        },
+        {
+          "interval": "(10.982425466293273, infinity)",
+          "left": {
+            "lo": "261596123591/23819521871",
+            "hi": "261771096549/23835453958",
+            "lo_decimal": "10.982425466293273",
+            "hi_decimal": "10.982425466293274",
+            "approx": "10.982425466293273",
+            "multiplicity": 1,
+            "exact": null
+          },
+          "right": null,
+          "sample": "2879482062039/238354539580",
+          "sign_a": 1,
+          "sign_a_minus_1": 1,
+          "sign_M": -1,
+          "domain": true,
+          "cptp": false
+        }
+      ],
+      "admissible_components": [
+        {
+          "type": "interval",
+          "left": "0",
+          "right": "\\alpha_4"
+        }
+      ],
+      "admissible_set_latex": "[0,\\alpha_4]",
+      "defect": {
+        "m": 5,
+        "eta": "-1/120",
+        "boundary_coefficient": "1/128"
+      }
+    },
+    {
+      "key": "dp5",
+      "name": "Dormand-Prince 5 principal formula",
+      "family": "explicit embedded",
+      "order": 5,
+      "stages": 7,
+      "R": "(x**6 + 5*x**5 + 25*x**4 + 100*x**3 + 300*x**2 + 600*x + 600)/600",
+      "R_display": "s**6/600 + s**5/120 + s**4/24 + s**3/6 + s**2/2 + s + 1",
+      "R_latex": "\\frac{s^{6}}{600} + \\frac{s^{5}}{120} + \\frac{s^{4}}{24} + \\frac{s^{3}}{6} + \\frac{s^{2}}{2} + s + 1",
+      "a": "(x**6 - 5*x**5 + 25*x**4 - 100*x**3 + 300*x**2 - 600*x + 600)/600",
+      "c": "(x**6 - 10*x**5 + 100*x**4 - 800*x**3 + 4800*x**2 - 19200*x + 38400)/38400",
+      "M": "-x**6*(x**6 - 20*x**5 + 300*x**4 - 3600*x**3 + 35600*x**2 - 294400*x - 396800)/1474560000",
+      "stage_determinant": "1",
+      "stage_full": "1",
+      "stage_half": "1",
+      "polynomials": {
+        "a": {
+          "expr": "(x**6 - 5*x**5 + 25*x**4 - 100*x**3 + 300*x**2 - 600*x + 600)/600",
+          "numerator_scalar": "1",
+          "primitive_numerator": "x**6 - 5*x**5 + 25*x**4 - 100*x**3 + 300*x**2 - 600*x + 600",
+          "factorization": "x**6 - 5*x**5 + 25*x**4 - 100*x**3 + 300*x**2 - 600*x + 600",
+          "square_free": "x**6 - 5*x**5 + 25*x**4 - 100*x**3 + 300*x**2 - 600*x + 600",
+          "roots": []
+        },
+        "a-1": {
+          "expr": "x*(x**5 - 5*x**4 + 25*x**3 - 100*x**2 + 300*x - 600)/600",
+          "numerator_scalar": "1",
+          "primitive_numerator": "x**6 - 5*x**5 + 25*x**4 - 100*x**3 + 300*x**2 - 600*x",
+          "factorization": "x*(x**5 - 5*x**4 + 25*x**3 - 100*x**2 + 300*x - 600)",
+          "square_free": "x**6 - 5*x**5 + 25*x**4 - 100*x**3 + 300*x**2 - 600*x",
+          "roots": [
+            {
+              "lo": "0",
+              "hi": "0",
+              "lo_decimal": "0",
+              "hi_decimal": "0",
+              "approx": "0",
+              "multiplicity": 1,
+              "exact": "0"
+            },
+            {
+              "lo": "98515529134/29793892741",
+              "hi": "15718348059/4753674677",
+              "lo_decimal": "3.306567892634946",
+              "hi_decimal": "3.306567892634947",
+              "approx": "3.306567892634947",
+              "multiplicity": 1,
+              "exact": null
+            }
+          ]
+        },
+        "M": {
+          "expr": "-x**6*(x**6 - 20*x**5 + 300*x**4 - 3600*x**3 + 35600*x**2 - 294400*x - 396800)/1474560000",
+          "numerator_scalar": "-1",
+          "primitive_numerator": "x**12 - 20*x**11 + 300*x**10 - 3600*x**9 + 35600*x**8 - 294400*x**7 - 396800*x**6",
+          "factorization": "x**6*(x**6 - 20*x**5 + 300*x**4 - 3600*x**3 + 35600*x**2 - 294400*x - 396800)",
+          "square_free": "x**7 - 20*x**6 + 300*x**5 - 3600*x**4 + 35600*x**3 - 294400*x**2 - 396800*x",
+          "roots": [
+            {
+              "lo": "0",
+              "hi": "0",
+              "lo_decimal": "0",
+              "hi_decimal": "0",
+              "approx": "0",
+              "multiplicity": 6,
+              "exact": "0"
+            },
+            {
+              "lo": "183259110569/13910567060",
+              "hi": "209360197492/15891810551",
+              "lo_decimal": "13.174093462800933",
+              "hi_decimal": "13.174093462800934",
+              "approx": "13.174093462800933",
+              "multiplicity": 1,
+              "exact": null
+            }
+          ]
+        }
+      },
+      "positive_events": [
+        {
+          "root": {
+            "lo": "98515529134/29793892741",
+            "hi": "15718348059/4753674677",
+            "lo_decimal": "3.306567892634946",
+            "hi_decimal": "3.306567892634947",
+            "approx": "3.306567892634947",
+            "multiplicity": 1,
+            "exact": null
+          },
+          "sources": [
+            "a-1"
+          ],
+          "multiplicities": {
+            "a-1": 1
+          },
+          "labels": [
+            "\\alpha_5"
+          ],
+          "mechanism": "population ceiling (a=1)"
+        },
+        {
+          "root": {
+            "lo": "183259110569/13910567060",
+            "hi": "209360197492/15891810551",
+            "lo_decimal": "13.174093462800933",
+            "hi_decimal": "13.174093462800934",
+            "approx": "13.174093462800933",
+            "multiplicity": 1,
+            "exact": null
+          },
+          "sources": [
+            "M"
+          ],
+          "multiplicities": {
+            "M": 1
+          },
+          "labels": [
+            "\\mu_5"
+          ],
+          "mechanism": "coherence-population block (M=0)"
+        }
+      ],
+      "sign_rows": [
+        {
+          "interval": "(0, 3.306567892634947)",
+          "left": null,
+          "right": {
+            "lo": "98515529134/29793892741",
+            "hi": "15718348059/4753674677",
+            "lo_decimal": "3.306567892634946",
+            "hi_decimal": "3.306567892634947",
+            "approx": "3.306567892634947",
+            "multiplicity": 1,
+            "exact": null
+          },
+          "sample": "49257764567/29793892741",
+          "sign_a": 1,
+          "sign_a_minus_1": -1,
+          "sign_M": 1,
+          "domain": true,
+          "cptp": true
+        },
+        {
+          "interval": "(3.306567892634947, 13.174093462800933)",
+          "left": {
+            "lo": "98515529134/29793892741",
+            "hi": "15718348059/4753674677",
+            "lo_decimal": "3.306567892634946",
+            "hi_decimal": "3.306567892634947",
+            "approx": "3.306567892634947",
+            "multiplicity": 1,
+            "exact": null
+          },
+          "right": {
+            "lo": "183259110569/13910567060",
+            "hi": "209360197492/15891810551",
+            "lo_decimal": "13.174093462800933",
+            "hi_decimal": "13.174093462800934",
+            "approx": "13.174093462800933",
+            "multiplicity": 1,
+            "exact": null
+          },
+          "sample": "1089805327988538697753/132252620751664679240",
+          "sign_a": 1,
+          "sign_a_minus_1": 1,
+          "sign_M": 1,
+          "domain": true,
+          "cptp": false
+        },
+        {
+          "interval": "(13.174093462800933, infinity)",
+          "left": {
+            "lo": "183259110569/13910567060",
+            "hi": "209360197492/15891810551",
+            "lo_decimal": "13.174093462800933",
+            "hi_decimal": "13.174093462800934",
+            "approx": "13.174093462800933",
+            "multiplicity": 1,
+            "exact": null
+          },
+          "right": null,
+          "sample": "1151481086206/79459052755",
+          "sign_a": 1,
+          "sign_a_minus_1": 1,
+          "sign_M": -1,
+          "domain": true,
+          "cptp": false
+        }
+      ],
+      "admissible_components": [
+        {
+          "type": "interval",
+          "left": "0",
+          "right": "\\alpha_5"
+        }
+      ],
+      "admissible_set_latex": "[0,\\alpha_5]",
+      "defect": {
+        "m": 6,
+        "eta": "1/3600",
+        "boundary_coefficient": "31/115200"
+      }
+    },
+    {
+      "key": "dp4",
+      "name": "Dormand-Prince embedded 4 formula",
+      "family": "explicit embedded",
+      "order": 4,
+      "stages": 7,
+      "R": "(5*x**7 + 161*x**6 + 1097*x**5 + 5000*x**4 + 20000*x**3 + 60000*x**2 + 120000*x + 120000)/120000",
+      "R_display": "s**7/24000 + 161*s**6/120000 + 1097*s**5/120000 + s**4/24 + s**3/6 + s**2/2 + s + 1",
+      "R_latex": "\\frac{s^{7}}{24000} + \\frac{161 s^{6}}{120000} + \\frac{1097 s^{5}}{120000} + \\frac{s^{4}}{24} + \\frac{s^{3}}{6} + \\frac{s^{2}}{2} + s + 1",
+      "a": "-(5*x**7 - 161*x**6 + 1097*x**5 - 5000*x**4 + 20000*x**3 - 60000*x**2 + 120000*x - 120000)/120000",
+      "c": "-(5*x**7 - 322*x**6 + 4388*x**5 - 40000*x**4 + 320000*x**3 - 1920000*x**2 + 7680000*x - 15360000)/15360000",
+      "M": "-x**5*(25*x**9 - 3220*x**8 + 147564*x**7 - 3225872*x**6 + 48214544*x**5 - 576320000*x**4 + 5721600000*x**3 - 37719040000*x**2 + 16752640000*x + 178790400000)/235929600000000",
+      "stage_determinant": "1",
+      "stage_full": "1",
+      "stage_half": "1",
+      "polynomials": {
+        "a": {
+          "expr": "-(5*x**7 - 161*x**6 + 1097*x**5 - 5000*x**4 + 20000*x**3 - 60000*x**2 + 120000*x - 120000)/120000",
+          "numerator_scalar": "-1",
+          "primitive_numerator": "5*x**7 - 161*x**6 + 1097*x**5 - 5000*x**4 + 20000*x**3 - 60000*x**2 + 120000*x - 120000",
+          "factorization": "5*x**7 - 161*x**6 + 1097*x**5 - 5000*x**4 + 20000*x**3 - 60000*x**2 + 120000*x - 120000",
+          "square_free": "5*x**7 - 161*x**6 + 1097*x**5 - 5000*x**4 + 20000*x**3 - 60000*x**2 + 120000*x - 120000",
+          "roots": [
+            {
+              "lo": "493131350638/19942310093",
+              "hi": "494205096201/19985732534",
+              "lo_decimal": "24.727895030129697",
+              "hi_decimal": "24.727895030129698",
+              "approx": "24.727895030129697",
+              "multiplicity": 1,
+              "exact": null
+            }
+          ]
+        },
+        "a-1": {
+          "expr": "-x*(5*x**6 - 161*x**5 + 1097*x**4 - 5000*x**3 + 20000*x**2 - 60000*x + 120000)/120000",
+          "numerator_scalar": "-1",
+          "primitive_numerator": "5*x**7 - 161*x**6 + 1097*x**5 - 5000*x**4 + 20000*x**3 - 60000*x**2 + 120000*x",
+          "factorization": "x*(5*x**6 - 161*x**5 + 1097*x**4 - 5000*x**3 + 20000*x**2 - 60000*x + 120000)",
+          "square_free": "5*x**7 - 161*x**6 + 1097*x**5 - 5000*x**4 + 20000*x**3 - 60000*x**2 + 120000*x",
+          "roots": [
+            {
+              "lo": "0",
+              "hi": "0",
+              "lo_decimal": "0",
+              "hi_decimal": "0",
+              "approx": "0",
+              "multiplicity": 1,
+              "exact": "0"
+            },
+            {
+              "lo": "31970201819/7290832737",
+              "hi": "101763865171/23207339254",
+              "lo_decimal": "4.384986320801944",
+              "hi_decimal": "4.384986320801945",
+              "approx": "4.384986320801944",
+              "multiplicity": 1,
+              "exact": null
+            },
+            {
+              "lo": "110158332594/4454845805",
+              "hi": "619462138949/25051289776",
+              "lo_decimal": "24.72775431876031",
+              "hi_decimal": "24.727754318760311",
+              "approx": "24.72775431876031",
+              "multiplicity": 1,
+              "exact": null
+            }
+          ]
+        },
+        "M": {
+          "expr": "-x**5*(25*x**9 - 3220*x**8 + 147564*x**7 - 3225872*x**6 + 48214544*x**5 - 576320000*x**4 + 5721600000*x**3 - 37719040000*x**2 + 16752640000*x + 178790400000)/235929600000000",
+          "numerator_scalar": "-1",
+          "primitive_numerator": "25*x**14 - 3220*x**13 + 147564*x**12 - 3225872*x**11 + 48214544*x**10 - 576320000*x**9 + 5721600000*x**8 - 37719040000*x**7 + 16752640000*x**6 + 178790400000*x**5",
+          "factorization": "x**5*(25*x**9 - 3220*x**8 + 147564*x**7 - 3225872*x**6 + 48214544*x**5 - 576320000*x**4 + 5721600000*x**3 - 37719040000*x**2 + 16752640000*x + 178790400000)",
+          "square_free": "25*x**10 - 3220*x**9 + 147564*x**8 - 3225872*x**7 + 48214544*x**6 - 576320000*x**5 + 5721600000*x**4 - 37719040000*x**3 + 16752640000*x**2 + 178790400000*x",
+          "roots": [
+            {
+              "lo": "0",
+              "hi": "0",
+              "lo_decimal": "0",
+              "hi_decimal": "0",
+              "approx": "0",
+              "multiplicity": 5,
+              "exact": "0"
+            },
+            {
+              "lo": "51881245722/16905725279",
+              "hi": "36089924993/11760056043",
+              "lo_decimal": "3.06885654805038",
+              "hi_decimal": "3.068856548050381",
+              "approx": "3.068856548050381",
+              "multiplicity": 1,
+              "exact": null
+            },
+            {
+              "lo": "271817406323/17767274446",
+              "hi": "276600123347/18079895507",
+              "lo_decimal": "15.298767807585426",
+              "hi_decimal": "15.298767807585427",
+              "approx": "15.298767807585427",
+              "multiplicity": 1,
+              "exact": null
+            }
+          ]
+        }
+      },
+      "positive_events": [
+        {
+          "root": {
+            "lo": "51881245722/16905725279",
+            "hi": "36089924993/11760056043",
+            "lo_decimal": "3.06885654805038",
+            "hi_decimal": "3.068856548050381",
+            "approx": "3.068856548050381",
+            "multiplicity": 1,
+            "exact": null
+          },
+          "sources": [
+            "M"
+          ],
+          "multiplicities": {
+            "M": 1
+          },
+          "labels": [
+            "\\beta_-"
+          ],
+          "mechanism": "coherence-population block (M=0)"
+        },
+        {
+          "root": {
+            "lo": "31970201819/7290832737",
+            "hi": "101763865171/23207339254",
+            "lo_decimal": "4.384986320801944",
+            "hi_decimal": "4.384986320801945",
+            "approx": "4.384986320801944",
+            "multiplicity": 1,
+            "exact": null
+          },
+          "sources": [
+            "a-1"
+          ],
+          "multiplicities": {
+            "a-1": 1
+          },
+          "labels": [
+            "\\beta_+"
+          ],
+          "mechanism": "population ceiling (a=1)"
+        },
+        {
+          "root": {
+            "lo": "271817406323/17767274446",
+            "hi": "276600123347/18079895507",
+            "lo_decimal": "15.298767807585426",
+            "hi_decimal": "15.298767807585427",
+            "approx": "15.298767807585427",
+            "multiplicity": 1,
+            "exact": null
+          },
+          "sources": [
+            "M"
+          ],
+          "multiplicities": {
+            "M": 1
+          },
+          "labels": [
+            "\\delta_M"
+          ],
+          "mechanism": "coherence-population block (M=0)"
+        },
+        {
+          "root": {
+            "lo": "110158332594/4454845805",
+            "hi": "619462138949/25051289776",
+            "lo_decimal": "24.72775431876031",
+            "hi_decimal": "24.727754318760311",
+            "approx": "24.72775431876031",
+            "multiplicity": 1,
+            "exact": null
+          },
+          "sources": [
+            "a-1"
+          ],
+          "multiplicities": {
+            "a-1": 1
+          },
+          "labels": [
+            "\\delta_1"
+          ],
+          "mechanism": "population ceiling (a=1)"
+        },
+        {
+          "root": {
+            "lo": "493131350638/19942310093",
+            "hi": "494205096201/19985732534",
+            "lo_decimal": "24.727895030129697",
+            "hi_decimal": "24.727895030129698",
+            "approx": "24.727895030129697",
+            "multiplicity": 1,
+            "exact": null
+          },
+          "sources": [
+            "a"
+          ],
+          "multiplicities": {
+            "a": 1
+          },
+          "labels": [
+            "\\delta_0"
+          ],
+          "mechanism": "population floor (a=0)"
+        }
+      ],
+      "sign_rows": [
+        {
+          "interval": "(0, 3.068856548050381)",
+          "left": null,
+          "right": {
+            "lo": "51881245722/16905725279",
+            "hi": "36089924993/11760056043",
+            "lo_decimal": "3.06885654805038",
+            "hi_decimal": "3.068856548050381",
+            "approx": "3.068856548050381",
+            "multiplicity": 1,
+            "exact": null
+          },
+          "sample": "25940622861/16905725279",
+          "sign_a": 1,
+          "sign_a_minus_1": -1,
+          "sign_M": -1,
+          "domain": true,
+          "cptp": false
+        },
+        {
+          "interval": "(3.068856548050381, 4.384986320801944)",
+          "left": {
+            "lo": "51881245722/16905725279",
+            "hi": "36089924993/11760056043",
+            "lo_decimal": "3.06885654805038",
+            "hi_decimal": "3.068856548050381",
+            "approx": "3.068856548050381",
+            "multiplicity": 1,
+            "exact": null
+          },
+          "right": {
+            "lo": "31970201819/7290832737",
+            "hi": "101763865171/23207339254",
+            "lo_decimal": "4.384986320801944",
+            "hi_decimal": "4.384986320801945",
+            "approx": "4.384986320801944",
+            "multiplicity": 1,
+            "exact": null
+          },
+          "sample": "35505387317349968781/9526733509695453299",
+          "sign_a": 1,
+          "sign_a_minus_1": -1,
+          "sign_M": 1,
+          "domain": true,
+          "cptp": true
+        },
+        {
+          "interval": "(4.384986320801944, 15.298767807585427)",
+          "left": {
+            "lo": "31970201819/7290832737",
+            "hi": "101763865171/23207339254",
+            "lo_decimal": "4.384986320801944",
+            "hi_decimal": "4.384986320801945",
+            "approx": "4.384986320801944",
+            "multiplicity": 1,
+            "exact": null
+          },
+          "right": {
+            "lo": "271817406323/17767274446",
+            "hi": "276600123347/18079895507",
+            "lo_decimal": "15.298767807585426",
+            "hi_decimal": "15.298767807585427",
+            "approx": "15.298767807585427",
+            "multiplicity": 1,
+            "exact": null
+          },
+          "sample": "2029056321214780855827/206165582843623451642",
+          "sign_a": 1,
+          "sign_a_minus_1": 1,
+          "sign_M": 1,
+          "domain": true,
+          "cptp": false
+        },
+        {
+          "interval": "(15.298767807585427, 24.72775431876031)",
+          "left": {
+            "lo": "271817406323/17767274446",
+            "hi": "276600123347/18079895507",
+            "lo_decimal": "15.298767807585426",
+            "hi_decimal": "15.298767807585427",
+            "approx": "15.298767807585427",
+            "multiplicity": 1,
+            "exact": null
+          },
+          "right": {
+            "lo": "110158332594/4454845805",
+            "hi": "619462138949/25051289776",
+            "lo_decimal": "24.72775431876031",
+            "hi_decimal": "24.727754318760311",
+            "approx": "24.72775431876031",
+            "multiplicity": 1,
+            "exact": null
+          },
+          "sample": "3223862041679737764493/161086293308394596270",
+          "sign_a": 1,
+          "sign_a_minus_1": 1,
+          "sign_M": -1,
+          "domain": true,
+          "cptp": false
+        },
+        {
+          "interval": "(24.72775431876031, 24.727895030129697)",
+          "left": {
+            "lo": "110158332594/4454845805",
+            "hi": "619462138949/25051289776",
+            "lo_decimal": "24.72775431876031",
+            "hi_decimal": "24.727754318760311",
+            "approx": "24.72775431876031",
+            "multiplicity": 1,
+            "exact": null
+          },
+          "right": {
+            "lo": "493131350638/19942310093",
+            "hi": "494205096201/19985732534",
+            "lo_decimal": "24.727895030129697",
+            "hi_decimal": "24.727895030129698",
+            "approx": "24.727895030129697",
+            "multiplicity": 1,
+            "exact": null
+          },
+          "sample": "24707082428256811589345/999161177885185018336",
+          "sign_a": 1,
+          "sign_a_minus_1": -1,
+          "sign_M": -1,
+          "domain": true,
+          "cptp": false
+        },
+        {
+          "interval": "(24.727895030129697, infinity)",
+          "left": {
+            "lo": "493131350638/19942310093",
+            "hi": "494205096201/19985732534",
+            "lo_decimal": "24.727895030129697",
+            "hi_decimal": "24.727895030129698",
+            "approx": "24.727895030129697",
+            "multiplicity": 1,
+            "exact": null
+          },
+          "right": null,
+          "sample": "5436256058211/199857325340",
+          "sign_a": -1,
+          "sign_a_minus_1": -1,
+          "sign_M": -1,
+          "domain": true,
+          "cptp": false
+        }
+      ],
+      "admissible_components": [
+        {
+          "type": "point",
+          "value": "0"
+        },
+        {
+          "type": "interval",
+          "left": "\\beta_-",
+          "right": "\\beta_+"
+        }
+      ],
+      "admissible_set_latex": "\\{0\\}\\cup[\\beta_-,\\beta_+]",
+      "defect": {
+        "m": 5,
+        "eta": "97/120000",
+        "boundary_coefficient": "-97/128000"
+      }
+    },
+    {
+      "key": "be",
+      "name": "Backward Euler",
+      "family": "implicit",
+      "order": 1,
+      "stages": 1,
+      "R": "-1/(x - 1)",
+      "R_display": "-1/(s - 1)",
+      "R_latex": "- \\frac{1}{s - 1}",
+      "a": "1/(x + 1)",
+      "c": "2/(x + 2)",
+      "M": "x**2/((x + 1)*(x + 2)**2)",
+      "stage_determinant": "1 - x",
+      "stage_full": "x + 1",
+      "stage_half": "(x + 2)/2",
+      "polynomials": {
+        "a": {
+          "expr": "1/(x + 1)",
+          "numerator_scalar": "1",
+          "primitive_numerator": "1",
+          "factorization": "1",
+          "square_free": "1",
+          "roots": []
+        },
+        "a-1": {
+          "expr": "-x/(x + 1)",
+          "numerator_scalar": "-1",
+          "primitive_numerator": "x",
+          "factorization": "x",
+          "square_free": "x",
+          "roots": [
+            {
+              "lo": "0",
+              "hi": "0",
+              "lo_decimal": "0",
+              "hi_decimal": "0",
+              "approx": "0",
+              "multiplicity": 1,
+              "exact": "0"
+            }
+          ]
+        },
+        "M": {
+          "expr": "x**2/((x + 1)*(x + 2)**2)",
+          "numerator_scalar": "1",
+          "primitive_numerator": "x**2",
+          "factorization": "x**2",
+          "square_free": "x",
+          "roots": [
+            {
+              "lo": "0",
+              "hi": "0",
+              "lo_decimal": "0",
+              "hi_decimal": "0",
+              "approx": "0",
+              "multiplicity": 2,
+              "exact": "0"
+            }
+          ]
+        }
+      },
+      "positive_events": [],
+      "sign_rows": [
+        {
+          "interval": "(0, infinity)",
+          "left": null,
+          "right": null,
+          "sample": "1",
+          "sign_a": 1,
+          "sign_a_minus_1": -1,
+          "sign_M": 1,
+          "domain": true,
+          "cptp": true
+        }
+      ],
+      "admissible_components": [
+        {
+          "type": "interval",
+          "left": "0",
+          "right": "\\infty"
+        }
+      ],
+      "admissible_set_latex": "[0,\\infty)",
+      "defect": {
+        "m": 2,
+        "eta": "1/2",
+        "boundary_coefficient": "1/4"
+      }
+    },
+    {
+      "key": "im",
+      "name": "Implicit midpoint",
+      "family": "implicit",
+      "order": 2,
+      "stages": 1,
+      "R": "-(x + 2)/(x - 2)",
+      "R_display": "-(s + 2)/(s - 2)",
+      "R_latex": "- \\frac{s + 2}{s - 2}",
+      "a": "-(x - 2)/(x + 2)",
+      "c": "-(x - 4)/(x + 4)",
+      "M": "-2*x**3/((x + 2)*(x + 4)**2)",
+      "stage_determinant": "-(x - 2)/2",
+      "stage_full": "(x + 2)/2",
+      "stage_half": "(x + 4)/4",
+      "polynomials": {
+        "a": {
+          "expr": "-(x - 2)/(x + 2)",
+          "numerator_scalar": "-1",
+          "primitive_numerator": "x - 2",
+          "factorization": "x - 2",
+          "square_free": "x - 2",
+          "roots": [
+            {
+              "lo": "2",
+              "hi": "2",
+              "lo_decimal": "2",
+              "hi_decimal": "2",
+              "approx": "2",
+              "multiplicity": 1,
+              "exact": "2"
+            }
+          ]
+        },
+        "a-1": {
+          "expr": "-2*x/(x + 2)",
+          "numerator_scalar": "-2",
+          "primitive_numerator": "x",
+          "factorization": "x",
+          "square_free": "x",
+          "roots": [
+            {
+              "lo": "0",
+              "hi": "0",
+              "lo_decimal": "0",
+              "hi_decimal": "0",
+              "approx": "0",
+              "multiplicity": 1,
+              "exact": "0"
+            }
+          ]
+        },
+        "M": {
+          "expr": "-2*x**3/((x + 2)*(x + 4)**2)",
+          "numerator_scalar": "-2",
+          "primitive_numerator": "x**3",
+          "factorization": "x**3",
+          "square_free": "x",
+          "roots": [
+            {
+              "lo": "0",
+              "hi": "0",
+              "lo_decimal": "0",
+              "hi_decimal": "0",
+              "approx": "0",
+              "multiplicity": 3,
+              "exact": "0"
+            }
+          ]
+        }
+      },
+      "positive_events": [
+        {
+          "root": {
+            "lo": "2",
+            "hi": "2",
+            "lo_decimal": "2",
+            "hi_decimal": "2",
+            "approx": "2",
+            "multiplicity": 1,
+            "exact": "2"
+          },
+          "sources": [
+            "a"
+          ],
+          "multiplicities": {
+            "a": 1
+          },
+          "labels": [],
+          "mechanism": "population floor (a=0)"
+        }
+      ],
+      "sign_rows": [
+        {
+          "interval": "(0, 2)",
+          "left": null,
+          "right": {
+            "lo": "2",
+            "hi": "2",
+            "lo_decimal": "2",
+            "hi_decimal": "2",
+            "approx": "2",
+            "multiplicity": 1,
+            "exact": "2"
+          },
+          "sample": "1",
+          "sign_a": 1,
+          "sign_a_minus_1": -1,
+          "sign_M": -1,
+          "domain": true,
+          "cptp": false
+        },
+        {
+          "interval": "(2, infinity)",
+          "left": {
+            "lo": "2",
+            "hi": "2",
+            "lo_decimal": "2",
+            "hi_decimal": "2",
+            "approx": "2",
+            "multiplicity": 1,
+            "exact": "2"
+          },
+          "right": null,
+          "sample": "3",
+          "sign_a": -1,
+          "sign_a_minus_1": -1,
+          "sign_M": -1,
+          "domain": true,
+          "cptp": false
+        }
+      ],
+      "admissible_components": [
+        {
+          "type": "point",
+          "value": "0"
+        }
+      ],
+      "admissible_set_latex": "\\{0\\}",
+      "defect": {
+        "m": 3,
+        "eta": "1/12",
+        "boundary_coefficient": "-1/16"
+      }
+    }
+  ]
+}

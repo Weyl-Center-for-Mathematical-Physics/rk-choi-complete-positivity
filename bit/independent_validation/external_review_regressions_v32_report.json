@@ -1,0 +1,75 @@
+{
+  "version": "3.2.0",
+  "checks": [
+    {
+      "name": "bad isolated root not admitted",
+      "passed": true,
+      "detail": {
+        "status": "PASS",
+        "isolated": []
+      }
+    },
+    {
+      "name": "bad root exact point status is FAIL",
+      "passed": true,
+      "detail": {
+        "point_status": "FAIL",
+        "sources": [
+          "one_minus_a"
+        ]
+      }
+    },
+    {
+      "name": "candidate locator also rejects false isolated point",
+      "passed": true,
+      "detail": {
+        "status": "PASS",
+        "isolated": []
+      }
+    },
+    {
+      "name": "genuine isolated CPTP equality retained",
+      "passed": true,
+      "detail": {
+        "status": "PASS",
+        "isolated": [
+          "1"
+        ]
+      }
+    },
+    {
+      "name": "invalid substeps True rejected early",
+      "passed": true,
+      "detail": "bool"
+    },
+    {
+      "name": "invalid substeps 2.0 rejected early",
+      "passed": true,
+      "detail": "float"
+    },
+    {
+      "name": "invalid substeps 2.9 rejected early",
+      "passed": true,
+      "detail": "float"
+    },
+    {
+      "name": "invalid substeps 0 rejected early",
+      "passed": true,
+      "detail": "int"
+    },
+    {
+      "name": "invalid substeps -1 rejected early",
+      "passed": true,
+      "detail": "int"
+    },
+    {
+      "name": "valid exact integer substep accepted",
+      "passed": true,
+      "detail": {
+        "a": "54289/147456"
+      }
+    }
+  ],
+  "passed": 10,
+  "failed": 0
+}

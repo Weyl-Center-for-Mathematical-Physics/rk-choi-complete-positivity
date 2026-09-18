@@ -1,0 +1,42 @@
+% Generated mechanically from results/v34/adaptive_benchmark_v34.csv. Do not edit by hand.
+\begin{table*}[t]
+\centering
+\caption{Adaptive safety benchmark. The work proxy counts RK stage evaluations or exponential actions. Algebraic certification costs are excluded and reported separately in Table~\ref{tab:guard_telemetry}.}
+\label{tab:adaptive_matrix}
+\resizebox{0.99\textwidth}{!}{%
+\begin{tabular}{llrrrrrr}
+\toprule
+Case & Policy & Choi error & Min. eig. & Direct & Projected & Fallback & RK stages\\
+\midrule
+boundary & error only & $7.92\times 10^{-4}$ & $-1\times 10^{-3}$ & 0 & 0 & 0 & 72\\
+boundary & guard + rotating fallback & $7.45\times 10^{-6}$ & $\ge -10^{-15}$ & 0 & 0 & 4 & 132\\
+boundary & rotating frame & $1.27\times 10^{-4}$ & $\ge -10^{-15}$ & 0 & 0 & 0 & 36\\
+boundary & Strang & $8.33\times 10^{-17}$ & $\ge -10^{-15}$ & 0 & 0 & 0 & 0\\
+buffered & guard, buffered & $2.85\times 10^{-4}$ & $\ge -10^{-15}$ & 3 & 2 & 0 & 84\\
+buffered & guard, buffered/direct & $2.47\times 10^{-4}$ & $\ge -10^{-15}$ & 5 & 0 & 0 & 60\\
+near saddle & guard, near saddle & $2.1\times 10^{-4}$ & $\ge -10^{-15}$ & 1 & 1 & 0 & 48\\
+\bottomrule
+\end{tabular}%
+}
+\end{table*}
+
+\begin{table*}[t]
+\centering
+\caption{Guard telemetry. A locator call is counted on every invocation, including empty and uncertain outcomes. Root-isolation operations count exact Sturm-isolation calls; certification operations count candidate and component certifications, including binary recertification attempts.}
+\label{tab:guard_telemetry}
+\resizebox{0.99\textwidth}{!}{%
+\begin{tabular}{lrrrrrrrrrr}
+\toprule
+Case & Tol. & Locator & Proj. found & Empty & Uncertain & Root iso. & Cert. & Binary & Prec. esc. & Fallback\\
+\midrule
+boundary & $1\times 10^{-2}$ & 3 & 0 & 3 & 0 & 9 & 21 & 0 & 0 & 3\\
+boundary & $3\times 10^{-3}$ & 3 & 0 & 3 & 0 & 9 & 21 & 0 & 0 & 3\\
+boundary & $1\times 10^{-3}$ & 4 & 0 & 4 & 0 & 12 & 33 & 0 & 0 & 4\\
+boundary & $3\times 10^{-4}$ & 5 & 0 & 5 & 0 & 15 & 42 & 0 & 0 & 5\\
+buffered & $1\times 10^{-3}$ & 2 & 2 & 0 & 0 & 6 & 25 & 2 & 0 & 0\\
+buffered & $3\times 10^{-4}$ & 0 & 0 & 0 & 0 & 0 & 15 & 0 & 0 & 0\\
+near saddle & $1\times 10^{-3}$ & 1 & 1 & 0 & 0 & 3 & 14 & 1 & 0 & 0\\
+\bottomrule
+\end{tabular}%
+}
+\end{table*}

@@ -1,0 +1,17 @@
+scenario,tolerance,policy,global_normalized_choi_error,minimum_step_choi_eigenvalue,accepted_steps,direct_accepts,projected_accepts,rotating_accepts,strang_accepts,exact_fallback_accepts,rejected_error,rejected_cp,guard_evaluations,candidate_certifications,component_searches,fallback_steps,precision_escalations,pi_memory_resets,rhs_stage_evaluations,exponential_actions
+boundary_tolerance_sweep,0.01,error_only,0.004327611992433297,-0.0034913536821074877,3,0,0,0,0,0,2,0,0,0,0,0,0,0,60,0
+boundary_tolerance_sweep,0.01,candidate_guard,6.091722947231542e-05,-3.7106479125533523e-25,3,0,0,3,0,0,1,3,3,3,0,3,0,1,84,0
+boundary_tolerance_sweep,0.01,rotating_frame,0.00034661010309685605,0.0,2,0,0,2,0,0,0,0,0,0,0,0,0,0,24,0
+boundary_tolerance_sweep,0.01,strang,8.326672684688674e-17,-6.501617097462554e-17,2,0,0,0,2,0,0,0,0,0,0,0,0,0,0,18
+boundary_tolerance_sweep,0.003,error_only,0.0016440166243959025,-0.0013738774796713147,3,0,0,0,0,0,2,0,0,0,0,0,0,0,60,0
+boundary_tolerance_sweep,0.003,candidate_guard,1.9018391371184816e-05,0.0,3,0,0,3,0,0,1,3,3,3,0,3,0,1,84,0
+boundary_tolerance_sweep,0.003,rotating_frame,0.00034661010309685605,0.0,2,0,0,2,0,0,0,0,0,0,0,0,0,0,24,0
+boundary_tolerance_sweep,0.003,strang,8.326672684688674e-17,-6.501617097462554e-17,2,0,0,0,2,0,0,0,0,0,0,0,0,0,0,18
+boundary_tolerance_sweep,0.001,error_only,0.0007916873687284027,-0.0010013590925761484,4,0,0,0,0,0,2,0,0,0,0,0,0,0,72,0
+boundary_tolerance_sweep,0.001,candidate_guard,7.453952621055388e-06,-1.1102230250602865e-16,4,0,0,4,0,0,3,4,4,4,0,4,0,2,132,0
+boundary_tolerance_sweep,0.001,rotating_frame,0.00012689042260567086,-8.481533182316791e-30,2,0,0,2,0,0,1,0,0,0,0,0,0,0,36,0
+boundary_tolerance_sweep,0.001,strang,8.326672684688674e-17,-6.501617097462554e-17,2,0,0,0,2,0,0,0,0,0,0,0,0,0,0,18
+boundary_tolerance_sweep,0.0003,error_only,0.0002358569229669584,-0.00026370286501248286,5,0,0,0,0,0,3,0,0,0,0,0,0,0,96,0
+boundary_tolerance_sweep,0.0003,candidate_guard,2.2182298373491274e-06,-3.562653249242374e-27,5,0,0,5,0,0,4,5,5,5,0,5,0,2,168,0
+boundary_tolerance_sweep,0.0003,rotating_frame,6.019302489924499e-05,-2.3167910730292682e-29,3,0,0,3,0,0,2,0,0,0,0,0,0,0,60,0
+boundary_tolerance_sweep,0.0003,strang,8.326672684688674e-17,-6.501617097462554e-17,2,0,0,0,2,0,0,0,0,0,0,0,0,0,0,18

@@ -1,0 +1,73 @@
+# Independent claim verification (69/69 passed)
+
+Computed from first principles with SymPy 1.14.0; no import of `rk_choi_margin`.
+
+- PASS `rk4_stability_function_from_tableau`
+- PASS `mode_equation_population`
+- PASS `mode_equation_coherence`
+- PASS `generator_spectrum`
+- PASS `rk4_direct_map_equals_claimed_block_form`
+- PASS `rk4_choi_matrix_equals_claimed_form`
+- PASS `trace_preservation_identities`
+- PASS `choi_block_determinant_identity`
+- PASS `stage_domain_is_spectral_condition`: explicit tableau: det(I - lambda A) = 1 for every lambda, so the stage domain is all steps; implicit tableaux give det(I-lambda A) with lambda in spec(hL)
+- PASS `exact_semigroup_margin`
+- PASS `criterion_reduction_structure`: characteristic polynomial of the claimed Choi matrix factors as (lambda-B)(lambda-C)(lambda^2-(A+D)lambda+(AD-|c|^2)); a Hermitian matrix is PSD iff all eigenvalues are nonnegative, so J>=0 iff B,C>=0 and the 2x2 block has nonnegative trace and determinant, i.e. A,D>=0 and AD-|c|^2>=0; B,C>=0 iff a<=1 for theta in (0,1) (at theta=0 only C=1-a>=0 is active, at theta=1 only B=1-a>=0)
+- PASS `signed_first_defect_law_generic_m2_to_m8`
+- PASS `G4_G5_G6_G7_closed_forms`
+- PASS `unit_circle_rule_q4`
+- PASS `rk4_threshold_factorization`
+- PASS `ssp3_threshold_factorization`
+- PASS `dp5_first_defect`
+- PASS `richardson_first_defect`
+- PASS `G6_thresholds`
+- PASS `dephasing_buffer_first_order`
+- PASS `excitation_buffer_coefficient`
+- PASS `rk4_x5_coefficient`
+- PASS `rk4_large_frequency_defect`
+- PASS `attached_scaling_laws`
+- PASS `rk4_margin_cubic_factorization`
+- PASS `cubic_discriminant`
+- PASS `q_pm_roots`
+- PASS `varpi_pm_closed_forms`
+- PASS `critical_cubic_factorizations`
+- PASS `alpha4_population_ceiling`
+- PASS `cubic_root_counts_by_regime`
+- PASS `empty_positive_step_regime_4_to_qplus`
+- PASS `attached_branch_ceiling_crossover`: exactly one real root of q -> C_q(q alpha4) (negative reduced discriminant), Sturm-isolated in (1, q_-) through the resultant; for 1<=q<q_c the attached set is [0, alpha4] (population ceiling active), for q_c<q<q_- it is [0, y3/q]
+- PASS `printed_crossover_brackets`: the printed rational brackets certify the discriminant sign and crossover location, not merely decimal approximations
+- PASS `detached_endpoints_below_alpha4`: y3/q > alpha4 on [1, q_c), = alpha4 at q_c, < alpha4 on (q_c, oo) which contains [q_-, 4] and [q_+, oo); sampled y3/q < alpha4 at q = 3.9, 17, 100
+- PASS `isolated_points_q4_and_qplus`
+- PASS `window_edge_asymptotics`
+- PASS `rk4_imaginary_axis_boundary`
+- PASS `hamiltonian_and_dissipative_parts_commute`
+- PASS `generator_splits`
+- PASS `unitary_channel_equals_exp_hamiltonian_part`
+- PASS `lab_and_rotating_rk4_maps_differ`
+- PASS `rotating_candidate_admissibility_is_omega_free`
+- PASS `frame_candidates_differ_prop6ii`: x^8 coefficients of |R4(-(1/2+kappa)x+i varpi x)|^2 and R4(-(1/2+kappa)x)^2 differ by (((1/2+kappa)^2+varpi^2)^4-(1/2+kappa)^8)/576, nonzero for varpi != 0; backward Euler and implicit midpoint: |R(-s+i nu)|^2 - R(-s)^2 = -nu^2/((1+s)^2((1+s)^2+nu^2)) and 8 nu^2 s/((2+s)^2((2+s)^2+nu^2)), zero for nu != 0 only at s = 0
+- PASS `composition_calculus`
+- PASS `rk4_population_multiplier_positive`
+- PASS `varpi2_direct_interval`
+- PASS `varpi2_two_half_step_disjoint`
+- PASS `substep_ladder_overlap_for_n_ge_2`
+- PASS `halving_threshold_resultant`
+- PASS `halving_threshold_value`
+- PASS `richardson_stability_polynomial`
+- PASS `richardson_margin_factorization`
+- PASS `richardson_first_positive_root_above_alpha4`
+- PASS `richardson_remote_interval`: margin positive and 0<=a<=1 at x=6.2 (inside), a>1 at x=6.5 (ceiling exit), margin negative at x=0.5 and 3 (outside)
+- PASS `richardson_global_sign_chart`: all positive boundary roots isolated and simple; exact signs on every interval including the tail leave only the closed remote component plus zero
+- PASS `persistence_inactive_slack_interval`: at varpi=2 both detached roots lie in (0.7,1.3), where a and 1-a have no zeros and are strictly positive; A_0=1 supplies the remaining inactive constraint
+- PASS `constituents_cptp_on_common_interval`: coarse RK4 at varpi=0: M4(x;0) = x^5(1152-160x+16x^2-x^3)/147456, the cubic has no root in (0, alpha4] (Sturm count) and is positive at both ends, so M4>0 on (0, alpha4]; 0<=a<=1 there by the population identity and the ceiling root alpha4; the fine map is CPTP on [0, 2 alpha4] by dilation (Proposition 7)
+- PASS `rk4_nonrotating_margin_root`
+- PASS `richardson_orientation_bands`
+- PASS `dp5_orientation_bands_reversed`
+- PASS `table1_buffered_roots_varpi2`
+- PASS `persistence_sign_samples`
+- PASS `noncommuting_eigenvalue_signs_omega_x_0p1`
+- PASS `noncommuting_components_omega_x_0p1`
+- PASS `transverse_table_endpoints`: endpoints are roots of det J(h); the sign pattern between them was certified for Omega_x=0.1 above and is +,-,+,- by continuity of the certified structure only at the listed values
+- PASS `printed_decimal_vs_binary64_margin`
+- PASS `nine_candidate_admissible_sets`: Backward Euler's last sampled segment is unbounded; the archive states [0, infinity)
+- PASS `fixed_horizon_margin_asymptotics`

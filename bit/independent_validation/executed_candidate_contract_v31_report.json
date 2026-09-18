@@ -1,0 +1,416 @@
+{
+  "checks": [
+    {
+      "name": "arbitrary structural builder absent",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "direct projection pass 1e-2",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "direct provenance 1e-2",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "direct exact executed recertificate 1e-2",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "direct projection pass 1e-10",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "direct provenance 1e-10",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "direct exact executed recertificate 1e-10",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "direct projection pass 1e-20",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "direct provenance 1e-20",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "direct exact executed recertificate 1e-20",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "direct projection pass 1e-30",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "direct provenance 1e-30",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "direct exact executed recertificate 1e-30",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "equal-substeps projection pass 1e-2",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "equal-substeps provenance 1e-2",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "equal-substeps exact executed recertificate 1e-2",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "equal-substeps projection pass 1e-10",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "equal-substeps provenance 1e-10",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "equal-substeps exact executed recertificate 1e-10",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "equal-substeps projection pass 1e-20",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "equal-substeps provenance 1e-20",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "equal-substeps exact executed recertificate 1e-20",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "equal-substeps projection pass 1e-30",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "equal-substeps provenance 1e-30",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "equal-substeps exact executed recertificate 1e-30",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "direct literal identity h=1.5",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "direct literal identity h=2.0",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "direct literal identity h=2.4",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "projection literal identity",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "lab coarse provenance h=0.5",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "lab fine provenance h=0.5",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "lab fine matrix identity h=0.5",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "lab extrapolated provenance h=0.5",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "lab distinct execution IDs h=0.5",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "lab coarse provenance h=1.0",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "lab fine provenance h=1.0",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "lab fine matrix identity h=1.0",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "lab extrapolated provenance h=1.0",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "lab distinct execution IDs h=1.0",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "lab coarse provenance h=2.0",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "lab fine provenance h=2.0",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "lab fine matrix identity h=2.0",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "lab extrapolated provenance h=2.0",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "lab distinct execution IDs h=2.0",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "rotating coarse provenance h=0.5",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "rotating fine provenance h=0.5",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "rotating fine matrix identity h=0.5",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "rotating coarse provenance h=1.0",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "rotating fine provenance h=1.0",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "rotating fine matrix identity h=1.0",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "rotating coarse provenance h=2.0",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "rotating fine provenance h=2.0",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "rotating fine matrix identity h=2.0",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "exact structural pass h=0.1",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "exact binary time h=0.1",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "exact provenance h=0.1",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "exact structural pass h=1.1",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "exact binary time h=1.1",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "exact provenance h=1.1",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "exact structural pass h=2.8",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "exact binary time h=2.8",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "exact provenance h=2.8",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "strang structural pass n=1",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "strang provenance n=1",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "strang structural pass n=2",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "strang provenance n=2",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "strang structural pass n=4",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "strang provenance n=4",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "diagnostics deeply immutable",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "matrix deeply immutable",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "benchmark provenance 2.0",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "benchmark execution continuity 2.0",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "benchmark physicality 2.0",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "benchmark provenance 2.8",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "benchmark execution continuity 2.8",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "benchmark physicality 2.8",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "benchmark provenance 5.6",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "benchmark execution continuity 5.6",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "benchmark physicality 5.6",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "benchmark provenance 5.0",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "benchmark execution continuity 5.0",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "benchmark physicality 5.0",
+      "pass": true,
+      "detail": ""
+    }
+  ],
+  "passed": 82,
+  "total": 82
+}

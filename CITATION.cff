@@ -1,24 +1,30 @@
 cff-version: 1.2.0
-message: "If you use this software and data package, please cite the associated article and the archived release."
-title: "rk-choi-complete-positivity: exact Runge-Kutta/Choi admissibility calculations"
+message: "If you use this software and data package, please cite this versioned release and the associated article."
+title: "rk-choi-complete-positivity: complete-positivity regions of Runge-Kutta discretizations of phase-covariant qubit dynamics (code and data)"
 type: software
-version: 1.0.0
-date-released: 2026-07-23
+version: 4.0.0
+date-released: 2026-09-18
 license: MIT
+url: "https://github.com/Weyl-Center-for-Mathematical-Physics/rk-choi-complete-positivity/releases/tag/v4.0.0"
 repository-code: "https://github.com/Weyl-Center-for-Mathematical-Physics/rk-choi-complete-positivity"
-url: "https://github.com/Weyl-Center-for-Mathematical-Physics/rk-choi-complete-positivity"
 abstract: >-
-  Exact symbolic calculations, certified root brackets, sign charts, and
-  figure-generation code for the study of generator-conditioned complete-
-  positivity regions of Runge-Kutta methods for qubit damping.
+  Exact symbolic calculations, certified root brackets, an independent
+  first-principles verifier of the article's claims, the Richardson-extrapolation
+  corollary of the signed first-defect law, candidate-map tests, pointwise
+  transverse-field certificates, certified adaptive-guard telemetry, deterministic
+  figures and tables with accessibility audits, and regression tests supporting
+  finite-step complete-positivity classifications of Runge-Kutta discretizations
+  of phase-covariant qubit Lindblad dynamics. The current tree is in bit/; the
+  root src/, data/, figures/ and supplement/ directories preserve the earlier
+  zero-precession release v1.0.0 unchanged.
 authors:
   - family-names: Pierpoint
     given-names: G. Blake
-    affiliation: "Department of Physics, University of Maryland, College Park; Weyl Center for Mathematical Physics"
+    affiliation: "Old Dominion University"
     orcid: "https://orcid.org/0000-0001-8288-8549"
   - family-names: Bernard
     given-names: Olivier
-    affiliation: "Department of Physics, Engineering, Earth and Environmental Sciences, Mechanics, Université Grenoble Alpes; Weyl Center for Mathematical Physics"
+    affiliation: "UFR PhITEM, Université Grenoble Alpes; Weyl Center for Mathematical Physics"
     orcid: "https://orcid.org/0009-0007-0177-1607"
   - family-names: Liu
     given-names: Yichen
@@ -28,6 +34,19 @@ keywords:
   - Lindblad equation
   - complete positivity
   - Runge-Kutta methods
-  - Choi matrix
-  - quantum channels
-  - numerical stability
+  - stability regions
+  - Richardson extrapolation
+  - certified numerics
+references:
+  - type: software
+    title: "rk-choi-complete-positivity: exact Runge-Kutta/Choi admissibility calculations (v1.0.0)"
+    authors:
+      - family-names: Pierpoint
+        given-names: G. Blake
+      - family-names: Bernard
+        given-names: Olivier
+      - family-names: Liu
+        given-names: Yichen
+    year: 2026
+    doi: 10.5281/zenodo.21522058
+    notes: "Earlier public release covering the zero-precession amplitude-damping certificates."
