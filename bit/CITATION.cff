@@ -2,9 +2,9 @@ cff-version: 1.2.0
 message: "If you use this software and data package, please cite this versioned release and the associated article."
 title: "rk-choi-margin: complete-positivity regions of Runge-Kutta discretizations of phase-covariant qubit dynamics (code and data)"
 type: software
-version: 4.0.1
+version: 4.1.0
 date-released: 2026-09-18
-url: "https://github.com/Weyl-Center-for-Mathematical-Physics/rk-choi-complete-positivity/releases/tag/v4.0.1"
+url: "https://github.com/Weyl-Center-for-Mathematical-Physics/rk-choi-complete-positivity/releases/tag/v4.1.0"
 identifiers:
   - type: doi
     value: 10.5281/zenodo.21522057

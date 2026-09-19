@@ -1,8 +1,8 @@
 # Runge-Kutta complete-positivity reproducibility releases
 
-## Current BIT code and data: v4.0.1
+## Current BIT code and data: v4.1.0
 
-The versioned [v4.0.1 release](https://github.com/Weyl-Center-for-Mathematical-Physics/rk-choi-complete-positivity/releases/tag/v4.0.1)
+The versioned [v4.1.0 release](https://github.com/Weyl-Center-for-Mathematical-Physics/rk-choi-complete-positivity/releases/tag/v4.1.0)
 provides the code and data supporting *Complete-positivity regions of Runge-Kutta discretizations of
 phase-covariant qubit dynamics*, by G. Blake Pierpoint, Olivier Bernard, and Yichen Liu.
 
@@ -21,14 +21,14 @@ python -m venv .venv
 ```
 
 See [`bit/README.md`](bit/README.md), [`bit/VERSION.md`](bit/VERSION.md), and the
-[release notes](RELEASE_NOTES_v4.0.1.md). Standalone reproduction explicitly skips checks that require
+[release notes](RELEASE_NOTES_v4.1.0.md). Standalone reproduction explicitly skips checks that require
 the separate manuscript workspace. This is a public reproducibility release, not a journal submission.
 
 The code, data and documentation are MIT-licensed. The root `CITATION.cff` describes the current release.
 Every release is archived on Zenodo: the concept DOI [10.5281/zenodo.21522057](https://doi.org/10.5281/zenodo.21522057) resolves to the
-latest version (v4.0.0 is [10.5281/zenodo.22837831](https://doi.org/10.5281/zenodo.22837831)). v4.0.1 is a
-documentation-only patch of v4.0.0 that adds this DOI to the article and archive metadata; cite the versioned
-GitHub release URL or the concept DOI.
+latest version (v4.0.0 is [10.5281/zenodo.22837831](https://doi.org/10.5281/zenodo.22837831)). v4.1.0 restyles the
+seven figures for the typeset article and edits the prose; certified values, scripts and tables are unchanged
+since v4.0.0. Cite the versioned GitHub release URL or the concept DOI.
 
 ## Preserved historical zero-precession archive
 

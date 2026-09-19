@@ -8,6 +8,15 @@ a minor version adds results without changing existing ones; a patch version cha
 or tests only. Historical version directories (`results/v26` … `results/v34`, `results/jcp_figures_v34`,
 `figures_jcp`) and the historical entry point `reproduce.sh` are preserved unchanged across versions.
 
+## 4.1.0 — figure restyle and prose release (2026-09-18)
+
+The seven figures were restyled for the typeset article (Computer Modern lettering, solid fills instead of
+hatching, consistent line weights and panel labels); the plotted data, series and panels are unchanged, and
+the figure contract tests were updated for the new export settings. No certified value, script output or
+table changed. The article and Online Resource prose was edited; the flattened article source shipped in
+`manuscript_source/` was regenerated. The archive is cited as https://github.com/Weyl-Center-for-Mathematical-Physics/rk-choi-complete-positivity/releases/tag/v4.1.0
+and by the Zenodo concept DOI 10.5281/zenodo.21522057.
+
 ## 4.0.1 — documentation patch (2026-09-18)
 
 No change to code, tests, certified data, figures or tables. The article's Code availability statement,

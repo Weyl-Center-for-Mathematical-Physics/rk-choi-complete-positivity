@@ -2,12 +2,12 @@
 
 **Article:** Complete-positivity regions of Runge–Kutta discretizations of phase-covariant qubit dynamics
 **Target journal:** BIT Numerical Mathematics (not submitted)
-**Archive version:** 4.0.1 (see `VERSION.md`)
+**Archive version:** 4.1.0 (see `VERSION.md`)
 **Authors:** G. Blake Pierpoint, Olivier Bernard, and Yichen Liu
 **Corresponding author:** G. Blake Pierpoint, pierpogb@odu.edu
 **License:** MIT (`LICENSE`); citation metadata in `CITATION.cff`
 
-**Versioned release:** https://github.com/Weyl-Center-for-Mathematical-Physics/rk-choi-complete-positivity/releases/tag/v4.0.1
+**Versioned release:** https://github.com/Weyl-Center-for-Mathematical-Physics/rk-choi-complete-positivity/releases/tag/v4.1.0
 **Archived:** Zenodo concept DOI https://doi.org/10.5281/zenodo.21522057 (resolves to the latest version)
 
 This archive contains the exact symbolic calculations, certified numerical records, deterministic figure

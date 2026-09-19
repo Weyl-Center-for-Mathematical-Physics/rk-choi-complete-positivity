@@ -118,7 +118,12 @@ def test_export_settings_embed_fonts(generator):
     rc = generator.EXPORT_RC
     assert rc["pdf.fonttype"] == 42
     assert rc["ps.fonttype"] in (3, 42)
-    assert "Arial" in rc["font.sans-serif"][0]
+    # Computer Modern text and mathematics, matching the pdflatex article (cmr10 ships with Matplotlib, so the
+    # export never depends on system fonts); tick labels go through mathtext so the minus sign has a glyph.
+    assert rc["font.family"] == "serif"
+    assert rc["font.serif"][0] == "cmr10"
+    assert rc["mathtext.fontset"] == "cm"
+    assert rc["axes.formatter.use_mathtext"] is True
 
 
 def test_deterministic_regeneration(generator, tmp_path):
