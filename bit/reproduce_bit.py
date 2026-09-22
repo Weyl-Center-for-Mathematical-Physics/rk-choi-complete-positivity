@@ -1,15 +1,15 @@
 #!/usr/bin/env python3
-"""Cross-platform reproduction orchestrator for the BIT Numerical Mathematics revision.
+"""Cross-platform reproduction entry point for the code and data of the BIT Numerical Mathematics article.
 
 Stages (run in this order by ``all``):
   certificates        independent first-principles verification of the article's claims and of the
                       extrapolation corollary (SymPy exact arithmetic; writes results/bit_revision/*.json|md)
   tests               the complete pytest suite, one isolated process per module (historical v3.5 modules
-                      plus the BIT contract modules); a collection gate records the number of tests
+                      plus the BIT contract modules); a first collection step records the number of tests
   audits              the retained v3.x audit scripts whose checks the article still relies on
   figures             deterministic regeneration of the BIT figure set and the Online Resource tables
-  manuscript-contract the manuscript source audit (needs the revision-root ``manuscript`` directory;
-                      skipped by ``all`` when the archive is used stand-alone)
+  manuscript-contract the audit of the article's LaTeX sources (given with ``--manuscript <dir>``, or found in a
+                      ``manuscript`` folder next to this archive; skipped by ``all`` when neither is available)
 
 Every stage prints the exact command lines it runs, stops at the first failure, returns that failure's
 exit code, and appends a timestamped log under results/bit_revision/logs/.  ``all`` finishes by writing
@@ -57,7 +57,7 @@ TEST_MODULES = [
     "tests/test_v34_remediation.py",
     "tests/test_v35_editorial_layout.py",
     "tests/test_v35_submission_revision.py",
-    # ... followed by the BIT revision contract modules
+    # ... followed by the BIT contract modules
     "tests/test_bit_scientific_contract.py",
     "tests/test_bit_figure_contract.py",
     "tests/test_bit_table_contract.py",
@@ -194,8 +194,9 @@ def run_stage(stage: str, log_dir: Path, manuscript: Path | None, submission: Pa
             if proc.stderr:
                 fh.write("\n[stderr]\n" + proc.stderr)
             fh.write(f"\n<== exit {proc.returncode} after {dt:.1f} s\n")
-            # the manifest records portable command lines: the interpreter as "python" and workspace paths relative to the archive
-            shown = [("python" if a == PY else a.replace(str(ROOT.parent), "<revision-root>").replace(str(ROOT), "<archive>")) for a in argv]
+            # the manifest records portable command lines: the interpreter as "python" and absolute paths relative to
+            # the archive folder (the archive itself first, then its parent folder)
+            shown = [("python" if a == PY else a.replace(str(ROOT), "<archive>").replace(str(ROOT.parent), "<archive>" + os.sep + "..")) for a in argv]
             entry = {"title": title, "argv": shown, "exit": proc.returncode, "seconds": round(dt, 1)}
             m = re.search(r"(\d+) passed", proc.stdout)
             if m and "pytest" in line:
@@ -231,13 +232,19 @@ def frozen_hashes() -> dict[str, str]:
     return {rel: sha256(ROOT / rel) for rel in FROZEN_INPUTS if (ROOT / rel).is_file()}
 
 
+# Manuscript files that are not bound into the manifest: article_numbers.tex is derived by the package builder and
+# checked against main.aux there; the cover letter is not part of the scientific record, so its date can change on
+# submission day without a new archive.
+MANUSCRIPT_UNBOUND = {"article_numbers.tex", "cover_letter.tex"}
+
+
 def manuscript_hashes(manuscript: Path | None) -> dict[str, str]:
+    """SHA-256 of the article and Online Resource sources the tests were run against."""
     if manuscript is None or not manuscript.is_dir():
         return {}
-    # article_numbers.tex is derived by the package builder and checked against main.aux there.
     return {p.name: sha256(p) for p in sorted(manuscript.iterdir())
             if p.is_file() and p.suffix in {".tex", ".bib", ".eps", ".cls", ".bst"}
-            and p.name != "article_numbers.tex"}
+            and p.name not in MANUSCRIPT_UNBOUND}
 
 
 def write_manifest(records: list[dict], path: Path = MANIFEST, source_inputs: dict | None = None,
@@ -273,7 +280,8 @@ def write_manifest(records: list[dict], path: Path = MANIFEST, source_inputs: di
 def main(argv: list[str] | None = None) -> int:
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("stage", choices=STAGES + ["all"])
-    ap.add_argument("--manuscript", type=Path, default=None, help="revision-root manuscript directory for the manuscript-contract stage")
+    ap.add_argument("--manuscript", type=Path, default=None,
+                    help="directory with the article's LaTeX sources (main.tex) for the manuscript-contract stage")
     ap.add_argument("--submission", type=Path, default=None, help="submission directory (optional, forwarded to the source audit)")
     ap.add_argument("--audit-json", type=Path, default=None, help="where the source audit writes its JSON (default: results/bit_revision/bit_audit.json)")
     ap.add_argument("--log-dir", type=Path, default=DEFAULT_LOG_DIR, help="log directory; must lie inside this archive")

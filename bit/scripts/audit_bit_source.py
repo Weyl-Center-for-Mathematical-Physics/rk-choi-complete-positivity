@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Deterministic BIT Numerical Mathematics source and package auditor (Task 16).
+"""Deterministic source and package auditor for the BIT Numerical Mathematics article.
 
     python scripts/audit_bit_source.py --manuscript ../manuscript [--submission ../submission]
         [--build-dir ../build/main_build] [--code-dir .] --status PRE_SUBMISSION|FINAL [--json out.json]

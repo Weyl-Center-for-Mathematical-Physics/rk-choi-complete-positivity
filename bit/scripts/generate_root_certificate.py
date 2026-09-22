@@ -1,3 +1,9 @@
+"""Exact root and sign certificates of the admissible sets on nonrotating one-way damping.
+
+Writes results/closeout/root_sign_certificate_v2_7.json (records), supplement/root_sign_certificate_v2_7.md,
+and supplement/root_sign_certificate_v2_7.tex (a compilable copy of Online Resource 1, Section 9). With
+--esm-copy PATH the Online Resource section itself is written to PATH as well.
+"""
 from __future__ import annotations
 
 import json
@@ -250,26 +256,6 @@ def interval_label(left: RootBracket | None, right: RootBracket | None) -> str:
     return f"({ltxt}, {rtxt})"
 
 
-def latex_interval_label(left: RootBracket | None, right: RootBracket | None) -> str:
-    if left is None:
-        ltxt = "0"
-    else:
-        ltxt = root_short_tex(left)
-    if right is None:
-        return rf"({ltxt},\infty)"
-    return rf"({ltxt},{root_short_tex(right)})"
-
-
-def root_short_tex(root: RootBracket) -> str:
-    if root.exact is not None:
-        return sp.latex(root.exact)
-    return root.approx
-
-
-def expr_tex(expr: sp.Expr) -> str:
-    return sp.latex(sp.factor(expr))
-
-
 def method_endpoint_name(method_key: str, source: str, positive_index: int) -> str | None:
     mapping = {
         ("rk4", "a-1", 0): r"\alpha_4",
@@ -339,29 +325,6 @@ def derive_admissible_components(sign_rows: list[dict[str, Any]], event_rows: li
         else:
             rendered.append(rf"[{left},{right}]")
     return components, r"\cup".join(rendered)
-
-
-def polynomial_align_tex(expr: sp.Expr, lhs: str, *, terms_per_line: int = 3) -> str:
-    expr = sp.sympify(expr)
-    for symbol in expr.free_symbols:
-        if symbol.name == "x" and symbol != x:
-            expr = expr.subs(symbol, x)
-    poly = sp.Poly(sp.expand(expr), x, domain=sp.ZZ)
-    terms = poly.terms()
-    chunks = [terms[i:i + terms_per_line] for i in range(0, len(terms), terms_per_line)]
-    lines: list[str] = []
-    for chunk_index, chunk in enumerate(chunks):
-        text = ""
-        for term_index, ((power,), coefficient) in enumerate(chunk):
-            term = sp.latex(abs(coefficient) * x**power)
-            if chunk_index == 0 and term_index == 0:
-                text += ("-" if coefficient < 0 else "") + term
-            else:
-                text += ("-" if coefficient < 0 else "+") + term
-        prefix = rf"{lhs}={{}}&" if chunk_index == 0 else r"&"
-        suffix = r"\\" if chunk_index < len(chunks) - 1 else ""
-        lines.append(prefix + text + suffix)
-    return "\\begin{aligned}\n" + "\n".join(lines) + "\n\\end{aligned}"
 
 
 def analyze_method(key: str) -> dict[str, Any]:
@@ -566,158 +529,324 @@ def write_markdown(methods_data: list[dict[str, Any]]) -> str:
     return "\n".join(lines) + "\n"
 
 
-def tex_escape(text: str) -> str:
-    return text.replace("&", r"\&").replace("_", r"\_")
+# ---------------------------------------------------------------------------
+# LaTeX output: Online Resource 1, Section 9, and a standalone copy of it
+# ---------------------------------------------------------------------------
+# Method names of the article's Table 1, keyed by the method keys of rk_choi_margin.methods.
+DISPLAY_NAMES = {
+    "euler": "Forward Euler",
+    "rk2": "Two-stage order two (Heun)",
+    "rk3": "SSPRK(3,3)",
+    "rk4": "Classical RK4",
+    "dp5": "Dormand--Prince 5 (principal)",
+    "dp4": "Dormand--Prince 4 (embedded)",
+    "be": "Backward Euler",
+    "im": "Implicit midpoint",
+}
+RICHARDSON_NAME = r"Richardson extrapolate of RK4 ($n=2$)"
+RICHARDSON_HEADING = r"Richardson extrapolate of RK4 (\texorpdfstring{$n=2$}{n=2})"
+RICHARDSON_SET = r"\{0\}\cup[\rho_-,\rho_+]"
+
+# The Richardson extrapolate is not a Butcher tableau of rk_choi_margin.methods; its brackets and exact sign
+# samples are recomputed and checked by scripts/verify_bit_claims.py (claim `richardson_global_sign_chart`).
+RICHARDSON_BLOCK = "\n".join([
+    rf"\section{{{RICHARDSON_HEADING}}}\label{{s:richardson_chart}}",
+    r"Let $R_{\rm ext}$ and $P_{10}$ be the exact polynomials of Section~\ref{s:candidates}, and set $a=R_{\rm ext}(-x)$ and $M=a-R_{\rm ext}(-x/2)^2$. Exact Sturm counts give two positive zeros of $a$, one positive zero of $a-1$, and two positive zeros of $M$; the trivial root $x=0$ is excluded.",
+    r"\begin{center}",
+    r"\begin{tabular}{@{}lll@{}}",
+    r"\toprule",
+    r"Root & Certified rational bracket & Boundary \\",
+    r"\midrule",
+    r"$r_{0a}$ & $(2.919911381617275,2.919911381617276)$ & population floor, $a=0$ \\",
+    r"$r_{0b}$ & $(6.034383873449079,6.034383873449080)$ & population floor, $a=0$ \\",
+    r"$\rho_-$ & $(6.034523958649170,6.034523958649171)$ & margin, $M=0$ \\",
+    r"$\rho_+$ & $(6.459127767825720,6.459127767825721)$ & population ceiling, $a=1$ \\",
+    r"$r_M$ & $(22.102437082855815,22.102437082855816)$ & margin, $M=0$ \\",
+    r"\bottomrule",
+    r"\end{tabular}",
+    r"\end{center}",
+    r"Each bracket contains one simple root of its indicated polynomial, and these are all positive boundary roots. Exact signs at the rational samples $1,4,6.03445,6.2,10,23$, respectively, give the complete chart:",
+    r"\begin{center}",
+    r"\begin{tabular}{@{}lcccc@{}}",
+    r"\toprule",
+    r"Open interval & $\operatorname{sgn}a$ & $\operatorname{sgn}(a-1)$ & $\operatorname{sgn}M$ & CPTP \\",
+    r"\midrule",
+    r"$(0,r_{0a})$ & $+$ & $-$ & $-$ & no \\",
+    r"$(r_{0a},r_{0b})$ & $-$ & $-$ & $-$ & no \\",
+    r"$(r_{0b},\rho_-)$ & $+$ & $-$ & $-$ & no \\",
+    r"$(\rho_-,\rho_+)$ & $+$ & $-$ & $+$ & yes \\",
+    r"$(\rho_+,r_M)$ & $+$ & $+$ & $+$ & no \\",
+    r"$(r_M,\infty)$ & $+$ & $+$ & $-$ & no \\",
+    r"\bottomrule",
+    r"\end{tabular}",
+    r"\end{center}",
+    r"\textbf{Completeness of the sign chart.} The closed inequalities and continuity include both $\rho_-$ and $\rho_+$; at $r_{0a}$ and $r_{0b}$ the margin is strictly negative, and at $r_M$ the population ceiling is strictly violated. The chart is therefore complete, and the admissible set is exactly $\mathcal A_{\rm ext}=\{0\}\cup[\rho_-,\rho_+]$. First defect $(m,\eta_m)=(6,-1/4320)$; orientation coefficient $-31/138240$.",
+])
+
+# Approximate widths in points of math glyphs at 9 pt, used only to break long polynomials across lines.
+POLY_LINE_BUDGET = 380.0
+
+
+def tex_sign(value: int) -> str:
+    return "$+$" if value > 0 else ("$-$" if value < 0 else "$0$")
+
+
+def boundary_tex(sources: Iterable[str]) -> str:
+    source_set = set(sources)
+    if "pole" in source_set:
+        return "stage singularity"
+    parts: list[str] = []
+    if "a" in source_set:
+        parts.append(r"population floor, $a=0$")
+    if "a-1" in source_set:
+        parts.append(r"population ceiling, $a=1$")
+    if "M" in source_set:
+        parts.append(r"margin, $M_R=0$")
+    return "; ".join(parts)
+
+
+# Typeset names of positive boundary roots that carry no label in the certificate records: r_0 for a zero of a,
+# r_1 for a zero of a - 1, r_M for a zero of M_R (as in the Richardson block), with a, b, ... when a method has
+# several.  They exist only in the LaTeX output; the JSON records are unchanged.
+FALLBACK_ROOT_NAMES = {"a": "0", "a-1": "1", "M": "M", "pole": "p"}
+
+
+def root_labels_tex(data: dict[str, Any]) -> list[str]:
+    """One label per positive boundary root: the recorded label if there is one, else r_0, r_1, r_M, ..."""
+    events = data["positive_events"]
+    bases = [None if event["labels"] else FALLBACK_ROOT_NAMES[event["sources"][0]] for event in events]
+    seen: dict[str, int] = {}
+    labels = []
+    for event, base in zip(events, bases):
+        if base is None:
+            labels.append(", ".join(event["labels"]))
+            continue
+        if bases.count(base) == 1:
+            labels.append(rf"r_{{{base}}}" if len(base) > 1 else rf"r_{base}")
+        else:
+            seen[base] = seen.get(base, 0) + 1
+            labels.append(rf"r_{{{base}{'abcdefgh'[seen[base] - 1]}}}")
+    return labels
+
+
+def event_short_tex(event: dict[str, Any], label: str) -> str:
+    """Name of a positive boundary root in a sign chart: its recorded label, else its exact value, else its typeset label."""
+    if event["labels"]:
+        return event["labels"][0]
+    root = event["root"]
+    return sp.latex(sp.Rational(root["exact"])) if root["exact"] is not None else label
+
+
+def _as_x_expr(text: str) -> sp.Expr:
+    expr = sp.sympify(text)
+    for symbol in expr.free_symbols:
+        if symbol.name == "x" and symbol != x:
+            expr = expr.subs(symbol, x)
+    return expr
+
+
+def polynomial_lines_tex(expr: sp.Expr) -> list[str]:
+    """Terms of an integer polynomial in decreasing degree, grouped into lines of bounded printed width."""
+    poly = sp.Poly(sp.expand(expr), x, domain=sp.ZZ)
+    lines: list[str] = []
+    text, width = "", 0.0
+    for index, ((power,), coefficient) in enumerate(poly.terms()):
+        magnitude = abs(int(coefficient))
+        term = sp.latex(magnitude * x**power)
+        sign = "-" if coefficient < 0 else ("" if index == 0 else "+")
+        term_width = (9.5 if index else (4.5 if sign else 0.0))
+        term_width += 4.5 * len(str(magnitude)) if (magnitude != 1 or power == 0) else 0.0
+        term_width += (5.2 if power > 0 else 0.0) + (3.2 * len(str(power)) if power > 1 else 0.0)
+        if text and width + term_width > POLY_LINE_BUDGET:
+            lines.append(text)
+            text, width = "", 0.0
+        text += sign + term
+        width += term_width
+    lines.append(text)
+    return lines
+
+
+def aligned_polynomial(lhs: str, expr: sp.Expr, end: str) -> list[str]:
+    chunks = polynomial_lines_tex(expr)
+    rows = [rf"{lhs}&={chunks[0]}"] + [rf"&\quad{chunk}" for chunk in chunks[1:]]
+    rows[-1] += end
+    return rows
+
+
+def margin_display_tex(data: dict[str, Any]) -> str:
+    """M_R(x,0,0) in factored form, or as a rational multiple of P_M(x) when the factored form is very long."""
+    M_expr = _as_x_expr(data["M"])
+    factored = sp.latex(sp.factor(M_expr))
+    if len(factored) <= 160:
+        return factored
+    ratio = sp.cancel(M_expr / _as_x_expr(data["polynomials"]["M"]["primitive_numerator"]))
+    if ratio.free_symbols or not ratio.is_Rational or ratio.p not in (1, -1):
+        return factored
+    return ("-" if ratio < 0 else "") + rf"\frac{{P_M(x)}}{{{ratio.q}}}"
+
+
+def method_equations_tex(data: dict[str, Any]) -> str:
+    rows = [
+        rf"R(s)&={data['R_latex']},",
+        rf"a(x)&={sp.latex(sp.factor(_as_x_expr(data['a'])))},",
+        rf"M_R(x,0,0)&={margin_display_tex(data)},",
+    ]
+    numerators = [("a", "P_0"), ("a-1", "P_1"), ("M", "P_M")]
+    entries: list[tuple[str, sp.Expr]] = []
+    for source, name in numerators:
+        entries.append((rf"{name}(x)", _as_x_expr(data["polynomials"][source]["primitive_numerator"])))
+    for source, name in numerators:
+        primitive = _as_x_expr(data["polynomials"][source]["primitive_numerator"])
+        square_free = _as_x_expr(data["polynomials"][source]["square_free"])
+        if sp.expand(primitive - square_free) != 0:
+            entries.append((rf"\operatorname{{sqf}}{name}(x)", square_free))
+    for index, (lhs, expr) in enumerate(entries):
+        rows.extend(aligned_polynomial(lhs, expr, "." if index == len(entries) - 1 else ","))
+    return "\\begin{align*}\n" + "\\\\\n".join(rows) + "\n\\end{align*}"
 
 
 def roots_table_tex(data: dict[str, Any]) -> str:
-    if not data["positive_events"]:
-        return "No positive real boundary roots or stage-resolvent singularities occur."
+    events = data["positive_events"]
+    if not events:
+        return "There is no positive boundary root."
     rows = []
-    for event in data["positive_events"]:
+    for event, label in zip(events, root_labels_tex(data)):
         root = event["root"]
-        label = ", ".join(event["labels"]) if event["labels"] else "--"
         if root["exact"] is not None:
-            bracket = f"${sp.latex(sp.Rational(root['exact']))}$"
+            bracket = f"${sp.latex(sp.Rational(root['exact']))}$ (exact)"
         else:
             bracket = f"$({root['lo_decimal']},{root['hi_decimal']})$"
-        rows.append(
-            f"${label}$ & {bracket} & ${root['approx']}$ & {tex_escape(event['mechanism'])} \\\\"
-        )
-    return "\n".join(
-        [
-            r"\begin{center}",
-            r"\begin{tabularx}{\textwidth}{@{}l l l X@{}}",
-            r"\toprule",
-            r"Label & Certified rational bracket & Approx. & Source / active mechanism \\",
-            r"\midrule",
-            *rows,
-            r"\bottomrule",
-            r"\end{tabularx}",
-            r"\end{center}",
-        ]
-    )
+        cells = [f"${label}$", bracket, f"${root['approx']}$", boundary_tex(event["sources"])]
+        rows.append(" & ".join(cells) + r" \\")
+    header = r"Root & Certified rational bracket & Approx. & Boundary \\"
+    return "\n".join([r"\begin{center}", r"\begin{tabular}{@{}llll@{}}", r"\toprule", header, r"\midrule",
+                      *rows, r"\bottomrule", r"\end{tabular}", r"\end{center}"])
 
 
 def sign_table_tex(data: dict[str, Any]) -> str:
+    """Sign chart; the stage-domain column is printed only when some interval leaves the stage domain."""
+    show_domain = not all(row["domain"] for row in data["sign_rows"])
+    names = ["0"] + [event_short_tex(event, label) for event, label in zip(data["positive_events"], root_labels_tex(data))] + [r"\infty"]
     rows = []
-    positive_roots = [
-        RootBracket(
-            sp.Rational(row["root"]["lo"]),
-            sp.Rational(row["root"]["hi"]),
-            row["root"]["approx"],
-            row["root"]["multiplicity"],
-            sp.Rational(row["root"]["exact"]) if row["root"]["exact"] is not None else None,
-        )
-        for row in data["positive_events"]
-    ]
-    boundaries: list[RootBracket | None] = [None] + positive_roots + [None]
     for i, row in enumerate(data["sign_rows"]):
-        interval = latex_interval_label(boundaries[i], boundaries[i + 1])
-        rows.append(
-            f"${interval}$ & {format_sign(row['sign_a'])} & {format_sign(row['sign_a_minus_1'])} & {format_sign(row['sign_M'])} & "
-            f"{'yes' if row['domain'] else 'no'} & {'yes' if row['cptp'] else 'no'} \\\\"
-        )
-    return "\n".join(
-        [
-            r"\begin{center}",
-            r"\begin{tabular}{@{}l c c c c c@{}}",
-            r"\toprule",
-            r"Open interval & $\operatorname{sgn}a$ & $\operatorname{sgn}(a-1)$ & $\operatorname{sgn}M$ & domain & CPTP \\",
-            r"\midrule",
-            *rows,
-            r"\bottomrule",
-            r"\end{tabular}",
-            r"\end{center}",
-        ]
-    )
+        cells = [f"$({names[i]},{names[i + 1]})$", tex_sign(row["sign_a"]), tex_sign(row["sign_a_minus_1"]), tex_sign(row["sign_M"])]
+        if show_domain:
+            cells.append("yes" if row["domain"] else "no")
+        cells.append("yes" if row["cptp"] else "no")
+        rows.append(" & ".join(cells) + r" \\")
+    header = r"Open interval & $\operatorname{sgn}a$ & $\operatorname{sgn}(a-1)$ & $\operatorname{sgn}M_R$ & " + ("Stage domain & " if show_domain else "") + r"CPTP \\"
+    spec = "lcccc" + ("c" if show_domain else "")
+    return "\n".join([r"\begin{center}", rf"\begin{{tabular}}{{@{{}}{spec}@{{}}}}", r"\toprule", header, r"\midrule",
+                      *rows, r"\bottomrule", r"\end{tabular}", r"\end{center}"])
 
 
-def write_tex(methods_data: list[dict[str, Any]]) -> str:
-    summary_rows = []
-    for data in methods_data:
-        summary_rows.append(
-            f"{tex_escape(data['name'])} & all $x\\geq0$ & ${data['admissible_set_latex']}$ \\\\"
-        )
+def dp4_completeness_tex(data: dict[str, Any]) -> str:
+    """Completeness statement for the embedded Dormand--Prince chart, checked against its exact sign rows."""
+    labels = [event["labels"] for event in data["positive_events"]]
+    rows = data["sign_rows"]
+    ok = labels == [[r"\beta_-"], [r"\beta_+"], [r"\delta_M"], [r"\delta_1"], [r"\delta_0"]] and len(rows) == 6
+    ok = ok and rows[0]["sign_M"] < 0 and rows[1]["cptp"] and rows[2]["sign_a_minus_1"] > 0 and rows[3]["sign_a_minus_1"] > 0
+    ok = ok and all(row["sign_M"] < 0 for row in rows[3:]) and not any(row["cptp"] for row in rows[2:])
+    if not ok:
+        raise RuntimeError("the embedded Dormand--Prince sign chart no longer matches its completeness statement")
+    return (r"\textbf{Completeness of the sign chart.} "
+            r"The margin is negative on $(0,\beta_-)$, the population ceiling fails on $(\beta_+,\delta_M]$, and the margin is "
+            r"negative on $(\delta_M,\infty)$, which contains $\delta_1$ and $\delta_0$. The inequalities $a\le1$ and $M_R\ge0$ "
+            r"therefore hold together only on $[\beta_-,\beta_+]$, and the chart is complete.")
 
-    body: list[str] = [
+
+def method_block_tex(data: dict[str, Any]) -> str:
+    lines = [rf"\section{{{DISPLAY_NAMES[data['key']]}}}"]
+    if data["stage_full"] != "1" or data["stage_half"] != "1":
+        full = sp.latex(sp.sympify(data["stage_full"]), fold_short_frac=True)
+        half = sp.latex(sp.sympify(data["stage_half"]), fold_short_frac=True)
+        lines.append(rf"Stage determinants: ${full}$ (at $-x$) and ${half}$ (at $-x/2$).")
+    lines.extend([method_equations_tex(data), roots_table_tex(data), sign_table_tex(data)])
+    closing = []
+    if data["key"] == "dp4":
+        closing.append(dp4_completeness_tex(data))
+    defect = data["defect"]
+    closing.append(rf"Admissible set: $\mathcal A_R={data['admissible_set_latex']}$. First defect $(m,\eta_m)=({defect['m']},{defect['eta']})$; "
+                   rf"orientation coefficient ${defect['boundary_coefficient']}$.")
+    lines.append(" ".join(closing))
+    return "\n".join(lines)
+
+
+def esm_certificate_tex(methods_data: list[dict[str, Any]]) -> str:
+    """Section 9 of Online Resource 1 (manuscript/nine_candidate_certificate.tex), from the certificate records.
+
+    The fragment depends only on JSON-serializable fields, so it can be rebuilt from
+    results/closeout/root_sign_certificate_v2_7.json alone."""
+    by_key = {data["key"]: data for data in methods_data}
+    order = ["euler", "rk2", "rk3", "rk4", "richardson", "dp5", "dp4", "be", "im"]
+    summary = []
+    for key in order:
+        if key == "richardson":
+            summary.append(rf"{RICHARDSON_NAME} & ${RICHARDSON_SET}$ \\")
+        else:
+            summary.append(rf"{DISPLAY_NAMES[key]} & ${by_key[key]['admissible_set_latex']}$ \\")
+    body = [r"\section{Summary}", r"\begin{center}", r"\begin{tabular}{@{}ll@{}}", r"\toprule",
+            r"Method & Admissible set on nonrotating one-way damping \\", r"\midrule", *summary, r"\bottomrule",
+            r"\end{tabular}", r"\end{center}"]
+    for key in order:
+        body.append(RICHARDSON_BLOCK if key == "richardson" else method_block_tex(by_key[key]))
+    return "\n".join(body) + "\n"
+
+
+STANDALONE_INTRO = (
+    r"This is Section~9 of Online Resource~1 of the article; references to Section~5 are to that document. "
+    r"For each method it lists the stability function, the population multiplier $a(x)=R(-x)$ and the margin $M_R(x,0,0)$, "
+    r"the numerators $P_0$, $P_1$, $P_M$ whose zeros are those of $a$, $a-1$, and $M_R$ (each $P$ is the primitive integer "
+    r"numerator with positive leading coefficient, so its sign can differ from that of $a$, $a-1$, or $M_R$; the sign charts give "
+    r"the signs of $a$, $a-1$, and $M_R$ themselves), their square-free parts where these differ, a labelled rational bracket for "
+    r"every positive root, and the sign chart. For the explicit methods the stage equations are solvable for every $x$; for "
+    r"backward Euler and the implicit midpoint rule the stage determinants $\det(I+xA)$ and $\det(I+xA/2)$ at the population and "
+    r"coherence arguments $-x$ and $-x/2$ are positive for $x\ge0$. Decimal bracket endpoints are exact rational numbers, and "
+    r"every sign is evaluated exactly at a rational sample point."
+)
+
+
+def standalone_certificate_tex(fragment: str) -> str:
+    """A compilable copy of the Online Resource section, kept with the code and data."""
+    preamble = [
         r"\documentclass[11pt]{article}",
         r"\usepackage[T1]{fontenc}",
         r"\usepackage[utf8]{inputenc}",
         r"\usepackage{lmodern}",
-        r"\usepackage{amsmath,amssymb,mathtools}",
-        r"\usepackage{booktabs,tabularx,array,longtable}",
-        r"\usepackage{adjustbox}",
-        r"\usepackage[letterpaper,margin=0.72in]{geometry}",
+        r"\usepackage{amsmath,amssymb}",
+        r"\usepackage{booktabs}",
+        r"\usepackage[a4paper,margin=17mm]{geometry}",
         r"\usepackage{microtype}",
-        r"\usepackage[hidelinks]{hyperref}",
-        r"\hypersetup{pdftitle={Supplemental Material: Certified complete-positivity stability regions and adaptive guards for Runge--Kutta propagation of phase-covariant qubits},pdfauthor={G. Blake Pierpoint; Olivier Bernard; Yichen Liu},pdfsubject={Exact boundary polynomials, Sturm-certified root isolation, sign charts, and no-omission certificate},pdfkeywords={complete positivity, Runge--Kutta methods, Choi matrix, root isolation, sign charts}}",
+        r"\providecommand{\texorpdfstring}[2]{#1}",
+        r"\makeatletter\@namedef{r@s:candidates}{{5}{}}\makeatother% Section 5 of Online Resource 1",
         r"\setlength{\parindent}{0pt}",
         r"\setlength{\parskip}{5pt}",
         r"\setlength{\emergencystretch}{3em}",
-        r"\title{Supplemental Material for\\[3pt]\large ``Certified complete-positivity stability regions and adaptive guards for Runge--Kutta propagation of phase-covariant qubits''}",
-        r"\author{G. Blake Pierpoint$^{1,*}$, Olivier Bernard$^{3,2}$, and Yichen Liu$^{4,2}$\\[6pt]",
-        r"\small $^1$Old Dominion University, 5115 Hampton Boulevard,\\",
-        r"\small Norfolk, Virginia 23529, USA\\",
-        r"\small $^2$Weyl Center for Mathematical Physics, Washington, DC, USA\\",
-        r"\small $^3$UFR PhITEM, Universit\'e Grenoble Alpes, Saint-Martin-d'H\`eres, France\\",
-        r"\small $^4$Department of Computer Science and Engineering, Shanghai Jiao Tong University, Shanghai, China\\[3pt]",
-        r"\small $^*$pierpogb@odu.edu}",
-        r"\date{August 2026}",
+        r"\title{Exact boundary polynomials, root brackets, and sign charts on nonrotating one-way damping\\[4pt]"
+        r"\large Online Resource~1, Section~9, of ``Complete-positivity regions of Runge--Kutta discretizations of phase-covariant qubit dynamics''}",
+        r"\author{G. Blake Pierpoint, Olivier Bernard, and Yichen Liu}",
+        r"\date{}",
         r"\begin{document}",
         r"\maketitle",
-        r"\section*{Scope of this certificate}",
-        r"This document reconstructs every pure-amplitude-damping CPTP-admissible set reported in the article from exact rational Butcher data. It records the boundary numerators for $a=0$, $a=1$, and $M_R=0$; the full- and half-step stage-resolvent factors; rational isolating intervals for every nonnegative real root; and the sign on every intervening interval. Root counts use Sturm sequences, and interval signs use exact rational sample points. Finite decimal bracket endpoints below denote exact rational numbers. A direct one-step map is CPTP exactly when the RK stage equations are defined and $a(x)\leq1$ and $M_R(x,0)\geq0$; the latter already implies $a(x)\geq0$.",
-        r"The companion software archive contains the machine-readable JSON certificate, exact sample points and multiplicities, source code, regression tests, and all plotting data. No reported endpoint is inferred from visual sampling; every endpoint is produced by or checked against exact real-root isolation.",
-        r"\section{Summary}",
-        r"\begin{center}",
-        r"\begin{tabularx}{\textwidth}{@{}X l l@{}}",
-        r"\toprule",
-        r"Method & Stage domain on $x\geq0$ & Certified admissible set \\",
-        r"\midrule",
-        *summary_rows,
-        r"\bottomrule",
-        r"\end{tabularx}",
-        r"\end{center}",
+        STANDALONE_INTRO,
+        "",
     ]
-
-    for idx, data in enumerate(methods_data, start=2):
-        body.extend(
-            [
-                rf"\section{{{tex_escape(data['name'])}}}",
-                r"The exact stability function is",
-                r"\[\begin{adjustbox}{max width=0.98\textwidth}$\displaystyle R(s)=" + data['R_latex'] + r"$\end{adjustbox}\]",
-                rf"The full- and half-step stage-resolvent factors are ${sp.latex(sp.sympify(data['stage_full']))}$ and ${sp.latex(sp.sympify(data['stage_half']))}$, respectively.",
-                r"The exact scalar functions are",
-                r"\[\begin{adjustbox}{max width=0.98\textwidth}$\displaystyle a(x)=" + sp.latex(sp.factor(sp.sympify(data['a']))) + r"$\end{adjustbox}\]",
-                r"\[\begin{adjustbox}{max width=0.98\textwidth}$\displaystyle M_R(x,0,0)=" + sp.latex(sp.factor(sp.sympify(data['M']))) + r"$\end{adjustbox}\]",
-                r"The primitive boundary numerators below isolate the zeros of $a$, $a-1$, and $M_R$; their signs are retained in the exact expressions above and in every interval row.",
-                r"\[" + polynomial_align_tex(sp.sympify(data['polynomials']['a']['primitive_numerator']), r"P_0(x)") + r"\]",
-                r"\[" + polynomial_align_tex(sp.sympify(data['polynomials']['a-1']['primitive_numerator']), r"P_1(x)") + r"\]",
-                r"\[" + polynomial_align_tex(sp.sympify(data['polynomials']['M']['primitive_numerator']), r"P_M(x)") + r"\]",
-                r"These equations correspond respectively to $a(x)=0$, $a(x)=1$, and $M_R(x,0,0)=0$. Their square-free parts are",
-                r"\[" + polynomial_align_tex(sp.sympify(data['polynomials']['a']['square_free']), r"\operatorname{sqf}P_0") + r"\]",
-                r"\[" + polynomial_align_tex(sp.sympify(data['polynomials']['a-1']['square_free']), r"\operatorname{sqf}P_1") + r"\]",
-                r"\[" + polynomial_align_tex(sp.sympify(data['polynomials']['M']['square_free']), r"\operatorname{sqf}P_M") + r"\]",
-                roots_table_tex(data),
-                sign_table_tex(data),
-                rf"The certified admissible set is $\mathcal A_R={data['admissible_set_latex']}$. The first exponential defect is $(m,\eta_m)=({data['defect']['m']},{sp.latex(sp.sympify(data['defect']['eta']))})$, and the signed boundary-law coefficient is ${sp.latex(sp.sympify(data['defect']['boundary_coefficient']))}$.",
-            ]
-        )
-
-    body.extend(
-        [
-            r"\section{Embedded Dormand--Prince no-omission check}",
-            r"For the embedded fourth-order formula, the ordered positive events are the first margin zero $\beta_-$, the first population-ceiling zero $\beta_+$, the second margin zero $\delta_M$, the second population-ceiling zero $\delta_1$, and the population-floor zero $\delta_0$. The complete sign chart shows that both CPTP inequalities hold only between $\beta_-$ and $\beta_+$. Population overflow excludes the region after $\beta_+$, the margin is again negative after $\delta_M$, and the population multiplier becomes negative after $\delta_0$. Consequently no later root generates an omitted admissible component.",
-            r"\section{Reproducibility}",
-            r"The companion JSON records exact expressions, rational brackets, root multiplicities, exact rational sample points, and interval truth values. This PDF is generated directly from the exact tableaux in \texttt{src/rk\_choi\_margin/methods.py}; every displayed endpoint is produced by or checked against exact real-root isolation rather than visual sampling.",
-            r"\end{document}",
-        ]
-    )
-    return "\n".join(body) + "\n"
+    return "\n".join(preamble) + "\n" + fragment + r"\end{document}" + "\n"
 
 
-def main() -> None:
+def write_lf(path: Path, text: str) -> None:
+    with open(path, "w", encoding="utf-8", newline="\n") as handle:
+        handle.write(text)
+
+
+def main(argv: list[str] | None = None) -> None:
+    import argparse
+
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--esm-copy", type=Path, default=None,
+                        help="also write the Online Resource section to this path (e.g. ../manuscript/nine_candidate_certificate.tex)")
+    args = parser.parse_args(argv)
+
     keys = ["euler", "rk2", "rk3", "rk4", "dp5", "dp4", "be", "im"]
     methods_data = [analyze_method(key) for key in keys]
 
@@ -727,11 +856,16 @@ def main() -> None:
 
     json_path.write_text(json.dumps({"version": "2.3", "certification": "exact rational arithmetic with Sturm root counts and exact sign samples", "methods": methods_data}, indent=2), encoding="utf-8")
     md_path.write_text(write_markdown(methods_data), encoding="utf-8")
-    tex_path.write_text(write_tex(methods_data), encoding="utf-8")
+    # The LaTeX is rendered from the records as written to the JSON file, so a copy can be rebuilt from it alone.
+    fragment = esm_certificate_tex(json.loads(json_path.read_text(encoding="utf-8"))["methods"])
+    write_lf(tex_path, standalone_certificate_tex(fragment))
 
     print(f"Wrote {json_path}")
     print(f"Wrote {md_path}")
     print(f"Wrote {tex_path}")
+    if args.esm_copy is not None:
+        write_lf(args.esm_copy, fragment)
+        print(f"Wrote {args.esm_copy}")
     for data in methods_data:
         print(data["key"], data["admissible_set_latex"])
         for event in data["positive_events"]:

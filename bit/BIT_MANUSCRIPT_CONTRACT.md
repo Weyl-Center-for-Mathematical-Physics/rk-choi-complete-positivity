@@ -1,7 +1,7 @@
-# BIT manuscript contract — identifiers to evidence
+# Claim-to-evidence map
 
 Article: *Complete-positivity regions of Runge–Kutta discretizations of phase-covariant qubit dynamics*
-(BIT Numerical Mathematics, revision of 2026-09-18). Every numbered statement, figure,
+(manuscript for BIT Numerical Mathematics, version of 22 September 2026). Every numbered statement, figure,
 and table of the article and of Online Resource 1 maps below to the script that produces or verifies it,
 the data it reads, the tests that guard it, and the certificate files that record it. Evidence classes:
 **symbolic** = exact SymPy identity; **certified** = exact rational/algebraic root isolation (Sturm) or exact
@@ -44,23 +44,22 @@ importing the package; check names below refer to its JSON keys. `scripts/verify
 | Fig. 1 (RK4 classification, inset) | `scripts/generate_bit_figures.py::fig1` | `figure1_exact_branches.csv`, `v27_verification.json`, exact critical values | `tests/test_bit_figure_contract.py` (sources, size, typography, overlap audit, series counts, determinism) |
 | Fig. 2 (candidate maps at ϖ = 2; Richardson margin) | `::fig2` | `figure2_candidate_regions.csv`, `figure2_richardson_margin.csv` | same |
 | Fig. 3 (buffered components; transverse certificates) | `::fig3` | `v27_verification.json`, `figure3_noncommuting_endpoints.csv` | same |
-| Fig. S4 of the Online Resource (accuracy–work; accepted candidate types; moved from the article after the Task 18 review) | `::fig4` (output `FigS4`) | `figure5_tolerance_sweep.csv`, `figure5_action_composition.csv`, `v34_verification.json` | same |
+| Fig. S4 of the Online Resource (accuracy–work; accepted candidate types; moved from the article to the Online Resource) | `::fig4` (output `FigS4`) | `figure5_tolerance_sweep.csv`, `figure5_action_composition.csv`, `v34_verification.json` | same |
 | Fig. S1 (orientation bands) | `::figS1` | exact `G_m` polynomials (symbolic) | same |
 | Fig. S2 (conditioning; signed polynomial; exact vs binary64) | `::figS2` | `figure1_conditioning.csv`, `figure4_conditioning.csv`, `v27_verification.json` | same |
 | Fig. S3 (witness fraction; fixed horizon) | `::figS3` | `figureS2_operational.csv`, mpmath recomputation | same |
 | Table 1 (article) | hand-typeset from `extrapolation_corollary.json` | `results/bit_revision/extrapolation_corollary.json` | `tests/test_bit_table_contract.py` |
 | Table 2 (article) | hand-typeset from frozen records | `figure5_tolerance_sweep.csv`, `v34_verification.json` | `tests/test_bit_table_contract.py` |
 | Tables S2–S4 of the Online Resource (extrapolation per method; tolerance sweep; telemetry); Table S1 (regime samples) is typeset from the `cubic_root_counts_by_regime` record | `scripts/generate_bit_tables.py` → `results/bit_revision/tables/*.tex` | as above (`results/bit_revision/tables/manifest.json`) | `tests/test_bit_table_contract.py` |
-| Grayscale / deuteranopia proofs | `scripts/generate_bit_figures.py::proofs` → `figures_bit/audit/` | rendered PNGs | visual (see `reports/07_FIGURE_ACCESSIBILITY_AUDIT.md`) |
+| Grayscale / deuteranopia proofs | `scripts/generate_bit_figures.py::proofs` → `figures_bit/audit/` | rendered PNGs | visual (proofs in `figures_bit/audit/`) |
 
 ## Reproduction
 
 `python reproduce_bit.py all` runs, in order, `certificates` (the two verifiers above), `tests` (every
 module in isolated processes), `audits` (the retained v3.x audit scripts), `figures` (figures and tables),
-and `manuscript-contract` (`scripts/audit_bit_source.py`, only when the revision-root `manuscript`
-directory is present), writing timestamped logs to `results/bit_revision/logs/` and the summary
+and `manuscript-contract` (`scripts/audit_bit_source.py`, only when the article's LaTeX sources are
+supplied with `--manuscript` or found in a folder `manuscript/` next to the archive), writing timestamped logs to `results/bit_revision/logs/` and the summary
 `results/bit_revision/manifest.json`. The historical v3.5 chain (`bash reproduce.sh all`) is unchanged;
 its `verify_v34_extensions.py` step regenerates the frozen v3.4 records identically except for
-`wall_time_seconds` fields, and its `remediation_v34.py` gate fails on a stale source-text heuristic about
-the retired JCP figure script (documented in `reports/02_BASELINE_REPRODUCTION.md`); that gate is not part
-of `reproduce_bit.py`.
+`wall_time_seconds` fields, and its historical `remediation_v34.py` check fails on a stale source-text
+heuristic about the historical figure script (see `README.md`); `reproduce_bit.py` does not run that check.

@@ -1,46 +1,39 @@
-# Runge-Kutta complete-positivity reproducibility releases
+# Runge–Kutta complete-positivity: code and data
 
-## Current BIT code and data: v4.1.0
+## Current release: v4.1.1
 
-The versioned [v4.1.0 release](https://github.com/Weyl-Center-for-Mathematical-Physics/rk-choi-complete-positivity/releases/tag/v4.1.0)
-provides the code and data supporting *Complete-positivity regions of Runge-Kutta discretizations of
-phase-covariant qubit dynamics*, by G. Blake Pierpoint, Olivier Bernard, and Yichen Liu.
-
-The current reproducibility tree is in [`bit/`](bit/), with its own pinned environment, documentation,
-69-check exact claim verifier, tests, scientific records, and deterministic figure/table generators.
-The release asset `BIT_Code_and_Data.zip` preserves the exact reviewed 408-file archive. Its historical
-manuscript-contract and flattened article-source fixtures are included deliberately because tests use
-them; they are not journal submission files.
+[Release v4.1.1](https://github.com/Weyl-Center-for-Mathematical-Physics/rk-choi-complete-positivity/releases/tag/v4.1.1) contains the code and data for *Complete-positivity regions of Runge–Kutta
+discretizations of phase-covariant qubit dynamics* by G. Blake Pierpoint, Olivier Bernard and Yichen Liu.
+The code is in [`bit/`](bit/); the release asset `BIT_Code_and_Data.zip` holds the same 408 files. The
+folders `bit/manuscript_contract/` (sources of an earlier manuscript version) and `bit/manuscript_source/`
+(the flattened article source) are included because the regression tests read them.
 
 ```bash
 cd bit
 python -m venv .venv
-# POSIX; on Windows use .venv\Scripts\python.exe in place of .venv/bin/python
-.venv/bin/python -m pip install -e ".[test]"
+.venv/bin/python -m pip install -e ".[test]"   # on Windows: .venv\Scripts\python.exe
 .venv/bin/python reproduce_bit.py all
 ```
 
-See [`bit/README.md`](bit/README.md), [`bit/VERSION.md`](bit/VERSION.md), and the
-[release notes](RELEASE_NOTES_v4.1.0.md). Standalone reproduction explicitly skips checks that require
-the separate manuscript workspace. This is a public reproducibility release, not a journal submission.
+Run from `bit/` or from the extracted release asset, `reproduce_bit.py all` passes four stages and skips the
+audit of the article's LaTeX sources, with 384 tests passed and 4 skipped (the skipped tests compare against
+those sources). See [`bit/README.md`](bit/README.md) and [`bit/VERSION.md`](bit/VERSION.md).
 
-The code, data and documentation are MIT-licensed. The root `CITATION.cff` describes the current release.
-Every release is archived on Zenodo: the concept DOI [10.5281/zenodo.21522057](https://doi.org/10.5281/zenodo.21522057) resolves to the
-latest version (v4.0.0 is [10.5281/zenodo.22837831](https://doi.org/10.5281/zenodo.22837831)). v4.1.0 restyles the
-seven figures for the typeset article and edits the prose; certified values, scripts and tables are unchanged
-since v4.0.0. Cite the versioned GitHub release URL or the concept DOI.
+License: MIT. Versions 1.0.0, 4.0.0, 4.1.0 and 4.1.1 are archived on Zenodo under the concept DOI
+[10.5281/zenodo.21522057](https://doi.org/10.5281/zenodo.21522057), which resolves to the latest version; the documentation-only
+v4.0.1 was not archived. Version 4.1.1 corrects statements in the article and its supplement, refines the
+figures and cleans up the documentation; certified values, data records and tables are unchanged since v4.0.0.
 
-## Preserved historical zero-precession archive
+## Version 1.0.0: zero-precession archive
 
-The [v1.0.0 tag and release](https://github.com/Weyl-Center-for-Mathematical-Physics/rk-choi-complete-positivity/releases/tag/v1.0.0)
-and its [archived DOI](https://doi.org/10.5281/zenodo.21522058) remain unchanged. The root `src/`, `data/`,
-`figures/`, `supplement/`, and historical reproduction workflow remain available unchanged. The root
-`AUTHORS.md` and the documentation below describe that historical release, not current affiliation or
-journal-consideration status. The BIT extension in `bit/` should be reproduced separately.
+The [v1.0.0 tag and release](https://github.com/Weyl-Center-for-Mathematical-Physics/rk-choi-complete-positivity/releases/tag/v1.0.0) and its
+[archived DOI](https://doi.org/10.5281/zenodo.21522058) are unchanged. The root `src/`, `data/`, `figures/`,
+`supplement/`, `AUTHORS.md` and the historical reproduction workflow belong to that release, and the
+documentation below describes it. The current code in `bit/` is reproduced separately.
 
-### Original documentation: *Runge-Kutta stability defects at the complete-positivity boundary of qubit damping*
+### Version 1.0.0 documentation
 
-This repository contains the exact symbolic calculations, certified boundary data, plotting data, and figures accompanying the manuscript submitted to *Physics Letters A*.
+This repository contains the exact symbolic calculations, certified boundary data, plotting data, and figures accompanying our zero-precession research note (Weyl Center for Mathematical Physics, Research Note 001).
 
 **Authors:** G. Blake Pierpoint, Olivier Bernard, and Yichen Liu  
 **Archive version:** 1.0.0  
@@ -143,10 +136,4 @@ The public repository is:
 
 `https://github.com/Weyl-Center-for-Mathematical-Physics/rk-choi-complete-positivity`
 
-Version 1.0.0 is configured for archival through Zenodo's GitHub integration. After Zenodo issues the version-specific DOI, add it to:
-
-- the manuscript's data-availability statement;
-- the journal submission metadata; and
-- `CITATION.cff`.
-
-Do not replace the deposited version in place. Corrections should be released as a new repository version with an accompanying archival record.
+Version 1.0.0 is archived at https://doi.org/10.5281/zenodo.21522058; later versions are listed at the top of this page.

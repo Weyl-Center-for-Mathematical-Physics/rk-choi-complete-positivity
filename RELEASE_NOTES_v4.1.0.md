@@ -12,7 +12,7 @@ changed since v4.0.0.
 
 The attached `BIT_Code_and_Data.zip` is the exact reviewed archive; the same 408 files appear under `bit/`,
 byte-for-byte. The root historical tree and the v1.0.0, v4.0.0 and v4.0.1 tags and releases are unchanged.
-Every release is archived on Zenodo under the concept DOI [10.5281/zenodo.21522057](https://doi.org/10.5281/zenodo.21522057).
+Version 4.1.0 is archived on Zenodo as [10.5281/zenodo.22846581](https://doi.org/10.5281/zenodo.22846581) (concept DOI [10.5281/zenodo.21522057](https://doi.org/10.5281/zenodo.21522057)).
 
 Release URL: https://github.com/Weyl-Center-for-Mathematical-Physics/rk-choi-complete-positivity/releases/tag/v4.1.0
 

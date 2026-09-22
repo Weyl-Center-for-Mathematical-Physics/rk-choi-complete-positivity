@@ -1,23 +1,24 @@
 #!/usr/bin/env python3
-"""Build the BIT submission candidate package from allowlisted sources (Task 16/19).
+"""Build the BIT Numerical Mathematics submission package from allowlisted sources.
 
-    python scripts/build_bit_package.py --revision-root .. --status PRE_SUBMISSION [--date 2026-09-13]
+    python scripts/build_bit_package.py --revision-root .. --status FINAL --gates-resolved [--date 2026-09-22]
 
-Steps (each compile runs in a fresh empty directory under <root>/build/package/ so that the flattened
-sources are proven self-contained):
-  1. flatten manuscript/main.tex (every \\input inlined) and compile the clean article; compile the review
-     copy from the same flattened source with the class option `lineno`;
+--revision-root is the folder that holds manuscript/ (the article's LaTeX sources), code_and_data/ (this
+archive) and submission/ (the output). Steps (each compile runs in a fresh empty directory under
+<root>/build/package/ so that the flattened sources are proven self-contained):
+  1. flatten manuscript/main.tex (every \\input inlined) and compile the clean article; compile the copy with
+     line numbers from the same flattened source with the class option `lineno`;
   2. regenerate article_numbers.tex from the clean build's main.aux and require it to equal the working copy;
-  3. compile Online Resource 1 from its own flat source set; compile the cover letter; export its plain text;
+  3. compile Online Resource 1 from its own flat source set; compile the cover letter and write its plain
+     text from the LaTeX source (checked against the text of the compiled PDF);
   4. write BIT_Manuscript_Source.zip, BIT_ESM_1_Source.zip, BIT_Code_and_Data.zip (deterministic, flat where
      required, allowlisted);
   5. write BIT_README_FIRST.md, BIT_SHA256.txt (verified from scratch), the outer package ZIP and its
-     sibling .sha256; re-open the outer ZIP, test CRC, compare every member byte-for-byte with the staged
-     files, and re-verify the internal manifest;
-  6. write build/audit/bit_package.json.
-Nothing is uploaded or sent anywhere. A FINAL local build additionally requires --gates-resolved for local
-finalization conditions (not later portal review/submission authority) and a marker-free
-source audit.
+     sibling .sha256; re-open the outer ZIP, test CRC, compare every member byte-for-byte with the written
+     files, and re-verify the internal checksum list;
+  6. write build/audit/bit_package.json (including the authors' checklist).
+Nothing is uploaded or sent anywhere. A FINAL build additionally requires --gates-resolved (the authors have
+confirmed the checklist items that precede submission) and a source audit without open markers.
 """
 from __future__ import annotations
 
@@ -36,7 +37,10 @@ from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
 CODE_ROOT = HERE.parent
-ZIP_DATE = (2026, 8, 16, 0, 0, 0)  # fixed member timestamp (SOURCE_DATE_EPOCH 1787184000)
+# One fixed timestamp (the release date of the archive, 00:00 UTC) for every ZIP member and every PDF compiled here.
+BUILD_DATE = _dt.datetime(2026, 9, 22, tzinfo=_dt.timezone.utc)
+SOURCE_DATE_EPOCH = str(int(BUILD_DATE.timestamp()))  # 1790035200
+ZIP_DATE = BUILD_DATE.timetuple()[:6]
 
 MAIN_SOURCE_EXTRA = ["references.bib", "sn-jnl.cls", "sn-mathphys-num.bst"]
 ESM_SOURCE = ["ESM_1.tex", "article_numbers.tex", "nine_candidate_certificate.tex", "extrapolation_table.tex",
@@ -47,26 +51,41 @@ CODE_EXCLUDE_PREFIX = ("figures_jcp/Graphical_Abstract",)
 CODE_EXCLUDE_SUFFIX = (".pyc", ".aux", ".synctex.gz", ".fdb_latexmk", ".fls")
 PACKAGE_DIRS = {"main_clean", "main_review", "esm", "cover", "extract_BIT_Manuscript_Source",
                 "extract_BIT_ESM_1_Source", "outer_check"}
+MANUSCRIPT_SOURCE_README = (
+    "Flattened LaTeX source of the article (all sections in one main.tex), written by scripts/build_bit_package.py. "
+    "tests/test_bit_table_contract.py reads it to check the typeset Tables 1 and 2 against the archived records; "
+    "nothing in this archive is built from it.\n")
 
-HUMAN_GATES = [
-    ("Exclusive consideration", "the manuscript is neither under consideration nor accepted for publication elsewhere"),
-    ("Scientific approval", "all authors approve the final theorem statements, title, abstract, figures, Online Resource, limitations, and comparisons with prior work"),
-    ("Changed metadata approval", "approve revised article fields with the manuscript; retain approved identities, order, affiliations (including institution-only ODU), contact details, ORCIDs and roles unless authors report a factual change"),
-    ("Funding/acknowledgment approval", "confirm the Wahab/ODU acknowledgment and whether the 'no specific grant' statement is accurate alongside NSF-supported computing infrastructure"),
-    ("AI disclosure approval", "approve the generative-AI statement in the Declarations"),
-    ("Prior-release statement", "the cited Weyl Center note and historical GitHub/Zenodo release are distinguished from the present article and code release"),
-    ("Data/code repository", "under the project's chosen release requirement, authorize deposit of the verified archive and supply its persistent DOI/URL; retain the historical regression fixture; BIT's mandatory Data Availability Statement is distinct from this release requirement"),
-    ("Reviewer/editor metadata", "optional editor suggestions require conflict checks if used; they do not block a final local package"),
-    ("Final visual approval", "an author inspects the exact PDFs of this package, including every figure at page scale"),
-    ("Portal-generated PDF", "an author inspects the journal portal's compiled PDF and confirms file order, rendering, declarations, and metadata"),
-    ("Submission authorization", "an author explicitly instructs the operator to submit; package preparation is not authorization"),
+# Items the authors confirm; recorded in build/audit/bit_package.json, not in the package README. Items 1-7 and 9
+# precede a FINAL build (--gates-resolved); item 8 is optional; items 10 and 11 happen in the journal system.
+AUTHOR_CHECKLIST = [
+    ("Exclusive consideration", "the manuscript is not under consideration or accepted for publication elsewhere"),
+    ("Scientific content", "all authors approve the theorem statements, title, abstract, figures, Online Resource, limitations and comparisons with prior work"),
+    ("Author details", "names, order, affiliations, e-mail addresses, ORCIDs and contributions are correct"),
+    ("Funding and acknowledgements", "the Funding statement and the Acknowledgements are correct"),
+    ("Generative-AI statement", "all authors approve the statement in the Declarations"),
+    ("Prior work", "the article distinguishes the cited research note and the earlier code release from the present work"),
+    ("Code and data", "the Code availability statement cites the published release and its DOI"),
+    ("Editor and reviewer suggestions", "optional; any suggestion is checked for conflicts of interest"),
+    ("Package PDFs", "an author has inspected the PDFs of this package, including every figure at page scale"),
+    ("PDF generated by the journal system", "an author checks file order, figures, declarations and metadata before approving it"),
+    ("Submission", "an author submits through the journal system; building the package submits nothing"),
 ]
+CHECKLIST_FIXED_STATUS = {8: "OPTIONAL", 10: "IN THE JOURNAL SYSTEM", 11: "BY THE AUTHORS"}
 
 
 # ---------------------------------------------------------------------------
 # helpers (unit-tested)
 # ---------------------------------------------------------------------------
+def author_checklist(gates_resolved: bool) -> list[dict]:
+    """The authors' checklist with its status, for build/audit/bit_package.json."""
+    return [{"item": i, "name": name, "requirement": requirement,
+             "status": CHECKLIST_FIXED_STATUS.get(i, "CONFIRMED" if gates_resolved else "OPEN")}
+            for i, (name, requirement) in enumerate(AUTHOR_CHECKLIST, 1)]
+
+
 def flatten_tex(main: Path) -> str:
+    """Inline every \\input recursively; the inlined text is inserted without marker comments."""
     def expand(p: Path) -> str:
         out = []
         for line in p.read_text(encoding="utf-8").splitlines(keepends=True):
@@ -75,11 +94,9 @@ def flatten_tex(main: Path) -> str:
             if m:
                 name = m.group(1)
                 q = p.parent / (name if name.endswith(".tex") else name + ".tex")
-                out.append(f"%% ---- begin {q.name} ----\n")
                 out.append(expand(q))
                 if not out[-1].endswith("\n"):
                     out.append("\n")
-                out.append(f"%% ---- end {q.name} ----\n")
             else:
                 out.append(line)
         return "".join(out)
@@ -87,11 +104,80 @@ def flatten_tex(main: Path) -> str:
     return expand(main)
 
 
+# sn-jnl's `lineno` option sets \setvruler[12bp][1][1][3][1][1.18\textwidth][26pt][-7pt][0.99\textheight]. The
+# numbers are set left-aligned, so on even pages (ruler on the left) a four-digit number ends about 1.5 mm from
+# the text. The review copy restarts the same continuous ruler with the even-page offset reduced from 26pt to
+# 18pt, which moves the ruler 8pt further left (gap about 4 mm for four digits, 6 mm for three).
+REVIEW_RULER = r"\unsetvruler\setvruler[12bp][1][1][3][1][1.18\textwidth][18pt][-7pt][0.99\textheight]%"
+
+
 def review_variant(flat: str) -> str:
     new, n = re.subn(r"\\documentclass\[pdflatex,sn-mathphys-num\]\{sn-jnl\}", r"\\documentclass[pdflatex,sn-mathphys-num,lineno]{sn-jnl}", flat, count=1)
     if n != 1:
         raise ValueError("documentclass line not found")
-    return new
+    if new.count("\\begin{document}") != 1:
+        raise ValueError("expected exactly one \\begin{document}")
+    return new.replace("\\begin{document}", "\\begin{document}\n" + REVIEW_RULER, 1)
+
+
+_LETTER_TEXT_COMMANDS = re.compile(r"\\(?:textit|textbf|emph|textrm|textsf|textsc|textup|textmd|textnormal|mbox)\{([^{}]*)\}")
+_LETTER_DECLARATIONS = re.compile(r"\\(?:tiny|scriptsize|footnotesize|small|normalsize|large|Large|LARGE|huge|Huge|"
+                                  r"bfseries|mdseries|itshape|upshape|slshape|scshape|rmfamily|sffamily|ttfamily|"
+                                  r"noindent|centering|raggedright)(?![A-Za-z])[ \t]*")
+_LETTER_DROP = re.compile(r"\\(?:vspace|hspace)\*?\{[^{}]*\}|\\(?:hrule|medskip|bigskip|smallskip)(?![A-Za-z])")
+_LETTER_SYMBOLS = {"textendash": "\u2013", "textemdash": "\u2014", "ldots": "\u2026", "dots": "\u2026"}
+
+
+def letter_text(tex: str) -> str:
+    """Plain UTF-8 text of a LaTeX letter, for pasting into a web form.
+
+    Paragraphs (blank lines in the source) are separated by one empty line and are never hard-wrapped; an explicit
+    line break (\\\\) starts a new line. TeX quotes, dashes and ties become their Unicode characters. A command
+    this converter does not know raises ValueError instead of leaking LaTeX into the text."""
+    m = re.search(r"\\begin\{document\}(.*?)\\end\{document\}", tex, re.S)
+    if not m:
+        raise ValueError("letter has no document body")
+    body = re.sub(r"((?:^|[^\\])(?:\\\\)*)%[^\n]*", r"\1", m.group(1), flags=re.M)  # % unless escaped as \%
+    body = re.sub(r"\\(?:begin|end)\{letterbody\}|\\par(?![A-Za-z])", "\n\n", body)
+    body = re.sub(r"\\(" + "|".join(_LETTER_SYMBOLS) + r")(?![A-Za-z])(?:\{\}|[ \t]*)",
+                  lambda s: _LETTER_SYMBOLS[s.group(1)], body)
+    body = _LETTER_DROP.sub("", body)
+    body = re.sub(r"\\\\\*?(?:\[[^\]]*\])?", "\x00", body)
+    body = re.sub(r"\\href\{[^{}]*\}\{([^{}]*)\}", r"\1", body)
+    body = re.sub(r"\\url\{([^{}]*)\}", r"\1", body)
+    while True:
+        new = _LETTER_TEXT_COMMANDS.sub(r"\1", body)
+        if new == body:
+            break
+        body = new
+    body = _LETTER_DECLARATIONS.sub("", body)
+    for macro, char in (("\\&", "&"), ("\\%", "%"), ("\\$", "$"), ("\\_", "_"), ("\\#", "#"), ("\\,", " "), ("\\ ", " ")):
+        body = body.replace(macro, char)
+    leftover = sorted(set(re.findall(r"\\[A-Za-z]+|\\.", body)))
+    if leftover:
+        raise ValueError(f"unsupported LaTeX in the letter body: {leftover}")
+    body = re.sub(r"(?<!\\)[{}]", "", body)
+    for tex_form, char in (("---", "\u2014"), ("--", "\u2013"), ("``", "\u201c"), ("''", "\u201d"), ("`", "\u2018"),
+                           ("'", "\u2019"), ("~", " ")):
+        body = body.replace(tex_form, char)
+    paragraphs = []
+    for block in re.split(r"\n[ \t]*\n", body):
+        lines = [" ".join(part.split()) for part in block.split("\x00")]
+        lines = [line for line in lines if line]
+        if lines:
+            paragraphs.append("\n".join(lines))
+    return "\n\n".join(paragraphs) + "\n"
+
+
+def same_letter_text(plain: str, pdf: str) -> bool:
+    """True when two renderings of a letter carry the same letters and digits in the same order (line breaks,
+    hyphenation at line ends, punctuation and ligatures are ignored)."""
+    import unicodedata
+
+    def key(s: str) -> str:
+        return "".join(ch for ch in unicodedata.normalize("NFKC", s) if ch.isalnum())
+
+    return bool(key(plain)) and key(plain) == key(pdf)
 
 
 def write_flat_zip(target: Path, members: dict[str, Path]) -> None:
@@ -230,7 +316,7 @@ def preserve_previous_packages(submission: Path, history: Path) -> None:
     reject_reparse_path(submission)
     reject_reparse_path(history)
     if history.name != "history" or history.parent.name != "build" or history.parent.parent.resolve() != submission.parent.resolve():
-        raise ValueError("package history must be under the revision root's build/history")
+        raise ValueError("package history must be under <root>/build/history, next to submission/")
     old = sorted(submission.glob("BIT_Submission_Package_*.zip"))
     files = old + [p.with_name(p.name + ".sha256") for p in old if p.with_name(p.name + ".sha256").exists()]
     for p in files:
@@ -250,7 +336,7 @@ def preserve_previous_packages(submission: Path, history: Path) -> None:
 def latexmk(workdir: Path, tex: str, log_name: str) -> Path:
     env = dict(os.environ)
     env["MIKTEX_ENABLEINSTALLER"] = "1"
-    env["SOURCE_DATE_EPOCH"] = "1787184000"
+    env["SOURCE_DATE_EPOCH"] = SOURCE_DATE_EPOCH
     cmd = ["latexmk", "-pdf", "-interaction=nonstopmode", "-halt-on-error", tex]
     print("  $", " ".join(cmd), "  (cwd", workdir, ")")
     proc = subprocess.run(cmd, cwd=workdir, env=env, capture_output=True, text=True, errors="replace")
@@ -303,10 +389,10 @@ def build(root: Path, status: str, date: str, gates_resolved: bool) -> dict:
     audit_dir = root / "build" / "audit"
     code_root = root / "code_and_data"
     if status == "FINAL" and not gates_resolved:
-        raise SystemExit("FINAL requires --gates-resolved (local finalization conditions 1-7 and 9 closed by the authors)")
+        raise SystemExit("FINAL requires --gates-resolved (the authors have confirmed checklist items 1-7 and 9 of AUTHOR_CHECKLIST)")
     submission.mkdir(exist_ok=True)
     audit_dir.mkdir(parents=True, exist_ok=True)
-    report: dict = {"status": status, "date": date, "steps": []}
+    report: dict = {"status": status, "date": date, "author_checklist": author_checklist(gates_resolved), "steps": []}
 
     # 0. source audit before building
     sys.path.insert(0, str(HERE))
@@ -318,7 +404,7 @@ def build(root: Path, status: str, date: str, gates_resolved: bool) -> dict:
         raise SystemExit(f"source audit failed before packaging: {failed}")
     report["steps"].append({"step": "pre-build source audit", "counts": pre["counts"]})
 
-    # 0b. the reproduction manifest must describe the artifacts about to be packaged (review finding B1)
+    # 0b. the reproduction manifest must describe the artifacts about to be packaged
     manifest_path = code_root / "results" / "bit_revision" / "manifest.json"
     if not manifest_path.exists():
         raise SystemExit("results/bit_revision/manifest.json is missing: run `reproduce_bit.py all` before packaging")
@@ -327,17 +413,17 @@ def build(root: Path, status: str, date: str, gates_resolved: bool) -> dict:
         validate_reproduction_manifest(code_root, manifest)
     except ValueError as exc:
         raise SystemExit(f"{exc}: run `reproduce_bit.py all` before packaging") from exc
-    report["steps"].append({"step": "reproduction manifest verified against the files to be packaged", "artifacts": len(manifest["artifacts"]), "tests_passed": manifest.get("tests_passed")})
+    report["steps"].append({"step": "reproduction manifest verified against the files to be packaged", "artifacts": len(manifest["artifacts"]),
+                            "tests_collected": manifest.get("tests_collected"), "tests_passed": manifest.get("tests_passed")})
 
     # 1. flattened article: clean and review copies
     flat = flatten_tex(manuscript / "main.tex")
     # the flattened article is also shipped inside the code archive so that the article-table contract tests can run
-    # without the revision workspace (review finding B9)
+    # without the article's LaTeX sources
     ms_dir = code_root / "manuscript_source"
     ms_dir.mkdir(exist_ok=True)
     write_lf(ms_dir / "main.tex", flat)
-    write_lf(ms_dir / "README.txt", "Flattened LaTeX source of the article as packaged in BIT_Manuscript_Source.zip (generated by scripts/build_bit_package.py). "
-             "It is read by tests/test_bit_table_contract.py to check the typeset Tables 1 and 2 against the frozen records; it is not a build input of the archive.\n")
+    write_lf(ms_dir / "README.txt", MANUSCRIPT_SOURCE_README)
     figs = sorted(p.name for p in manuscript.glob("Fig[0-9].eps")) + sorted(p.name for p in manuscript.glob("Fig[0-9][0-9].eps"))
     clean_dir = fresh(build_dir / "main_clean")
     (clean_dir / "main.tex").write_text(flat, encoding="utf-8")
@@ -374,8 +460,16 @@ def build(root: Path, status: str, date: str, gates_resolved: bool) -> dict:
     cover_dir = fresh(build_dir / "cover")
     shutil.copy2(manuscript / "cover_letter.tex", cover_dir / "cover_letter.tex")
     cover_pdf = latexmk(cover_dir, "cover_letter.tex", "latexmk_cover.txt")
-    cover_txt = pdf_text(cover_pdf).replace("­", "–")  # pdftotext maps the en dash glyph to a soft hyphen
-    report["steps"].append({"step": "Online Resource and cover letter compiled", "esm_pages": pdf_pages(esm_pdf), "cover_pages": pdf_pages(cover_pdf)})
+    # the plain text is written from the LaTeX source (paragraphs kept, no line-end hyphenation) and must carry the
+    # same words as the compiled letter
+    try:
+        cover_txt = letter_text((manuscript / "cover_letter.tex").read_text(encoding="utf-8"))
+    except ValueError as exc:
+        raise SystemExit(f"cannot write Cover_Letter_BIT.txt: {exc}") from exc
+    if not same_letter_text(cover_txt, pdf_text(cover_pdf)):
+        raise SystemExit("Cover_Letter_BIT.txt (from cover_letter.tex) differs from the text of the compiled cover letter")
+    report["steps"].append({"step": "Online Resource and cover letter compiled", "esm_pages": pdf_pages(esm_pdf), "cover_pages": pdf_pages(cover_pdf),
+                            "cover_text_paragraphs": cover_txt.count("\n\n") + 1})
 
     # 4. stage payload
     preserve_previous_packages(submission, root / "build" / "history")
@@ -455,70 +549,125 @@ def build(root: Path, status: str, date: str, gates_resolved: bool) -> dict:
     return report
 
 
+_MONTHS = ("January", "February", "March", "April", "May", "June", "July", "August", "September", "October",
+           "November", "December")
+
+
+def _long_date(date: str) -> str:
+    try:
+        d = _dt.date.fromisoformat(date)
+    except ValueError:
+        return date
+    return f"{d.day} {_MONTHS[d.month - 1]} {d.year}"
+
+
 def render_readme(status: str, date: str, report: dict, code_files, gates_resolved: bool) -> str:
-    pages = {s.get("step"): s for s in report["steps"]}
-    art = pages.get("article compiled from flattened source in fresh directories", {})
-    esm = pages.get("Online Resource and cover letter compiled", {})
-    def gate_status(i):
-        return {8: "OPTIONAL", 10: "LATER", 11: "NOT AUTHORIZED"}.get(i, "RESOLVED" if gates_resolved else "OPEN")
-    gates = "\n".join(f"| {i} | {name} | {gate_status(i)} | {action} |" for i, (name, action) in enumerate(HUMAN_GATES, 1))
-    return f"""# READ ME FIRST — BIT Numerical Mathematics submission candidate
-
-**Package status: `{status}`.** Built {date} by `code_and_data/scripts/build_bit_package.py` from the revision
-workspace. {'One or more local finalization conditions remain open; this package must not be uploaded.' if status == 'PRE_SUBMISSION' else 'The authors declared the local finalization conditions (1-7 and 9) resolved; later portal inspection and submission authorization are not implied.'}
-**Completing this local package is not a journal submission.** No journal files have been uploaded, and no portal
-declaration has been made. Submission requires an author's explicit authorization after the gates below.
-
-## Files
-
-| File | What it is |
-|---|---|
-| `Manuscript_BIT_review.pdf` | article compiled with line numbers (class option `lineno`), {art.get('review_pages', '?')} pages |
-| `Manuscript_BIT_clean.pdf` | the same source without line numbers, {art.get('clean_pages', '?')} pages |
-| `ESM_1.pdf` | Online Resource 1 (Electronic Supplementary Material), {esm.get('esm_pages', '?')} pages |
-| `Cover_Letter_BIT.pdf`, `Cover_Letter_BIT.txt` | cover letter (one page; body at most 150 words) and its plain text |
-| `BIT_Manuscript_Source.zip` | flat LaTeX source of the article: one `main.tex`, `main.bbl`, `references.bib`, `sn-jnl.cls`, `sn-mathphys-num.bst`, {', '.join(art.get('figures', []))} |
-| `BIT_ESM_1_Source.zip` | flat LaTeX source of Online Resource 1 (separate entry point `ESM_1.tex`); kept for the archive — upload `ESM_1.pdf` as the Online Resource and do **not** upload this ZIP as manuscript LaTeX source |
-| `BIT_Code_and_Data.zip` | reproducibility archive ({len(code_files)} files, directory `BIT_Code_and_Data/`); its `manuscript_contract/` folder is the historical v3.5 source-contract fixture (earlier-journal files) required by the historical test suite and `reproduce.sh source-audit`, not part of the BIT submission |
-| `BIT_Submission_Metadata.md` | portal field values with approval status per field |
-| `BIT_Declarations.md` | declarations as typeset, with approval status |
-| `BIT_SHA256.txt` | SHA-256 of every file above |
-| `BIT_Submission_Package_{date}_{status}.zip` (+ `.sha256`) | the outer package containing all of the above |
-
-## Reproduction
-
-```powershell
-Expand-Archive BIT_Code_and_Data.zip; Set-Location BIT_Code_and_Data\\BIT_Code_and_Data
-python -m venv .venv; .\\.venv\\Scripts\\python.exe -m pip install -e ".[test]"
-.\\.venv\\Scripts\\python.exe .\\reproduce_bit.py all
-```
-
-(POSIX: `python3 -m venv .venv && ./.venv/bin/python -m pip install -e ".[test]" && ./.venv/bin/python reproduce_bit.py all`.)
-
-## Data-link status
-
-{'This staging build does not attest that repository publication is complete; verify the versioned URL in the Code availability statement before finalizing.' if status == 'PRE_SUBMISSION' else 'The Code availability statement cites the verified public versioned release; the earlier Zenodo DOI remains a separate historical reference.'}
-
-## Human gates
-
-Only conditions 1-7 and 9 govern local FINAL preparation. Optional editor choices, later portal-proof
-review, and explicit submission authorization remain separate. Unchanged approved author fields are retained.
-
-| # | Condition | Status | Requirement |
-|---|---|---|---|
-{gates}
-
-A `{status}` package name is truthful only while the statuses above are current; rebuild the package after
-any change to the sources or the gate statuses.
-"""
+    """BIT_README_FIRST.md: a short description of the package for the authors. The authors' checklist
+    (gates_resolved) is recorded in build/audit/bit_package.json, not here."""
+    steps = {s.get("step"): s for s in report["steps"]}
+    art = steps.get("article compiled from flattened source in fresh directories", {})
+    esm = steps.get("Online Resource and cover letter compiled", {})
+    outer = f"BIT_Submission_Package_{date}_{status}.zip"
+    figures = ", ".join(f"`{f}`" for f in art.get("figures", [])) or "the figure files"
+    draft = "\n**Draft package; not for upload.**\n" if status != "FINAL" else ""
+    lines = [
+        "# Read me first: BIT Numerical Mathematics submission files",
+        "",
+        f"Package of {_long_date(date)}, status `{status}`, built by `code_and_data/scripts/build_bit_package.py`.",
+        draft,
+        "## Files",
+        "",
+        "| File | Contents |",
+        "|---|---|",
+        f"| `Manuscript_BIT_clean.pdf` | the article, {art.get('clean_pages', '?')} pages |",
+        f"| `Manuscript_BIT_review.pdf` | the same article with line numbers, for referees, {art.get('review_pages', '?')} pages |",
+        f"| `BIT_Manuscript_Source.zip` | LaTeX source of the article in one flat folder: `main.tex` (all sections in one file), `main.bbl`, "
+        f"`references.bib`, `sn-jnl.cls`, `sn-mathphys-num.bst`, {figures}; it compiles with pdfLaTeX to the clean PDF |",
+        f"| `ESM_1.pdf` | Online Resource 1 (Electronic Supplementary Material), {esm.get('esm_pages', '?')} pages |",
+        "| `BIT_ESM_1_Source.zip` | LaTeX source of Online Resource 1 (entry point `ESM_1.tex`), kept with the authors' records |",
+        "| `Cover_Letter_BIT.pdf` | cover letter, one page |",
+        "| `Cover_Letter_BIT.txt` | the same letter as plain text, one line per paragraph, for pasting into a form |",
+        "| `BIT_Submission_Metadata.md` | values for the fields of the submission form |",
+        "| `BIT_Declarations.md` | text of the Declarations section, for the form fields |",
+        f"| `BIT_Code_and_Data.zip` | code and data archive ({len(code_files)} files in the folder `BIT_Code_and_Data/`), the same file as the "
+        "asset `BIT_Code_and_Data.zip` of the release cited in the Code availability statement; its `manuscript_contract/` folder "
+        "holds the sources of an earlier manuscript version that the regression tests read |",
+        "| `BIT_README_FIRST.md` | this description |",
+        "| `BIT_SHA256.txt` | SHA-256 checksums of the files above |",
+        f"| `{outer}`, `{outer}.sha256` | all of the above in one ZIP, and its checksum |",
+        "",
+        "## Checking the files",
+        "",
+        "`BIT_SHA256.txt` lists the SHA-256 checksum of every file in the package. With GNU coreutils (Linux, Git Bash):",
+        "",
+        "```bash",
+        "sha256sum -c BIT_SHA256.txt",
+        f"sha256sum -c {outer}.sha256",
+        "```",
+        "",
+        "On macOS use `shasum -a 256 -c` in place of `sha256sum -c`. In PowerShell (no output means that every file matches):",
+        "",
+        "```powershell",
+        "Get-Content BIT_SHA256.txt | ForEach-Object { $h, $f = $_ -split '  ', 2; "
+        "if ((Get-FileHash $f -Algorithm SHA256).Hash -ne $h) { \"mismatch: $f\" } }",
+        "```",
+        "",
+        "## Reproducing the results",
+        "",
+        "The code and data archive re-verifies the certified results and regenerates the figures and tables. In PowerShell:",
+        "",
+        "```powershell",
+        "Expand-Archive BIT_Code_and_Data.zip; Set-Location BIT_Code_and_Data\\BIT_Code_and_Data",
+        "python -m venv .venv; .\\.venv\\Scripts\\python.exe -m pip install -e \".[test]\"",
+        ".\\.venv\\Scripts\\python.exe .\\reproduce_bit.py all",
+        "```",
+        "",
+        "In a POSIX shell:",
+        "",
+        "```bash",
+        "unzip BIT_Code_and_Data.zip && cd BIT_Code_and_Data",
+        "python3 -m venv .venv && ./.venv/bin/python -m pip install -e \".[test]\"",
+        "./.venv/bin/python reproduce_bit.py all",
+        "```",
+        "",
+        "Four stages pass and the manuscript-contract stage is skipped, because it needs the article's LaTeX sources, which the "
+        "archive does not contain; four tests are skipped for the same reason. `README.md` in the archive describes each stage "
+        "and gives the expected test counts.",
+        "",
+        "## What goes to the journal",
+        "",
+        "Upload in the journal system:",
+        "",
+        "- the article: `BIT_Manuscript_Source.zip` where LaTeX source is requested (the journal system compiles it), and "
+        "`Manuscript_BIT_review.pdf` or `Manuscript_BIT_clean.pdf` where a manuscript PDF is requested;",
+        "- `ESM_1.pdf` as Online Resource 1 (Electronic Supplementary Material);",
+        "- the cover letter: `Cover_Letter_BIT.pdf`, or the text of `Cover_Letter_BIT.txt` pasted into the cover-letter field.",
+        "",
+        "Copy the form values from `BIT_Submission_Metadata.md` and `BIT_Declarations.md`.",
+        "",
+        "Not uploaded: `BIT_ESM_1_Source.zip` and `BIT_Code_and_Data.zip`. Neither is an Online Resource: Online Resource 1 is "
+        "uploaded as `ESM_1.pdf`, and the code and data are cited by URL and DOI in the Code availability statement. "
+        "`BIT_README_FIRST.md`, `BIT_SHA256.txt` and the outer ZIP are for the authors.",
+        "",
+        "## Before submitting",
+        "",
+        "1. Check the date of the cover letter. The cover letter is not part of the code archive: changing its date in "
+        "`manuscript/cover_letter.tex` and rebuilding the package does not change `BIT_Code_and_Data.zip`.",
+        "2. Upload the files listed above.",
+        "3. Check the PDF generated by the journal system (file order, figures, declarations, metadata) before approving it.",
+        "",
+    ]
+    return "\n".join(lines)
 
 
 def main(argv=None) -> int:
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    ap.add_argument("--revision-root", type=Path, default=CODE_ROOT.parent)
+    ap.add_argument("--revision-root", type=Path, default=CODE_ROOT.parent,
+                    help="folder holding manuscript/, code_and_data/ and submission/ (default: the parent of this archive)")
     ap.add_argument("--status", choices=["PRE_SUBMISSION", "FINAL"], required=True)
     ap.add_argument("--date", default=_dt.date.today().isoformat())
-    ap.add_argument("--gates-resolved", action="store_true", help="the authors have closed local finalization conditions 1-7 and 9 (FINAL only; not submission authority)")
+    ap.add_argument("--gates-resolved", action="store_true",
+                    help="the authors have confirmed checklist items 1-7 and 9 of AUTHOR_CHECKLIST (required for FINAL; submits nothing)")
     args = ap.parse_args(argv)
     root = args.revision_root.resolve()
     report = build(root, args.status, args.date, args.gates_resolved)

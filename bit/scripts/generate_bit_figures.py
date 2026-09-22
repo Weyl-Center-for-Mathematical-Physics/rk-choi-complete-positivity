@@ -6,7 +6,8 @@ Reads only the frozen v3.4 plotting data under results/jcp_figures_v34/, results
 are recorded next to the outputs).  Produces Fig1--Fig3 (article) and FigS1--FigS4 (Online Resource 1) at
 the final width of 119 mm with 8--10 pt Computer Modern lettering (the article is typeset with pdflatex in
 Computer Modern), the Okabe--Ito palette with redundant line styles, markers and fill lightness, and embedded
-fonts; writes a manifest, an overlap audit, and grayscale / deuteranopia proof renders.
+fonts; writes a manifest, an overlap audit, and grayscale / deuteranopia proof renders.  No TeX installation
+is needed: the lettering uses Matplotlib's bundled Computer Modern fonts through mathtext.
 
 Usage (from code_and_data):  python scripts/generate_bit_figures.py [--out DIR]
 """
@@ -30,17 +31,37 @@ Path(os.environ["MPLCONFIGDIR"]).mkdir(parents=True, exist_ok=True)
 import matplotlib  # noqa: E402
 
 matplotlib.use("Agg")
+import matplotlib._mathtext_data  # noqa: E402
 import matplotlib.colors  # noqa: E402
+import matplotlib.patheffects as patheffects  # noqa: E402
 import matplotlib.pyplot as plt  # noqa: E402
 import matplotlib.text  # noqa: E402
 import mpmath as mp  # noqa: E402
 import numpy as np  # noqa: E402
-from matplotlib.collections import Collection  # noqa: E402
+from matplotlib.collections import Collection, PathCollection  # noqa: E402
 from matplotlib.patches import Patch, Rectangle  # noqa: E402
 from matplotlib.transforms import Bbox, ScaledTranslation, blended_transform_factory  # noqa: E402
 
 # fontTools complains about the (deliberately ancient) timestamps of the bundled Computer Modern TrueType files
 logging.getLogger("fontTools").setLevel(logging.ERROR)
+
+# Computer Modern \varpi.  Matplotlib's BaKoMa ("cm") mathtext table has no entry for \varpi, so the glyph would
+# fall back to STIXGeneral-Italic, which looks bold next to the Computer Modern omega and Gamma.  The bundled
+# cmmi10.ttf does contain TeX's varpi (glyph "pi1" at code 36, the OML slot of \varpi), so it is mapped here.
+# The entry lives only in this process's copy of Matplotlib's table (no file is changed), it is added only when
+# Matplotlib has none of its own, and the BaKoMa table is consulted only by the "cm" mathtext fontset, which no
+# other archive script uses.
+CM_VARPI = ("cmmi10", 36)
+
+
+def install_cm_varpi() -> bool:
+    table = matplotlib._mathtext_data.latex_to_bakoma
+    if r"\varpi" not in table:
+        table[r"\varpi"] = CM_VARPI
+    return table[r"\varpi"] == CM_VARPI
+
+
+install_cm_varpi()
 
 DATA = ROOT / "results" / "jcp_figures_v34"
 OUT = ROOT / "figures_bit"
@@ -82,8 +103,17 @@ def tint(color: str, amount: float) -> str:
     return matplotlib.colors.to_hex((1 - amount * (1 - r), 1 - amount * (1 - g), 1 - amount * (1 - b)))
 
 
+def shade(color: str, amount: float) -> str:
+    """Opaque blend of `color` with black (amount = 1 gives the pure colour)."""
+    r, g, b = matplotlib.colors.to_rgb(color)
+    return matplotlib.colors.to_hex((amount * r, amount * g, amount * b))
+
+
 FILL_BLUE, FILL_ORANGE = tint(BLUE, 0.34), tint(ORANGE, 0.30)              # attached / CPTP vs detached / non-CPTP
-BAR_BLUE, BAR_ORANGE, BAR_GREEN, BAR_PURPLE = BLUE, tint(ORANGE, 0.62), tint(GREEN, 0.78), tint(PURPLE, 0.85)  # dark -> light
+# stacked bars: the same full blue and orange as the lines elsewhere, and a light green, so that the three shown tones
+# stay separated in grayscale (dark 0.43 / mid 0.68 / light 0.82 relative luminance, sRGB-encoded)
+BAR_BLUE, BAR_ORANGE, BAR_GREEN, BAR_PURPLE = BLUE, ORANGE, tint(GREEN, 0.35), tint(PURPLE, 0.85)
+MARK_PURPLE = shade(PURPLE, 0.6)                                            # darker purple for isolated point marks
 DASHED = (0, (3.6, 1.8))
 DASHDOT = (0, (4.2, 1.6, 1.0, 1.6))
 # The bundled Computer Modern roman has no U+2013 glyph; its cmap keeps the TeX OT1 layout, in which the en dash
@@ -280,20 +310,24 @@ def fig1():
     fig, ax = plt.subplots(figsize=(WIDTH_IN, 3.2), layout="constrained")
     fill_components(ax, vgrid, au, dl, du)
     ceiling = ax.axhline(ALPHA4, color=INK, linestyle=DASHDOT, linewidth=0.8, label=r"population ceiling $\alpha_4$", zorder=2.5)
-    ZOOM = (0.78, 0.88, 0.0, 3.0)  # x0, x1, y0, y1 of the reentrant band shown in the inset (outlined in the main panel)
-    # only varpi_+ is marked in the main panel; the three frequencies of the reentrant band are marked and labelled in the inset
-    guide(ax, x=VARPI_P)
+    ZOOM = (0.78, 0.88, 0.0, 3.0)  # x0, x1, y0, y1 of the inset window 0.78 <= varpi <= 0.88, 0 <= x <= 3 (outlined in the main panel)
+    YTOP = 3.6
+    # only varpi_+ is marked in the main panel; the three frequencies of the reentrant band are marked and labelled in the
+    # inset.  The varpi_+ line stops at x = 3 (the top of the zoom box), below the legend, so it never strikes the legend text.
+    guide(ax, x=VARPI_P, ymax=ZOOM[3] / YTOP)
     isolated, = ax.plot([VARPI_R, VARPI_P], [2.0, (9 + np.sqrt(33)) / ((123 + 11 * np.sqrt(33)) / 16)], marker="D", markersize=4.6,
                         markerfacecolor=YELLOW, markeredgecolor=INK, markeredgewidth=0.7, linestyle="None",
                         label="isolated admissible step", zorder=4)
-    ax.text(VARPI_P + 0.05, 0.10, r"$\varpi_+$", fontsize=8.5, ha="left", va="bottom")
+    # \! pulls the script "+" in to the tight placement of the other varpi subscripts (mathtext sets it loosely)
+    ax.text(VARPI_P + 0.05, 0.10, r"$\varpi_{\!+}$", fontsize=8.5, ha="left", va="bottom")
     ax.set_xlim(0, 4)
-    ax.set_ylim(0, 3.6)
+    ax.set_ylim(0, YTOP)
     ax.set_xlabel(r"frequency ratio $\varpi=|\omega|/\Gamma$")
     ax.set_ylabel(r"step $x=\Gamma h$")
     ax.legend(handles=component_handles() + [ceiling, isolated], loc="upper right", ncol=2, borderaxespad=0.6, columnspacing=1.6)
     # zoom into the reentrant band
-    inset = ax.inset_axes([0.625, 0.395, 0.355, 0.30])
+    # (placed so that the labels above the inset, whose mathtext radical box is tall, stay clear of the ceiling line)
+    inset = ax.inset_axes([0.625, 0.38, 0.355, 0.30])
     vz = np.linspace(0.78, 0.88, 1201)
     azu, zdl, zdu = _branches(vz)
     fill_components(inset, vz, azu, zdl, zdu, labels=False)
@@ -301,12 +335,14 @@ def fig1():
     # invisible text-mode space: Matplotlib's mathtext mis-sizes the raster of an expression that ends with a
     # script-size Computer Modern minus (that glyph has negative depth) and would crop the minus away.
     above = blended_transform_factory(inset.transData, inset.transAxes) + ScaledTranslation(0, 2.0 / 72, fig.dpi_scale_trans)
-    for v, lab in ((VARPI_C, r"$\varpi_c$"), (VARPI_M, r"$\varpi_{-\text{ }}$"), (VARPI_R, r"$\sqrt{3}/2$")):
+    for v, lab in ((VARPI_C, r"$\varpi_c$"), (VARPI_M, r"$\varpi_{\!-\text{ }}$"), (VARPI_R, r"$\sqrt{3}/2$")):
         guide(inset, x=v)
         inset.text(v, 1.0, lab, transform=above, fontsize=8.0, ha="center", va="bottom")
+    # The data window is exactly ZOOM (and matches the grey box); the x ticks sit inside it so that no tick label
+    # overhangs the inset frame (into the main panel's right spine) or meets the y tick label "0" at the corner.
     inset.set_xlim(ZOOM[0], ZOOM[1])
     inset.set_ylim(ZOOM[2], ZOOM[3])
-    inset.set_xticks([0.78, 0.83, 0.88])
+    inset.set_xticks([0.80, 0.83, 0.86])
     inset.set_yticks([0, 1, 2, 3])
     inset.tick_params(labelsize=8.0, length=2.2, pad=2.0)
     inset.set_facecolor("white")
@@ -323,10 +359,11 @@ def conditioning_panel(bx):
     cond = read_csv("figure1_conditioning.csv")
     deltas, widths = col(cond, "delta_varpi"), col(cond, "window_width")
     ok = np.isfinite(widths)
-    bx.loglog(deltas[ok], widths[ok], color=BLUE, marker="o", markevery=12, linestyle="-", label=r"$x_+-x_-$", zorder=3)
-    ref = np.sqrt(deltas[ok]) * widths[ok][-1] / np.sqrt(deltas[ok][-1])
-    bx.loglog(deltas[ok], ref, color=ORANGE, linestyle=DASHED, label=r"$O((\varpi-\varpi_+)^{1/2})$", zorder=2)
-    bx.set_xlabel(r"$\varpi-\varpi_+$")
+    bx.loglog(deltas[ok], widths[ok], color=BLUE, marker="o", markevery=12, linestyle="-", label=r"$x_{\!+}-x_{\!-}$", zorder=3)
+    # square-root reference, offset upwards by a factor 3 from the last data point so that it does not hide under the data
+    ref = 3.0 * np.sqrt(deltas[ok]) * widths[ok][-1] / np.sqrt(deltas[ok][-1])
+    bx.loglog(deltas[ok], ref, color=ORANGE, linestyle=DASHED, label=r"$O((\varpi-\varpi_{\!+})^{1/2})$", zorder=4)
+    bx.set_xlabel(r"$\varpi-\varpi_{\!+}$")
     bx.set_ylabel("detached-window width")
     bx.legend(loc="lower right")
 
@@ -339,10 +376,14 @@ def fig2():
     xs, scaled = col(marg, "x"), col(marg, "M_ext_over_x6")
     fig, (ax, bx) = plt.subplots(1, 2, figsize=(WIDTH_IN, 2.5), layout="constrained")
     panel(ax, "a")
-    rows = [(1, direct["lower_decimal"], direct["upper_decimal"], BLUE, "o", BLUE), (0, fine["lower_decimal"], fine["upper_decimal"], ORANGE, "s", "white")]
+    # At varpi = 2 both positive-step components are detached (A_4(2) = {0} u [x_-, x_+]), so both use the detached
+    # style of Figs. 1 and 3 (orange, square markers); the two candidates differ by marker fill only (filled: one full
+    # step, open: two half steps), and the rows are named on the axis, so no colour name is needed.
+    rows = [(1, direct["lower_decimal"], direct["upper_decimal"], ORANGE, "s", ORANGE), (0, fine["lower_decimal"], fine["upper_decimal"], ORANGE, "s", "white")]
     for y, lo, hi, color, mk, face in rows:
         ax.hlines(y, lo, hi, linewidth=3.0, color=color, linestyles="-", zorder=2)
-        ax.plot([lo, hi], [y, y], color=color, marker=mk, markerfacecolor=face, markeredgewidth=0.8, markersize=4.0, linestyle="None", zorder=3)
+        # squares slightly larger than the 3 pt bar so that the filled ones still read as markers, not as bar ends
+        ax.plot([lo, hi], [y, y], color=color, marker=mk, markerfacecolor=face, markeredgewidth=0.8, markersize=5.0, linestyle="None", zorder=3)
     ax.plot([0, 0], [1, 0], marker="o", markersize=3.0, color=INK, linestyle="None", zorder=3)
     for xv in (1.0, 2.0):
         guide(ax, x=xv)
@@ -361,12 +402,14 @@ def fig2():
     region = Patch(facecolor=FILL_ORANGE, edgecolor=ORANGE, linewidth=0.8, label="extrapolate non-CPTP")
     guide(bx, x=ALPHA4)
     bx.text(ALPHA4 - 0.06, -2.45e-4, r"$\alpha_4$", ha="right", va="bottom", fontsize=8.5)
-    bx.set_xlim(0, 2.85)
+    # clear space between the alpha_4 line and the right spine (a 1 mm gap read as a doubled frame line)
+    bx.set_xlim(0, 3.0)
     bx.set_ylim(-2.6e-4, 1.4e-4)
     bx.set_xlabel(r"nonrotating step $x$")
     bx.set_ylabel("scaled Choi margin")
     bx.ticklabel_format(axis="y", style="sci", scilimits=(-3, 3), useMathText=True)
-    bx.legend(handles=[margin, region], loc="upper right", borderaxespad=0.6, handlelength=1.5, handletextpad=0.5)
+    # upper left, in the empty band above zero and clear of the alpha_4 line
+    bx.legend(handles=[margin, region], loc="upper left", borderaxespad=0.6, handlelength=1.5, handletextpad=0.5)
     return finish(fig)
 
 
@@ -397,15 +440,15 @@ def fig3():
     ax.legend(loc="upper center", ncol=2, handlelength=1.6, columnspacing=1.2, handletextpad=0.5)
     panel(bx, "b")
     ox = col(nc, "omega_x")
-    bx.plot(ox, col(nc, "attached_upper"), color=BLUE, marker="o", linestyle="None", markersize=4.6, label="attached")
+    bx.plot(ox, col(nc, "attached_upper"), color=BLUE, marker="o", linestyle="None", markersize=4.6, label="attached, upper")
     bx.plot(ox, col(nc, "detached_lower"), color=ORANGE, marker="s", markerfacecolor="white", markeredgewidth=0.9, linestyle="None", markersize=4.6, label="detached, lower")
     bx.plot(ox, col(nc, "detached_upper"), color=GREEN, marker="^", markerfacecolor="white", markeredgewidth=0.9, linestyle="None", markersize=5.2, label="detached, upper")
     bx.set_xticks(ox)
-    bx.set_xticklabels(["0", "0.05", "0.1", "0.2"])
+    bx.set_xticklabels(["$0$", "$0.05$", "$0.10$", "$0.20$"])
     bx.set_xlim(-0.03, 0.235)
     bx.set_ylim(0.15, 1.40)
-    bx.set_xlabel(r"certified coupling $\Omega_x/\Gamma$")
-    bx.set_ylabel(r"certified endpoint $x$")
+    bx.set_xlabel(r"coupling $\Omega_x/\Gamma$")
+    bx.set_ylabel(r"endpoint $x$")
     bx.legend(loc="center", bbox_to_anchor=(0.5, 0.28), handletextpad=0.4, handlelength=1.2)
     return finish(fig)
 
@@ -459,9 +502,11 @@ def fig4():
 def figS1():
     fig, ax = plt.subplots(figsize=(WIDTH_IN, 2.0), layout="constrained")
     vmax, vlo, vr, vhi = 2.3, np.sqrt(2 - np.sqrt(33) / 4), VARPI_R, np.sqrt(2 + np.sqrt(33) / 4)
-    rows = [("Richardson extrapolate of RK4", [(0, vlo, "out"), (vlo, vhi, "in"), (vhi, vmax, "out")]),
-            (f"Dormand{ENDASH}Prince 5", [(0, vlo, "in"), (vlo, vhi, "out"), (vhi, vmax, "in")]),
-            ("classical RK4", [(0, vr, "in"), (vr, vmax, "out")])]
+    # method names as in the article's Table 1
+    # the Table 1 name in full, on two lines so that the bars keep their width
+    rows = [("Richardson extrapolate\n" r"of RK4 ($n=2$)", [(0, vlo, "out"), (vlo, vhi, "in"), (vhi, vmax, "out")]),
+            (f"Dormand{ENDASH}Prince 5 (principal)", [(0, vlo, "in"), (vlo, vhi, "out"), (vhi, vmax, "in")]),
+            ("Classical RK4", [(0, vr, "in"), (vr, vmax, "out")])]
     for y, (name, segs) in enumerate(rows):
         for lo, hi, state in segs:
             ax.barh(y, hi - lo, left=lo, height=0.56, facecolor=FILL_BLUE if state == "in" else FILL_ORANGE,
@@ -472,9 +517,11 @@ def figS1():
     categorical(ax, "y")
     for v in (vlo, vr, vhi):
         guide(ax, x=v, zorder=3)
-    ax.text(vlo - 0.025, 2.58, "0.751", ha="right", va="bottom", fontsize=8.0)
-    ax.text(vr + 0.025, 2.58, "0.866", ha="left", va="bottom", fontsize=8.0)
-    mark(ax, vhi, 2.58, "1.854", va="bottom")
+    # rounded (not truncated) three-decimal tick-style labels, each beside its line: sqrt(2 - sqrt33/4) = 0.7509...,
+    # sqrt3/2 = 0.8660..., sqrt(2 + sqrt33/4) = 1.8536...
+    ax.text(vlo - 0.025, 2.58, f"{vlo:.3f}", ha="right", va="bottom", fontsize=8.0)
+    ax.text(vr + 0.025, 2.58, f"{vr:.3f}", ha="left", va="bottom", fontsize=8.0)
+    ax.text(vhi + 0.025, 2.58, f"{vhi:.3f}", ha="left", va="bottom", fontsize=8.0)
     ax.set_xlim(0, vmax)
     ax.set_ylim(-0.5, 3.1)
     ax.set_xlabel(r"frequency ratio $\varpi=|\omega|/\Gamma$")
@@ -515,7 +562,7 @@ def figS2():
                        label="halving steps", zorder=4)
     ax.set_yscale("symlog", linthresh=100)
     ax.set_xlabel(r"$x=\Gamma h$ at $\varpi=2$")
-    ax.set_ylabel("signed polynomial (symlog)")
+    ax.set_ylabel("signed polynomial\n(symmetric log scale)")
     ax.legend(handles=[curve, window, halving], loc="lower right", bbox_to_anchor=(1.0, 1.0), ncol=1, borderaxespad=0.4, handlelength=1.6, handletextpad=0.5)
     panel(bx, "c")
     direct = np.abs(dbl)
@@ -525,7 +572,9 @@ def figS2():
     guide(bx, y=1e-12, label=r"tolerance $10^{-12}$")
     false = np.array([0.004, 0.001, 1e-4, 1e-5])
     false_y = [abs(float(r["exact_margin_decimal"])) for r in V["blocking_false_acceptance_reproduction"]]
-    bx.scatter(false, false_y, color=PURPLE, marker="x", s=30, linewidths=1.0, label="false accept", zorder=4)
+    # heavier, darker crosses with a thin white halo, so that they stay legible on the blue line in grayscale print
+    bx.scatter(false, false_y, color=MARK_PURPLE, marker="x", s=36, linewidths=1.5, label="false accept", zorder=4,
+               path_effects=[patheffects.withStroke(linewidth=2.9, foreground="white")])
     bx.set_xlabel(r"$x$")
     bx.set_ylabel("margin magnitude")
     bx.legend(loc="lower right", bbox_to_anchor=(1.0, 1.0), ncol=1, borderaxespad=0.4, handlelength=1.6, handletextpad=0.5)
@@ -542,7 +591,7 @@ def figS3():
     ax.set_ylabel("fraction of Bell-input trace error")
     ax.set_ylim(0, 1)
     ax2 = ax.twinx()
-    l2 = ax2.semilogy(vscan, absdef, color=ORANGE, linestyle=DASHED, label=r"absolute $\delta_{\rm CP}$")
+    l2 = ax2.semilogy(vscan, absdef, color=ORANGE, linestyle=DASHED, label="absolute negative mass")  # same term as the right axis
     ax2.set_ylabel("absolute negative mass")
     ax.legend(l1 + l2, [l.get_label() for l in l1 + l2], loc="lower right", bbox_to_anchor=(1.0, 1.0), ncol=1, borderaxespad=0.4, handlelength=1.8, handletextpad=0.5)
     panel(bx, "b")
@@ -584,25 +633,60 @@ def all_text_artists(fig):
 # ---------------------------------------------------------------------------
 # overlap audit (rendered geometry)
 # ---------------------------------------------------------------------------
-def _data_points(ax):
+def _densify(xy, step=2.0):
+    """Points every `step` display pixels along a display-space polyline, so that a legend or label crossed by a
+    long straight segment (e.g. a full-height guide line, whose only vertices lie on the frame) is detected."""
+    out = [xy[:1]]
+    for a, b in zip(xy[:-1], xy[1:]):
+        n = max(1, int(np.ceil(np.hypot(*(b - a)) / step)))
+        out.append(a + np.linspace(0.0, 1.0, n + 1)[1:, None] * (b - a))
+    return np.vstack(out)
+
+
+def _runs(xy):
+    """Split a vertex array at non-finite rows (line breaks) into finite runs."""
+    ok = np.isfinite(xy).all(axis=1)
+    runs, start = [], None
+    for i, flag in enumerate(ok):
+        if flag and start is None:
+            start = i
+        elif not flag and start is not None:
+            runs.append(xy[start:i])
+            start = None
+    if start is not None:
+        runs.append(xy[start:])
+    return runs
+
+
+def _data_points(ax, dense=False):
     """Display-space points and rectangles of the data artists of an axes (interior points only, so that
-    axvline/axhline endpoints on the frame do not count)."""
+    axvline/axhline endpoints on the frame do not count).  With dense=True, drawn line segments and collection
+    edges are sampled every 2 px instead of only at their vertices; marker-only lines and scatter markers
+    contribute their centres."""
     pts = []
     rects = []
     for line in ax.lines:
         xy = np.column_stack([np.asarray(line.get_xdata(), dtype=float), np.asarray(line.get_ydata(), dtype=float)])
-        xy = xy[np.isfinite(xy).all(axis=1)]
-        if len(xy):
-            pts.append(line.get_transform().transform(xy))
+        drawn = line.get_linestyle() not in ("None", "none", "", " ")
+        for run in _runs(xy):
+            d = line.get_transform().transform(run)
+            pts.append(_densify(d) if dense and drawn and len(d) > 1 else d)
     for coll in ax.collections:
         if not isinstance(coll, Collection):
             continue
+        if isinstance(coll, PathCollection):          # scatter: marker centres are the data positions
+            off = np.asarray(coll.get_offsets(), dtype=float)
+            off = off[np.isfinite(off).all(axis=1)] if len(off) else off
+            if len(off):
+                pts.append(coll.get_offset_transform().transform(off))
+            continue
         tr = coll.get_transform()
         for path in coll.get_paths():
-            v = np.asarray(path.vertices, dtype=float)
-            v = v[np.isfinite(v).all(axis=1)]
-            if len(v):
-                pts.append(tr.transform(v))
+            polys = path.to_polygons(closed_only=False) if dense else [np.asarray(path.vertices, dtype=float)]
+            for poly in polys:
+                for run in _runs(np.asarray(poly, dtype=float)):
+                    d = tr.transform(run)
+                    pts.append(_densify(d) if dense and len(d) > 1 else d)
     for patch in ax.patches:
         if isinstance(patch, Rectangle):
             rects.append(patch.get_window_extent())
@@ -634,11 +718,13 @@ def overlap_audit(fig):
         boxes = []
         for ax in fig.get_axes():
             pts, rects = _data_points(ax)
+            dense, _ = _data_points(ax, dense=True)
             leg = ax.get_legend()
             if leg is not None:
                 lb = leg.get_window_extent(renderer)
                 boxes.append(("legend@" + repr(ax.get_position().bounds), lb))
-                if _bbox_hits(lb, pts, rects):
+                # frameless legends must not be crossed by any drawn line, guide lines included
+                if _bbox_hits(lb, dense, rects):
                     report["legend_data_overlaps"].append(f"legend of axes {ax.get_position().bounds}")
                 ab = ax.get_window_extent(renderer)
                 inside = lb.x0 >= ab.x0 - 0.5 and lb.x1 <= ab.x1 + 0.5 and lb.y0 >= ab.y0 - 0.5 and lb.y1 <= ab.y1 + 0.5
@@ -649,19 +735,34 @@ def overlap_audit(fig):
             for t in (ax.title, ax._left_title, ax._right_title):
                 if t.get_text().strip():
                     boxes.append(("title:" + t.get_text(), t.get_window_extent(renderer)))
+            # axis labels and offset texts (e.g. a long y label running past the axes into the panel letter)
+            for t in (ax.xaxis.label, ax.yaxis.label, ax.xaxis.offsetText, ax.yaxis.offsetText):
+                if t.get_visible() and t.get_text().strip():
+                    boxes.append(("axis:" + t.get_text(), t.get_window_extent(renderer)))
             # every text artist, including the panel letters, must clear the data and each other
             for t in ax.texts:
                 if not t.get_text().strip() or t.get_gid() == "inbar":
                     continue
                 tb = t.get_window_extent(renderer)
                 boxes.append((t.get_text(), tb))
-                if _bbox_hits(tb, pts, rects, pad=0.5):
+                # a label with a white backing (mark()) is meant to sit on a thin guide line, so only the data
+                # vertices count for it; every other label must also clear the drawn line segments
+                probe = pts if t.get_bbox_patch() is not None else dense
+                if _bbox_hits(tb, probe, rects, pad=0.5):
                     report["text_data_overlaps"].append(t.get_text())
-            # child inset axes as opaque boxes against the parent's data
+            # child inset axes as opaque boxes against the parent's data; their labels against both panels
             for child in ax.child_axes:
                 cb = child.get_window_extent(renderer)
-                if _bbox_hits(cb, pts, rects, pad=0.0):
+                if _bbox_hits(cb, dense, rects, pad=0.0):
                     report["text_data_overlaps"].append("inset axes")
+                cpts, crects = _data_points(child)
+                for t in child.texts:
+                    if not t.get_text().strip():
+                        continue
+                    tb = t.get_window_extent(renderer)
+                    boxes.append(("inset:" + t.get_text(), tb))
+                    if _bbox_hits(tb, dense, rects, pad=0.5) or _bbox_hits(tb, cpts, crects, pad=0.5):
+                        report["text_data_overlaps"].append("inset:" + t.get_text())
         for i in range(len(boxes)):
             for j in range(i + 1, len(boxes)):
                 if boxes[i][1].overlaps(boxes[j][1]):

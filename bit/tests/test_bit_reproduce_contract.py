@@ -1,4 +1,4 @@
-"""Contract tests for reproduce_bit.py (Task 13): CLI handling, fail-fast behaviour, output-path confinement,
+"""Contract tests for reproduce_bit.py: CLI handling, fail-fast behaviour, output-path confinement,
 manifest completeness."""
 from __future__ import annotations
 
@@ -96,13 +96,21 @@ def test_default_log_dir_and_manifest_are_confined_to_the_archive():
     assert not rb._inside(rb.ROOT.parent / "manuscript", rb.ROOT)
 
 
-def test_manifest_binds_current_computation_sources(tmp_path):
+def test_manifest_binds_current_computation_sources_and_article_sources_only(tmp_path):
     path = rb.write_manifest([], tmp_path / "manifest.json")
     m = json.loads(path.read_text())
     hashes = m.get("source_inputs_sha256", {})
     for rel in ("reproduce_bit.py", "pyproject.toml", "scripts/verify_bit_claims.py", "src/rk_choi_margin/__init__.py",
                 "manuscript_contract/scripts_source_audit_v35.py"):
         assert hashes.get(rel) == hashlib.sha256((ROOT / rel).read_bytes()).hexdigest()
+    # article and Online Resource sources are bound; the derived article_numbers.tex and the cover letter are not
+    manuscript = tmp_path / "manuscript"
+    manuscript.mkdir()
+    bound = {"main.tex", "sec01.tex", "ESM_1.tex", "references.bib", "Fig1.eps", "sn-jnl.cls", "sn-mathphys-num.bst"}
+    for name in bound | {"cover_letter.tex", "article_numbers.tex", "notes.txt"}:
+        (manuscript / name).write_text(name, encoding="utf-8")
+    assert set(rb.manuscript_hashes(manuscript)) == bound
+    assert "cover_letter.tex" not in m["manuscript_inputs_sha256"]
 
 
 def test_all_fails_when_collection_exceeds_executed_tests(tmp_path, monkeypatch):

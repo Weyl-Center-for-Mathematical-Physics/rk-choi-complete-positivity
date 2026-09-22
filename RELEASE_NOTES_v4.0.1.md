@@ -13,3 +13,5 @@ byte-for-byte. The root historical tree and the v1.0.0 and v4.0.0 tags and relea
 Release URL: https://github.com/Weyl-Center-for-Mathematical-Physics/rk-choi-complete-positivity/releases/tag/v4.0.1
 
 License: MIT. The exact asset SHA-256 and verification totals are in the GitHub release body.
+
+Zenodo did not archive this documentation-only release.

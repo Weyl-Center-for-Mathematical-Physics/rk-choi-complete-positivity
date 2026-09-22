@@ -1,6 +1,6 @@
 {
  "generator": "reproduce_bit.py",
- "generated_utc": "2026-09-19T14:44:31+00:00",
+ "generated_utc": "2026-09-22T21:22:28+00:00",
  "python": "3.13.5",
  "stage_counts": {
   "PASS": 5,
@@ -10,7 +10,7 @@
  "stages": [
   {
    "stage": "certificates",
-   "log": "results\\bit_revision\\logs\\20260919T144147Z_certificates.log",
+   "log": "results\\bit_revision\\logs\\20260922T211927Z_certificates.log",
    "commands": [
     {
      "title": "Independent first-principles verification of the article's claims",
@@ -20,7 +20,7 @@
       "scripts/verify_bit_claims.py"
      ],
      "exit": 0,
-     "seconds": 12.8
+     "seconds": 13.4
     },
     {
      "title": "Verification of the extrapolation corollary for the archived methods",
@@ -30,14 +30,14 @@
       "scripts/verify_bit_extension.py"
      ],
      "exit": 0,
-     "seconds": 9.4
+     "seconds": 9.9
     }
    ],
    "status": "PASS"
   },
   {
    "stage": "tests",
-   "log": "results\\bit_revision\\logs\\20260919T144210Z_tests.log",
+   "log": "results\\bit_revision\\logs\\20260922T211951Z_tests.log",
    "commands": [
     {
      "title": "Collect the complete pytest suite",
@@ -53,7 +53,7 @@
      ],
      "exit": 0,
      "seconds": 1.3,
-     "tests_collected": 387
+     "tests_collected": 388
     },
     {
      "title": "Test tests/test_closeout.py",
@@ -68,7 +68,7 @@
       "tests/test_closeout.py"
      ],
      "exit": 0,
-     "seconds": 9.0,
+     "seconds": 9.5,
      "tests_passed": 14
     },
     {
@@ -84,7 +84,7 @@
       "tests/test_core.py"
      ],
      "exit": 0,
-     "seconds": 10.0,
+     "seconds": 12.7,
      "tests_passed": 41
     },
     {
@@ -100,7 +100,7 @@
       "tests/test_topology_operational.py"
      ],
      "exit": 0,
-     "seconds": 1.6,
+     "seconds": 1.8,
      "tests_passed": 9
     },
     {
@@ -116,7 +116,7 @@
       "tests/test_v26.py"
      ],
      "exit": 0,
-     "seconds": 1.2,
+     "seconds": 1.3,
      "tests_passed": 6
     },
     {
@@ -132,7 +132,7 @@
       "tests/test_v27_certification.py"
      ],
      "exit": 0,
-     "seconds": 3.4,
+     "seconds": 4.1,
      "tests_passed": 14
     },
     {
@@ -148,7 +148,7 @@
       "tests/test_v27_noncommuting_adaptive.py"
      ],
      "exit": 0,
-     "seconds": 34.8,
+     "seconds": 38.5,
      "tests_passed": 8
     },
     {
@@ -164,7 +164,7 @@
       "tests/test_v28_candidates.py"
      ],
      "exit": 0,
-     "seconds": 2.4,
+     "seconds": 2.7,
      "tests_passed": 9
     },
     {
@@ -180,7 +180,7 @@
       "tests/test_v29_executed_candidate.py"
      ],
      "exit": 0,
-     "seconds": 4.3,
+     "seconds": 5.0,
      "tests_passed": 12
     },
     {
@@ -196,7 +196,7 @@
       "tests/test_v29_theory.py"
      ],
      "exit": 0,
-     "seconds": 2.8,
+     "seconds": 3.2,
      "tests_passed": 8
     },
     {
@@ -212,7 +212,7 @@
       "tests/test_v30_execution_contract.py"
      ],
      "exit": 0,
-     "seconds": 3.0,
+     "seconds": 3.1,
      "tests_passed": 12
     },
     {
@@ -228,7 +228,7 @@
       "tests/test_v31_closeout.py"
      ],
      "exit": 0,
-     "seconds": 2.8,
+     "seconds": 2.9,
      "tests_passed": 61
     },
     {
@@ -244,7 +244,7 @@
       "tests/test_v32_external_review.py"
      ],
      "exit": 0,
-     "seconds": 1.8,
+     "seconds": 2.0,
      "tests_passed": 9
     },
     {
@@ -260,7 +260,7 @@
       "tests/test_v33_endpoint_membership.py"
      ],
      "exit": 0,
-     "seconds": 6.0,
+     "seconds": 6.6,
      "tests_passed": 16
     },
     {
@@ -276,7 +276,7 @@
       "tests/test_v34_remediation.py"
      ],
      "exit": 0,
-     "seconds": 1.2,
+     "seconds": 1.3,
      "tests_passed": 4
     },
     {
@@ -292,7 +292,7 @@
       "tests/test_v35_editorial_layout.py"
      ],
      "exit": 0,
-     "seconds": 5.6,
+     "seconds": 6.0,
      "tests_passed": 11
     },
     {
@@ -308,7 +308,7 @@
       "tests/test_v35_submission_revision.py"
      ],
      "exit": 0,
-     "seconds": 0.3,
+     "seconds": 0.4,
      "tests_passed": 6
     },
     {
@@ -324,7 +324,7 @@
       "tests/test_bit_scientific_contract.py"
      ],
      "exit": 0,
-     "seconds": 7.1,
+     "seconds": 8.0,
      "tests_passed": 36
     },
     {
@@ -340,7 +340,7 @@
       "tests/test_bit_figure_contract.py"
      ],
      "exit": 0,
-     "seconds": 7.6,
+     "seconds": 8.4,
      "tests_passed": 31
     },
     {
@@ -356,7 +356,7 @@
       "tests/test_bit_table_contract.py"
      ],
      "exit": 0,
-     "seconds": 0.3,
+     "seconds": 0.4,
      "tests_passed": 13
     },
     {
@@ -372,7 +372,7 @@
       "tests/test_bit_reproduce_contract.py"
      ],
      "exit": 0,
-     "seconds": 1.0,
+     "seconds": 1.2,
      "tests_passed": 13
     },
     {
@@ -388,15 +388,15 @@
       "tests/test_bit_submission_contract.py"
      ],
      "exit": 0,
-     "seconds": 3.5,
-     "tests_passed": 54
+     "seconds": 4.0,
+     "tests_passed": 55
     }
    ],
    "status": "PASS"
   },
   {
    "stage": "audits",
-   "log": "results\\bit_revision\\logs\\20260919T144401Z_audits.log",
+   "log": "results\\bit_revision\\logs\\20260922T212155Z_audits.log",
    "commands": [
     {
      "title": "Verify theorem identities (v2.x archive audit)",
@@ -406,7 +406,7 @@
       "scripts/verify_theorems.py"
      ],
      "exit": 0,
-     "seconds": 4.1
+     "seconds": 4.3
     },
     {
      "title": "Verify phase-covariant identities",
@@ -416,7 +416,7 @@
       "scripts/verify_phase_covariant.py"
      ],
      "exit": 0,
-     "seconds": 2.6
+     "seconds": 2.8
     },
     {
      "title": "Verify method and candidate audit",
@@ -426,7 +426,7 @@
       "scripts/verify_section4.py"
      ],
      "exit": 0,
-     "seconds": 1.7
+     "seconds": 1.8
     },
     {
      "title": "Independent 15,000-sample Choi audit",
@@ -436,7 +436,7 @@
       "independent_validation/independent_audit_v31.py"
      ],
      "exit": 0,
-     "seconds": 3.2
+     "seconds": 4.3
     },
     {
      "title": "Executed-candidate contract audit",
@@ -446,7 +446,7 @@
       "independent_validation/executed_candidate_contract_v31.py"
      ],
      "exit": 0,
-     "seconds": 5.9
+     "seconds": 6.2
     },
     {
      "title": "Endpoint-domain adversarial audit",
@@ -463,7 +463,7 @@
   },
   {
    "stage": "figures",
-   "log": "results\\bit_revision\\logs\\20260919T144421Z_figures.log",
+   "log": "results\\bit_revision\\logs\\20260922T212217Z_figures.log",
    "commands": [
     {
      "title": "Generate the BIT figure set with overlap and colour audits",
@@ -473,7 +473,7 @@
       "scripts/generate_bit_figures.py"
      ],
      "exit": 0,
-     "seconds": 9.9
+     "seconds": 11.0
     },
     {
      "title": "Generate the Online Resource tables from frozen records",
@@ -490,7 +490,7 @@
   },
   {
    "stage": "manuscript-contract",
-   "log": "results\\bit_revision\\logs\\20260919T144431Z_manuscript-contract.log",
+   "log": "results\\bit_revision\\logs\\20260922T212228Z_manuscript-contract.log",
    "commands": [
     {
      "title": "Audit the manuscript source against the archive contract",
@@ -499,21 +499,21 @@
       "-u",
       "scripts/audit_bit_source.py",
       "--manuscript",
-      "<revision-root>\\manuscript",
+      "<archive>\\..\\manuscript",
       "--status",
       "PRE_SUBMISSION",
       "--json",
-      "<revision-root>\\code_and_data\\results\\bit_revision\\bit_audit.json"
+      "<archive>\\results\\bit_revision\\bit_audit.json"
      ],
      "exit": 0,
-     "seconds": 0.1
+     "seconds": 0.2
     }
    ],
    "status": "PASS"
   }
  ],
- "tests_collected": 387,
- "tests_passed": 387,
+ "tests_collected": 388,
+ "tests_passed": 388,
  "tests_skipped": 0,
  "frozen_inputs_sha256": {
   "results/jcp_figures_v34/figure1_exact_branches.csv": "2f81dd15a03ac5e05f5fff5908386448eb995584f6b8133cd3649af8bcf50be4",
@@ -552,14 +552,14 @@
   "independent_validation/third_order_adversarial_v32.py": "fa9ceeb5e6f821d565173ef0890b989ee4e4d991ff9e7844f4082b8ff45094f6",
   "independent_validation/third_order_adversarial_v33.py": "af5fa62a4f06aa31a930488bc8214b807537927cf0df869872dcc56b6563e498",
   "manuscript_contract/scripts_source_audit_v35.py": "871d8c953b0fdad3c11fa22010e5f1038e47050a6d908438dbcf03a3deff61cc",
-  "pyproject.toml": "6f9bb7ff402f0a23406d954efab45d5a0ee75e42e74c7e61f1950d1a50baafd6",
+  "pyproject.toml": "6b2e9c740a40dcb1ac10ba7869264bac33e8b0a078fbe5bdfec69ccbfe64ff73",
   "reproduce.sh": "fdfb18ab20648ff03673382a2cff793de9a4e2b4e9fed3e26e7bff675f7fae76",
-  "reproduce_bit.py": "49a32e66d501c82c7b913a3985205c55fb79670773870576204c72b4572ea4eb",
-  "scripts/audit_bit_source.py": "425836c70d647b083a9913db01f0ed72ae2bc61eb821d94539d17bbca7b32611",
-  "scripts/build_bit_package.py": "f4c8395842b5f74c84b66e410db17c8c7b5e9d3103726ec92d4fb3148876d49c",
+  "reproduce_bit.py": "ff1a6059981b95af1961399164c208f40ee1fed4850d360de438bdfa18d875f2",
+  "scripts/audit_bit_source.py": "137bdaad38e1ad32950d4d31b2d3b3e74f1efc2c15ba91d931cff36695860a98",
+  "scripts/build_bit_package.py": "cebc360eed5e1ebe4dc2c6d7454dadaa17bb0fd0692b79b5a81d40e7123716fc",
   "scripts/generate_benchmark_figures.py": "468cee55772078e5bff38da2c52837b354d3cb462a2f05f07a262487abe4aca9",
-  "scripts/generate_bit_figures.py": "4569345d1dd8cc126eeaaa396ff95a1c021f7006fe41d29d5aed856bbf7b71a7",
-  "scripts/generate_bit_tables.py": "429228a26c83ea44924952921a1452aace2a4cdf6c1651a61f6217b5ffb6ba7f",
+  "scripts/generate_bit_figures.py": "5e395f26570a8fb3227e6557d23236480de8ad86a6ff088028ceced9fe31a766",
+  "scripts/generate_bit_tables.py": "6bfa6abde09618eb717e558de576d2e295b7cf052a4bf2cf381c543039da3d10",
   "scripts/generate_jcp_figures.py": "74420117c10c9ead36bbf8a438199d1bd8343cb1da5da6149999d136e8acdd1f",
   "scripts/generate_jcp_figures_v27.py": "a4dd95cc1d567a2d1cdb4c3ef6fab0391668f9f4a0cdb2ace72bea7d2302b028",
   "scripts/generate_jcp_figures_v28.py": "1c9ce927a22ef0b7b7899afd5ba22417a39e5c037355dc60e911380748555fe1",
@@ -569,8 +569,8 @@
   "scripts/generate_jcp_figures_v32.py": "9a0a33b08709c256e01685b317b04385e5b72db7aa60b324eb46a5187464a762",
   "scripts/generate_jcp_figures_v33.py": "4c9a094d02bc5c722b37c89050237890a3314daf53eb3603a2f7b82a96bbbe6f",
   "scripts/generate_jcp_figures_v34.py": "5d87f56de064803a3e50d19b02615e41653121e292f61543f192fa1d120bae2a",
-  "scripts/generate_root_certificate.py": "14f915e8c07bda3914a5f877c59b8558d6eb1243895ddc73cd8adb114b498189",
-  "scripts/sync_article_numbers.py": "de2db273b47327c6a77436ccf2225626ebb57ed7f63c116abbd1528ce85f03a1",
+  "scripts/generate_root_certificate.py": "39d3d1cc8a1245ca4a2b4bfbbb80071019044f4184dd7b05f1812d5bf3ff7793",
+  "scripts/sync_article_numbers.py": "fc9d6c1da51800104f6611098d2bddb8bab77c5de11f62fbc10a9d17056f0f2e",
   "scripts/verify_bit_claims.py": "314955add1acbc488a419094d3646275f57afdea5d1122329ac282a8f4c13a3f",
   "scripts/verify_bit_extension.py": "1e798d10eee38a8655c2068d76529c994ae4251668cf718a4cc18c9f136555e0",
   "scripts/verify_phase_covariant.py": "b6b7de2c5f2172f15fb52dda6577dec29cab3f299ba619e958d6afeb058aca1b",
@@ -599,11 +599,11 @@
   "src/rk_choi_margin/symbolic.py": "10efa900c43c8ed33249c080c29d0d31ece46ec29a9ff110c5f7cb5ef619452c",
   "src/rk_choi_margin/topology.py": "9ee9e982db6f7452569c180ceb0c20ae86486ab9d3cc1afff4cb8efc7866ce8e",
   "src/rk_choi_margin/v26.py": "2b49b99ccd92219927800c9232d10df89b23bc97c0ab589d027fb02511377081",
-  "tests/test_bit_figure_contract.py": "db63b071fc86c773dd4c2e62e66c507514a09cc0b4a9240bdf3f9e94be6f32f6",
-  "tests/test_bit_reproduce_contract.py": "b30f0284dbeb6baf18685678420c0f851221d3b8b4baaafbb7d06452f82c94bf",
+  "tests/test_bit_figure_contract.py": "b0166a19ff2cd6e1c9fcdb9c58809bdb5b894f9b9eff0d3cd44ef9f36ad0addc",
+  "tests/test_bit_reproduce_contract.py": "bba73eab39b38914bf77b297c78a7687a0e2f4a1324a6acfa245726d2e7519a4",
   "tests/test_bit_scientific_contract.py": "a884ec7cf111f3d344f31543550202566f60d18b894c1c25c978c2b9ca780249",
-  "tests/test_bit_submission_contract.py": "aa2528631d6cfd729595ddeb752f605217c281000bfe5eab7fe7075e8e3900f2",
-  "tests/test_bit_table_contract.py": "d7a8146e3d7831e18051ef26ab3b4802e092772f1e047896141f86b341ee6db9",
+  "tests/test_bit_submission_contract.py": "e982403d0230fc62fe98b9b801a753a7e60cfcd4ae1aada3e2323201e4bcd2c6",
+  "tests/test_bit_table_contract.py": "a6b3dfc1bd8da1e30053a0555c937b205d45825ed96a85df81b620f1dd626a5d",
   "tests/test_closeout.py": "4a10b287e4ed8a0edb1a6366ce359724ff00913813ac582e33004789337c8f6f",
   "tests/test_core.py": "6ba0f1799f210934bb0f6b25079e206797cd286e8b21b4475c16b6c76dc8fc62",
   "tests/test_topology_operational.py": "2f1e0391e0697465e329788897ab26749752058d4e038d82ef25df4f1a9fe2c2",
@@ -622,32 +622,31 @@
   "tests/test_v35_submission_revision.py": "ad7dfef9e0993104b75197450694eefef855dc720d08e024cbd1bed3567f0b80"
  },
  "manuscript_inputs_sha256": {
-  "cover_letter.tex": "9013930810c8e1fe5a080658306f37056a68198785520ade63e93c76e915ee41",
-  "declarations.tex": "f27740ea3e3e23281ecc5355fe2d9b26a2a5085bf5e3ce8d6715822795de8d6d",
-  "ESM_1.tex": "d500df343f213fd7e133c5b31ff87e0122f4e19873efed82356b6e54ba2357b9",
-  "extrapolation_table.tex": "914b35a0ea58270f7848cc08bddd1fca1b9efe8b741d762986eb68abf4db64c3",
-  "Fig1.eps": "088a0f515d183b7dc05b176abd518da51092b9ac59f7ddade430d4c72712f54d",
-  "Fig2.eps": "852ed66e3058bb4443edcc31325305937a0782816132533ccf977ccc7a2b1899",
-  "Fig3.eps": "ffd18cf46a43100560bf79d2e5a1fa22b282b88db7aa1516df6dff470e75f70c",
-  "FigS1.eps": "4f53366765c23272549324fa8c4192ef9f92080106090b1e1268474ea8a72410",
-  "FigS2.eps": "5deaaa264376d5c8108eb57989e34a32318abac32e3e0df73d32a32773ab6775",
-  "FigS3.eps": "275d41a2ba83d5872b85076e7c0d98bf3a1ab1492b8c90361af1162bad3071f6",
-  "FigS4.eps": "e1775dea0646bbef6fb2f00a81e12751e7b3ea0a3a0ebf122af098ad7cb1809d",
-  "guard_telemetry_table.tex": "5f1f1af2981df30c962fdb9a6cd8478cdf0b99ba30e71d3963537cc1285c1da4",
-  "main.tex": "3b86b7e1c50498367e01037027030f8955adaddff5685ad4b5b205917822af8b",
-  "nine_candidate_certificate.tex": "b6ec05f8f7e798ae92ca0ad916dc6118e150b2bc016a4e05c31819c75710e4b6",
-  "references.bib": "f1f1f4d1d99bb0749d1be2ab8eac4c8ac3af9ce60f478e1ea962ef032999987d",
-  "sec01_introduction.tex": "2c05b7a6a37fde5f428b6a824018e4e1742cf923f354408f1df550eea3747a22",
-  "sec02_problem_and_candidates.tex": "0ea6aa73ad2cd46f289f7b148494ebf217c72fd25d1833d992060d5674653a30",
-  "sec03_cp_criterion.tex": "11d9fdabecf68475d57b5610a25068f0ff352a27284f0b28bec576e796ee26c4",
-  "sec04_rk4_classification.tex": "ab95e6ab37c82bbeb3c587f2ec8d66df353e52db03f7c9f7280c826a102a675d",
-  "sec05_representation_and_candidates.tex": "9088a9b629725f043a2e7d025d58a0703771e4f8225bb0a0175209e34219618a",
-  "sec06_certification_and_examples.tex": "fb297a09aa2e79b3636ab6d5f00bccfffda003faa2ed04b45b1ddffe69c08fa7",
-  "sec07_discussion.tex": "19d4a3fee3a9a6be4bdb160048e8fd2ad5c463c708cb5b0daaa92ec901f0d073",
-  "sec08_conclusion.tex": "7cb00504d9f76cd081e357d04d614d638541a11a158f2876221922dd7209e818",
+  "declarations.tex": "ad1a442c4119d40703444312511e69789e2b5542ef2ad86e982735e6ac4dd1d8",
+  "ESM_1.tex": "d55e0e570bde1a9e7659abbbc15d993a004682dc28ec484144f07c3546b18c85",
+  "extrapolation_table.tex": "51df6c0e8319520479239c12c2d4739d8608d1225028fb39d421d0221c89e120",
+  "Fig1.eps": "15f3a1c2a3283c60e6cb68255ae7877afd266ae0f1db29ab7c3646da6e040dd2",
+  "Fig2.eps": "fbb4c80fb1ded4e12c0ed06c06b62a58c722b69104559f6e2160819b00ad11c2",
+  "Fig3.eps": "f35e3817eb803ff295149e0b674e4694e85975bdc3e18038679d662ec8db4a86",
+  "FigS1.eps": "21ab7ca84a972abe6e391a6183cd9dca4c57573a3e02794eca093a13e5bf0610",
+  "FigS2.eps": "9408d78851168329c1a6c0759223d354abaaf082b8e4a2791b88bc1bee733683",
+  "FigS3.eps": "c6ab0975e6eb5b0fdf5eb56e87fd5be578e8850d1e9928f9571427af0881f4cf",
+  "FigS4.eps": "34823d9e3b71076b00dc72025b16df60bb38185d9b6cacd824f294288d8c55b2",
+  "guard_telemetry_table.tex": "571728196416f615a489c33ebb36ef29525a7c2cf9fe0c16219584318403d463",
+  "main.tex": "6ffb4f0044898870d0e8e6d847491954c120513a76b70dd6cad1807840fc959e",
+  "nine_candidate_certificate.tex": "15c28560dee30927dd690598d2a374efc97eeb24469ba5608cdf1622e1b145b1",
+  "references.bib": "e7c6693535792d81f9f75669ed016a56dc92d5750f9fd87084e99e8d566dc36b",
+  "sec01_introduction.tex": "55207ea04bdf535442a024e2f6975712bd1c73b81cfb075f40584cfe8bf32600",
+  "sec02_problem_and_candidates.tex": "89e3a51eede65ee24e833cf8a5c662f5828f227d9d049caf4cb0159b2f7aada0",
+  "sec03_cp_criterion.tex": "3b4acb5cf3ae27046dad7ef7bb4c1c5db33e27e15521e109f87bf9b28fbb60b3",
+  "sec04_rk4_classification.tex": "071e6a126526d86ced8051c56b018e8eaab4d798c46bb3141500c531ce8fdef0",
+  "sec05_representation_and_candidates.tex": "04f48fd55793be2428cb2e4170cd846999d4042408eb675dc4277df9c3a8d15b",
+  "sec06_certification_and_examples.tex": "ee4d90ef5cbdc03ad9252ef34d737191834201e690ed57dd173be6a22345ac4a",
+  "sec07_discussion.tex": "805da36c98be80b9194fcc2706d651d60863320fd12f486cd5bbc5146db4a417",
+  "sec08_conclusion.tex": "7c1b7a5bda9ad226e412e735949cc7be4b4daad3b764e259e012d89f7576280a",
   "sn-jnl.cls": "36d0c3273a59d48dc6a9c7b080dfa1ec50dc10229d8751568d1f2e490ffa5ecc",
   "sn-mathphys-num.bst": "b3a7c7fbcc1e7f9619de634fcea2f5bb7a245818a5942bc576e40ea001633332",
-  "tolerance_sweep_table.tex": "b88cea8b24aebff78d50324c1c3b016deb3968663c8af639b49c632878a40993"
+  "tolerance_sweep_table.tex": "01601ad8bb018b8eb4a9534a2af5d2de63223476bfbd45da1c6ac6fd52eecb7a"
  },
  "artifacts": {
   "results/bit_revision/claim_verification.json": {
@@ -668,107 +667,107 @@
   },
   "results/bit_revision/figures/manifest.json": {
    "bytes": 6013,
-   "sha256": "38231ce9ad6d21bb53928b1366a900993ef3c04e3b238a231e05d844e8e840f0"
+   "sha256": "622431fb9e2033e1867a342b5fa943cbccfd3909243cf8f033a81d33f862997d"
   },
   "results/bit_revision/tables/manifest.json": {
    "bytes": 596,
-   "sha256": "180cfa8ba73605d559ce1e9a6865c6f89adf2af69a85be5a20edb6286d569b7f"
+   "sha256": "f2b2f544434b1624e7a17d807e00f9e0848683ede15c9e7d91800a4b31358f06"
   },
   "results/bit_revision/tables/extrapolation_table.tex": {
-   "bytes": 1360,
-   "sha256": "914b35a0ea58270f7848cc08bddd1fca1b9efe8b741d762986eb68abf4db64c3"
+   "bytes": 1128,
+   "sha256": "51df6c0e8319520479239c12c2d4739d8608d1225028fb39d421d0221c89e120"
   },
   "results/bit_revision/tables/guard_telemetry_table.tex": {
-   "bytes": 699,
-   "sha256": "5f1f1af2981df30c962fdb9a6cd8478cdf0b99ba30e71d3963537cc1285c1da4"
+   "bytes": 659,
+   "sha256": "571728196416f615a489c33ebb36ef29525a7c2cf9fe0c16219584318403d463"
   },
   "results/bit_revision/tables/tolerance_sweep_table.tex": {
-   "bytes": 1861,
-   "sha256": "b88cea8b24aebff78d50324c1c3b016deb3968663c8af639b49c632878a40993"
+   "bytes": 1825,
+   "sha256": "01601ad8bb018b8eb4a9534a2af5d2de63223476bfbd45da1c6ac6fd52eecb7a"
   },
   "figures_bit/Fig1.eps": {
-   "bytes": 208617,
-   "sha256": "088a0f515d183b7dc05b176abd518da51092b9ac59f7ddade430d4c72712f54d"
+   "bytes": 209047,
+   "sha256": "15f3a1c2a3283c60e6cb68255ae7877afd266ae0f1db29ab7c3646da6e040dd2"
   },
   "figures_bit/Fig2.eps": {
-   "bytes": 101909,
-   "sha256": "852ed66e3058bb4443edcc31325305937a0782816132533ccf977ccc7a2b1899"
+   "bytes": 103212,
+   "sha256": "fbb4c80fb1ded4e12c0ed06c06b62a58c722b69104559f6e2160819b00ad11c2"
   },
   "figures_bit/Fig3.eps": {
-   "bytes": 64386,
-   "sha256": "ffd18cf46a43100560bf79d2e5a1fa22b282b88db7aa1516df6dff470e75f70c"
+   "bytes": 63511,
+   "sha256": "f35e3817eb803ff295149e0b674e4694e85975bdc3e18038679d662ec8db4a86"
   },
   "figures_bit/FigS1.eps": {
-   "bytes": 46461,
-   "sha256": "4f53366765c23272549324fa8c4192ef9f92080106090b1e1268474ea8a72410"
+   "bytes": 49243,
+   "sha256": "21ab7ca84a972abe6e391a6183cd9dca4c57573a3e02794eca093a13e5bf0610"
   },
   "figures_bit/FigS2.eps": {
-   "bytes": 109237,
-   "sha256": "5deaaa264376d5c8108eb57989e34a32318abac32e3e0df73d32a32773ab6775"
+   "bytes": 113239,
+   "sha256": "9408d78851168329c1a6c0759223d354abaaf082b8e4a2791b88bc1bee733683"
   },
   "figures_bit/FigS3.eps": {
-   "bytes": 88506,
-   "sha256": "275d41a2ba83d5872b85076e7c0d98bf3a1ab1492b8c90361af1162bad3071f6"
+   "bytes": 88232,
+   "sha256": "c6ab0975e6eb5b0fdf5eb56e87fd5be578e8850d1e9928f9571427af0881f4cf"
   },
   "figures_bit/FigS4.eps": {
-   "bytes": 77460,
-   "sha256": "e1775dea0646bbef6fb2f00a81e12751e7b3ea0a3a0ebf122af098ad7cb1809d"
+   "bytes": 77450,
+   "sha256": "34823d9e3b71076b00dc72025b16df60bb38185d9b6cacd824f294288d8c55b2"
   },
   "figures_bit/Fig1.pdf": {
-   "bytes": 69721,
-   "sha256": "f6623bacc33d2df7ac3cd2b5a3f38c3e131a8239b155c3a52ff0d25ea568c61b"
+   "bytes": 67786,
+   "sha256": "c225fa0176e4dc8defd73ac992d29a3650c5ff8008e9a565431001c116075d8e"
   },
   "figures_bit/Fig2.pdf": {
-   "bytes": 36723,
-   "sha256": "b643b72dbf4dfdc131144f4fe0f7d2352236990be3a02f49c3473ff54f745ab4"
+   "bytes": 34743,
+   "sha256": "70ccad77446bea02b3d57d436ca150e5e66099a56bbaa4545eb9bee49dbf1dd5"
   },
   "figures_bit/Fig3.pdf": {
-   "bytes": 24857,
-   "sha256": "f7d6c26f831922a2309da67632e7494fda3543890ff535c93371be803d79562c"
+   "bytes": 22755,
+   "sha256": "0d21bdbecb9d135c528695d71bb023eaa9508e27034bb084dd2060f565dc0a87"
   },
   "figures_bit/FigS1.pdf": {
-   "bytes": 18602,
-   "sha256": "a3ead4c9cf717a113dc02dac6ad68b4e8e36a2c51b62e75a5dc6e2f3abfcc8b9"
+   "bytes": 17125,
+   "sha256": "95a091e4a3f20cc3c2cae516ad9e0a42a3293a6e4f574d3eb4db4ac216ed239f"
   },
   "figures_bit/FigS2.pdf": {
-   "bytes": 30850,
-   "sha256": "e0db94cd6c8bd7e17d6b5bf6d4051402ec5e3575d0a7d11b9e81bdf582355ecb"
+   "bytes": 29067,
+   "sha256": "f76b1704ceac0ab7c86538b589408f812c85f509d6b09c7f036e6341ac5f8bb1"
   },
   "figures_bit/FigS3.pdf": {
-   "bytes": 28192,
-   "sha256": "2375c9c2fafa8d1a346ed7b51ce9953c5a3a0917a446c473eed62e83450c4b9c"
+   "bytes": 26118,
+   "sha256": "64716bb75d61d1adeda277602527f3e9398a24ea260b5f43c55c8706f1c00ef6"
   },
   "figures_bit/FigS4.pdf": {
-   "bytes": 19024,
-   "sha256": "882dee2a780e46020ba5152f545c33ec0bad19781b60ef51167f068c1cba4021"
+   "bytes": 19004,
+   "sha256": "911ca28d183bf65de341741b7c4e2b0b048c6a07be4fbdb4bce85f25de3f20b5"
   },
   "figures_bit/Fig1.png": {
-   "bytes": 98477,
-   "sha256": "cf6d8b4d06099477b682f458f3570afb40ef7efd9c2cd6baab0c2d17df111a79"
+   "bytes": 98093,
+   "sha256": "ad2cf70a9b38bd351d3ceff7476607fdcf0fea005d89e4d27d48cf3604cc17c6"
   },
   "figures_bit/Fig2.png": {
-   "bytes": 63695,
-   "sha256": "1093c70c3764c80b7fffa8716d64cfb0a1afbcc819d5e358c1fa7af6fb08e913"
+   "bytes": 63625,
+   "sha256": "04fc7f7c8a3156309361210020c10a2aefebf5baea1bc7cd1060cd85f34b05cc"
   },
   "figures_bit/Fig3.png": {
-   "bytes": 71015,
-   "sha256": "df92948d39768b83713c43578fe62964865d5ff23cd2cbb2010e8b3fcf8d132f"
+   "bytes": 67490,
+   "sha256": "cb455eb8d1d2f1ed13b3b54980443455fc730de290c5159cc2eb5b77e383b78f"
   },
   "figures_bit/FigS1.png": {
-   "bytes": 52042,
-   "sha256": "49f4e34fa2f1e0cd1d516b4597118503fe29471b25382decc8434e332a9527d5"
+   "bytes": 57367,
+   "sha256": "b2348a0cdcdb485c756d9c8957f57c4206ff0c6314867c11ae48cd11ceb51dad"
   },
   "figures_bit/FigS2.png": {
-   "bytes": 159412,
-   "sha256": "d3bfc9d48fb2b876d86e9528b53ecc38cc2be8574194d76154cdd9f9955fc0ac"
+   "bytes": 173014,
+   "sha256": "198d0680e1a9aecadb4bcc1a48eb0dfee635edfd113aee9ce236290219de3766"
   },
   "figures_bit/FigS3.png": {
-   "bytes": 119437,
-   "sha256": "71703a3b792efec04b61daf0677419b4becb1f1e062961c8f2eef7232d88d17e"
+   "bytes": 122210,
+   "sha256": "3af45c7125e186455a517f478d479ab18c2b8959dd4bd035514ab54cc9c06e65"
   },
   "figures_bit/FigS4.png": {
-   "bytes": 87773,
-   "sha256": "065f382bff71bf50de718682d864ec9812f7af353efa6ba35cfd4b0aeb627039"
+   "bytes": 87740,
+   "sha256": "df44be59892416fba6421bdc1b0eed06d03f0a4ee3ae0e4e8e0a55bba6755711"
   }
  }
 }

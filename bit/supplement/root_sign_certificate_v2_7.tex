@@ -2,462 +2,318 @@
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
 \usepackage{lmodern}
-\usepackage{amsmath,amssymb,mathtools}
-\usepackage{booktabs,tabularx,array,longtable}
-\usepackage{adjustbox}
-\usepackage[letterpaper,margin=0.72in]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage{booktabs}
+\usepackage[a4paper,margin=17mm]{geometry}
 \usepackage{microtype}
-\usepackage[hidelinks]{hyperref}
-\hypersetup{pdftitle={Supplemental Material: Certified complete-positivity stability regions and adaptive guards for Runge--Kutta propagation of phase-covariant qubits},pdfauthor={G. Blake Pierpoint; Olivier Bernard; Yichen Liu},pdfsubject={Exact boundary polynomials, Sturm-certified root isolation, sign charts, and no-omission certificate},pdfkeywords={complete positivity, Runge--Kutta methods, Choi matrix, root isolation, sign charts}}
+\providecommand{\texorpdfstring}[2]{#1}
+\makeatletter\@namedef{r@s:candidates}{{5}{}}\makeatother% Section 5 of Online Resource 1
 \setlength{\parindent}{0pt}
 \setlength{\parskip}{5pt}
 \setlength{\emergencystretch}{3em}
-\title{Supplemental Material for\\[3pt]\large ``Certified complete-positivity stability regions and adaptive guards for Runge--Kutta propagation of phase-covariant qubits''}
-\author{G. Blake Pierpoint$^{1,*}$, Olivier Bernard$^{3,2}$, and Yichen Liu$^{4,2}$\\[6pt]
-\small $^1$Old Dominion University, 5115 Hampton Boulevard,\\
-\small Norfolk, Virginia 23529, USA\\
-\small $^2$Weyl Center for Mathematical Physics, Washington, DC, USA\\
-\small $^3$UFR PhITEM, Universit\'e Grenoble Alpes, Saint-Martin-d'H\`eres, France\\
-\small $^4$Department of Computer Science and Engineering, Shanghai Jiao Tong University, Shanghai, China\\[3pt]
-\small $^*$pierpogb@odu.edu}
-\date{August 2026}
+\title{Exact boundary polynomials, root brackets, and sign charts on nonrotating one-way damping\\[4pt]\large Online Resource~1, Section~9, of ``Complete-positivity regions of Runge--Kutta discretizations of phase-covariant qubit dynamics''}
+\author{G. Blake Pierpoint, Olivier Bernard, and Yichen Liu}
+\date{}
 \begin{document}
 \maketitle
-\section*{Scope of this certificate}
-This document reconstructs every pure-amplitude-damping CPTP-admissible set reported in the article from exact rational Butcher data. It records the boundary numerators for $a=0$, $a=1$, and $M_R=0$; the full- and half-step stage-resolvent factors; rational isolating intervals for every nonnegative real root; and the sign on every intervening interval. Root counts use Sturm sequences, and interval signs use exact rational sample points. Finite decimal bracket endpoints below denote exact rational numbers. A direct one-step map is CPTP exactly when the RK stage equations are defined and $a(x)\leq1$ and $M_R(x,0)\geq0$; the latter already implies $a(x)\geq0$.
-The companion software archive contains the machine-readable JSON certificate, exact sample points and multiplicities, source code, regression tests, and all plotting data. No reported endpoint is inferred from visual sampling; every endpoint is produced by or checked against exact real-root isolation.
+This is Section~9 of Online Resource~1 of the article; references to Section~5 are to that document. For each method it lists the stability function, the population multiplier $a(x)=R(-x)$ and the margin $M_R(x,0,0)$, the numerators $P_0$, $P_1$, $P_M$ whose zeros are those of $a$, $a-1$, and $M_R$ (each $P$ is the primitive integer numerator with positive leading coefficient, so its sign can differ from that of $a$, $a-1$, or $M_R$; the sign charts give the signs of $a$, $a-1$, and $M_R$ themselves), their square-free parts where these differ, a labelled rational bracket for every positive root, and the sign chart. For the explicit methods the stage equations are solvable for every $x$; for backward Euler and the implicit midpoint rule the stage determinants $\det(I+xA)$ and $\det(I+xA/2)$ at the population and coherence arguments $-x$ and $-x/2$ are positive for $x\ge0$. Decimal bracket endpoints are exact rational numbers, and every sign is evaluated exactly at a rational sample point.
+
 \section{Summary}
 \begin{center}
-\begin{tabularx}{\textwidth}{@{}X l l@{}}
+\begin{tabular}{@{}ll@{}}
 \toprule
-Method & Stage domain on $x\geq0$ & Certified admissible set \\
+Method & Admissible set on nonrotating one-way damping \\
 \midrule
-Forward Euler & all $x\geq0$ & $\{0\}$ \\
-Heun RK2 & all $x\geq0$ & $[0,2]$ \\
-SSPRK(3,3) & all $x\geq0$ & $\{0\}$ \\
-Classical RK4 & all $x\geq0$ & $[0,\alpha_4]$ \\
-Dormand-Prince 5 principal formula & all $x\geq0$ & $[0,\alpha_5]$ \\
-Dormand-Prince embedded 4 formula & all $x\geq0$ & $\{0\}\cup[\beta_-,\beta_+]$ \\
-Backward Euler & all $x\geq0$ & $[0,\infty)$ \\
-Implicit midpoint & all $x\geq0$ & $\{0\}$ \\
+Forward Euler & $\{0\}$ \\
+Two-stage order two (Heun) & $[0,2]$ \\
+SSPRK(3,3) & $\{0\}$ \\
+Classical RK4 & $[0,\alpha_4]$ \\
+Richardson extrapolate of RK4 ($n=2$) & $\{0\}\cup[\rho_-,\rho_+]$ \\
+Dormand--Prince 5 (principal) & $[0,\alpha_5]$ \\
+Dormand--Prince 4 (embedded) & $\{0\}\cup[\beta_-,\beta_+]$ \\
+Backward Euler & $[0,\infty)$ \\
+Implicit midpoint & $\{0\}$ \\
 \bottomrule
-\end{tabularx}
+\end{tabular}
 \end{center}
 \section{Forward Euler}
-The exact stability function is
-\[\begin{adjustbox}{max width=0.98\textwidth}$\displaystyle R(s)=s + 1$\end{adjustbox}\]
-The full- and half-step stage-resolvent factors are $1$ and $1$, respectively.
-The exact scalar functions are
-\[\begin{adjustbox}{max width=0.98\textwidth}$\displaystyle a(x)=1 - x$\end{adjustbox}\]
-\[\begin{adjustbox}{max width=0.98\textwidth}$\displaystyle M_R(x,0,0)=- \frac{x^{2}}{4}$\end{adjustbox}\]
-The primitive boundary numerators below isolate the zeros of $a$, $a-1$, and $M_R$; their signs are retained in the exact expressions above and in every interval row.
-\[\begin{aligned}
-P_0(x)={}&x-1
-\end{aligned}\]
-\[\begin{aligned}
-P_1(x)={}&x
-\end{aligned}\]
-\[\begin{aligned}
-P_M(x)={}&x^{2}
-\end{aligned}\]
-These equations correspond respectively to $a(x)=0$, $a(x)=1$, and $M_R(x,0,0)=0$. Their square-free parts are
-\[\begin{aligned}
-\operatorname{sqf}P_0={}&x-1
-\end{aligned}\]
-\[\begin{aligned}
-\operatorname{sqf}P_1={}&x
-\end{aligned}\]
-\[\begin{aligned}
-\operatorname{sqf}P_M={}&x
-\end{aligned}\]
+\begin{align*}
+R(s)&=s + 1,\\
+a(x)&=1 - x,\\
+M_R(x,0,0)&=- \frac{x^{2}}{4},\\
+P_0(x)&=x-1,\\
+P_1(x)&=x,\\
+P_M(x)&=x^{2},\\
+\operatorname{sqf}P_M(x)&=x.
+\end{align*}
 \begin{center}
-\begin{tabularx}{\textwidth}{@{}l l l X@{}}
+\begin{tabular}{@{}llll@{}}
 \toprule
-Label & Certified rational bracket & Approx. & Source / active mechanism \\
+Root & Certified rational bracket & Approx. & Boundary \\
 \midrule
-$--$ & $1$ & $1$ & population floor (a=0) \\
-\bottomrule
-\end{tabularx}
-\end{center}
-\begin{center}
-\begin{tabular}{@{}l c c c c c@{}}
-\toprule
-Open interval & $\operatorname{sgn}a$ & $\operatorname{sgn}(a-1)$ & $\operatorname{sgn}M$ & domain & CPTP \\
-\midrule
-$(0,1)$ & + & - & - & yes & no \\
-$(1,\infty)$ & - & - & - & yes & no \\
+$r_0$ & $1$ (exact) & $1$ & population floor, $a=0$ \\
 \bottomrule
 \end{tabular}
 \end{center}
-The certified admissible set is $\mathcal A_R=\{0\}$. The first exponential defect is $(m,\eta_m)=(2,- \frac{1}{2})$, and the signed boundary-law coefficient is $- \frac{1}{4}$.
-\section{Heun RK2}
-The exact stability function is
-\[\begin{adjustbox}{max width=0.98\textwidth}$\displaystyle R(s)=\frac{s^{2}}{2} + s + 1$\end{adjustbox}\]
-The full- and half-step stage-resolvent factors are $1$ and $1$, respectively.
-The exact scalar functions are
-\[\begin{adjustbox}{max width=0.98\textwidth}$\displaystyle a(x)=\frac{x^{2} - 2 x + 2}{2}$\end{adjustbox}\]
-\[\begin{adjustbox}{max width=0.98\textwidth}$\displaystyle M_R(x,0,0)=- \frac{x^{3} \left(x - 8\right)}{64}$\end{adjustbox}\]
-The primitive boundary numerators below isolate the zeros of $a$, $a-1$, and $M_R$; their signs are retained in the exact expressions above and in every interval row.
-\[\begin{aligned}
-P_0(x)={}&x^{2}-2 x+2
-\end{aligned}\]
-\[\begin{aligned}
-P_1(x)={}&x^{2}-2 x
-\end{aligned}\]
-\[\begin{aligned}
-P_M(x)={}&x^{4}-8 x^{3}
-\end{aligned}\]
-These equations correspond respectively to $a(x)=0$, $a(x)=1$, and $M_R(x,0,0)=0$. Their square-free parts are
-\[\begin{aligned}
-\operatorname{sqf}P_0={}&x^{2}-2 x+2
-\end{aligned}\]
-\[\begin{aligned}
-\operatorname{sqf}P_1={}&x^{2}-2 x
-\end{aligned}\]
-\[\begin{aligned}
-\operatorname{sqf}P_M={}&x^{2}-8 x
-\end{aligned}\]
 \begin{center}
-\begin{tabularx}{\textwidth}{@{}l l l X@{}}
+\begin{tabular}{@{}lcccc@{}}
 \toprule
-Label & Certified rational bracket & Approx. & Source / active mechanism \\
+Open interval & $\operatorname{sgn}a$ & $\operatorname{sgn}(a-1)$ & $\operatorname{sgn}M_R$ & CPTP \\
 \midrule
-$--$ & $2$ & $2$ & population ceiling (a=1) \\
-$--$ & $8$ & $8$ & coherence-population block (M=0) \\
-\bottomrule
-\end{tabularx}
-\end{center}
-\begin{center}
-\begin{tabular}{@{}l c c c c c@{}}
-\toprule
-Open interval & $\operatorname{sgn}a$ & $\operatorname{sgn}(a-1)$ & $\operatorname{sgn}M$ & domain & CPTP \\
-\midrule
-$(0,2)$ & + & - & + & yes & yes \\
-$(2,8)$ & + & + & + & yes & no \\
-$(8,\infty)$ & + & + & - & yes & no \\
+$(0,1)$ & $+$ & $-$ & $-$ & no \\
+$(1,\infty)$ & $-$ & $-$ & $-$ & no \\
 \bottomrule
 \end{tabular}
 \end{center}
-The certified admissible set is $\mathcal A_R=[0,2]$. The first exponential defect is $(m,\eta_m)=(3,- \frac{1}{6})$, and the signed boundary-law coefficient is $\frac{1}{8}$.
+Admissible set: $\mathcal A_R=\{0\}$. First defect $(m,\eta_m)=(2,-1/2)$; orientation coefficient $-1/4$.
+\section{Two-stage order two (Heun)}
+\begin{align*}
+R(s)&=\frac{s^{2}}{2} + s + 1,\\
+a(x)&=\frac{x^{2} - 2 x + 2}{2},\\
+M_R(x,0,0)&=- \frac{x^{3} \left(x - 8\right)}{64},\\
+P_0(x)&=x^{2}-2 x+2,\\
+P_1(x)&=x^{2}-2 x,\\
+P_M(x)&=x^{4}-8 x^{3},\\
+\operatorname{sqf}P_M(x)&=x^{2}-8 x.
+\end{align*}
+\begin{center}
+\begin{tabular}{@{}llll@{}}
+\toprule
+Root & Certified rational bracket & Approx. & Boundary \\
+\midrule
+$r_1$ & $2$ (exact) & $2$ & population ceiling, $a=1$ \\
+$r_M$ & $8$ (exact) & $8$ & margin, $M_R=0$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+\begin{center}
+\begin{tabular}{@{}lcccc@{}}
+\toprule
+Open interval & $\operatorname{sgn}a$ & $\operatorname{sgn}(a-1)$ & $\operatorname{sgn}M_R$ & CPTP \\
+\midrule
+$(0,2)$ & $+$ & $-$ & $+$ & yes \\
+$(2,8)$ & $+$ & $+$ & $+$ & no \\
+$(8,\infty)$ & $+$ & $+$ & $-$ & no \\
+\bottomrule
+\end{tabular}
+\end{center}
+Admissible set: $\mathcal A_R=[0,2]$. First defect $(m,\eta_m)=(3,-1/6)$; orientation coefficient $1/8$.
 \section{SSPRK(3,3)}
-The exact stability function is
-\[\begin{adjustbox}{max width=0.98\textwidth}$\displaystyle R(s)=\frac{s^{3}}{6} + \frac{s^{2}}{2} + s + 1$\end{adjustbox}\]
-The full- and half-step stage-resolvent factors are $1$ and $1$, respectively.
-The exact scalar functions are
-\[\begin{adjustbox}{max width=0.98\textwidth}$\displaystyle a(x)=- \frac{x^{3} - 3 x^{2} + 6 x - 6}{6}$\end{adjustbox}\]
-\[\begin{adjustbox}{max width=0.98\textwidth}$\displaystyle M_R(x,0,0)=- \frac{x^{4} \left(x^{2} - 12 x + 84\right)}{2304}$\end{adjustbox}\]
-The primitive boundary numerators below isolate the zeros of $a$, $a-1$, and $M_R$; their signs are retained in the exact expressions above and in every interval row.
-\[\begin{aligned}
-P_0(x)={}&x^{3}-3 x^{2}+6 x\\
-&-6
-\end{aligned}\]
-\[\begin{aligned}
-P_1(x)={}&x^{3}-3 x^{2}+6 x
-\end{aligned}\]
-\[\begin{aligned}
-P_M(x)={}&x^{6}-12 x^{5}+84 x^{4}
-\end{aligned}\]
-These equations correspond respectively to $a(x)=0$, $a(x)=1$, and $M_R(x,0,0)=0$. Their square-free parts are
-\[\begin{aligned}
-\operatorname{sqf}P_0={}&x^{3}-3 x^{2}+6 x\\
-&-6
-\end{aligned}\]
-\[\begin{aligned}
-\operatorname{sqf}P_1={}&x^{3}-3 x^{2}+6 x
-\end{aligned}\]
-\[\begin{aligned}
-\operatorname{sqf}P_M={}&x^{3}-12 x^{2}+84 x
-\end{aligned}\]
+\begin{align*}
+R(s)&=\frac{s^{3}}{6} + \frac{s^{2}}{2} + s + 1,\\
+a(x)&=- \frac{x^{3} - 3 x^{2} + 6 x - 6}{6},\\
+M_R(x,0,0)&=- \frac{x^{4} \left(x^{2} - 12 x + 84\right)}{2304},\\
+P_0(x)&=x^{3}-3 x^{2}+6 x-6,\\
+P_1(x)&=x^{3}-3 x^{2}+6 x,\\
+P_M(x)&=x^{6}-12 x^{5}+84 x^{4},\\
+\operatorname{sqf}P_M(x)&=x^{3}-12 x^{2}+84 x.
+\end{align*}
 \begin{center}
-\begin{tabularx}{\textwidth}{@{}l l l X@{}}
+\begin{tabular}{@{}llll@{}}
 \toprule
-Label & Certified rational bracket & Approx. & Source / active mechanism \\
+Root & Certified rational bracket & Approx. & Boundary \\
 \midrule
-$--$ & $(1.596071637983321,1.596071637983322)$ & $1.596071637983322$ & population floor (a=0) \\
-\bottomrule
-\end{tabularx}
-\end{center}
-\begin{center}
-\begin{tabular}{@{}l c c c c c@{}}
-\toprule
-Open interval & $\operatorname{sgn}a$ & $\operatorname{sgn}(a-1)$ & $\operatorname{sgn}M$ & domain & CPTP \\
-\midrule
-$(0,1.596071637983322)$ & + & - & - & yes & no \\
-$(1.596071637983322,\infty)$ & - & - & - & yes & no \\
+$r_0$ & $(1.596071637983321,1.596071637983322)$ & $1.596071637983322$ & population floor, $a=0$ \\
 \bottomrule
 \end{tabular}
 \end{center}
-The certified admissible set is $\mathcal A_R=\{0\}$. The first exponential defect is $(m,\eta_m)=(4,- \frac{1}{24})$, and the signed boundary-law coefficient is $- \frac{7}{192}$.
+\begin{center}
+\begin{tabular}{@{}lcccc@{}}
+\toprule
+Open interval & $\operatorname{sgn}a$ & $\operatorname{sgn}(a-1)$ & $\operatorname{sgn}M_R$ & CPTP \\
+\midrule
+$(0,r_0)$ & $+$ & $-$ & $-$ & no \\
+$(r_0,\infty)$ & $-$ & $-$ & $-$ & no \\
+\bottomrule
+\end{tabular}
+\end{center}
+Admissible set: $\mathcal A_R=\{0\}$. First defect $(m,\eta_m)=(4,-1/24)$; orientation coefficient $-7/192$.
 \section{Classical RK4}
-The exact stability function is
-\[\begin{adjustbox}{max width=0.98\textwidth}$\displaystyle R(s)=\frac{s^{4}}{24} + \frac{s^{3}}{6} + \frac{s^{2}}{2} + s + 1$\end{adjustbox}\]
-The full- and half-step stage-resolvent factors are $1$ and $1$, respectively.
-The exact scalar functions are
-\[\begin{adjustbox}{max width=0.98\textwidth}$\displaystyle a(x)=\frac{x^{4} - 4 x^{3} + 12 x^{2} - 24 x + 24}{24}$\end{adjustbox}\]
-\[\begin{adjustbox}{max width=0.98\textwidth}$\displaystyle M_R(x,0,0)=- \frac{x^{5} \left(x^{3} - 16 x^{2} + 160 x - 1152\right)}{147456}$\end{adjustbox}\]
-The primitive boundary numerators below isolate the zeros of $a$, $a-1$, and $M_R$; their signs are retained in the exact expressions above and in every interval row.
-\[\begin{aligned}
-P_0(x)={}&x^{4}-4 x^{3}+12 x^{2}\\
-&-24 x+24
-\end{aligned}\]
-\[\begin{aligned}
-P_1(x)={}&x^{4}-4 x^{3}+12 x^{2}\\
-&-24 x
-\end{aligned}\]
-\[\begin{aligned}
-P_M(x)={}&x^{8}-16 x^{7}+160 x^{6}\\
-&-1152 x^{5}
-\end{aligned}\]
-These equations correspond respectively to $a(x)=0$, $a(x)=1$, and $M_R(x,0,0)=0$. Their square-free parts are
-\[\begin{aligned}
-\operatorname{sqf}P_0={}&x^{4}-4 x^{3}+12 x^{2}\\
-&-24 x+24
-\end{aligned}\]
-\[\begin{aligned}
-\operatorname{sqf}P_1={}&x^{4}-4 x^{3}+12 x^{2}\\
-&-24 x
-\end{aligned}\]
-\[\begin{aligned}
-\operatorname{sqf}P_M={}&x^{4}-16 x^{3}+160 x^{2}\\
-&-1152 x
-\end{aligned}\]
+\begin{align*}
+R(s)&=\frac{s^{4}}{24} + \frac{s^{3}}{6} + \frac{s^{2}}{2} + s + 1,\\
+a(x)&=\frac{x^{4} - 4 x^{3} + 12 x^{2} - 24 x + 24}{24},\\
+M_R(x,0,0)&=- \frac{x^{5} \left(x^{3} - 16 x^{2} + 160 x - 1152\right)}{147456},\\
+P_0(x)&=x^{4}-4 x^{3}+12 x^{2}-24 x+24,\\
+P_1(x)&=x^{4}-4 x^{3}+12 x^{2}-24 x,\\
+P_M(x)&=x^{8}-16 x^{7}+160 x^{6}-1152 x^{5},\\
+\operatorname{sqf}P_M(x)&=x^{4}-16 x^{3}+160 x^{2}-1152 x.
+\end{align*}
 \begin{center}
-\begin{tabularx}{\textwidth}{@{}l l l X@{}}
+\begin{tabular}{@{}llll@{}}
 \toprule
-Label & Certified rational bracket & Approx. & Source / active mechanism \\
+Root & Certified rational bracket & Approx. & Boundary \\
 \midrule
-$\alpha_4$ & $(2.785293563405281,2.785293563405282)$ & $2.785293563405282$ & population ceiling (a=1) \\
-$\mu_4$ & $(10.982425466293273,10.982425466293274)$ & $10.982425466293273$ & coherence-population block (M=0) \\
-\bottomrule
-\end{tabularx}
-\end{center}
-\begin{center}
-\begin{tabular}{@{}l c c c c c@{}}
-\toprule
-Open interval & $\operatorname{sgn}a$ & $\operatorname{sgn}(a-1)$ & $\operatorname{sgn}M$ & domain & CPTP \\
-\midrule
-$(0,2.785293563405282)$ & + & - & + & yes & yes \\
-$(2.785293563405282,10.982425466293273)$ & + & + & + & yes & no \\
-$(10.982425466293273,\infty)$ & + & + & - & yes & no \\
+$\alpha_4$ & $(2.785293563405281,2.785293563405282)$ & $2.785293563405282$ & population ceiling, $a=1$ \\
+$\mu_4$ & $(10.982425466293273,10.982425466293274)$ & $10.982425466293273$ & margin, $M_R=0$ \\
 \bottomrule
 \end{tabular}
 \end{center}
-The certified admissible set is $\mathcal A_R=[0,\alpha_4]$. The first exponential defect is $(m,\eta_m)=(5,- \frac{1}{120})$, and the signed boundary-law coefficient is $\frac{1}{128}$.
-\section{Dormand-Prince 5 principal formula}
-The exact stability function is
-\[\begin{adjustbox}{max width=0.98\textwidth}$\displaystyle R(s)=\frac{s^{6}}{600} + \frac{s^{5}}{120} + \frac{s^{4}}{24} + \frac{s^{3}}{6} + \frac{s^{2}}{2} + s + 1$\end{adjustbox}\]
-The full- and half-step stage-resolvent factors are $1$ and $1$, respectively.
-The exact scalar functions are
-\[\begin{adjustbox}{max width=0.98\textwidth}$\displaystyle a(x)=\frac{x^{6} - 5 x^{5} + 25 x^{4} - 100 x^{3} + 300 x^{2} - 600 x + 600}{600}$\end{adjustbox}\]
-\[\begin{adjustbox}{max width=0.98\textwidth}$\displaystyle M_R(x,0,0)=- \frac{x^{6} \left(x^{6} - 20 x^{5} + 300 x^{4} - 3600 x^{3} + 35600 x^{2} - 294400 x - 396800\right)}{1474560000}$\end{adjustbox}\]
-The primitive boundary numerators below isolate the zeros of $a$, $a-1$, and $M_R$; their signs are retained in the exact expressions above and in every interval row.
-\[\begin{aligned}
-P_0(x)={}&x^{6}-5 x^{5}+25 x^{4}\\
-&-100 x^{3}+300 x^{2}-600 x\\
-&+600
-\end{aligned}\]
-\[\begin{aligned}
-P_1(x)={}&x^{6}-5 x^{5}+25 x^{4}\\
-&-100 x^{3}+300 x^{2}-600 x
-\end{aligned}\]
-\[\begin{aligned}
-P_M(x)={}&x^{12}-20 x^{11}+300 x^{10}\\
-&-3600 x^{9}+35600 x^{8}-294400 x^{7}\\
-&-396800 x^{6}
-\end{aligned}\]
-These equations correspond respectively to $a(x)=0$, $a(x)=1$, and $M_R(x,0,0)=0$. Their square-free parts are
-\[\begin{aligned}
-\operatorname{sqf}P_0={}&x^{6}-5 x^{5}+25 x^{4}\\
-&-100 x^{3}+300 x^{2}-600 x\\
-&+600
-\end{aligned}\]
-\[\begin{aligned}
-\operatorname{sqf}P_1={}&x^{6}-5 x^{5}+25 x^{4}\\
-&-100 x^{3}+300 x^{2}-600 x
-\end{aligned}\]
-\[\begin{aligned}
-\operatorname{sqf}P_M={}&x^{7}-20 x^{6}+300 x^{5}\\
-&-3600 x^{4}+35600 x^{3}-294400 x^{2}\\
-&-396800 x
-\end{aligned}\]
 \begin{center}
-\begin{tabularx}{\textwidth}{@{}l l l X@{}}
+\begin{tabular}{@{}lcccc@{}}
 \toprule
-Label & Certified rational bracket & Approx. & Source / active mechanism \\
+Open interval & $\operatorname{sgn}a$ & $\operatorname{sgn}(a-1)$ & $\operatorname{sgn}M_R$ & CPTP \\
 \midrule
-$\alpha_5$ & $(3.306567892634946,3.306567892634947)$ & $3.306567892634947$ & population ceiling (a=1) \\
-$\mu_5$ & $(13.174093462800933,13.174093462800934)$ & $13.174093462800933$ & coherence-population block (M=0) \\
-\bottomrule
-\end{tabularx}
-\end{center}
-\begin{center}
-\begin{tabular}{@{}l c c c c c@{}}
-\toprule
-Open interval & $\operatorname{sgn}a$ & $\operatorname{sgn}(a-1)$ & $\operatorname{sgn}M$ & domain & CPTP \\
-\midrule
-$(0,3.306567892634947)$ & + & - & + & yes & yes \\
-$(3.306567892634947,13.174093462800933)$ & + & + & + & yes & no \\
-$(13.174093462800933,\infty)$ & + & + & - & yes & no \\
+$(0,\alpha_4)$ & $+$ & $-$ & $+$ & yes \\
+$(\alpha_4,\mu_4)$ & $+$ & $+$ & $+$ & no \\
+$(\mu_4,\infty)$ & $+$ & $+$ & $-$ & no \\
 \bottomrule
 \end{tabular}
 \end{center}
-The certified admissible set is $\mathcal A_R=[0,\alpha_5]$. The first exponential defect is $(m,\eta_m)=(6,\frac{1}{3600})$, and the signed boundary-law coefficient is $\frac{31}{115200}$.
-\section{Dormand-Prince embedded 4 formula}
-The exact stability function is
-\[\begin{adjustbox}{max width=0.98\textwidth}$\displaystyle R(s)=\frac{s^{7}}{24000} + \frac{161 s^{6}}{120000} + \frac{1097 s^{5}}{120000} + \frac{s^{4}}{24} + \frac{s^{3}}{6} + \frac{s^{2}}{2} + s + 1$\end{adjustbox}\]
-The full- and half-step stage-resolvent factors are $1$ and $1$, respectively.
-The exact scalar functions are
-\[\begin{adjustbox}{max width=0.98\textwidth}$\displaystyle a(x)=- \frac{5 x^{7} - 161 x^{6} + 1097 x^{5} - 5000 x^{4} + 20000 x^{3} - 60000 x^{2} + 120000 x - 120000}{120000}$\end{adjustbox}\]
-\[\begin{adjustbox}{max width=0.98\textwidth}$\displaystyle M_R(x,0,0)=- \frac{x^{5} \left(25 x^{9} - 3220 x^{8} + 147564 x^{7} - 3225872 x^{6} + 48214544 x^{5} - 576320000 x^{4} + 5721600000 x^{3} - 37719040000 x^{2} + 16752640000 x + 178790400000\right)}{235929600000000}$\end{adjustbox}\]
-The primitive boundary numerators below isolate the zeros of $a$, $a-1$, and $M_R$; their signs are retained in the exact expressions above and in every interval row.
-\[\begin{aligned}
-P_0(x)={}&5 x^{7}-161 x^{6}+1097 x^{5}\\
-&-5000 x^{4}+20000 x^{3}-60000 x^{2}\\
-&+120000 x-120000
-\end{aligned}\]
-\[\begin{aligned}
-P_1(x)={}&5 x^{7}-161 x^{6}+1097 x^{5}\\
-&-5000 x^{4}+20000 x^{3}-60000 x^{2}\\
-&+120000 x
-\end{aligned}\]
-\[\begin{aligned}
-P_M(x)={}&25 x^{14}-3220 x^{13}+147564 x^{12}\\
-&-3225872 x^{11}+48214544 x^{10}-576320000 x^{9}\\
-&+5721600000 x^{8}-37719040000 x^{7}+16752640000 x^{6}\\
-&+178790400000 x^{5}
-\end{aligned}\]
-These equations correspond respectively to $a(x)=0$, $a(x)=1$, and $M_R(x,0,0)=0$. Their square-free parts are
-\[\begin{aligned}
-\operatorname{sqf}P_0={}&5 x^{7}-161 x^{6}+1097 x^{5}\\
-&-5000 x^{4}+20000 x^{3}-60000 x^{2}\\
-&+120000 x-120000
-\end{aligned}\]
-\[\begin{aligned}
-\operatorname{sqf}P_1={}&5 x^{7}-161 x^{6}+1097 x^{5}\\
-&-5000 x^{4}+20000 x^{3}-60000 x^{2}\\
-&+120000 x
-\end{aligned}\]
-\[\begin{aligned}
-\operatorname{sqf}P_M={}&25 x^{10}-3220 x^{9}+147564 x^{8}\\
-&-3225872 x^{7}+48214544 x^{6}-576320000 x^{5}\\
-&+5721600000 x^{4}-37719040000 x^{3}+16752640000 x^{2}\\
-&+178790400000 x
-\end{aligned}\]
+Admissible set: $\mathcal A_R=[0,\alpha_4]$. First defect $(m,\eta_m)=(5,-1/120)$; orientation coefficient $1/128$.
+\section{Richardson extrapolate of RK4 (\texorpdfstring{$n=2$}{n=2})}\label{s:richardson_chart}
+Let $R_{\rm ext}$ and $P_{10}$ be the exact polynomials of Section~\ref{s:candidates}, and set $a=R_{\rm ext}(-x)$ and $M=a-R_{\rm ext}(-x/2)^2$. Exact Sturm counts give two positive zeros of $a$, one positive zero of $a-1$, and two positive zeros of $M$; the trivial root $x=0$ is excluded.
 \begin{center}
-\begin{tabularx}{\textwidth}{@{}l l l X@{}}
+\begin{tabular}{@{}lll@{}}
 \toprule
-Label & Certified rational bracket & Approx. & Source / active mechanism \\
+Root & Certified rational bracket & Boundary \\
 \midrule
-$\beta_-$ & $(3.06885654805038,3.068856548050381)$ & $3.068856548050381$ & coherence-population block (M=0) \\
-$\beta_+$ & $(4.384986320801944,4.384986320801945)$ & $4.384986320801944$ & population ceiling (a=1) \\
-$\delta_M$ & $(15.298767807585426,15.298767807585427)$ & $15.298767807585427$ & coherence-population block (M=0) \\
-$\delta_1$ & $(24.72775431876031,24.727754318760311)$ & $24.72775431876031$ & population ceiling (a=1) \\
-$\delta_0$ & $(24.727895030129697,24.727895030129698)$ & $24.727895030129697$ & population floor (a=0) \\
-\bottomrule
-\end{tabularx}
-\end{center}
-\begin{center}
-\begin{tabular}{@{}l c c c c c@{}}
-\toprule
-Open interval & $\operatorname{sgn}a$ & $\operatorname{sgn}(a-1)$ & $\operatorname{sgn}M$ & domain & CPTP \\
-\midrule
-$(0,3.068856548050381)$ & + & - & - & yes & no \\
-$(3.068856548050381,4.384986320801944)$ & + & - & + & yes & yes \\
-$(4.384986320801944,15.298767807585427)$ & + & + & + & yes & no \\
-$(15.298767807585427,24.72775431876031)$ & + & + & - & yes & no \\
-$(24.72775431876031,24.727895030129697)$ & + & - & - & yes & no \\
-$(24.727895030129697,\infty)$ & - & - & - & yes & no \\
+$r_{0a}$ & $(2.919911381617275,2.919911381617276)$ & population floor, $a=0$ \\
+$r_{0b}$ & $(6.034383873449079,6.034383873449080)$ & population floor, $a=0$ \\
+$\rho_-$ & $(6.034523958649170,6.034523958649171)$ & margin, $M=0$ \\
+$\rho_+$ & $(6.459127767825720,6.459127767825721)$ & population ceiling, $a=1$ \\
+$r_M$ & $(22.102437082855815,22.102437082855816)$ & margin, $M=0$ \\
 \bottomrule
 \end{tabular}
 \end{center}
-The certified admissible set is $\mathcal A_R=\{0\}\cup[\beta_-,\beta_+]$. The first exponential defect is $(m,\eta_m)=(5,\frac{97}{120000})$, and the signed boundary-law coefficient is $- \frac{97}{128000}$.
+Each bracket contains one simple root of its indicated polynomial, and these are all positive boundary roots. Exact signs at the rational samples $1,4,6.03445,6.2,10,23$, respectively, give the complete chart:
+\begin{center}
+\begin{tabular}{@{}lcccc@{}}
+\toprule
+Open interval & $\operatorname{sgn}a$ & $\operatorname{sgn}(a-1)$ & $\operatorname{sgn}M$ & CPTP \\
+\midrule
+$(0,r_{0a})$ & $+$ & $-$ & $-$ & no \\
+$(r_{0a},r_{0b})$ & $-$ & $-$ & $-$ & no \\
+$(r_{0b},\rho_-)$ & $+$ & $-$ & $-$ & no \\
+$(\rho_-,\rho_+)$ & $+$ & $-$ & $+$ & yes \\
+$(\rho_+,r_M)$ & $+$ & $+$ & $+$ & no \\
+$(r_M,\infty)$ & $+$ & $+$ & $-$ & no \\
+\bottomrule
+\end{tabular}
+\end{center}
+\textbf{Completeness of the sign chart.} The closed inequalities and continuity include both $\rho_-$ and $\rho_+$; at $r_{0a}$ and $r_{0b}$ the margin is strictly negative, and at $r_M$ the population ceiling is strictly violated. The chart is therefore complete, and the admissible set is exactly $\mathcal A_{\rm ext}=\{0\}\cup[\rho_-,\rho_+]$. First defect $(m,\eta_m)=(6,-1/4320)$; orientation coefficient $-31/138240$.
+\section{Dormand--Prince 5 (principal)}
+\begin{align*}
+R(s)&=\frac{s^{6}}{600} + \frac{s^{5}}{120} + \frac{s^{4}}{24} + \frac{s^{3}}{6} + \frac{s^{2}}{2} + s + 1,\\
+a(x)&=\frac{x^{6} - 5 x^{5} + 25 x^{4} - 100 x^{3} + 300 x^{2} - 600 x + 600}{600},\\
+M_R(x,0,0)&=- \frac{x^{6} \left(x^{6} - 20 x^{5} + 300 x^{4} - 3600 x^{3} + 35600 x^{2} - 294400 x - 396800\right)}{1474560000},\\
+P_0(x)&=x^{6}-5 x^{5}+25 x^{4}-100 x^{3}+300 x^{2}-600 x+600,\\
+P_1(x)&=x^{6}-5 x^{5}+25 x^{4}-100 x^{3}+300 x^{2}-600 x,\\
+P_M(x)&=x^{12}-20 x^{11}+300 x^{10}-3600 x^{9}+35600 x^{8}-294400 x^{7}-396800 x^{6},\\
+\operatorname{sqf}P_M(x)&=x^{7}-20 x^{6}+300 x^{5}-3600 x^{4}+35600 x^{3}-294400 x^{2}-396800 x.
+\end{align*}
+\begin{center}
+\begin{tabular}{@{}llll@{}}
+\toprule
+Root & Certified rational bracket & Approx. & Boundary \\
+\midrule
+$\alpha_5$ & $(3.306567892634946,3.306567892634947)$ & $3.306567892634947$ & population ceiling, $a=1$ \\
+$\mu_5$ & $(13.174093462800933,13.174093462800934)$ & $13.174093462800933$ & margin, $M_R=0$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+\begin{center}
+\begin{tabular}{@{}lcccc@{}}
+\toprule
+Open interval & $\operatorname{sgn}a$ & $\operatorname{sgn}(a-1)$ & $\operatorname{sgn}M_R$ & CPTP \\
+\midrule
+$(0,\alpha_5)$ & $+$ & $-$ & $+$ & yes \\
+$(\alpha_5,\mu_5)$ & $+$ & $+$ & $+$ & no \\
+$(\mu_5,\infty)$ & $+$ & $+$ & $-$ & no \\
+\bottomrule
+\end{tabular}
+\end{center}
+Admissible set: $\mathcal A_R=[0,\alpha_5]$. First defect $(m,\eta_m)=(6,1/3600)$; orientation coefficient $31/115200$.
+\section{Dormand--Prince 4 (embedded)}
+\begin{align*}
+R(s)&=\frac{s^{7}}{24000} + \frac{161 s^{6}}{120000} + \frac{1097 s^{5}}{120000} + \frac{s^{4}}{24} + \frac{s^{3}}{6} + \frac{s^{2}}{2} + s + 1,\\
+a(x)&=- \frac{5 x^{7} - 161 x^{6} + 1097 x^{5} - 5000 x^{4} + 20000 x^{3} - 60000 x^{2} + 120000 x - 120000}{120000},\\
+M_R(x,0,0)&=-\frac{P_M(x)}{235929600000000},\\
+P_0(x)&=5 x^{7}-161 x^{6}+1097 x^{5}-5000 x^{4}+20000 x^{3}-60000 x^{2}+120000 x-120000,\\
+P_1(x)&=5 x^{7}-161 x^{6}+1097 x^{5}-5000 x^{4}+20000 x^{3}-60000 x^{2}+120000 x,\\
+P_M(x)&=25 x^{14}-3220 x^{13}+147564 x^{12}-3225872 x^{11}+48214544 x^{10}-576320000 x^{9}+5721600000 x^{8}\\
+&\quad-37719040000 x^{7}+16752640000 x^{6}+178790400000 x^{5},\\
+\operatorname{sqf}P_M(x)&=25 x^{10}-3220 x^{9}+147564 x^{8}-3225872 x^{7}+48214544 x^{6}-576320000 x^{5}+5721600000 x^{4}\\
+&\quad-37719040000 x^{3}+16752640000 x^{2}+178790400000 x.
+\end{align*}
+\begin{center}
+\begin{tabular}{@{}llll@{}}
+\toprule
+Root & Certified rational bracket & Approx. & Boundary \\
+\midrule
+$\beta_-$ & $(3.06885654805038,3.068856548050381)$ & $3.068856548050381$ & margin, $M_R=0$ \\
+$\beta_+$ & $(4.384986320801944,4.384986320801945)$ & $4.384986320801944$ & population ceiling, $a=1$ \\
+$\delta_M$ & $(15.298767807585426,15.298767807585427)$ & $15.298767807585427$ & margin, $M_R=0$ \\
+$\delta_1$ & $(24.72775431876031,24.727754318760311)$ & $24.72775431876031$ & population ceiling, $a=1$ \\
+$\delta_0$ & $(24.727895030129697,24.727895030129698)$ & $24.727895030129697$ & population floor, $a=0$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+\begin{center}
+\begin{tabular}{@{}lcccc@{}}
+\toprule
+Open interval & $\operatorname{sgn}a$ & $\operatorname{sgn}(a-1)$ & $\operatorname{sgn}M_R$ & CPTP \\
+\midrule
+$(0,\beta_-)$ & $+$ & $-$ & $-$ & no \\
+$(\beta_-,\beta_+)$ & $+$ & $-$ & $+$ & yes \\
+$(\beta_+,\delta_M)$ & $+$ & $+$ & $+$ & no \\
+$(\delta_M,\delta_1)$ & $+$ & $+$ & $-$ & no \\
+$(\delta_1,\delta_0)$ & $+$ & $-$ & $-$ & no \\
+$(\delta_0,\infty)$ & $-$ & $-$ & $-$ & no \\
+\bottomrule
+\end{tabular}
+\end{center}
+\textbf{Completeness of the sign chart.} The margin is negative on $(0,\beta_-)$, the population ceiling fails on $(\beta_+,\delta_M]$, and the margin is negative on $(\delta_M,\infty)$, which contains $\delta_1$ and $\delta_0$. The inequalities $a\le1$ and $M_R\ge0$ therefore hold together only on $[\beta_-,\beta_+]$, and the chart is complete. Admissible set: $\mathcal A_R=\{0\}\cup[\beta_-,\beta_+]$. First defect $(m,\eta_m)=(5,97/120000)$; orientation coefficient $-97/128000$.
 \section{Backward Euler}
-The exact stability function is
-\[\begin{adjustbox}{max width=0.98\textwidth}$\displaystyle R(s)=- \frac{1}{s - 1}$\end{adjustbox}\]
-The full- and half-step stage-resolvent factors are $x + 1$ and $\frac{x}{2} + 1$, respectively.
-The exact scalar functions are
-\[\begin{adjustbox}{max width=0.98\textwidth}$\displaystyle a(x)=\frac{1}{x + 1}$\end{adjustbox}\]
-\[\begin{adjustbox}{max width=0.98\textwidth}$\displaystyle M_R(x,0,0)=\frac{x^{2}}{\left(x + 1\right) \left(x + 2\right)^{2}}$\end{adjustbox}\]
-The primitive boundary numerators below isolate the zeros of $a$, $a-1$, and $M_R$; their signs are retained in the exact expressions above and in every interval row.
-\[\begin{aligned}
-P_0(x)={}&1
-\end{aligned}\]
-\[\begin{aligned}
-P_1(x)={}&x
-\end{aligned}\]
-\[\begin{aligned}
-P_M(x)={}&x^{2}
-\end{aligned}\]
-These equations correspond respectively to $a(x)=0$, $a(x)=1$, and $M_R(x,0,0)=0$. Their square-free parts are
-\[\begin{aligned}
-\operatorname{sqf}P_0={}&1
-\end{aligned}\]
-\[\begin{aligned}
-\operatorname{sqf}P_1={}&x
-\end{aligned}\]
-\[\begin{aligned}
-\operatorname{sqf}P_M={}&x
-\end{aligned}\]
-No positive real boundary roots or stage-resolvent singularities occur.
+Stage determinants: $x + 1$ (at $-x$) and $x / 2 + 1$ (at $-x/2$).
+\begin{align*}
+R(s)&=- \frac{1}{s - 1},\\
+a(x)&=\frac{1}{x + 1},\\
+M_R(x,0,0)&=\frac{x^{2}}{\left(x + 1\right) \left(x + 2\right)^{2}},\\
+P_0(x)&=1,\\
+P_1(x)&=x,\\
+P_M(x)&=x^{2},\\
+\operatorname{sqf}P_M(x)&=x.
+\end{align*}
+There is no positive boundary root.
 \begin{center}
-\begin{tabular}{@{}l c c c c c@{}}
+\begin{tabular}{@{}lcccc@{}}
 \toprule
-Open interval & $\operatorname{sgn}a$ & $\operatorname{sgn}(a-1)$ & $\operatorname{sgn}M$ & domain & CPTP \\
+Open interval & $\operatorname{sgn}a$ & $\operatorname{sgn}(a-1)$ & $\operatorname{sgn}M_R$ & CPTP \\
 \midrule
-$(0,\infty)$ & + & - & + & yes & yes \\
+$(0,\infty)$ & $+$ & $-$ & $+$ & yes \\
 \bottomrule
 \end{tabular}
 \end{center}
-The certified admissible set is $\mathcal A_R=[0,\infty)$. The first exponential defect is $(m,\eta_m)=(2,\frac{1}{2})$, and the signed boundary-law coefficient is $\frac{1}{4}$.
+Admissible set: $\mathcal A_R=[0,\infty)$. First defect $(m,\eta_m)=(2,1/2)$; orientation coefficient $1/4$.
 \section{Implicit midpoint}
-The exact stability function is
-\[\begin{adjustbox}{max width=0.98\textwidth}$\displaystyle R(s)=- \frac{s + 2}{s - 2}$\end{adjustbox}\]
-The full- and half-step stage-resolvent factors are $\frac{x}{2} + 1$ and $\frac{x}{4} + 1$, respectively.
-The exact scalar functions are
-\[\begin{adjustbox}{max width=0.98\textwidth}$\displaystyle a(x)=- \frac{x - 2}{x + 2}$\end{adjustbox}\]
-\[\begin{adjustbox}{max width=0.98\textwidth}$\displaystyle M_R(x,0,0)=- \frac{2 x^{3}}{\left(x + 2\right) \left(x + 4\right)^{2}}$\end{adjustbox}\]
-The primitive boundary numerators below isolate the zeros of $a$, $a-1$, and $M_R$; their signs are retained in the exact expressions above and in every interval row.
-\[\begin{aligned}
-P_0(x)={}&x-2
-\end{aligned}\]
-\[\begin{aligned}
-P_1(x)={}&x
-\end{aligned}\]
-\[\begin{aligned}
-P_M(x)={}&x^{3}
-\end{aligned}\]
-These equations correspond respectively to $a(x)=0$, $a(x)=1$, and $M_R(x,0,0)=0$. Their square-free parts are
-\[\begin{aligned}
-\operatorname{sqf}P_0={}&x-2
-\end{aligned}\]
-\[\begin{aligned}
-\operatorname{sqf}P_1={}&x
-\end{aligned}\]
-\[\begin{aligned}
-\operatorname{sqf}P_M={}&x
-\end{aligned}\]
+Stage determinants: $x / 2 + 1$ (at $-x$) and $x / 4 + 1$ (at $-x/2$).
+\begin{align*}
+R(s)&=- \frac{s + 2}{s - 2},\\
+a(x)&=- \frac{x - 2}{x + 2},\\
+M_R(x,0,0)&=- \frac{2 x^{3}}{\left(x + 2\right) \left(x + 4\right)^{2}},\\
+P_0(x)&=x-2,\\
+P_1(x)&=x,\\
+P_M(x)&=x^{3},\\
+\operatorname{sqf}P_M(x)&=x.
+\end{align*}
 \begin{center}
-\begin{tabularx}{\textwidth}{@{}l l l X@{}}
+\begin{tabular}{@{}llll@{}}
 \toprule
-Label & Certified rational bracket & Approx. & Source / active mechanism \\
+Root & Certified rational bracket & Approx. & Boundary \\
 \midrule
-$--$ & $2$ & $2$ & population floor (a=0) \\
-\bottomrule
-\end{tabularx}
-\end{center}
-\begin{center}
-\begin{tabular}{@{}l c c c c c@{}}
-\toprule
-Open interval & $\operatorname{sgn}a$ & $\operatorname{sgn}(a-1)$ & $\operatorname{sgn}M$ & domain & CPTP \\
-\midrule
-$(0,2)$ & + & - & - & yes & no \\
-$(2,\infty)$ & - & - & - & yes & no \\
+$r_0$ & $2$ (exact) & $2$ & population floor, $a=0$ \\
 \bottomrule
 \end{tabular}
 \end{center}
-The certified admissible set is $\mathcal A_R=\{0\}$. The first exponential defect is $(m,\eta_m)=(3,\frac{1}{12})$, and the signed boundary-law coefficient is $- \frac{1}{16}$.
-\section{Embedded Dormand--Prince no-omission check}
-For the embedded fourth-order formula, the ordered positive events are the first margin zero $\beta_-$, the first population-ceiling zero $\beta_+$, the second margin zero $\delta_M$, the second population-ceiling zero $\delta_1$, and the population-floor zero $\delta_0$. The complete sign chart shows that both CPTP inequalities hold only between $\beta_-$ and $\beta_+$. Population overflow excludes the region after $\beta_+$, the margin is again negative after $\delta_M$, and the population multiplier becomes negative after $\delta_0$. Consequently no later root generates an omitted admissible component.
-\section{Reproducibility}
-The companion JSON records exact expressions, rational brackets, root multiplicities, exact rational sample points, and interval truth values. This PDF is generated directly from the exact tableaux in \texttt{src/rk\_choi\_margin/methods.py}; every displayed endpoint is produced by or checked against exact real-root isolation rather than visual sampling.
+\begin{center}
+\begin{tabular}{@{}lcccc@{}}
+\toprule
+Open interval & $\operatorname{sgn}a$ & $\operatorname{sgn}(a-1)$ & $\operatorname{sgn}M_R$ & CPTP \\
+\midrule
+$(0,2)$ & $+$ & $-$ & $-$ & no \\
+$(2,\infty)$ & $-$ & $-$ & $-$ & no \\
+\bottomrule
+\end{tabular}
+\end{center}
+Admissible set: $\mathcal A_R=\{0\}$. First defect $(m,\eta_m)=(3,1/12)$; orientation coefficient $-1/16$.
 \end{document}

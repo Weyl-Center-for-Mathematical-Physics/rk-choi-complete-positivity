@@ -1,8 +1,8 @@
-"""Contract tests for the BIT source auditor and package builder (Task 16).
+"""Contract tests for the BIT source auditor and package builder.
 
-Rules are exercised on small synthetic manuscripts (fast, hermetic) and, when the revision-root
-`manuscript` directory is present, on the real working source (source-level rules only; the packaged
-artifacts are audited by `reproduce_bit.py manuscript-contract` and by Task 17).
+Rules are exercised on small synthetic manuscripts (fast, hermetic) and, when the article's LaTeX sources are
+present in `../manuscript`, on the real source (source-level rules only; the packaged artifacts are audited by
+`reproduce_bit.py manuscript-contract` and by the package builder itself).
 """
 from __future__ import annotations
 
@@ -278,6 +278,8 @@ def test_flatten_inlines_inputs_recursively(tmp_path):
     assert "\\input{" not in flat
     assert "\\section{Intro}" in flat and "\\bmhead{Funding}" in flat
     assert flat.count("\\documentclass") == 1
+    # the flattened file that goes to the journal carries no marker comments naming the inlined files
+    assert "%% ----" not in flat and "sec01" not in flat and "declarations.tex" not in flat
 
 
 def test_review_variant_adds_lineno_option(tmp_path):
@@ -286,6 +288,12 @@ def test_review_variant_adds_lineno_option(tmp_path):
     review = bbp.review_variant(flat)
     assert "\\documentclass[pdflatex,sn-mathphys-num,lineno]{sn-jnl}" in review
     assert review.count("lineno") == 1
+    # the continuous ruler is restarted with a wider even-page offset so that four-digit numbers keep clear of the text
+    assert "\\begin{document}\n" + bbp.REVIEW_RULER + "\n" in review
+    assert "\\unsetvruler\\setvruler[12bp][1][1][3][1][1.18\\textwidth][18pt]" in review
+    assert review.replace(bbp.REVIEW_RULER + "\n", "").replace(",lineno]", "]") == flat
+    with pytest.raises(ValueError):
+        bbp.review_variant(flat.replace("\\begin{document}", ""))
 
 
 def test_flat_zip_writer_rejects_nested_and_absolute_names(tmp_path):
@@ -350,7 +358,7 @@ def test_code_allowlist_excludes_environments_caches_and_logs():
 # ---------------------------------------------------------------------------
 # real working source (source-level rules only)
 # ---------------------------------------------------------------------------
-@pytest.mark.skipif(not MANUSCRIPT.exists(), reason="revision-root manuscript directory not present")
+@pytest.mark.skipif(not MANUSCRIPT.exists(), reason="the article's LaTeX sources (../manuscript) are not included in this archive")
 def test_real_manuscript_source_rules_pass():
     res = abs_.run_audit(MANUSCRIPT, status="PRE_SUBMISSION")
     failed = {r["id"]: r["detail"] for r in res["rules"] if r["status"] == "FAIL"}
@@ -455,8 +463,12 @@ def reproduction_fixture(tmp_path):
     return m
 
 
-def test_complete_reproduction_manifest_is_accepted(tmp_path):
+def test_complete_reproduction_manifest_is_accepted_and_does_not_bind_the_cover_letter(tmp_path):
     m = reproduction_fixture(tmp_path)
+    letter = tmp_path / "manuscript" / "cover_letter.tex"
+    letter.write_text("19 September 2026", encoding="utf-8")
+    bbp.validate_reproduction_manifest(tmp_path, m, manuscript=tmp_path / "manuscript")
+    letter.write_text("22 September 2026", encoding="utf-8")  # a new letter date needs no new reproduction run
     bbp.validate_reproduction_manifest(tmp_path, m, manuscript=tmp_path / "manuscript")
 
 
@@ -519,14 +531,78 @@ def test_final_rejects_pending_prose_after_brackets_removed(tmp_path, pending):
     assert rule(abs_.run_audit(m, status="FINAL"), "package_status_consistent")["status"] == "FAIL"
 
 
-def test_final_local_readme_does_not_claim_later_submission_authority():
-    text = bbp.render_readme("FINAL", "2026-09-18", {"steps": []}, [], True)
-    rows = {int(cells[1].strip()): cells[3].strip() for line in text.splitlines()
-            if (cells := line.split("|")) and len(cells) >= 5 and cells[1].strip().isdigit()}
-    assert rows[8] == "OPTIONAL"
-    assert rows[10] == "LATER"
-    assert rows[11] == "NOT AUTHORIZED"
-    assert all(rows[i] == "RESOLVED" for i in (1, 2, 3, 4, 5, 6, 7, 9))
+def test_package_readme_is_neutral_and_the_checklist_stays_in_the_build_record():
+    report = {"steps": [
+        {"step": "article compiled from flattened source in fresh directories", "clean_pages": 27, "review_pages": 27, "figures": ["Fig1.eps"]},
+        {"step": "Online Resource and cover letter compiled", "esm_pages": 17, "cover_pages": 1}]}
+    final = bbp.render_readme("FINAL", "2026-09-22", report, ["file"] * 408, True)
+    draft = bbp.render_readme("PRE_SUBMISSION", "2026-09-22", report, ["file"] * 408, False)
+    # the status stays visible (audit rule package_status_labelled); a draft says that it is not for upload
+    assert "status `FINAL`" in final and "22 September 2026" in final and "408 files" in final
+    assert "not for upload" not in final and "**Draft package; not for upload.**" in draft
+    # every file of the package is described, and the upload / no-upload split is stated
+    for name in abs_.SUBMISSION_FILES + ["BIT_Submission_Package_2026-09-22_FINAL.zip"]:
+        assert f"`{name}`" in final, name
+    assert "Not uploaded: `BIT_ESM_1_Source.zip` and `BIT_Code_and_Data.zip`" in final
+    assert "sha256sum -c BIT_SHA256.txt" in final and "reproduce_bit.py all" in final
+    # neutral wording: no process jargon, nothing the source auditor would flag
+    for word in ("gate", "operator", "fixture", "condition", "staging", "PRE_SUBMISSION", "workspace", "revision", "authoriz", "task "):
+        assert word not in final.lower(), word
+    for pattern in (abs_.MARKER_WORDS, abs_.BRACKET_MARKER, abs_.PENDING_FINAL_STATUS, abs_.JCP_RESIDUE):
+        assert not pattern.search(final), pattern.pattern
+    assert not [term for term in abs_.STALE_TERMS if term in final]
+    # the checklist goes to build/audit/bit_package.json and never confirms what happens in the journal system
+    rows = {r["item"]: r["status"] for r in bbp.author_checklist(True)}
+    assert rows[8] == "OPTIONAL" and rows[10] != "CONFIRMED" and rows[11] != "CONFIRMED"
+    assert all(rows[i] == "CONFIRMED" for i in (1, 2, 3, 4, 5, 6, 7, 9))
+    assert not [r for r in bbp.author_checklist(False) if r["status"] == "CONFIRMED"]
+
+
+COVER_TEX = r"""\documentclass{article}
+\newenvironment{letterbody}{}{}
+\begin{document}
+{\large\bfseries Ada Lovelace}\\
+Uni A\\
+\href{mailto:ada@example.org}{ada@example.org}
+
+\vspace{0.3em}\hrule\vspace{0.6em}
+
+22 September 2026
+
+Dear Editor, % a comment
+
+\begin{letterbody}
+Please consider ``A good title'' for \textit{BIT Numerical Mathematics}.
+
+A Runge--Kutta step of the classical fourth-order method; it's exact~--- and certified.
+\end{letterbody}
+
+Sincerely,
+
+\vspace{1.2em}
+{\bfseries Ada Lovelace}\\
+Corresponding author
+\end{document}
+"""
+
+
+def test_cover_letter_text_keeps_paragraphs_and_whole_words():
+    text = bbp.letter_text(COVER_TEX)
+    assert text == ("Ada Lovelace\nUni A\nada@example.org\n\n22 September 2026\n\nDear Editor,\n\n"
+                    "Please consider “A good title” for BIT Numerical Mathematics.\n\n"
+                    "A Runge–Kutta step of the classical fourth-order method; it’s exact — and certified.\n\n"
+                    "Sincerely,\n\nAda Lovelace\nCorresponding author\n")
+    # the PDF text of the same letter is hard-wrapped, hyphenated at line ends and uses ligatures: same words
+    pdf = ("Ada Lovelace\nUni A\nada@example.org\n22 September 2026\nDear Editor,\nPlease consider “A good title” "
+           "for BIT Numerical\nMathematics.\nA Runge–Kutta step of the classical fourth-\norder method; it’s exact "
+           "— and certiﬁed.\nSincerely,\nAda Lovelace\nCorresponding author\n\f")
+    assert bbp.same_letter_text(text, pdf)
+    assert not bbp.same_letter_text(text, pdf.replace("certiﬁed", "veriﬁed"))
+    # text-symbol commands and a comment after a line break give the same text; unknown commands are refused
+    variant = COVER_TEX.replace("Runge--Kutta", "Runge\\textendash Kutta").replace("Uni A\\\\", "Uni A\\\\% note")
+    assert bbp.letter_text(variant) == text
+    with pytest.raises(ValueError):
+        bbp.letter_text(COVER_TEX.replace("Uni A", r"Universit\'e A"))
 
 
 def test_commented_letterbody_cannot_hide_overlong_real_cover(tmp_path):
