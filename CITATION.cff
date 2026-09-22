@@ -10,6 +10,9 @@ identifiers:
   - type: doi
     value: 10.5281/zenodo.21522057
     description: "Zenodo concept DOI resolving to the latest archived version"
+  - type: doi
+    value: 10.5281/zenodo.22905456
+    description: "Zenodo archive of version 4.1.1"
 repository-code: "https://github.com/Weyl-Center-for-Mathematical-Physics/rk-choi-complete-positivity"
 abstract: >-
   Exact symbolic calculations, certified root brackets, an independent

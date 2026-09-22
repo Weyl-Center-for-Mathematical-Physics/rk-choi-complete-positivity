@@ -20,8 +20,8 @@ audit of the article's LaTeX sources, with 384 tests passed and 4 skipped (the s
 those sources). See [`bit/README.md`](bit/README.md) and [`bit/VERSION.md`](bit/VERSION.md).
 
 License: MIT. Versions 1.0.0, 4.0.0, 4.1.0 and 4.1.1 are archived on Zenodo under the concept DOI
-[10.5281/zenodo.21522057](https://doi.org/10.5281/zenodo.21522057), which resolves to the latest version; the documentation-only
-v4.0.1 was not archived. Version 4.1.1 corrects statements in the article and its supplement, refines the
+[10.5281/zenodo.21522057](https://doi.org/10.5281/zenodo.21522057), which resolves to the latest version (v4.1.1: [10.5281/zenodo.22905456](https://doi.org/10.5281/zenodo.22905456)); the
+documentation-only v4.0.1 was not archived. Version 4.1.1 corrects statements in the article and its supplement, refines the
 figures and cleans up the documentation; certified values, data records and tables are unchanged since v4.0.0.
 
 ## Version 1.0.0: zero-precession archive
