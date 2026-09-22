@@ -551,7 +551,7 @@ RICHARDSON_SET = r"\{0\}\cup[\rho_-,\rho_+]"
 # samples are recomputed and checked by scripts/verify_bit_claims.py (claim `richardson_global_sign_chart`).
 RICHARDSON_BLOCK = "\n".join([
     rf"\section{{{RICHARDSON_HEADING}}}\label{{s:richardson_chart}}",
-    r"Let $R_{\rm ext}$ and $P_{10}$ be the exact polynomials of Section~\ref{s:candidates}, and set $a=R_{\rm ext}(-x)$ and $M=a-R_{\rm ext}(-x/2)^2$. Exact Sturm counts give two positive zeros of $a$, one positive zero of $a-1$, and two positive zeros of $M$; the trivial root $x=0$ is excluded.",
+    r"Let $R_{\rm ext}$ and $P_{10}$ be the exact polynomials of Section~\ref{s:candidates}, and set $a=R_{\rm ext}(-x)$ and $M=a-R_{\rm ext}(-x/2)^2$. Exact Sturm counts give two positive zeros of $a$, one positive zero of $a-1$, and two positive zeros of $M$.",
     r"\begin{center}",
     r"\begin{tabular}{@{}lll@{}}",
     r"\toprule",
@@ -565,7 +565,7 @@ RICHARDSON_BLOCK = "\n".join([
     r"\bottomrule",
     r"\end{tabular}",
     r"\end{center}",
-    r"Each bracket contains one simple root of its indicated polynomial, and these are all positive boundary roots. Exact signs at the rational samples $1,4,6.03445,6.2,10,23$, respectively, give the complete chart:",
+    r"Each bracket contains one simple root of its indicated polynomial, and together the brackets hold all positive boundary roots. Exact signs at the rational samples $1,4,6.03445,6.2,10,23$, respectively, give the complete chart:",
     r"\begin{center}",
     r"\begin{tabular}{@{}lcccc@{}}",
     r"\toprule",
@@ -580,7 +580,7 @@ RICHARDSON_BLOCK = "\n".join([
     r"\bottomrule",
     r"\end{tabular}",
     r"\end{center}",
-    r"\textbf{Completeness of the sign chart.} The closed inequalities and continuity include both $\rho_-$ and $\rho_+$; at $r_{0a}$ and $r_{0b}$ the margin is strictly negative, and at $r_M$ the population ceiling is strictly violated. The chart is therefore complete, and the admissible set is exactly $\mathcal A_{\rm ext}=\{0\}\cup[\rho_-,\rho_+]$. First defect $(m,\eta_m)=(6,-1/4320)$; orientation coefficient $-31/138240$.",
+    r"\textbf{Completeness of the sign chart.} The inequalities are closed and the functions continuous, so the admissible set contains both $\rho_-$ and $\rho_+$. At $r_{0a}$ and $r_{0b}$ the margin is strictly negative, and at $r_M$ the population ceiling is strictly violated. The chart is therefore complete, and the admissible set is exactly $\mathcal A_{\rm ext}=\{0\}\cup[\rho_-,\rho_+]$. First defect $(m,\eta_m)=(6,-1/4320)$; orientation coefficient $-31/138240$.",
 ])
 
 # Approximate widths in points of math glyphs at 9 pt, used only to break long polynomials across lines.
@@ -794,15 +794,16 @@ def esm_certificate_tex(methods_data: list[dict[str, Any]]) -> str:
 
 
 STANDALONE_INTRO = (
-    r"This is Section~9 of Online Resource~1 of the article; references to Section~5 are to that document. "
-    r"For each method it lists the stability function, the population multiplier $a(x)=R(-x)$ and the margin $M_R(x,0,0)$, "
-    r"the numerators $P_0$, $P_1$, $P_M$ whose zeros are those of $a$, $a-1$, and $M_R$ (each $P$ is the primitive integer "
-    r"numerator with positive leading coefficient, so its sign can differ from that of $a$, $a-1$, or $M_R$; the sign charts give "
-    r"the signs of $a$, $a-1$, and $M_R$ themselves), their square-free parts where these differ, a labelled rational bracket for "
-    r"every positive root, and the sign chart. For the explicit methods the stage equations are solvable for every $x$; for "
-    r"backward Euler and the implicit midpoint rule the stage determinants $\det(I+xA)$ and $\det(I+xA/2)$ at the population and "
-    r"coherence arguments $-x$ and $-x/2$ are positive for $x\ge0$. Decimal bracket endpoints are exact rational numbers, and "
-    r"every sign is evaluated exactly at a rational sample point."
+    r"This is Section~9 of Online Resource~1 of the article, and references to Section~5 are to that document. "
+    r"For each method it lists the stability function, the population multiplier $a(x)=R(-x)$, the margin $M_R(x,0,0)$, "
+    r"and the numerators $P_0$, $P_1$, $P_M$ whose zeros are those of $a$, $a-1$, and $M_R$, with their square-free parts "
+    r"where these differ from them. Each $P$ is the primitive integer numerator with positive leading coefficient, so its sign "
+    r"can differ from that of $a$, $a-1$, or $M_R$. The sign charts give the signs of $a$, $a-1$, and $M_R$ themselves. "
+    r"A table gives a labelled rational bracket for every positive root, and the admissible set follows from the sign chart. "
+    r"For the explicit methods the stage equations are solvable for every $x$. For backward Euler and the implicit midpoint rule "
+    r"the stage determinants $\det(I+xA)$ and $\det(I+xA/2)$, at the population and coherence arguments $-x$ and $-x/2$, are "
+    r"positive for $x\ge0$. Decimal bracket endpoints are exact rational numbers, and every sign is evaluated exactly at a "
+    r"rational sample point."
 )
 
 

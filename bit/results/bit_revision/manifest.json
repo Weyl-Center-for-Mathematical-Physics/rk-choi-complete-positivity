@@ -1,6 +1,6 @@
 {
  "generator": "reproduce_bit.py",
- "generated_utc": "2026-09-22T21:22:28+00:00",
+ "generated_utc": "2026-09-22T23:06:52+00:00",
  "python": "3.13.5",
  "stage_counts": {
   "PASS": 5,
@@ -10,7 +10,7 @@
  "stages": [
   {
    "stage": "certificates",
-   "log": "results\\bit_revision\\logs\\20260922T211927Z_certificates.log",
+   "log": "results\\bit_revision\\logs\\20260922T230344Z_certificates.log",
    "commands": [
     {
      "title": "Independent first-principles verification of the article's claims",
@@ -20,7 +20,7 @@
       "scripts/verify_bit_claims.py"
      ],
      "exit": 0,
-     "seconds": 13.4
+     "seconds": 15.4
     },
     {
      "title": "Verification of the extrapolation corollary for the archived methods",
@@ -30,14 +30,14 @@
       "scripts/verify_bit_extension.py"
      ],
      "exit": 0,
-     "seconds": 9.9
+     "seconds": 12.2
     }
    ],
    "status": "PASS"
   },
   {
    "stage": "tests",
-   "log": "results\\bit_revision\\logs\\20260922T211951Z_tests.log",
+   "log": "results\\bit_revision\\logs\\20260922T230412Z_tests.log",
    "commands": [
     {
      "title": "Collect the complete pytest suite",
@@ -52,7 +52,7 @@
       "tests"
      ],
      "exit": 0,
-     "seconds": 1.3,
+     "seconds": 2.0,
      "tests_collected": 388
     },
     {
@@ -68,7 +68,7 @@
       "tests/test_closeout.py"
      ],
      "exit": 0,
-     "seconds": 9.5,
+     "seconds": 10.3,
      "tests_passed": 14
     },
     {
@@ -84,7 +84,7 @@
       "tests/test_core.py"
      ],
      "exit": 0,
-     "seconds": 12.7,
+     "seconds": 11.5,
      "tests_passed": 41
     },
     {
@@ -100,7 +100,7 @@
       "tests/test_topology_operational.py"
      ],
      "exit": 0,
-     "seconds": 1.8,
+     "seconds": 1.9,
      "tests_passed": 9
     },
     {
@@ -116,7 +116,7 @@
       "tests/test_v26.py"
      ],
      "exit": 0,
-     "seconds": 1.3,
+     "seconds": 1.4,
      "tests_passed": 6
     },
     {
@@ -132,7 +132,7 @@
       "tests/test_v27_certification.py"
      ],
      "exit": 0,
-     "seconds": 4.1,
+     "seconds": 4.4,
      "tests_passed": 14
     },
     {
@@ -148,7 +148,7 @@
       "tests/test_v27_noncommuting_adaptive.py"
      ],
      "exit": 0,
-     "seconds": 38.5,
+     "seconds": 37.9,
      "tests_passed": 8
     },
     {
@@ -180,7 +180,7 @@
       "tests/test_v29_executed_candidate.py"
      ],
      "exit": 0,
-     "seconds": 5.0,
+     "seconds": 4.7,
      "tests_passed": 12
     },
     {
@@ -196,7 +196,7 @@
       "tests/test_v29_theory.py"
      ],
      "exit": 0,
-     "seconds": 3.2,
+     "seconds": 3.0,
      "tests_passed": 8
     },
     {
@@ -212,7 +212,7 @@
       "tests/test_v30_execution_contract.py"
      ],
      "exit": 0,
-     "seconds": 3.1,
+     "seconds": 3.2,
      "tests_passed": 12
     },
     {
@@ -228,7 +228,7 @@
       "tests/test_v31_closeout.py"
      ],
      "exit": 0,
-     "seconds": 2.9,
+     "seconds": 3.0,
      "tests_passed": 61
     },
     {
@@ -244,7 +244,7 @@
       "tests/test_v32_external_review.py"
      ],
      "exit": 0,
-     "seconds": 2.0,
+     "seconds": 2.5,
      "tests_passed": 9
     },
     {
@@ -260,7 +260,7 @@
       "tests/test_v33_endpoint_membership.py"
      ],
      "exit": 0,
-     "seconds": 6.6,
+     "seconds": 6.8,
      "tests_passed": 16
     },
     {
@@ -292,7 +292,7 @@
       "tests/test_v35_editorial_layout.py"
      ],
      "exit": 0,
-     "seconds": 6.0,
+     "seconds": 6.5,
      "tests_passed": 11
     },
     {
@@ -324,7 +324,7 @@
       "tests/test_bit_scientific_contract.py"
      ],
      "exit": 0,
-     "seconds": 8.0,
+     "seconds": 7.8,
      "tests_passed": 36
     },
     {
@@ -340,7 +340,7 @@
       "tests/test_bit_figure_contract.py"
      ],
      "exit": 0,
-     "seconds": 8.4,
+     "seconds": 9.2,
      "tests_passed": 31
     },
     {
@@ -372,7 +372,7 @@
       "tests/test_bit_reproduce_contract.py"
      ],
      "exit": 0,
-     "seconds": 1.2,
+     "seconds": 1.3,
      "tests_passed": 13
     },
     {
@@ -396,7 +396,7 @@
   },
   {
    "stage": "audits",
-   "log": "results\\bit_revision\\logs\\20260922T212155Z_audits.log",
+   "log": "results\\bit_revision\\logs\\20260922T230618Z_audits.log",
    "commands": [
     {
      "title": "Verify theorem identities (v2.x archive audit)",
@@ -406,7 +406,7 @@
       "scripts/verify_theorems.py"
      ],
      "exit": 0,
-     "seconds": 4.3
+     "seconds": 4.4
     },
     {
      "title": "Verify phase-covariant identities",
@@ -426,7 +426,7 @@
       "scripts/verify_section4.py"
      ],
      "exit": 0,
-     "seconds": 1.8
+     "seconds": 1.9
     },
     {
      "title": "Independent 15,000-sample Choi audit",
@@ -436,7 +436,7 @@
       "independent_validation/independent_audit_v31.py"
      ],
      "exit": 0,
-     "seconds": 4.3
+     "seconds": 4.5
     },
     {
      "title": "Executed-candidate contract audit",
@@ -446,7 +446,7 @@
       "independent_validation/executed_candidate_contract_v31.py"
      ],
      "exit": 0,
-     "seconds": 6.2
+     "seconds": 6.8
     },
     {
      "title": "Endpoint-domain adversarial audit",
@@ -456,14 +456,14 @@
       "independent_validation/endpoint_membership_v33.py"
      ],
      "exit": 0,
-     "seconds": 2.4
+     "seconds": 2.6
     }
    ],
    "status": "PASS"
   },
   {
    "stage": "figures",
-   "log": "results\\bit_revision\\logs\\20260922T212217Z_figures.log",
+   "log": "results\\bit_revision\\logs\\20260922T230641Z_figures.log",
    "commands": [
     {
      "title": "Generate the BIT figure set with overlap and colour audits",
@@ -473,7 +473,7 @@
       "scripts/generate_bit_figures.py"
      ],
      "exit": 0,
-     "seconds": 11.0
+     "seconds": 11.3
     },
     {
      "title": "Generate the Online Resource tables from frozen records",
@@ -490,7 +490,7 @@
   },
   {
    "stage": "manuscript-contract",
-   "log": "results\\bit_revision\\logs\\20260922T212228Z_manuscript-contract.log",
+   "log": "results\\bit_revision\\logs\\20260922T230652Z_manuscript-contract.log",
    "commands": [
     {
      "title": "Audit the manuscript source against the archive contract",
@@ -506,7 +506,7 @@
       "<archive>\\results\\bit_revision\\bit_audit.json"
      ],
      "exit": 0,
-     "seconds": 0.2
+     "seconds": 0.1
     }
    ],
    "status": "PASS"
@@ -552,7 +552,7 @@
   "independent_validation/third_order_adversarial_v32.py": "fa9ceeb5e6f821d565173ef0890b989ee4e4d991ff9e7844f4082b8ff45094f6",
   "independent_validation/third_order_adversarial_v33.py": "af5fa62a4f06aa31a930488bc8214b807537927cf0df869872dcc56b6563e498",
   "manuscript_contract/scripts_source_audit_v35.py": "871d8c953b0fdad3c11fa22010e5f1038e47050a6d908438dbcf03a3deff61cc",
-  "pyproject.toml": "6b2e9c740a40dcb1ac10ba7869264bac33e8b0a078fbe5bdfec69ccbfe64ff73",
+  "pyproject.toml": "0332834ff8d0f51dadecaf3eb54f20213578f00194e230864a5dace9ee059b2b",
   "reproduce.sh": "fdfb18ab20648ff03673382a2cff793de9a4e2b4e9fed3e26e7bff675f7fae76",
   "reproduce_bit.py": "ff1a6059981b95af1961399164c208f40ee1fed4850d360de438bdfa18d875f2",
   "scripts/audit_bit_source.py": "137bdaad38e1ad32950d4d31b2d3b3e74f1efc2c15ba91d931cff36695860a98",
@@ -569,7 +569,7 @@
   "scripts/generate_jcp_figures_v32.py": "9a0a33b08709c256e01685b317b04385e5b72db7aa60b324eb46a5187464a762",
   "scripts/generate_jcp_figures_v33.py": "4c9a094d02bc5c722b37c89050237890a3314daf53eb3603a2f7b82a96bbbe6f",
   "scripts/generate_jcp_figures_v34.py": "5d87f56de064803a3e50d19b02615e41653121e292f61543f192fa1d120bae2a",
-  "scripts/generate_root_certificate.py": "39d3d1cc8a1245ca4a2b4bfbbb80071019044f4184dd7b05f1812d5bf3ff7793",
+  "scripts/generate_root_certificate.py": "be419e7fb2c0e89db02dc065a805e97ee902c3fe9847e7d7e30b1508b71b395b",
   "scripts/sync_article_numbers.py": "fc9d6c1da51800104f6611098d2bddb8bab77c5de11f62fbc10a9d17056f0f2e",
   "scripts/verify_bit_claims.py": "314955add1acbc488a419094d3646275f57afdea5d1122329ac282a8f4c13a3f",
   "scripts/verify_bit_extension.py": "1e798d10eee38a8655c2068d76529c994ae4251668cf718a4cc18c9f136555e0",
@@ -622,8 +622,8 @@
   "tests/test_v35_submission_revision.py": "ad7dfef9e0993104b75197450694eefef855dc720d08e024cbd1bed3567f0b80"
  },
  "manuscript_inputs_sha256": {
-  "declarations.tex": "ad1a442c4119d40703444312511e69789e2b5542ef2ad86e982735e6ac4dd1d8",
-  "ESM_1.tex": "d55e0e570bde1a9e7659abbbc15d993a004682dc28ec484144f07c3546b18c85",
+  "declarations.tex": "08aaeb746c5f32c9b36e64e94eaac3aef0d75ec5bb78c58f5c50453e5a1d3f55",
+  "ESM_1.tex": "ef3053c301333d9e49bd9a8e4ad69d146ec9bb3922b1b24763102f8a0098a66f",
   "extrapolation_table.tex": "51df6c0e8319520479239c12c2d4739d8608d1225028fb39d421d0221c89e120",
   "Fig1.eps": "15f3a1c2a3283c60e6cb68255ae7877afd266ae0f1db29ab7c3646da6e040dd2",
   "Fig2.eps": "fbb4c80fb1ded4e12c0ed06c06b62a58c722b69104559f6e2160819b00ad11c2",
@@ -633,17 +633,17 @@
   "FigS3.eps": "c6ab0975e6eb5b0fdf5eb56e87fd5be578e8850d1e9928f9571427af0881f4cf",
   "FigS4.eps": "34823d9e3b71076b00dc72025b16df60bb38185d9b6cacd824f294288d8c55b2",
   "guard_telemetry_table.tex": "571728196416f615a489c33ebb36ef29525a7c2cf9fe0c16219584318403d463",
-  "main.tex": "6ffb4f0044898870d0e8e6d847491954c120513a76b70dd6cad1807840fc959e",
-  "nine_candidate_certificate.tex": "15c28560dee30927dd690598d2a374efc97eeb24469ba5608cdf1622e1b145b1",
+  "main.tex": "91f90ef95a432ddc1a0a75611798aa2a32e4ded2fdab1926735668b387f39503",
+  "nine_candidate_certificate.tex": "618a1a8526c90f6e7a828302e7a645097ec952a31e9b03b72df91328edca1781",
   "references.bib": "e7c6693535792d81f9f75669ed016a56dc92d5750f9fd87084e99e8d566dc36b",
-  "sec01_introduction.tex": "55207ea04bdf535442a024e2f6975712bd1c73b81cfb075f40584cfe8bf32600",
-  "sec02_problem_and_candidates.tex": "89e3a51eede65ee24e833cf8a5c662f5828f227d9d049caf4cb0159b2f7aada0",
-  "sec03_cp_criterion.tex": "3b4acb5cf3ae27046dad7ef7bb4c1c5db33e27e15521e109f87bf9b28fbb60b3",
-  "sec04_rk4_classification.tex": "071e6a126526d86ced8051c56b018e8eaab4d798c46bb3141500c531ce8fdef0",
-  "sec05_representation_and_candidates.tex": "04f48fd55793be2428cb2e4170cd846999d4042408eb675dc4277df9c3a8d15b",
-  "sec06_certification_and_examples.tex": "ee4d90ef5cbdc03ad9252ef34d737191834201e690ed57dd173be6a22345ac4a",
-  "sec07_discussion.tex": "805da36c98be80b9194fcc2706d651d60863320fd12f486cd5bbc5146db4a417",
-  "sec08_conclusion.tex": "7c1b7a5bda9ad226e412e735949cc7be4b4daad3b764e259e012d89f7576280a",
+  "sec01_introduction.tex": "38cc7f4b1157f73ffe54702526609b0420ac06023accbfb34220a4da792aae67",
+  "sec02_problem_and_candidates.tex": "e8ea7a6944007447d1874d20fdf90f7dab8f2c4faf74a336eee7c081d9737092",
+  "sec03_cp_criterion.tex": "569422c6aec5db094a94fe7b370cb567891fa1923810f3c0e1f83ce32a87d3d9",
+  "sec04_rk4_classification.tex": "1687f5aa5f66d89e36f4e5677b71bc1f78a3aa225616141b3fe5268991293842",
+  "sec05_representation_and_candidates.tex": "fac11f86c9ee4b7d4c95a0cbbb6821fa1fcabfd5cb3d7b9ea8c412c728e31caa",
+  "sec06_certification_and_examples.tex": "ce9e8cf028445f3cf1e70a54189bd4f83a3c6cc02af569585ccfd05a8478adb1",
+  "sec07_discussion.tex": "3daaa5c9327ed6c210203c0d5e03d60185adef4bf81ab57d67134a54a71afca0",
+  "sec08_conclusion.tex": "fa6a91b4ebbffbfb0f0936ceff7e7c7ff1d40178fa11bd98e5fd92f359badcb6",
   "sn-jnl.cls": "36d0c3273a59d48dc6a9c7b080dfa1ec50dc10229d8751568d1f2e490ffa5ecc",
   "sn-mathphys-num.bst": "b3a7c7fbcc1e7f9619de634fcea2f5bb7a245818a5942bc576e40ea001633332",
   "tolerance_sweep_table.tex": "01601ad8bb018b8eb4a9534a2af5d2de63223476bfbd45da1c6ac6fd52eecb7a"

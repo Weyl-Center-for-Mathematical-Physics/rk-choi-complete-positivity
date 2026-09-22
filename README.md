@@ -1,8 +1,8 @@
 # Runge–Kutta complete-positivity: code and data
 
-## Current release: v4.1.1
+## Current release: v4.1.2
 
-[Release v4.1.1](https://github.com/Weyl-Center-for-Mathematical-Physics/rk-choi-complete-positivity/releases/tag/v4.1.1) contains the code and data for *Complete-positivity regions of Runge–Kutta
+[Release v4.1.2](https://github.com/Weyl-Center-for-Mathematical-Physics/rk-choi-complete-positivity/releases/tag/v4.1.2) contains the code and data for *Complete-positivity regions of Runge–Kutta
 discretizations of phase-covariant qubit dynamics* by G. Blake Pierpoint, Olivier Bernard and Yichen Liu.
 The code is in [`bit/`](bit/); the release asset `BIT_Code_and_Data.zip` holds the same 408 files. The
 folders `bit/manuscript_contract/` (sources of an earlier manuscript version) and `bit/manuscript_source/`
@@ -19,10 +19,11 @@ Run from `bit/` or from the extracted release asset, `reproduce_bit.py all` pass
 audit of the article's LaTeX sources, with 384 tests passed and 4 skipped (the skipped tests compare against
 those sources). See [`bit/README.md`](bit/README.md) and [`bit/VERSION.md`](bit/VERSION.md).
 
-License: MIT. Versions 1.0.0, 4.0.0, 4.1.0 and 4.1.1 are archived on Zenodo under the concept DOI
+License: MIT. Versions 1.0.0, 4.0.0, 4.1.0, 4.1.1 and 4.1.2 are archived on Zenodo under the concept DOI
 [10.5281/zenodo.21522057](https://doi.org/10.5281/zenodo.21522057), which resolves to the latest version (v4.1.1: [10.5281/zenodo.22905456](https://doi.org/10.5281/zenodo.22905456)); the
-documentation-only v4.0.1 was not archived. Version 4.1.1 corrects statements in the article and its supplement, refines the
-figures and cleans up the documentation; certified values, data records and tables are unchanged since v4.0.0.
+documentation-only v4.0.1 was not archived. Version 4.1.2 revises the wording of the article and its supplement; version 4.1.1
+corrected statements in both, refined the figures and cleaned up the documentation. Certified values, data
+records and tables are unchanged since v4.0.0.
 
 ## Version 1.0.0: zero-precession archive
 

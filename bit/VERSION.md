@@ -8,6 +8,12 @@ a minor version adds results without changing existing ones; a patch version cha
 or tests only. Historical version directories (`results/v26` … `results/v34`, `results/jcp_figures_v34`,
 `figures_jcp`) and the historical entry point `reproduce.sh` are preserved unchanged across versions.
 
+## 4.1.2 — text revision (2026-09-22)
+
+Edits to the wording of the article and Online Resource 1 for readability; the flattened article source in
+`manuscript_source/` was regenerated. No code, test, certified value, data record, figure or table changed.
+Release: https://github.com/Weyl-Center-for-Mathematical-Physics/rk-choi-complete-positivity/releases/tag/v4.1.2.
+
 ## 4.1.1 — corrections release (2026-09-22)
 
 Corrections to the mathematical text of the article and of Online Resource 1, fixes to the figures, and

@@ -1,4 +1,4 @@
-Code and data archive, version 4.1.1 (22 September 2026), for the article
+Code and data archive, version 4.1.2 (22 September 2026), for the article
 
   Complete-positivity regions of Runge-Kutta discretizations of
   phase-covariant qubit dynamics
@@ -29,5 +29,5 @@ binary64, regression test, visual) are explained in README.md and mapped to
 the article in BIT_MANUSCRIPT_CONTRACT.md.
 
 Versioned public release:
-https://github.com/Weyl-Center-for-Mathematical-Physics/rk-choi-complete-positivity/releases/tag/v4.1.1
+https://github.com/Weyl-Center-for-Mathematical-Physics/rk-choi-complete-positivity/releases/tag/v4.1.2
 Zenodo concept DOI (all versions): https://doi.org/10.5281/zenodo.21522057
